@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IECcodeGen", "IECcodeGen\IECcodeGen.csproj", "{FBBE6534-9E49-4CB4-9CCF-309E7A339B1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBBE6534-9E49-4CB4-9CCF-309E7A339B1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBE6534-9E49-4CB4-9CCF-309E7A339B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBE6534-9E49-4CB4-9CCF-309E7A339B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBE6534-9E49-4CB4-9CCF-309E7A339B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6819859-E183-4F0F-AEBF-692E99CC85F3}
+	EndGlobalSection
+EndGlobal
