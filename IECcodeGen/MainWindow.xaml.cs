@@ -22,6 +22,8 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit;
 using Path = System.IO.Path;
 using Microsoft.Win32;
+using MahApps.Metro.Controls;
+using MahApps.Metro;
 
 namespace IECcodeGen
 {
@@ -29,19 +31,13 @@ namespace IECcodeGen
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     ///
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
             InitializeComponent();
 
             // Editor Setup
-            TextEditorOptions textEditorOptions = new TextEditorOptions
-            {
-                ConvertTabsToSpaces = true,
-                ShowSpaces = true
-            };
-
             string file = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"resources\st_syntax.xshd");
             Stream xshd_stream = File.OpenRead(file);
             XmlTextReader xshd_reader = new XmlTextReader(xshd_stream);
@@ -51,75 +47,36 @@ namespace IECcodeGen
             xshd_stream.Close();
 
             text_code_template.ShowLineNumbers = true;
-            text_code_template.Options = textEditorOptions;
+            text_code_template.TextArea.Foreground = Brushes.White;
+            text_code_template.TextArea.FontSize = 13;
+            text_code_template.TextArea.FontFamily = new FontFamily("Consolas");
+            text_code_template.Options.ConvertTabsToSpaces = true;
 
             text_code_output.IsReadOnly = true;
             text_code_output.TextArea.Caret.CaretBrush = Brushes.Transparent;
+            text_code_output.TextArea.Foreground = Brushes.White;
+            text_code_output.TextArea.FontSize = 13;
+            text_code_output.TextArea.FontFamily = new FontFamily("Consolas");
             text_code_output.ShowLineNumbers = true;
-            text_code_output.Options = textEditorOptions;
+            text_code_output.Options.ConvertTabsToSpaces = true;
+
+            //Theme
+            ThemeManager.ChangeAppStyle(Application.Current,
+                ThemeManager.GetAccent("Steel"),
+                ThemeManager.GetAppTheme("BaseDark"));
+
+            //ComboBox
+
+            combo_vars.Items.Add("Variable_1");
+            combo_vars.Items.Add("Variable_2");
+            combo_vars.Items.Add("Variable_3");
         }
-
-        //private void Chb_var1_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if ((bool)chb_var1.IsChecked)
-        //    {
-        //        text_var1.IsEnabled = true;
-        //        text_var1.Background = Brushes.White;
-        //        combo_vars.Items.Add("Variable_1");
-        //        chb_var2.IsEnabled = true;
-        //    }
-        //    else
-        //    {
-        //        text_var1.IsEnabled = false;
-        //        text_var1.Background = Brushes.LightGray;
-        //        text_var1.Text = "";
-        //        combo_vars.Items.Remove("Variable_1");
-        //        chb_var2.IsEnabled = false;
-        //        chb_var3.IsEnabled = false;
-        //    }
-        //}
-
-        //private void Chb_var2_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if ((bool)chb_var2.IsChecked)
-        //    {
-        //        text_var2.IsEnabled = true;
-        //        text_var2.Background = Brushes.White;
-        //        combo_vars.Items.Add("Variable_2");
-        //        chb_var3.IsEnabled = true;
-        //    }
-        //    else
-        //    {
-        //        text_var2.IsEnabled = false;
-        //        text_var2.Background = Brushes.LightGray;
-        //        text_var2.Text = "";
-        //        combo_vars.Items.Remove("Variable_2");
-        //        chb_var3.IsEnabled = false;
-        //    }
-        //}
-
-        //private void Chb_var3_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if ((bool)chb_var3.IsChecked)
-        //    {
-        //        text_var3.IsEnabled = true;
-        //        text_var3.Background = Brushes.White;
-        //        combo_vars.Items.Add("Variable_3");
-        //    }
-        //    else
-        //    {
-        //        text_var3.IsEnabled = false;
-        //        text_var3.Background = Brushes.LightGray;
-        //        text_var3.Text = "";
-        //        combo_vars.Items.Remove("Variable_3");
-        //    }
-        //}
 
         private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                text_code_template.Text = text_code_template.Text.Replace(text_suchen.Text, combo_vars.Text);
+                text_code_template.Text = text_code_template.Text.Replace(text_suchen.Text, combo_vars.SelectedItem.ToString());
             }
             catch (Exception)
             {
@@ -235,6 +192,26 @@ namespace IECcodeGen
 
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, text_code_output.Text);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void mi_leerzeichen_ein(object sender, RoutedEventArgs e)
+        {
+            text_code_template.Options.ShowSpaces = true;
+        }
+
+        private void mi_leerzeichen_aus(object sender, RoutedEventArgs e)
+        {
+            text_code_template.Options.ShowSpaces = false;
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(text_code_output.Text);
         }
     }
 
