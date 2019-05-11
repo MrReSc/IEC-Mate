@@ -67,7 +67,6 @@
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Column="0" Grid.Row="0" Text="Variable 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
-                    <CheckBox x:Name="chb_var1" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Chb_var1_Click" IsChecked="True"/>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True">
@@ -95,11 +94,9 @@
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Column="0" Grid.Row="0" Text="Variable 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
-                    <CheckBox x:Name="chb_var2" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Chb_var2_Click"/>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" IsEnabled="False" 
-                             Background="LightGray">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" >
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -124,11 +121,9 @@
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Column="0" Grid.Row="0" Text="Variable 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
-                    <CheckBox x:Name="chb_var3" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Chb_var3_Click" IsEnabled="False"/>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" IsEnabled="False" 
-                             Background="LightGray">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" >
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
