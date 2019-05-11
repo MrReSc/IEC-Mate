@@ -59,61 +59,61 @@ namespace IECcodeGen
             text_code_output.Options = textEditorOptions;
         }
 
-        private void Chb_var1_Click(object sender, RoutedEventArgs e)
-        {
-            if ((bool)chb_var1.IsChecked)
-            {
-                text_var1.IsEnabled = true;
-                text_var1.Background = Brushes.White;
-                combo_vars.Items.Add("Variable_1");
-                chb_var2.IsEnabled = true;
-            }
-            else
-            {
-                text_var1.IsEnabled = false;
-                text_var1.Background = Brushes.LightGray;
-                text_var1.Text = "";
-                combo_vars.Items.Remove("Variable_1");
-                chb_var2.IsEnabled = false;
-                chb_var3.IsEnabled = false;
-            }
-        }
+        //private void Chb_var1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if ((bool)chb_var1.IsChecked)
+        //    {
+        //        text_var1.IsEnabled = true;
+        //        text_var1.Background = Brushes.White;
+        //        combo_vars.Items.Add("Variable_1");
+        //        chb_var2.IsEnabled = true;
+        //    }
+        //    else
+        //    {
+        //        text_var1.IsEnabled = false;
+        //        text_var1.Background = Brushes.LightGray;
+        //        text_var1.Text = "";
+        //        combo_vars.Items.Remove("Variable_1");
+        //        chb_var2.IsEnabled = false;
+        //        chb_var3.IsEnabled = false;
+        //    }
+        //}
 
-        private void Chb_var2_Click(object sender, RoutedEventArgs e)
-        {
-            if ((bool)chb_var2.IsChecked)
-            {
-                text_var2.IsEnabled = true;
-                text_var2.Background = Brushes.White;
-                combo_vars.Items.Add("Variable_2");
-                chb_var3.IsEnabled = true;
-            }
-            else
-            {
-                text_var2.IsEnabled = false;
-                text_var2.Background = Brushes.LightGray;
-                text_var2.Text = "";
-                combo_vars.Items.Remove("Variable_2");
-                chb_var3.IsEnabled = false;
-            }
-        }
+        //private void Chb_var2_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if ((bool)chb_var2.IsChecked)
+        //    {
+        //        text_var2.IsEnabled = true;
+        //        text_var2.Background = Brushes.White;
+        //        combo_vars.Items.Add("Variable_2");
+        //        chb_var3.IsEnabled = true;
+        //    }
+        //    else
+        //    {
+        //        text_var2.IsEnabled = false;
+        //        text_var2.Background = Brushes.LightGray;
+        //        text_var2.Text = "";
+        //        combo_vars.Items.Remove("Variable_2");
+        //        chb_var3.IsEnabled = false;
+        //    }
+        //}
 
-        private void Chb_var3_Click(object sender, RoutedEventArgs e)
-        {
-            if ((bool)chb_var3.IsChecked)
-            {
-                text_var3.IsEnabled = true;
-                text_var3.Background = Brushes.White;
-                combo_vars.Items.Add("Variable_3");
-            }
-            else
-            {
-                text_var3.IsEnabled = false;
-                text_var3.Background = Brushes.LightGray;
-                text_var3.Text = "";
-                combo_vars.Items.Remove("Variable_3");
-            }
-        }
+        //private void Chb_var3_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if ((bool)chb_var3.IsChecked)
+        //    {
+        //        text_var3.IsEnabled = true;
+        //        text_var3.Background = Brushes.White;
+        //        combo_vars.Items.Add("Variable_3");
+        //    }
+        //    else
+        //    {
+        //        text_var3.IsEnabled = false;
+        //        text_var3.Background = Brushes.LightGray;
+        //        text_var3.Text = "";
+        //        combo_vars.Items.Remove("Variable_3");
+        //    }
+        //}
 
         private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
         {
@@ -209,6 +209,11 @@ namespace IECcodeGen
                     {
                         outtext = outtext + Environment.NewLine + Environment.NewLine + temp_text;
                     }
+                }
+
+                if (lines == 0)
+                {
+                    return "Fehler! Keine Variabeln in der Liste 1.";
                 }
             }
             catch (Exception)
