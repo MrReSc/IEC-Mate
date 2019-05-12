@@ -30,6 +30,76 @@
 
     </Window.Resources>
 
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <ToggleButton IsChecked="{Binding ElementName=fo_einstellungen, Path=IsOpen}" Cursor="Hand">
+                <iconPacks:PackIconMaterial Kind="Settings" Width="15" Height="15"/>
+            </ToggleButton>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            
+            <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300" >
+
+                <Controls:Flyout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="22"/>
+                        <Setter Property="Margin" Value="0,16,0,0"/>
+                    </Style>
+
+                    <Style TargetType="Controls:ToggleSwitch">
+                        <Setter Property="Margin" Value="3,0,0,0"/>
+                    </Style>
+                </Controls:Flyout.Resources>
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Aussehen" Grid.Column="1" Grid.Row="0"/>
+                    <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="Dunkel" OffLabel="Hell" IsCheckedChanged="Tg_theme_IsCheckedChanged" />
+                    
+                    <Label Content="Editor" Grid.Column="1" Grid.Row="2"/>
+                    <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="3" OnLabel="Leerzeichen Ein" OffLabel="Leerzeichen Aus" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
+                    <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="4" OnLabel="Zeilennummern Ein" OffLabel="Zeilennummern Aus" IsCheckedChanged="Tg_line_no_IsCheckedChanged" />
+
+                    <Grid Grid.Column="1" Grid.Row="5" Margin="0,3,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Schriftgrösse" FontSize="15" FontWeight="Medium" Margin="0" />
+                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Column="1" Grid.Row="4" Margin="20,0,5,0" HorizontalAlignment="Right" Width="70" ValueChanged="NumericUpDown_ValueChanged" />
+                    </Grid>
+
+                </Grid>
+
+                
+                
+            </Controls:Flyout>
+
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -205,8 +275,6 @@
                                     <MenuItem Command="Cut" />
                                     <MenuItem Command="Copy" />
                                     <MenuItem Command="Paste" />
-                                    <Separator />
-                                    <MenuItem Header="_Leerzeichen anzeigen"  IsCheckable="true" Checked="mi_leerzeichen_ein" Unchecked="mi_leerzeichen_aus"/>
                                 </ContextMenu>
                             </avalonEdit:TextEditor.ContextMenu>
                         </avalonEdit:TextEditor>
@@ -231,10 +299,11 @@
                         <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" VerticalContentAlignment="Center" />
                         <TextBox Grid.Row="1" Grid.Column="2" Text="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
                         <Controls:SplitButton  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>
+                        <!--<ComboBox  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>-->
+
                         <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0" Width="30" Height="30">
                             <iconPacks:PackIconMaterial Kind="SwapHorizontal" Width="auto" Height="auto" Foreground="SteelBlue"/>
                         </Button>
-
                     </Grid>
                 </Grid>
 
@@ -263,7 +332,7 @@
                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <avalonEdit:TextEditor.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Alles in Zwischenablage kopieren" Click="MenuItem_Click_1" />
+                                    <MenuItem Header="Alles in Zwischenablage kopieren" Click="CopyToClipboard_Click_1" />
                                 </ContextMenu>
                             </avalonEdit:TextEditor.ContextMenu>
 
@@ -275,6 +344,7 @@
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -287,6 +357,9 @@
                         </Button>
                         <Button Grid.Row="1" x:Name="btn_gen_loschen" Grid.Column="1" Click="Btn_gen_loschen_Click" Width="30" Height="30">
                             <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Foreground="FireBrick"/>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3" Click="CopyToClipboard_Click_1" Width="30" Height="30">
+                            <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                         </Button>
                     </Grid>
 
