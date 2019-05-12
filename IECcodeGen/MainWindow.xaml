@@ -5,27 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
+        xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
         xmlns:local="clr-namespace:IECcodeGen"
         mc:Ignorable="d"
         Title="IECcodeGen - BETA" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         BorderBrush="{DynamicResource AccentColorBrush}"
-        BorderThickness="1"
+        BorderThickness="1" Closing="MetroWindow_Closing" PreviewMouseDown="MetroWindow_PreviewMouseDown"
         >
 
     <Window.Resources>
-        <Style TargetType="TextBox">
-            <!--<Setter Property="FontFamily" Value="Consolas"/>-->
-            <Setter Property="FontSize" Value="14"/>
-            <!--<Setter Property="FontWeight" Value="Bold"/>-->
-        </Style>
-
         <Style TargetType="ComboBox">
             <Setter Property="FontFamily" Value="Consolas"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" >
+            <Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True"/>
+            <!--<Setter Property="Controls:TextBoxHelper.Watermark" Value="var_1&#x0a;var_2&#x0a;var_3&#x0a;..."/>-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
     </Window.Resources>
@@ -40,8 +45,8 @@
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            
-            <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300" >
+
+            <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300">
 
                 <Controls:Flyout.Resources>
                     <Style TargetType="Label">
@@ -75,7 +80,7 @@
 
                     <Label Content="Aussehen" Grid.Column="1" Grid.Row="0"/>
                     <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="Dunkel" OffLabel="Hell" IsCheckedChanged="Tg_theme_IsCheckedChanged" />
-                    
+
                     <Label Content="Editor" Grid.Column="1" Grid.Row="2"/>
                     <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="3" OnLabel="Leerzeichen Ein" OffLabel="Leerzeichen Aus" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
                     <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="4" OnLabel="Zeilennummern Ein" OffLabel="Zeilennummern Aus" IsCheckedChanged="Tg_line_no_IsCheckedChanged" />
@@ -92,15 +97,12 @@
 
                 </Grid>
 
-                
-                
             </Controls:Flyout>
 
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-
-    <Grid>
+    <Grid x:Name="RootGrid">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -128,7 +130,7 @@
                 </MenuItem>
 
                 <MenuItem Header="_Hilfe">
-                    <!--<MenuItem Header="_Infos" Click="MenuItem_Click_About" />-->
+                    <MenuItem Header="_Infos" Click="MenuItem_Click_About" />
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -164,10 +166,11 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <TextBox Grid.Column="0" Grid.Row="0" Text="Variable 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Variable 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
+                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen...">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -191,10 +194,11 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <TextBox Grid.Column="0" Grid.Row="0" Text="Variable 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Variable 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
+                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen...">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -218,10 +222,11 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <TextBox Grid.Column="0" Grid.Row="0" Text="Variable 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Variable 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
+                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen...">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -241,9 +246,9 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <GroupBox Grid.Column="1" Grid.Row="0" Header="Code Vorlage">
@@ -256,7 +261,7 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="5" />
@@ -265,7 +270,7 @@
                     <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
                         <avalonEdit:TextEditor  
                                             x:Name="text_code_template" 
-                                            Width="auto" Height="300" 
+                                            Width="auto" Height="auto" 
                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <avalonEdit:TextEditor.ContextMenu>
                                 <ContextMenu>
@@ -288,6 +293,7 @@
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -295,21 +301,27 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
-                        <TextBox Grid.Row="1" Grid.Column="0" Text="Suchen nach:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
-                        <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" VerticalContentAlignment="Center" />
-                        <TextBox Grid.Row="1" Grid.Column="2" Text="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
-                        <Controls:SplitButton  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>
+                        <!--<Label Grid.Row="1" Grid.Column="0" Content="Suchen nach:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>-->
+                        <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Suchen nach..."/>
+                        <Label Grid.Row="1" Grid.Column="2" Content="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
+                        <Controls:SplitButton  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" BorderBrush="LightGray" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>
                         <!--<ComboBox  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>-->
 
                         <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0" Width="30" Height="30">
                             <iconPacks:PackIconMaterial Kind="SwapHorizontal" Width="auto" Height="auto" Foreground="SteelBlue"/>
+                        </Button>
+
+                        <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="6" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Right">
+                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Foreground="LightSalmon"/>
                         </Button>
                     </Grid>
                 </Grid>
 
             </GroupBox>
 
-            <GroupBox Grid.Column="1" Grid.Row="2" Header="Code">
+            <GridSplitter Grid.Column="1" Grid.Row="1" Height="2" HorizontalAlignment="Stretch"/>
+
+            <GroupBox Grid.Column="1" Grid.Row="3" Header="Code">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5" />
@@ -325,10 +337,11 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
+                    <Border x:Name="border_code_output" Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="Transparent" CornerRadius="3" Background="Gainsboro">
                         <avalonEdit:TextEditor  
                                             x:Name="text_code_output" 
-                                            Width="auto" Height="auto" 
+                                            Width="auto" Height="auto"
+                                            Background="Gainsboro"
                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <avalonEdit:TextEditor.ContextMenu>
                                 <ContextMenu>
@@ -355,29 +368,62 @@
                         <Button Grid.Row="1" x:Name="btn_gen" Grid.Column="0" Click="Btn_gen_Click" Margin="0,0,10,0" Width="30" Height="30">
                             <iconPacks:PackIconMaterial Kind="Play" Width="auto" Height="auto" Foreground="LimeGreen"/>
                         </Button>
-                        <Button Grid.Row="1" x:Name="btn_gen_loschen" Grid.Column="1" Click="Btn_gen_loschen_Click" Width="30" Height="30">
-                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Foreground="FireBrick"/>
+                        <Button Grid.Row="1" x:Name="btn_gen_loschen" Grid.Column="3" Click="Btn_gen_loschen_Click" Width="30" Height="30">
+                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Foreground="LightSalmon"/>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="3" Click="CopyToClipboard_Click_1" Width="30" Height="30">
+                        <Button Grid.Row="1" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="Kopiert den kompletten Code in die Zwischenablage">
                             <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                         </Button>
                     </Grid>
 
-
-
                 </Grid>
-
-
-
-                
 
             </GroupBox>
 
         </Grid>
 
+        <!--<simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
+                                 x:Name="child_Infos"
+                                 Title="Info"
+                                 ChildWindowHeight="300"
+                                 ChildWindowWidth="400"
+                                 EnableDropShadow="False">
+            --><!--  Content  --><!--
+        </simpleChildWindow:ChildWindow>-->
+
+        <simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
+                                 x:Name="child_Infos"
+                                 Title="Info"
+                                 BorderBrush="{DynamicResource AccentBaseColorBrush}"
+                                 BorderThickness="1"
+                                 GlowBrush="{DynamicResource AccentColorBrush}"
+                                 IsModal="False"
+                                 AllowMove="True"
+                                 ShowCloseButton="True"
+                                 MinHeight="400"
+                                 MinWidth="400">
+            <StackPanel Margin="20">
+                <iconPacks:PackIconMaterial Kind="CodeBraces" Width="30" Height="30" HorizontalAlignment="Center"/>
+                <Label Content="IEC Code Generator - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
+                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold">
+                    Verison:
+                </Label>
+
+                <TextBlock HorizontalAlignment="Center">           
+                    <Hyperlink NavigateUri="mailto:resc@mailbox.org?subject=IEC Code Generator" RequestNavigate="Hyperlink_RequestNavigate" >
+                        Remo Scheidegger
+                    </Hyperlink>
+                </TextBlock>
 
 
+            </StackPanel>
+            
 
+
+            
+
+            
+        </simpleChildWindow:ChildWindow>
 
     </Grid>
 
