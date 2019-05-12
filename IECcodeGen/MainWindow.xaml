@@ -146,7 +146,7 @@
             </StackPanel>
         </simpleChildWindow:ChildWindow>
 
-        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,10">
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,3">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Datei">
                     <MenuItem Header="Vorlage _Importieren" Click="Btn_template_offnen_Click"/>
@@ -300,9 +300,9 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition Height="*" MinHeight="150"/>
                 <RowDefinition Height="20" />
-                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition Height="*" MinHeight="150"/>
             </Grid.RowDefinitions>
 
             <GroupBox Grid.Column="1" Grid.Row="0" Header="Code Vorlage">
