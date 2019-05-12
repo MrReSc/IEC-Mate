@@ -4,11 +4,13 @@
 
         xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
   <Color name="Comment" foreground="ForestGreen" />
+  <Color name="Error" foreground="Red" />
   <Color name="String" foreground="Blue" />
 
   <!-- This is the main ruleset. -->
   <RuleSet>
     <Span color="Comment" begin="//" />
+    <Span color="Error" begin="#-->" />
     <Span color="Comment" multiline="true"
 
        begin="/\*" end="\*/" />

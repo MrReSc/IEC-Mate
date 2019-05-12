@@ -4,11 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"           
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
         xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
         xmlns:local="clr-namespace:IECcodeGen"
-        mc:Ignorable="d"
         Title="IECcodeGen - BETA" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
@@ -189,14 +188,14 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="5" />
+                        <RowDefinition Height="2" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0" Width="200" Text="VARIABLE 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
-                             Controls:TextBoxHelper.ClearTextButton="False" Background="SteelBlue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             FontWeight="Regular" FontSize="11" IsReadOnly="True">
+                             Controls:TextBoxHelper.ClearTextButton="False" Background="DodgerBlue" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             FontWeight="Regular" FontSize="11" IsReadOnly="True" IsTabStop="False">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -207,7 +206,7 @@
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
                              Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
-                             Controls:TextBoxHelper.ClearTextButton="True">
+                             Controls:TextBoxHelper.ClearTextButton="True" IsTabStop="False">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -226,14 +225,14 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="5" />
+                        <RowDefinition Height="2" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0" Width="200" Text="VARIABLE 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
-                             Controls:TextBoxHelper.ClearTextButton="False" Background="SteelBlue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             FontWeight="Regular" FontSize="11" IsReadOnly="True">
+                             Controls:TextBoxHelper.ClearTextButton="False" Background="DodgerBlue" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             FontWeight="Regular" FontSize="11" IsReadOnly="True" IsTabStop="False">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -244,7 +243,7 @@
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
                              Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
-                             Controls:TextBoxHelper.ClearTextButton="True">
+                             Controls:TextBoxHelper.ClearTextButton="True" IsTabStop="False">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -263,14 +262,14 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="5" />
+                        <RowDefinition Height="2" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0" Width="200" Text="VARIABLE 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
-                             Controls:TextBoxHelper.ClearTextButton="False" Background="SteelBlue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             FontWeight="Regular" FontSize="11" IsReadOnly="True">
+                             Controls:TextBoxHelper.ClearTextButton="False" Background="DodgerBlue" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             FontWeight="Regular" FontSize="11" IsReadOnly="True" IsTabStop="False">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -281,7 +280,7 @@
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
                              Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
-                             Controls:TextBoxHelper.ClearTextButton="True">
+                             Controls:TextBoxHelper.ClearTextButton="True" IsTabStop="False">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -325,8 +324,8 @@
                     <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
                         <avalonEdit:TextEditor  
                                             x:Name="text_code_template" 
-                                            Width="auto" Height="auto" 
-                                            ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            Width="auto" Height="auto" IsTabStop="False"
+                                            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <avalonEdit:TextEditor.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Command="Undo" />
@@ -384,9 +383,16 @@
                 </Grid>
 
             </GroupBox>
+
             
-            <GridSplitter Grid.Column="1" Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="SteelBlue" />
-            
+            <GridSplitter Grid.Column="1" Grid.Row="1" Height="15" HorizontalAlignment="Stretch" Background="Transparent"/>
+            <TextBox Grid.Column="1" Grid.Row="1" BorderThickness="0" HorizontalAlignment="Center"  IsHitTestVisible="False"
+                    VerticalAlignment="Center" Text="&#xE76F;&#xE76F;&#xE76F;"
+                    Foreground="gray" FontFamily="Segoe MDL2 Assets"
+                    VerticalContentAlignment="Center" IsTabStop="False"/>
+
+
+
 
             <GroupBox Grid.Column="1" Grid.Row="3" Header="Code">
                 <Grid>
@@ -409,7 +415,7 @@
                                             x:Name="text_code_output" 
                                             Width="auto" Height="auto"
                                             Background="Gainsboro"
-                                            ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsTabStop="False">
                             <avalonEdit:TextEditor.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Alles in Zwischenablage kopieren" Click="CopyToClipboard_Click_1" />
