@@ -300,9 +300,9 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="*" MinHeight="200"/>
                 <RowDefinition Height="20" />
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" MinHeight="200"/>
             </Grid.RowDefinitions>
 
             <GroupBox Grid.Column="1" Grid.Row="0" Header="Code Vorlage">
