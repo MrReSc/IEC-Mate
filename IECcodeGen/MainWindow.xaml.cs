@@ -24,6 +24,8 @@ using Path = System.IO.Path;
 using Microsoft.Win32;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using MahApps.Metro.SimpleChildWindow;
+using System.Diagnostics;
 
 namespace IECcodeGen
 {
@@ -33,6 +35,9 @@ namespace IECcodeGen
     ///
     public partial class MainWindow : MetroWindow
     {
+        public static BrushConverter bc = new BrushConverter();
+        public Brush DarkBackground = (Brush)bc.ConvertFromString("#4A4A4A");
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,7 +51,6 @@ namespace IECcodeGen
             xshd_reader.Close();
             xshd_stream.Close();
 
-            text_code_template.ShowLineNumbers = true;
             text_code_template.TextArea.FontFamily = new FontFamily("Consolas");
             text_code_template.Options.ConvertTabsToSpaces = true;
 
@@ -54,7 +58,6 @@ namespace IECcodeGen
             text_code_output.TextArea.Caret.CaretBrush = Brushes.Transparent;
             text_code_output.TextArea.FontFamily = new FontFamily("Consolas");
             text_code_output.Options.ConvertTabsToSpaces = true;
-
 
             //ComboBox
             combo_vars.Items.Add("Variable_1");
@@ -70,6 +73,10 @@ namespace IECcodeGen
             {
                 text_code_template.TextArea.Foreground = Brushes.White;
                 text_code_output.TextArea.Foreground = Brushes.White;
+
+                text_code_output.Background = DarkBackground;
+                border_code_output.Background = DarkBackground;
+
                 tg_theme.IsChecked = true;
             }
 
@@ -84,7 +91,20 @@ namespace IECcodeGen
             text_code_output.TextArea.FontSize = Properties.Settings.Default.schriftgrosse;
             text_code_template.TextArea.FontSize = Properties.Settings.Default.schriftgrosse;
 
+            this.Top = Properties.Settings.Default.fentser_top;
+            this.Left = Properties.Settings.Default.fenster_left;
+            this.Height = Properties.Settings.Default.fenster_hohe;
+            this.Width = Properties.Settings.Default.fenster_breite;
+            if (Properties.Settings.Default.fenster_max)
+            {
+                WindowState = WindowState.Maximized;
+            }
 
+            //Inhalt laden
+            text_var1.Text = Inhalt.Default.variable_1;
+            text_var2.Text = Inhalt.Default.variable_2;
+            text_var3.Text = Inhalt.Default.variable_3;
+            text_code_template.Text = Inhalt.Default.vorlage;
         }
 
         private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
@@ -97,7 +117,7 @@ namespace IECcodeGen
             {
                 ;
             }
-            
+
         }
 
         private void Btn_template_speichern_Click(object sender, RoutedEventArgs e)
@@ -154,10 +174,22 @@ namespace IECcodeGen
             string[] vars_3 = var_3_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
 
             string outtext = "";
+            string error = "Fehler beim Erzeugen vom Code!" + Environment.NewLine + "Die Anzahl Variabeln ist nicht identisch.";
 
             try
             {
                 int lines = vars_1.Length;
+                
+
+                if (lines == 0)
+                {
+                    return "Fehler! Keine Variabeln in der Liste 1.";
+                }
+
+                if ((lines < vars_2.Length) || (lines < vars_3.Length))
+                {
+                    return error;
+                }
 
                 for (int i = 0; i < lines; i++)
                 {
@@ -182,15 +214,11 @@ namespace IECcodeGen
                         outtext = outtext + Environment.NewLine + Environment.NewLine + temp_text;
                     }
                 }
-
-                if (lines == 0)
-                {
-                    return "Fehler! Keine Variabeln in der Liste 1.";
-                }
+              
             }
             catch (Exception)
             {
-                return "Fehler! Die Anzahl Variabeln scheint nicht identisch zu sein.";
+                return error;
             }
             return outtext;
         }
@@ -214,23 +242,10 @@ namespace IECcodeGen
             Application.Current.Shutdown();
         }
 
-        private void mi_leerzeichen_ein(object sender, RoutedEventArgs e)
-        {
-            text_code_template.Options.ShowSpaces = true;
-        }
-
-        private void mi_leerzeichen_aus(object sender, RoutedEventArgs e)
-        {
-            text_code_template.Options.ShowSpaces = false;
-        }
-
-
-
         private void CopyToClipboard_Click_1(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(text_code_output.Text);
         }
-
 
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
         {
@@ -260,6 +275,8 @@ namespace IECcodeGen
 
                 text_code_template.TextArea.Foreground = Brushes.White;
                 text_code_output.TextArea.Foreground = Brushes.White;
+                text_code_output.Background = DarkBackground;
+                border_code_output.Background = DarkBackground;
 
                 Properties.Settings.Default.theme = "BaseDark";
                 Properties.Settings.Default.Save();
@@ -272,6 +289,9 @@ namespace IECcodeGen
 
                 text_code_template.TextArea.Foreground = Brushes.Black;
                 text_code_output.TextArea.Foreground = Brushes.Black;
+
+                text_code_output.Background = Brushes.Gainsboro;
+                border_code_output.Background = Brushes.Gainsboro;
 
                 Properties.Settings.Default.theme = "BaseLight";
                 Properties.Settings.Default.Save();
@@ -305,6 +325,57 @@ namespace IECcodeGen
                 Properties.Settings.Default.zeilennummern = false;
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                // Use the RestoreBounds as the current values will be 0, 0 and the size of the screen
+                Properties.Settings.Default.fentser_top = RestoreBounds.Top;
+                Properties.Settings.Default.fenster_left = RestoreBounds.Left;
+                Properties.Settings.Default.fenster_hohe = RestoreBounds.Height;
+                Properties.Settings.Default.fenster_breite = RestoreBounds.Width;
+                Properties.Settings.Default.fenster_max = true;
+            }
+            else
+            {
+                Properties.Settings.Default.fentser_top = this.Top;
+                Properties.Settings.Default.fenster_left = this.Left;
+                Properties.Settings.Default.fenster_hohe = this.Height;
+                Properties.Settings.Default.fenster_breite = this.Width;
+                Properties.Settings.Default.fenster_max = false;
+            }
+
+            Inhalt.Default.variable_1 = text_var1.Text;
+            Inhalt.Default.variable_2 = text_var2.Text;
+            Inhalt.Default.variable_3 = text_var3.Text;
+            Inhalt.Default.vorlage = text_code_template.Text;
+
+            Inhalt.Default.Save();
+            Properties.Settings.Default.Save();
+        }
+
+        private void Btn_template_loschen_Click(object sender, RoutedEventArgs e)
+        {
+            text_code_template.Text = "";
+        }
+
+
+        private void MetroWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            fo_einstellungen.IsOpen = false;
+        }
+
+        private void MenuItem_Click_About(object sender, RoutedEventArgs e)
+        {
+            child_Infos.IsOpen = true;
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
         }
     }
 

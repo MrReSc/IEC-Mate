@@ -70,5 +70,65 @@ namespace IECcodeGen.Properties {
                 this["schriftgrosse"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double fentser_top {
+            get {
+                return ((double)(this["fentser_top"]));
+            }
+            set {
+                this["fentser_top"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double fenster_left {
+            get {
+                return ((double)(this["fenster_left"]));
+            }
+            set {
+                this["fenster_left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("900")]
+        public double fenster_hohe {
+            get {
+                return ((double)(this["fenster_hohe"]));
+            }
+            set {
+                this["fenster_hohe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1200")]
+        public double fenster_breite {
+            get {
+                return ((double)(this["fenster_breite"]));
+            }
+            set {
+                this["fenster_breite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool fenster_max {
+            get {
+                return ((bool)(this["fenster_max"]));
+            }
+            set {
+                this["fenster_max"] = value;
+            }
+        }
     }
 }
