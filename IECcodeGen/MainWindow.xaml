@@ -13,25 +13,19 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         BorderBrush="{DynamicResource AccentColorBrush}"
-        BorderThickness="1" Closing="MetroWindow_Closing" PreviewMouseDown="MetroWindow_PreviewMouseDown"
+        BorderThickness="1" Closing="MetroWindow_Closing"
         >
 
     <Window.Resources>
-        <Style TargetType="ComboBox">
-            <Setter Property="FontFamily" Value="Consolas"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" >
+        <!--<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" >
             <Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True"/>
-            <!--<Setter Property="Controls:TextBoxHelper.Watermark" Value="var_1&#x0a;var_2&#x0a;var_3&#x0a;..."/>-->
-            <Style.Triggers>
+            --><!--<Setter Property="Controls:TextBoxHelper.Watermark" Value="var_1&#x0a;var_2&#x0a;var_3&#x0a;..."/>-->
+            <!--<Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True"/>
                 </Trigger>
-            </Style.Triggers>
-        </Style>
+            </Style.Triggers>--><!--
+        </Style>-->
 
     </Window.Resources>
 
@@ -46,16 +40,11 @@
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
 
-            <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300">
+            <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300" IsPinned="False" Theme="Adapt">
 
                 <Controls:Flyout.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="FontSize" Value="22"/>
-                        <Setter Property="Margin" Value="0,16,0,0"/>
-                    </Style>
-
                     <Style TargetType="Controls:ToggleSwitch">
-                        <Setter Property="Margin" Value="3,0,0,0"/>
+                        <Setter Property="Margin" Value="5,0,0,0"/>
                     </Style>
                 </Controls:Flyout.Resources>
 
@@ -78,10 +67,10 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Aussehen" Grid.Column="1" Grid.Row="0"/>
+                    <Label Content="Aussehen" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
                     <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="Dunkel" OffLabel="Hell" IsCheckedChanged="Tg_theme_IsCheckedChanged" />
 
-                    <Label Content="Editor" Grid.Column="1" Grid.Row="2"/>
+                    <Label Content="Editor" Grid.Column="1" Grid.Row="2" FontSize="30" Margin="0,25,0,0"/>
                     <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="3" OnLabel="Leerzeichen Ein" OffLabel="Leerzeichen Aus" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
                     <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="4" OnLabel="Zeilennummern Ein" OffLabel="Zeilennummern Aus" IsCheckedChanged="Tg_line_no_IsCheckedChanged" />
 
@@ -92,13 +81,12 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="Schriftgrösse" FontSize="15" FontWeight="Medium" Margin="0" />
-                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Column="1" Grid.Row="4" Margin="20,0,5,0" HorizontalAlignment="Right" Width="70" ValueChanged="NumericUpDown_ValueChanged" />
+                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Column="1" Grid.Row="4" Margin="20,0,5,0" 
+                                                HorizontalAlignment="Right" Width="80" ValueChanged="NumericUpDown_ValueChanged" 
+                                                HorizontalContentAlignment="Left" FontSize="15" FontWeight="Medium"/>
                     </Grid>
-
                 </Grid>
-
             </Controls:Flyout>
-
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
@@ -117,6 +105,47 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
+
+        <simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
+                                 x:Name="child_Infos"
+                                 Title="Info"
+                                 BorderBrush="{DynamicResource AccentBaseColorBrush}"
+                                 BorderThickness="1"
+                                 GlowBrush="{DynamicResource AccentColorBrush}"
+                                 IsModal="False"
+                                 AllowMove="True"
+                                 ShowCloseButton="True"
+                                 MinHeight="400"
+                                 MinWidth="400">
+            <StackPanel Margin="20">
+                <iconPacks:PackIconMaterial Kind="CodeBraces" Width="30" Height="30" HorizontalAlignment="Center"/>
+                <Label Content="IEC Code Generator - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
+                <Label x:Name="lb_version" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Center" Margin="0,0,0,20">           
+                    <Hyperlink NavigateUri="mailto:resc@mailbox.org?subject=IEC Code Generator" RequestNavigate="Hyperlink_RequestNavigate" >
+                        Remo Scheidegger
+                    </Hyperlink>
+                </TextBlock>
+                <Label Content="MIT Lizenz:" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
+                <TextBlock FontSize="12" TextWrapping="Wrap" MaxWidth="400" MaxHeight="400" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <TextBlock.Text>
+                        Copyright (c) 2019 Remo Scheidegger
+                        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
+                        associated documentation files (the "Software"), to deal in the Software without restriction, 
+                        including without limitation the rights to use, copy, modify, merge, publish, 
+                        distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
+                        Software is furnished to do so, subject to the following conditions:
+                        The above copyright notice and this permission notice shall be included in all copies or 
+                        substantial portions of the Software.
+                        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT 
+                        NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+                        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
+                        DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+                        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </simpleChildWindow:ChildWindow>
 
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,10">
             <Menu DockPanel.Dock="Top">
@@ -156,7 +185,6 @@
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -166,11 +194,20 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" Content="Variable 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
+                    <TextBox Grid.Row="0" Width="200" Text="VARIABLE 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
+                             Controls:TextBoxHelper.ClearTextButton="False" Background="SteelBlue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             FontWeight="Regular" FontSize="11">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen...">
+                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
+                             Controls:TextBoxHelper.ClearTextButton="True">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -179,8 +216,8 @@
                     </TextBox>
                 </Grid>
 
-                <Separator Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5" Background="LightGray"/>
-
+                <!--<Separator Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"   />-->
+                
                 <Grid Grid.Column="1" Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
@@ -194,11 +231,20 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" Content="Variable 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
+                    <TextBox Grid.Row="0" Width="200" Text="VARIABLE 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
+                             Controls:TextBoxHelper.ClearTextButton="False" Background="SteelBlue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             FontWeight="Regular" FontSize="11">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen...">
+                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
+                             Controls:TextBoxHelper.ClearTextButton="True">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -207,7 +253,7 @@
                     </TextBox>
                 </Grid>
 
-                <Separator Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,5" Background="LightGray"/>
+                <!--<Separator Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" />-->
 
                 <Grid Grid.Column="1" Grid.Row="5">
                     <Grid.ColumnDefinitions>
@@ -222,11 +268,20 @@
                         <RowDefinition Height="5" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" Content="Variable 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"/>
+                    <TextBox Grid.Row="0" Width="200" Text="VARIABLE 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
+                             Controls:TextBoxHelper.ClearTextButton="False" Background="SteelBlue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                             FontWeight="Regular" FontSize="11">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen...">
+                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
+                             Controls:TextBoxHelper.ClearTextButton="True">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
@@ -302,9 +357,20 @@
                         </Grid.RowDefinitions>
 
                         <!--<Label Grid.Row="1" Grid.Column="0" Content="Suchen nach:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>-->
-                        <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Suchen nach..."/>
+                        <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" 
+                                 VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Suchen nach..."
+                                 Controls:TextBoxHelper.ClearTextButton="True">
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
                         <Label Grid.Row="1" Grid.Column="2" Content="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
-                        <Controls:SplitButton  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" BorderBrush="LightGray" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>
+                        <Controls:SplitButton  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" BorderBrush="LightGray" Width="130" 
+                                               Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14" Controls:ControlsHelper.CornerRadius="3"
+                                               HorizontalContentAlignment="Left" SelectedIndex="0">
+                        </Controls:SplitButton>
                         <!--<ComboBox  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"/>-->
 
                         <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0" Width="30" Height="30">
@@ -312,7 +378,7 @@
                         </Button>
 
                         <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="6" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Right">
-                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Foreground="LightSalmon"/>
+                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                         </Button>
                     </Grid>
                 </Grid>
@@ -369,7 +435,7 @@
                             <iconPacks:PackIconMaterial Kind="Play" Width="auto" Height="auto" Foreground="LimeGreen"/>
                         </Button>
                         <Button Grid.Row="1" x:Name="btn_gen_loschen" Grid.Column="3" Click="Btn_gen_loschen_Click" Width="30" Height="30">
-                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Foreground="LightSalmon"/>
+                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="Kopiert den kompletten Code in die Zwischenablage">
                             <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
@@ -391,7 +457,7 @@
             --><!--  Content  --><!--
         </simpleChildWindow:ChildWindow>-->
 
-        <simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
+        <!--<simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
                                  x:Name="child_Infos"
                                  Title="Info"
                                  BorderBrush="{DynamicResource AccentBaseColorBrush}"
@@ -405,14 +471,29 @@
             <StackPanel Margin="20">
                 <iconPacks:PackIconMaterial Kind="CodeBraces" Width="30" Height="30" HorizontalAlignment="Center"/>
                 <Label Content="IEC Code Generator - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
-                <Label HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold">
-                    Verison:
-                </Label>
-
+                <Label x:Name="lb_version" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
                 <TextBlock HorizontalAlignment="Center">           
                     <Hyperlink NavigateUri="mailto:resc@mailbox.org?subject=IEC Code Generator" RequestNavigate="Hyperlink_RequestNavigate" >
                         Remo Scheidegger
                     </Hyperlink>
+                </TextBlock>
+                <Label Content="MIT Lizenz" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
+                <TextBlock FontSize="12" TextWrapping="Wrap" MaxWidth="400" MaxHeight="250" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <TextBlock.Text>
+                        Copyright (c) 2019 Remo Scheidegger
+                        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
+                        associated documentation files (the "Software"), to deal in the Software without restriction, 
+                        including without limitation the rights to use, copy, modify, merge, publish, 
+                        distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
+                        Software is furnished to do so, subject to the following conditions:
+                        The above copyright notice and this permission notice shall be included in all copies or 
+                        substantial portions of the Software.
+                        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT 
+                        NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+                        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
+                        DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+                        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                    </TextBlock.Text>
                 </TextBlock>
 
 
@@ -423,7 +504,7 @@
             
 
             
-        </simpleChildWindow:ChildWindow>
+        </simpleChildWindow:ChildWindow>-->
 
     </Grid>
 
