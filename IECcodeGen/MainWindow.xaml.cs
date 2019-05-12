@@ -175,7 +175,7 @@ namespace IECcodeGen
             string[] vars_3 = var_3_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
 
             string outtext = "";
-            string error = "Fehler beim Erzeugen vom Code!" + Environment.NewLine + "Die Anzahl Variabeln ist nicht identisch.";
+            string error = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Die Anzahl Variabeln ist nicht identisch.";
 
             try
             {
@@ -184,7 +184,7 @@ namespace IECcodeGen
 
                 if (lines == 0)
                 {
-                    return "Fehler! Keine Variabeln in der Liste 1.";
+                    return "#--> Keine Variabeln in der Liste 1.";
                 }
 
                 if ((lines < vars_2.Length) || (lines < vars_3.Length))
