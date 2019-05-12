@@ -26,6 +26,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using MahApps.Metro.SimpleChildWindow;
 using System.Diagnostics;
+using System.Deployment.Application;
 
 namespace IECcodeGen
 {
@@ -37,6 +38,8 @@ namespace IECcodeGen
     {
         public static BrushConverter bc = new BrushConverter();
         public Brush DarkBackground = (Brush)bc.ConvertFromString("#4A4A4A");
+        public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
+
 
         public MainWindow()
         {
@@ -59,10 +62,8 @@ namespace IECcodeGen
             text_code_output.TextArea.FontFamily = new FontFamily("Consolas");
             text_code_output.Options.ConvertTabsToSpaces = true;
 
-            //ComboBox
-            combo_vars.Items.Add("Variable_1");
-            combo_vars.Items.Add("Variable_2");
-            combo_vars.Items.Add("Variable_3");
+            //SplitButton
+            combo_vars.ItemsSource = variablen_liste;
 
             //Einstellungen laden
             ThemeManager.ChangeAppStyle(Application.Current,
@@ -362,14 +363,25 @@ namespace IECcodeGen
         }
 
 
-        private void MetroWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            fo_einstellungen.IsOpen = false;
-        }
+        //private void MetroWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    fo_einstellungen.IsOpen = false;
+        //}
 
         private void MenuItem_Click_About(object sender, RoutedEventArgs e)
         {
             child_Infos.IsOpen = true;
+            try
+            {
+                //// get deployment version
+                lb_version.Content = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch (InvalidDeploymentException)
+            {
+                //// you cannot read publish version when app isn't installed 
+                //// (e.g. during debug)
+                lb_version.Content = "not installed";
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
