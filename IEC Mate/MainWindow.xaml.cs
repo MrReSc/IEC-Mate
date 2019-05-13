@@ -193,7 +193,10 @@ namespace IECMate
             string[] vars_3 = var_3_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
 
             string outtext = "";
-            string error = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Die Anzahl Variabeln ist nicht identisch.";
+            string error0 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Die Anzahl Variabeln ist nicht identisch.";
+            string error1 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Keine Variable in Liste 1.";
+            string error2 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Keine Variable in Liste 2.";
+            string error3 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Keine Variable in Liste 3.";
 
             try
             {
@@ -202,12 +205,22 @@ namespace IECMate
 
                 if (lines == 0)
                 {
-                    return "#--> Keine Variabeln in der Liste 1.";
+                    return error1;
                 }
 
                 if ((lines < vars_2.Length) || (lines < vars_3.Length))
                 {
-                    return error;
+                    return error0;
+                }
+
+                if ((template.Contains(var_2)) && (vars_2.Length == 0))
+                {
+                    return error2;
+                }
+
+                if ((template.Contains(var_3)) && (vars_3.Length == 0))
+                {
+                    return error3;
                 }
 
                 for (int i = 0; i < lines; i++)
@@ -237,7 +250,7 @@ namespace IECMate
             }
             catch (Exception)
             {
-                return error;
+                return error0;
             }
             return outtext;
         }
