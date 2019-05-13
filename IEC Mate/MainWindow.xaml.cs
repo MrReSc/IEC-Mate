@@ -28,7 +28,7 @@ using MahApps.Metro.SimpleChildWindow;
 using System.Diagnostics;
 using System.Deployment.Application;
 
-namespace IECcodeGen
+namespace IECMate
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace IECcodeGen
+namespace IECMate
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"
