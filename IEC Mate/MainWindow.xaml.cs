@@ -39,7 +39,7 @@ namespace IECMate
         public static BrushConverter bc = new BrushConverter();
         public Brush DarkBackground = (Brush)bc.ConvertFromString("#4A4A4A");
         public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
-
+        public Stack<string> undoList = new Stack<string>();
 
         public MainWindow()
         {
@@ -112,6 +112,24 @@ namespace IECMate
         {
             try
             {
+                string undoListInhalt = "";
+
+                if (undoList.Count >=1)
+                {
+                    undoListInhalt = undoList.Peek();
+                }
+
+                if ((! String.Equals(text_code_template.Text, undoListInhalt)))
+                {
+                    undoList.Push(text_code_template.Text);
+                }
+
+                if (undoList.Count >= 1)
+                {
+                    btn_template_undo.IsEnabled = true;
+                    mitem_undo.IsEnabled = true;
+                }
+
                 text_code_template.Text = text_code_template.Text.Replace(text_suchen.Text, combo_vars.SelectedItem.ToString());
             }
             catch (Exception)
@@ -363,11 +381,6 @@ namespace IECMate
         }
 
 
-        //private void MetroWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    fo_einstellungen.IsOpen = false;
-        //}
-
         private void MenuItem_Click_About(object sender, RoutedEventArgs e)
         {
             child_Infos.IsOpen = true;
@@ -388,6 +401,20 @@ namespace IECMate
         {
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
+        }
+
+        private void Btn_template_undo_Click(object sender, RoutedEventArgs e)
+        {
+            if (undoList.Count > 0)
+            {
+                text_code_template.Text = undoList.Pop();
+            }
+ 
+            if (undoList.Count == 0)
+            {
+                btn_template_undo.IsEnabled = false;
+                mitem_undo.IsEnabled = false;
+            }
         }
     }
 
