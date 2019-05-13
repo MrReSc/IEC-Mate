@@ -5,15 +5,15 @@
         xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
   <Color name="Comment" foreground="ForestGreen" />
   <Color name="Error" foreground="Red" />
-  <Color name="String" foreground="Blue" />
+  <Color name="String" foreground="DarkOrange" />
 
   <!-- This is the main ruleset. -->
   <RuleSet>
-    <Span color="Comment" begin="//" />
-    <Span color="Error" begin="#-->" />
-    <Span color="Comment" multiline="true"
+    <Span color="Comment" begin="//"></Span>
+    
+    <Span color="Comment" multiline="true" begin="\(\*" end="\*\)" />
 
-       begin="/\*" end="\*/" />
+    <Span color="Error" begin="#-->" />
 
     <Span color="String">
       <Begin>"</Begin>

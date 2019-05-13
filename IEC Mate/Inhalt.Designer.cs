@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IECcodeGen {
+namespace IECMate {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
