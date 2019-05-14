@@ -27,6 +27,8 @@ using MahApps.Metro;
 using MahApps.Metro.SimpleChildWindow;
 using System.Diagnostics;
 using System.Deployment.Application;
+using WinForms = System.Windows.Forms; //FolderDialog
+using MahApps.Metro.Controls.Dialogs;
 
 namespace IECMate
 {
@@ -101,6 +103,8 @@ namespace IECMate
                 WindowState = WindowState.Maximized;
             }
 
+            text_projktpfad_suche.Text = Properties.Settings.Default.projekt_pfad_suche;
+
             //Inhalt laden
             text_var1.Text = Inhalt.Default.variable_1;
             text_var2.Text = Inhalt.Default.variable_2;
@@ -114,12 +118,12 @@ namespace IECMate
             {
                 string undoListInhalt = "";
 
-                if (undoList.Count >=1)
+                if (undoList.Count >= 1)
                 {
                     undoListInhalt = undoList.Peek();
                 }
 
-                if ((! String.Equals(text_code_template.Text, undoListInhalt)))
+                if ((!String.Equals(text_code_template.Text, undoListInhalt)))
                 {
                     undoList.Push(text_code_template.Text);
                 }
@@ -169,9 +173,9 @@ namespace IECMate
         private void Btn_gen_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
-                text_code_output.Text = Code_gen("Variable_1", text_var1.Text, 
-                                                 "Variable_2", text_var2.Text, 
+            {
+                text_code_output.Text = Code_gen("Variable_1", text_var1.Text,
+                                                 "Variable_2", text_var2.Text,
                                                  "Variable_3", text_var3.Text,
                                                  text_code_template.Text);
             }
@@ -179,12 +183,12 @@ namespace IECMate
             {
                 ;
             }
-           
+
         }
 
-        private string Code_gen(string var_1, string var_1_text, 
-                                string var_2, string var_2_text, 
-                                string var_3, string var_3_text, 
+        private string Code_gen(string var_1, string var_1_text,
+                                string var_2, string var_2_text,
+                                string var_3, string var_3_text,
                                 string template)
         {
             string[] split = new string[] { "\r\n" };
@@ -201,7 +205,7 @@ namespace IECMate
             try
             {
                 int lines = vars_1.Length;
-                
+
 
                 if (lines == 0)
                 {
@@ -246,7 +250,7 @@ namespace IECMate
                         outtext = outtext + Environment.NewLine + Environment.NewLine + temp_text;
                     }
                 }
-              
+
             }
             catch (Exception)
             {
@@ -422,13 +426,134 @@ namespace IECMate
             {
                 text_code_template.Text = undoList.Pop();
             }
- 
+
             if (undoList.Count == 0)
             {
                 btn_template_undo.IsEnabled = false;
                 mitem_undo.IsEnabled = false;
             }
         }
-    }
 
+        private void Btn_pfad_auswahlen_Click(object sender, RoutedEventArgs e)
+        {
+            WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+            folderDialog.ShowNewFolderButton = false;
+            folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            WinForms.DialogResult result = folderDialog.ShowDialog();
+
+            if (result == WinForms.DialogResult.OK)
+            {
+                String sPath = folderDialog.SelectedPath;
+                text_projktpfad_suche.Text = sPath;
+
+                Properties.Settings.Default.projekt_pfad_suche = sPath;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private async void Btn_suche_Click(object sender, RoutedEventArgs e)
+        {
+            listbox_ergebnis.Items.Clear();
+
+            if ((!String.IsNullOrEmpty(text_pattern_suche.Text)) && (!(String.IsNullOrWhiteSpace(text_pattern_suche.Text))))
+            {
+                var x = await this.ShowProgressAsync("Suchen", "Die Suche läuft. Bite warten...", true) as ProgressDialogController;
+                x.SetIndeterminate();
+
+                try
+                {
+                    List<string> allFiles = new List<string>();
+
+                    AddFileNamesToList(text_projktpfad_suche.Text, allFiles);
+
+                    if ((!String.IsNullOrEmpty(text_pattern_suche.Text)) && (x.IsOpen))
+                    {
+                        foreach (string fileName in allFiles)
+                        {
+                            if (x.IsCanceled)
+                            {
+                                break;
+                            }
+
+                            using (var reader = File.OpenText(fileName))
+                            {
+                                var fileText = await reader.ReadToEndAsync();
+
+                                if ((bool)ts_exakte_suche.IsChecked)
+                                {
+                                    if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text))))
+                                    {
+                                        listbox_ergebnis.Items.Add(fileName);
+                                    }
+                                }
+                                else
+                                {
+                                    if (fileText.Contains(text_pattern_suche.Text))
+                                    {
+                                        listbox_ergebnis.Items.Add(fileName);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    ;
+                }
+
+                await x.CloseAsync();
+            }
+            else
+            {
+                if (String.IsNullOrWhiteSpace(text_pattern_suche.Text))
+                {
+                    text_pattern_suche.Text = "";
+                }
+            }
+        }
+
+
+        public static void AddFileNamesToList(string sourceDir, List<string> allFiles)
+        {
+
+            var fileEntries = Directory.GetFiles(sourceDir).Where(name => !name.EndsWith(".fu") &&
+                                                                          !name.EndsWith(".fud") &&
+                                                                          !name.EndsWith(".ful") &&
+                                                                          !name.EndsWith("O")); 
+            foreach (string fileName in fileEntries)
+            {
+                allFiles.Add(fileName);
+            }
+
+            //Recursion    
+            string[] subdirectoryEntries = Directory.GetDirectories(sourceDir);
+            foreach (string item in subdirectoryEntries)
+            {
+                // Avoid "reparse points"
+                if ((File.GetAttributes(item) & FileAttributes.ReparsePoint) != FileAttributes.ReparsePoint)
+                {
+                    AddFileNamesToList(item, allFiles);
+                }
+            }
+        }
+
+        private void Btn_suche_offnen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string selectedText = listbox_ergebnis.SelectedItem.ToString();
+
+                if (!String.IsNullOrEmpty(selectedText))
+                {
+                    System.Diagnostics.Process.Start(selectedText);
+                }
+            }
+            catch (Exception)
+            {
+                ;
+            }
+            
+        }
+    }
 }

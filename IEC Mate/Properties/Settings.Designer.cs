@@ -130,5 +130,29 @@ namespace IECMate.Properties {
                 this["fenster_max"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string projekt_pfad_suche {
+            get {
+                return ((string)(this["projekt_pfad_suche"]));
+            }
+            set {
+                this["projekt_pfad_suche"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string such_begriff {
+            get {
+                return ((string)(this["such_begriff"]));
+            }
+            set {
+                this["such_begriff"] = value;
+            }
+        }
     }
 }
