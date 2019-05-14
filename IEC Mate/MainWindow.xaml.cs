@@ -463,8 +463,18 @@ namespace IECMate
                 try
                 {
                     List<string> allFiles = new List<string>();
+                    string suchpfad = "";
 
-                    AddFileNamesToList(text_projktpfad_suche.Text, allFiles);
+                    if ((bool)ts_kbus_suche.IsChecked)
+                    {
+                        suchpfad = text_projktpfad_suche.Text + "\\application\\control\\config\\kbus";
+                    }
+                    else
+                    {
+                        suchpfad = text_projktpfad_suche.Text;
+                    }
+
+                    AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
 
                     if ((!String.IsNullOrEmpty(text_pattern_suche.Text)) && (x.IsOpen))
                     {
@@ -514,13 +524,22 @@ namespace IECMate
         }
 
 
-        public static void AddFileNamesToList(string sourceDir, List<string> allFiles)
+        public static void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin)
         {
+            IEnumerable<string> fileEntries = Enumerable.Empty<string>();
 
-            var fileEntries = Directory.GetFiles(sourceDir).Where(name => !name.EndsWith(".fu") &&
+            if (bin)
+            {
+                fileEntries = Directory.GetFiles(sourceDir);
+            }
+            else
+            {
+                fileEntries = Directory.GetFiles(sourceDir).Where(name => !name.EndsWith(".fu") &&
                                                                           !name.EndsWith(".fud") &&
                                                                           !name.EndsWith(".ful") &&
-                                                                          !name.EndsWith("O")); 
+                                                                          !name.EndsWith("O"));
+            }
+
             foreach (string fileName in fileEntries)
             {
                 allFiles.Add(fileName);
@@ -533,7 +552,7 @@ namespace IECMate
                 // Avoid "reparse points"
                 if ((File.GetAttributes(item) & FileAttributes.ReparsePoint) != FileAttributes.ReparsePoint)
                 {
-                    AddFileNamesToList(item, allFiles);
+                    AddFileNamesToList(item, allFiles, bin);
                 }
             }
         }
