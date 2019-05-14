@@ -438,7 +438,15 @@ namespace IECMate
         {
             WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
             folderDialog.ShowNewFolderButton = false;
-            folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            if (!String.IsNullOrWhiteSpace(text_projktpfad_suche.Text))
+            {
+                folderDialog.SelectedPath = text_projktpfad_suche.Text;
+            }
+            else
+            {
+                folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            }
+           
             WinForms.DialogResult result = folderDialog.ShowDialog();
 
             if (result == WinForms.DialogResult.OK)
@@ -467,7 +475,7 @@ namespace IECMate
 
                     if ((bool)ts_kbus_suche.IsChecked)
                     {
-                        suchpfad = text_projktpfad_suche.Text + "\\application\\control\\config\\kbus";
+                        suchpfad = text_projktpfad_suche.Text + "\\application\\control\\config";
                     }
                     else
                     {
@@ -498,7 +506,8 @@ namespace IECMate
                                 }
                                 else
                                 {
-                                    if (fileText.Contains(text_pattern_suche.Text))
+                                    //Nicht Case Sensitive
+                                    if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                                     {
                                         listbox_ergebnis.Items.Add(fileName);
                                     }
@@ -522,6 +531,7 @@ namespace IECMate
                 }
             }
         }
+
 
 
         public static void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin)
