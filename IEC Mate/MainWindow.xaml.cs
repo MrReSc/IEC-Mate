@@ -29,6 +29,7 @@ using System.Diagnostics;
 using System.Deployment.Application;
 using WinForms = System.Windows.Forms; //FolderDialog
 using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Controls.Primitives;
 
 namespace IECMate
 {
@@ -583,6 +584,38 @@ namespace IECMate
                 ;
             }
             
+        }
+
+
+        private void Encoding_Checked(object sender, RoutedEventArgs args)
+        {
+            long ResulateDezimal = 0;
+            var objects = grid_encoding.GetChildObjects();
+            foreach (object child in objects)
+            {
+                if (child.GetType() == typeof(StackPanel))
+                {
+                    StackPanel ch = child as StackPanel;
+                    var obj = ch.GetChildObjects();
+                    foreach (object item in obj)
+                    {
+                        if (item.GetType() == typeof(ToggleButton))
+                        {
+                            ToggleButton tb = item as ToggleButton;
+                            if ((bool)tb.IsChecked)
+                            {
+                                int bit = Int32.Parse(tb.Content.ToString());
+                                ResulateDezimal = ResulateDezimal + Convert.ToInt64(Math.Pow(2, bit));
+                            }
+                        }
+                    }
+                }
+            }
+
+            string binary = Convert.ToString(ResulateDezimal, 2);
+            text_encode_dec.Text = ResulateDezimal.ToString();
+            text_encode_hex.Text = "16#" + ResulateDezimal.ToString("X");
+            text_encode_bin.Text = "2#" + binary;
         }
     }
 }
