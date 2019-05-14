@@ -121,7 +121,7 @@
                 <Label Content="IEC Mate - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
                 <Label x:Name="lb_version" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
                 <TextBlock HorizontalAlignment="Center" Margin="0,0,0,20">           
-                    <Hyperlink NavigateUri="mailto:resc@mailbox.org?subject=IEC Mate" RequestNavigate="Hyperlink_RequestNavigate" >
+                    <Hyperlink NavigateUri="mailto:iecmate@mailbox.org?subject=IEC Mate" RequestNavigate="Hyperlink_RequestNavigate" >
                         Remo Scheidegger
                     </Hyperlink>
                 </TextBlock>
@@ -514,9 +514,9 @@
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
                     </Button>
 
-                    <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" OnLabel="Exakte Zeichenfolge suchen ein" OffLabel="Exakte Zeichenfolge suchen aus" Padding="0,0,5,0" IsChecked="True" ToolTip="Es wird nur nach der exakten Zeichenfolge gesucht." Width="320" HorizontalAlignment="Right"/>
+                    <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" OnLabel="Exakte Zeichenfolge suchen ein" OffLabel="Exakte Zeichenfolge suchen aus" Padding="0,0,5,0" IsChecked="True" ToolTip="Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive)." Width="320" HorizontalAlignment="Right"/>
                     <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" OnLabel="In Binär Dateien suchen ein" OffLabel="In Binär Dateien suchen aus" Padding="0,0,5,0" IsChecked="False" ToolTip="Such auch nach *.fud, *.ful, *.fu, *.**O Dateien." Width="320" HorizontalAlignment="Right"/>
-                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="4" OnLabel="Nur in kbus suchen ein" OffLabel="Nur in kbus suchen aus" Padding="0,0,5,0" IsChecked="False"  ToolTip="Such nur im Unterverzeichnis \application\control\config\kbus" Width="320" HorizontalAlignment="Right"/>
+                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="4" OnLabel="Nur in HW-Konfig suchen ein" OffLabel="Nur in HW-Konfig suchen aus" Padding="0,0,5,0" IsChecked="False"  ToolTip="Such nur im Unterverzeichnis \application\control\config\" Width="320" HorizontalAlignment="Right"/>
 
 
                     <GroupBox Grid.Column="0" Grid.Row="6" Header="Ergebnis" Grid.ColumnSpan="4">
