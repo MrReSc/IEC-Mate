@@ -84,6 +84,11 @@ namespace IECMate
                 text_decode_out1.Background = DarkBackground;
                 text_decode_out2.Background = DarkBackground;
 
+                text_encode_bin.Background = DarkBackground;
+                text_encode_dec.Background = DarkBackground;
+                text_encode_hex.Background = DarkBackground;
+
+
                 tg_theme.IsChecked = true;
             }
 
@@ -108,6 +113,9 @@ namespace IECMate
             }
 
             text_projktpfad_suche.Text = Properties.Settings.Default.projekt_pfad_suche;
+            text_projktpfad_helfer.Text = Properties.Settings.Default.projekt_pfad_helfer;
+
+            tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
 
             //Inhalt laden
             text_var1.Text = Inhalt.Default.variable_1;
@@ -320,6 +328,9 @@ namespace IECMate
 
                 text_decode_out1.Background = DarkBackground;
                 text_decode_out2.Background = DarkBackground;
+                text_encode_bin.Background = DarkBackground;
+                text_encode_dec.Background = DarkBackground;
+                text_encode_hex.Background = DarkBackground;
 
                 Properties.Settings.Default.theme = "BaseDark";
                 Properties.Settings.Default.Save();
@@ -338,6 +349,9 @@ namespace IECMate
 
                 text_decode_out1.Background = Brushes.Gainsboro;
                 text_decode_out2.Background = Brushes.Gainsboro;
+                text_encode_bin.Background = Brushes.Gainsboro;
+                text_encode_dec.Background = Brushes.Gainsboro;
+                text_encode_hex.Background = Brushes.Gainsboro;
 
                 Properties.Settings.Default.theme = "BaseLight";
                 Properties.Settings.Default.Save();
@@ -398,6 +412,8 @@ namespace IECMate
             Inhalt.Default.variable_3 = text_var3.Text;
             Inhalt.Default.vorlage = text_code_template.Text;
 
+            Properties.Settings.Default.tabcontrol_index = tc_root.SelectedIndex;
+
             Inhalt.Default.Save();
             Properties.Settings.Default.Save();
         }
@@ -454,7 +470,7 @@ namespace IECMate
             }
             else
             {
-                folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+                folderDialog.SelectedPath = "c:\\";
             }
            
             WinForms.DialogResult result = folderDialog.ShowDialog();
@@ -825,8 +841,222 @@ namespace IECMate
 
         private async void ShowFehlerBitsetAsync(string message)
         {
-            await this.ShowMessageAsync("Fehler bei der Eingabe", message, MessageDialogStyle.Affirmative);
+            text_decode.IsEnabled = false;
+            MessageDialogResult result = await this.ShowMessageAsync("Fehler bei der Eingabe", message, MessageDialogStyle.Affirmative);
 
+            if (result == MessageDialogResult.Affirmative)
+            {
+                text_decode.IsEnabled = true;
+            }
+
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            text_var1.Text = "";
+            text_var2.Text = "";
+            text_var3.Text = "";
+        }
+
+        private void Btn_pfad_helfer_auswahlen_Click(object sender, RoutedEventArgs e)
+        {
+            WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+            folderDialog.ShowNewFolderButton = false;
+            if (!String.IsNullOrWhiteSpace(text_projktpfad_suche.Text))
+            {
+                folderDialog.SelectedPath = text_projktpfad_helfer.Text;
+            }
+            else
+            {
+                folderDialog.SelectedPath = "c:\\";
+            }
+
+            WinForms.DialogResult result = folderDialog.ShowDialog();
+
+            if (result == WinForms.DialogResult.OK)
+            {
+                String sPath = folderDialog.SelectedPath;
+                text_projktpfad_helfer.Text = sPath;
+
+                Properties.Settings.Default.projekt_pfad_helfer= sPath;
+                Properties.Settings.Default.Save();
+            }
+
+        }
+
+
+        private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tc = sender as TabControl;
+
+            if (tc != null)
+            {
+                var item = tc.SelectedIndex;
+
+                if (item == 1)
+                {
+                    text_pattern_suche.Focus();
+                }
+
+                if (item == 2)
+                {
+                    text_decode.Focus();
+                }
+            }
+        }
+
+        private async void FehlerHelferAsync()
+        {
+            string message = "Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.";
+            string titel = "Fehler beim öffnen";
+            await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+        }
+
+        private async void FehlerHelferAsyncME()
+        {
+            string message = "Bitte eine ME auswählen.";
+            string titel = "Fehler beim öffnen";
+            await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+        }
+
+        private void OpenFileOrFolder(string input)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(input))
+                {
+                    System.Diagnostics.Process.Start(input);
+                }
+            }
+            catch (Exception)
+            {
+                FehlerHelferAsync();
+            }
+        }
+
+        private void Btn_open_systemoptions_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\data_Machine\\machineSetup\\systemOptions.properties";
+            OpenFileOrFolder(open);
+        }
+
+        private void Bt_openFormProgram_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\data_Customer\\formProgram";
+            OpenFileOrFolder(open);
+        }
+
+        private void Bt_openDiagnoseData_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\data_Customer\\diagnoseData";
+            OpenFileOrFolder(open);
+        }
+
+        private void Bt_openDiagramSetup_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\data_Customer\\diagramSetup";
+            OpenFileOrFolder(open);
+        }
+
+        private void Bt_simStarten_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\Start_Simulation.bat";
+            OpenFileOrFolder(open);
+        }
+
+        private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\Start_Visualization.bat";
+            OpenFileOrFolder(open);
+        }
+
+        private async void Bt_BackupProject_Click(object sender, RoutedEventArgs e)
+        {
+            string ordnername = new DirectoryInfo(text_projktpfad_helfer.Text).Name;
+            string targetArchive = text_projktpfad_helfer.Text.Replace(ordnername, "") + DateTime.Now.ToString("MMddyyyy_HHmmss") + "_" + ordnername + ".7z";
+            string sourceName = text_projktpfad_helfer.Text;
+
+            if ((!String.IsNullOrWhiteSpace(sourceName)) && (!(String.IsNullOrWhiteSpace(targetArchive))) && Directory.Exists(sourceName))
+            {
+                //var xp = await this.ShowProgressAsync("Backup", "Das Backup läuft bitte warten...", true) as ProgressDialogController;
+                //xp.SetIndeterminate();
+
+                try
+                {
+                    ProcessStartInfo p = new ProcessStartInfo();
+                    p.FileName = @"resources\7z\7za.exe";
+                    p.Arguments = string.Format("a -t7z \"{0}\" \"{1}\" -mx=9", targetArchive, sourceName);
+                    p.WindowStyle = ProcessWindowStyle.Normal;
+                    Process x = Process.Start(p);
+                    //Process x = await Task.Run(() => Process.Start(p));
+                    x.WaitForExit();
+                }
+                catch (Exception)
+                {
+                    string message = "Bitte den Projektpfad überprüfen.";
+                    string titel = "Fehler beim Backup";
+                    await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+                }
+
+            }
+            else
+            {
+                string message = "Bitte den Projektpfad überprüfen.";
+                string titel = "Fehler beim Backup";
+                await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+            }
+            
+        }
+
+        private void Cb_select_me_DropDownOpened(object sender, EventArgs e)
+        {
+            string mepfad = text_projktpfad_helfer.Text + "\\application\\control\\ieccontrol";
+
+            if (Directory.Exists(mepfad))
+            {
+                string[] subdirectoryEntries = Directory.GetDirectories(mepfad);
+
+                foreach (string subdirectory in subdirectoryEntries)
+                {
+                    string ordnername = new DirectoryInfo(subdirectory).Name;
+                    cb_select_me.Items.Add(ordnername);
+                }
+            }
+            else
+            {
+                cb_select_me.Items.Clear();
+                FehlerHelferAsync();
+            }
+        }
+
+        private void Btn_open_me_folder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string me = cb_select_me.SelectedValue.ToString();
+                string open = text_projktpfad_helfer.Text + "\\application\\control\\ieccontrol\\" + me;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception)
+            {
+                FehlerHelferAsyncME();
+            }
+
+        }
+
+        private void Btn_open_xml_hmi_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string me = cb_select_me.SelectedValue.ToString();
+                string open = text_projktpfad_helfer.Text + "\\application\\view\\" + me + "\\hmi\\text";
+                OpenFileOrFolder(open);
+            }
+            catch (Exception)
+            {
+                FehlerHelferAsyncME();
+            }
         }
     }
 }
