@@ -154,5 +154,29 @@ namespace IECMate.Properties {
                 this["such_begriff"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int tabcontrol_index {
+            get {
+                return ((int)(this["tabcontrol_index"]));
+            }
+            set {
+                this["tabcontrol_index"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string projekt_pfad_helfer {
+            get {
+                return ((string)(this["projekt_pfad_helfer"]));
+            }
+            set {
+                this["projekt_pfad_helfer"] = value;
+            }
+        }
     }
 }
