@@ -574,7 +574,7 @@
                                 <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
                                 <TextBox x:Name="text_encode_dec"  Controls:TextBoxHelper.Watermark="Dezimal 10#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
@@ -616,9 +616,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                
-
-                                <StackPanel x:Name="sp_0bis8" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
 
                                     <ToggleButton x:Name="tb_bit0" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
                                         0
@@ -738,7 +736,7 @@
                                         26
                                     </ToggleButton>
 
-                                    <ToggleButton x:Name="tb_bit27" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,50,-2">
+                                    <ToggleButton x:Name="tb_bit27" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,50,0">
                                         27
                                     </ToggleButton>
 
@@ -760,9 +758,6 @@
 
                                 </StackPanel>
                             </Grid>
-                            
-
-
                         </Grid>
                     </GroupBox>
 
@@ -770,6 +765,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="5" />
                             </Grid.ColumnDefinitions>
@@ -778,10 +774,221 @@
                                 <RowDefinition Height="5" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="5" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
 
+                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
+                                <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="Dezimal, 16# Hex oder 2# Binär" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" TextChanged="Text_decode_TextChanged">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                                <TextBox x:Name="text_decode_out1" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" IsReadOnly="True" Foreground="DarkGray" Background="Gainsboro" Text="asdsad">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                                <TextBox x:Name="text_decode_out2" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" IsReadOnly="True" Foreground="DarkGray" Background="Gainsboro" Text="asdsad">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                            </StackPanel>
+
+                            <Grid x:Name="grid_decoding" Grid.Column="2" Grid.Row="1" ToggleButton.Checked="Encoding_Checked" ToggleButton.Unchecked="Encoding_Checked">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
+                                        <Ellipse x:Name="el_bit0" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="0" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit1" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="1" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit2" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="2" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
+                                        <Ellipse x:Name="el_bit3" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="3" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit4" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="4" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit5" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="5" FontSize="18" FontWeight="Bold"/>
+                                     </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit6" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="6" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit7" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="7" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
+                                        <Ellipse x:Name="el_bit8" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="8" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit9" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="9" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit10" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="10" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
+                                        <Ellipse x:Name="el_bit11" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="11" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit12" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="12" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit13" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="13" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit14" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="14" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit15" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="15" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
+                                        <Ellipse x:Name="el_bit16" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="16" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit17" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="17" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit18" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="18" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
+                                        <Ellipse x:Name="el_bit19" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="19" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit20" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="20" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit21" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="21" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit22" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="22" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit23" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="23" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
+                                        <Ellipse x:Name="el_bit24" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="24" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit25" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="25" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit26" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="26" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
+                                        <Ellipse x:Name="el_bit27" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="27" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit28" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="28" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit29" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="29" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit30" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="30" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
+                                        <Ellipse x:Name="el_bit31" Stroke="Silver" StrokeThickness="2"/>
+                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="31" FontSize="18" FontWeight="Bold"/>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Grid>
 
                         </Grid>
                     </GroupBox>

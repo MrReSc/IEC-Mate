@@ -81,6 +81,9 @@ namespace IECMate
                 text_code_output.Background = DarkBackground;
                 border_code_output.Background = DarkBackground;
 
+                text_decode_out1.Background = DarkBackground;
+                text_decode_out2.Background = DarkBackground;
+
                 tg_theme.IsChecked = true;
             }
 
@@ -315,6 +318,9 @@ namespace IECMate
                 text_code_output.Background = DarkBackground;
                 border_code_output.Background = DarkBackground;
 
+                text_decode_out1.Background = DarkBackground;
+                text_decode_out2.Background = DarkBackground;
+
                 Properties.Settings.Default.theme = "BaseDark";
                 Properties.Settings.Default.Save();
             }
@@ -329,6 +335,9 @@ namespace IECMate
 
                 text_code_output.Background = Brushes.Gainsboro;
                 border_code_output.Background = Brushes.Gainsboro;
+
+                text_decode_out1.Background = Brushes.Gainsboro;
+                text_decode_out2.Background = Brushes.Gainsboro;
 
                 Properties.Settings.Default.theme = "BaseLight";
                 Properties.Settings.Default.Save();
@@ -617,5 +626,208 @@ namespace IECMate
             text_encode_hex.Text = "16#" + ResulateDezimal.ToString("X");
             text_encode_bin.Text = "2#" + binary;
         }
+
+        private void Text_decode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            //Wenn alles gelöscht wird
+            if (String.IsNullOrWhiteSpace(text_decode.Text))
+            {
+                List<char> BinList = new List<char>();
+                BinList.Insert(0, '0');
+                ShowDecodeResult(BinList);
+
+                text_decode_out1.Text = "";
+                text_decode_out2.Text = "";
+                return;
+            }
+
+
+            //Hex Zahl wurde eingegeben
+            if (text_decode.Text.StartsWith("16#"))
+            {
+                var hex = text_decode.Text.Split('#')[1];
+
+                if (!String.IsNullOrWhiteSpace(hex))
+                {
+
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(hex, @"\A\b[0-9a-fA-F]+\b\Z"))
+                    {
+                        ShowFehlerBitsetAsync("Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F.");
+                        return;
+                    }
+
+                    if (Convert.ToInt64(hex, 16) > 4294967295)
+                    {
+                        ShowFehlerBitsetAsync("Die eingegebene Zahl ist grösser als 32bit.");
+                        return;
+                    }
+
+                    List<char> BinList = new List<char>();
+                    foreach (var bit in Convert.ToString(Convert.ToInt64(Convert.ToInt64(hex, 16)), 2))
+                    {
+                        BinList.Insert(0, bit);
+                    }
+                    ShowDecodeResult(BinList);
+
+                    text_decode_out1.Text = "2#" + Convert.ToString(Convert.ToInt64(hex, 16), 2);
+                    text_decode_out2.Text = "10#" + Convert.ToString(Convert.ToInt64(hex, 16), 10);
+                }
+                else
+                {
+                    List<char> BinList = new List<char>();
+                    BinList.Insert(0, '0');
+                    ShowDecodeResult(BinList);
+
+                    text_decode_out1.Text = "";
+                    text_decode_out2.Text = "";
+                }
+                return;
+            }
+
+            //Binärzahl wurde eingegeben
+            if (text_decode.Text.StartsWith("2#"))
+            {
+                var bin = text_decode.Text.Split('#')[1];
+
+                if (!String.IsNullOrWhiteSpace(bin))
+                {
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(bin, @"\A\b[0-1]+\b\Z"))
+                    {
+                        ShowFehlerBitsetAsync("Die Binär - Eingabe enthält andere Zeichen als 0 oder 1.");
+                        return;
+                    }
+
+                    if (Convert.ToInt64(bin, 2) > 4294967295)
+                    {
+                        ShowFehlerBitsetAsync("Die eingegebene Zahl ist grösser als 32bit.");
+                        return;
+                    }
+
+                    List<char> BinList = new List<char>();
+                    foreach (var bit in bin)
+                    {
+                        BinList.Insert(0, bit);
+                    }
+                    ShowDecodeResult(BinList);
+
+                    text_decode_out1.Text = "10#" + Convert.ToInt64(bin, 2).ToString();
+                    text_decode_out2.Text = "16#" + Convert.ToInt64(bin, 2).ToString("X");
+                }
+                else
+                {
+                    List<char> BinList = new List<char>();
+                    BinList.Insert(0, '0');
+                    ShowDecodeResult(BinList);
+
+                    text_decode_out1.Text = "";
+                    text_decode_out2.Text = "";
+                }
+                return;
+            }
+
+            //Dezimal Zahl
+            string dez = "";
+            if (text_decode.Text.StartsWith("10#"))
+            {
+                dez = text_decode.Text.Split('#')[1];
+            }
+            else
+            {
+                dez = text_decode.Text;
+            }
+
+            if (!String.IsNullOrWhiteSpace(dez))
+            {
+                if (!dez.All(Char.IsDigit))
+                {
+                    ShowFehlerBitsetAsync("Die Dezimal - Eingabe enthält andere Zeichen als 0 - 9.");
+                    return;
+                }
+
+                if (Convert.ToInt64(dez) > 4294967295)
+                {
+                    ShowFehlerBitsetAsync("Die eingegebene Zahl ist grösser als 32bit.");
+                    return;
+                }
+
+                List<char> BinList = new List<char>();
+                foreach (var bit in Convert.ToString(Convert.ToInt64(dez), 2))
+                {
+                    BinList.Insert(0, bit);
+                }
+                ShowDecodeResult(BinList);
+                text_decode_out1.Text = "2#" + Convert.ToString(Convert.ToInt64(dez, 10), 2);
+                text_decode_out2.Text = "16#" + Convert.ToInt64(dez, 10).ToString("X");
+                return;
+            }
+            else
+            {
+                List<char> BinList = new List<char>();
+                BinList.Insert(0, '0');
+                ShowDecodeResult(BinList);
+
+                text_decode_out1.Text = "";
+                text_decode_out2.Text = "";
+            }
+        }
+
+        private void ShowDecodeResult(List<char> list)
+        {
+            var objects = grid_decoding.GetChildObjects();
+            foreach (object child in objects)
+            {
+                if (child.GetType() == typeof(StackPanel))
+                {
+                    StackPanel ch = child as StackPanel;
+                    var obj = ch.GetChildObjects();
+                    foreach (object item in obj)
+                    {
+                        if (item.GetType() == typeof(Grid))
+                        {
+                            Grid grid = item as Grid;
+                            var gr = grid.GetChildObjects();
+
+                            foreach (object it in gr)
+                            {
+                                if (it.GetType() == typeof(Ellipse))
+                                {
+                                    Ellipse el = it as Ellipse;
+                                    el.Fill = Brushes.Transparent;
+                                }
+
+                                if (it.GetType() == typeof(Ellipse))
+                                {
+                                    Ellipse el = it as Ellipse;
+                                    int bit = Int32.Parse(el.Name.Replace("el_bit", ""));
+
+                                    var len = list.Count();
+
+                                    if (bit < len)
+                                    {
+                                        if (list[bit] == '1')
+                                        {
+                                            el.Fill = Brushes.DodgerBlue;
+                                        }
+                                        else
+                                        {
+                                            el.Fill = Brushes.Transparent;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void ShowFehlerBitsetAsync(string message)
+        {
+            await this.ShowMessageAsync("Fehler bei der Eingabe", message, MessageDialogStyle.Affirmative);
+
+        }
     }
 }
+
