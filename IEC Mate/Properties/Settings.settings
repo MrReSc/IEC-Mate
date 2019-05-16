@@ -41,5 +41,8 @@
     <Setting Name="projekt_pfad_helfer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="akzentfarbe" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Steel</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
