@@ -361,6 +361,7 @@ namespace IECMate
         private void Btn_template_loschen_Click(object sender, RoutedEventArgs e)
         {
             text_code_template.Text = "";
+            combo_vars.SelectedIndex = -1;
         }
 
 
