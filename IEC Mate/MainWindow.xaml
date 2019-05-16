@@ -347,11 +347,11 @@
                                     <Label Grid.Row="1" Grid.Column="2" Content="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
 
                                     <ComboBox x:Name="combo_vars" Controls:ControlsHelper.CornerRadius="3" Grid.Row="1" Grid.Column="3"
-                                              BorderBrush="LightGray" Width="180" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"
+                                              BorderBrush="LightGray" Width="180" Margin="0,0,20,0" VerticalContentAlignment="Center" 
                                               HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="Variable auswählen...">
                                     </ComboBox>
 
-                                    <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0,0,10,0" Width="30" Height="30" ToolTip="">
+                                    <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0,0,10,0" Width="30" Height="30">
                                         <iconPacks:PackIconMaterial Kind="SwapHorizontal" Width="auto" Height="auto"/>
                                     </Button>
 
@@ -545,7 +545,7 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel VerticalAlignment="Top">
-                                    <TextBox x:Name="text_encode_dec"  Text="Dezimal 10#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro">
+                                    <TextBox x:Name="text_encode_dec"  Text="Dezimal 10#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -553,7 +553,7 @@
                                         </TextBox.Resources>
                                     </TextBox>
 
-                                    <TextBox x:Name="text_encode_hex"  Text="Hexadezimal 16#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro">
+                                    <TextBox x:Name="text_encode_hex"  Text="Hexadezimal 16#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -561,7 +561,7 @@
                                         </TextBox.Resources>
                                     </TextBox>
 
-                                    <TextBox x:Name="text_encode_bin"  Text="Binär 2#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro">
+                                    <TextBox x:Name="text_encode_bin"  Text="Binär 2#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>

@@ -1131,6 +1131,14 @@ namespace IECMate
             text_var2.Text = "";
             text_var3.Text = "";
         }
+
+        private void Text_encode_dec_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Set the event as handled
+            e.Handled = true;
+            // Select the Text
+            (sender as TextBox).SelectAll();
+        }
     }
 }
 
