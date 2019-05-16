@@ -1045,54 +1045,50 @@ namespace IECMate
 
         private async void Bt_BackupProject_Click(object sender, RoutedEventArgs e)
         {
-            string ordnername = new DirectoryInfo(text_projktpfad_helfer.Text).Name;
-            string targetArchive = text_projktpfad_helfer.Text.Replace(ordnername, "") + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + ordnername + ".7z";
-            string sourceName = text_projktpfad_helfer.Text;
-
-            var mymessageboxsettings = new MetroDialogSettings()
+            try
             {
-                NegativeButtonText = "Abbrechen"
-            };
+                string foldername = new DirectoryInfo(text_projktpfad_helfer.Text).Name;
+                string targetArchive = text_projktpfad_helfer.Text.Replace(foldername, "") + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + foldername + ".7z";
+                string sourceName = text_projktpfad_helfer.Text;
 
+                //Check if Path exists
+                Directory.GetAccessControl(sourceName);
 
-            var xp = await this.ShowProgressAsync("Backup", "Das Backup läuft bitte warten...", false);
-            xp.SetIndeterminate();
+                //New Messagbox
+                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen" };
+                var xp = await this.ShowProgressAsync("Backup", "Das Backup läuft bitte warten...", false, mymessageboxsettings);
+                xp.SetIndeterminate();
 
-            Process x = new Process();
+                //Process
+                Process x = new Process();
+                ProcessStartInfo p = new ProcessStartInfo();
+                p.FileName = @"resources\7z\7za.exe";
+                p.Arguments = string.Format("a -t7z \"{0}\" \"{1}\" -mx=9", targetArchive, sourceName);
+                p.WindowStyle = ProcessWindowStyle.Normal;
 
-
-            if ((!String.IsNullOrWhiteSpace(sourceName)) && (!(String.IsNullOrWhiteSpace(targetArchive))) && Directory.Exists(sourceName))
-            {
-                try
+                await Task.Run(() =>
                 {
-                    ProcessStartInfo p = new ProcessStartInfo();
-                    p.FileName = @"resources\7z\7za.exe";
-                    p.Arguments = string.Format("a -t7z \"{0}\" \"{1}\" -mx=9", targetArchive, sourceName);
-                    p.WindowStyle = ProcessWindowStyle.Normal;
+                    x = Process.Start(p);
 
-                    await Task.Run(() =>
+                    if (xp.IsCanceled)
                     {
-                        x = Process.Start(p);
+                        x.Kill();
+                    }
+                    else
+                    {
                         x.WaitForExit();
-                    });
+                    }     
+                });
 
+                await xp.CloseAsync();
 
-                }
-                catch (Exception ex)
-                {
-                    string message = ex.Message;
-                    string titel = "Fehler beim Backup";
-                    await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
-                }
             }
-            else
+            catch (Exception ex)
             {
-                string message = "Bitte den Projektpfad überprüfen.";
+                string message = "Projektordner existiert nicht " + ex.Message;
                 string titel = "Fehler beim Backup";
                 await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
             }
-
-            await xp.CloseAsync();
         }
 
 
