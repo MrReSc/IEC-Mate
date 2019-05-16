@@ -1037,6 +1037,11 @@ namespace IECMate
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
             }
+
+            if (ti_code.IsSelected)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_code_template.Focus()));
+            }
         }
 
         private void Cb_akzent_farbe_SelectionChanged(object sender, SelectionChangedEventArgs e)
