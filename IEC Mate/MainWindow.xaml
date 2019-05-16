@@ -154,7 +154,7 @@
         <!--Alle Tabs-->
         <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" SelectionChanged="Tc_root_SelectionChanged">
             <!--Code Tab-->
-            <TabItem Header="Code">
+            <TabItem x:Name="ti_code" Header="Code">
                 <Grid Margin="0,5,0,0">
 
                     <Grid.ColumnDefinitions>
