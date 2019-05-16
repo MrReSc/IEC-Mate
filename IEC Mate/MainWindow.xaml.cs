@@ -491,6 +491,7 @@ namespace IECMate
                 catch (Exception)
                 {
                     await this.ShowMessageAsync("Fehler bei der Suche", "Das Verzeichnis ist kein IEC Projekt.", MessageDialogStyle.Affirmative);
+                    await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
                 }
 
                 await x.CloseAsync();
@@ -498,6 +499,7 @@ namespace IECMate
             else
             {
                 await this.ShowMessageAsync("Fehler bei der Suche", "Suchfeld ist leer oder das Verzeichnis existiert nicht.", MessageDialogStyle.Affirmative);
+                await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
             }
         }
 
