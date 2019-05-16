@@ -176,14 +176,25 @@ namespace IECMate
 
         }
 
-        private void Btn_gen_Click(object sender, RoutedEventArgs e)
+        private async void Btn_gen_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                text_code_output.Text = Code_gen("Variable_1", text_var1.Text,
+                string code = Code_gen("Variable_1", text_var1.Text,
                                                  "Variable_2", text_var2.Text,
                                                  "Variable_3", text_var3.Text,
                                                  text_code_template.Text);
+
+                if (code.StartsWith("#-->"))
+                {
+                    var message = code.Replace("#--> ", "");
+                    await this.ShowMessageAsync("Fehler beim Erzeugen vom Code", message, MessageDialogStyle.Affirmative);
+                }
+                else
+                {
+                    text_code_output.Text = code;
+                }
+
             }
             catch (Exception)
             {
@@ -203,10 +214,10 @@ namespace IECMate
             string[] vars_3 = var_3_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
 
             string outtext = "";
-            string error0 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Die Anzahl Variabeln ist nicht identisch.";
-            string error1 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Keine Variable in Liste 1.";
-            string error2 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Keine Variable in Liste 2.";
-            string error3 = "#--> Fehler beim Erzeugen vom Code!" + Environment.NewLine + "#--> Keine Variable in Liste 3.";
+            string error0 = "#--> Die Anzahl Variabeln ist nicht identisch.";
+            string error1 = "#--> Keine Variable in Liste 1.";
+            string error2 = "#--> Keine Variable in Liste 2.";
+            string error3 = "#--> Keine Variable in Liste 3.";
 
             try
             {
