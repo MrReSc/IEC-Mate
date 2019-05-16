@@ -3,34 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
-using ICSharpCode.AvalonEdit.CodeCompletion;
-using ICSharpCode.AvalonEdit.Folding;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit;
 using Path = System.IO.Path;
 using Microsoft.Win32;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
-using MahApps.Metro.SimpleChildWindow;
 using System.Diagnostics;
 using System.Deployment.Application;
 using WinForms = System.Windows.Forms; //FolderDialog
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Controls.Primitives;
-using System.Threading;
 using System.Windows.Threading;
 
 namespace IECMate
@@ -300,48 +290,6 @@ namespace IECMate
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
         {
             text_code_template.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
-        }
-
-        private void Tg_theme_IsCheckedChanged(object sender, EventArgs e)
-        {
-            if ((bool)tg_theme.IsChecked)
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                            ThemeManager.GetAccent(Properties.Settings.Default.akzentfarbe),
-                                            ThemeManager.GetAppTheme("BaseDark"));
-
-                text_code_template.TextArea.Foreground = Brushes.White;
-                text_code_output.TextArea.Foreground = Brushes.White;
-                text_code_output.Background = DarkBackground;
-                border_code_output.Background = DarkBackground;
-
-                text_decode_out1.Background = DarkBackground;
-                text_decode_out2.Background = DarkBackground;
-                text_encode_bin.Background = DarkBackground;
-                text_encode_dec.Background = DarkBackground;
-                text_encode_hex.Background = DarkBackground;
-            }
-            else
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                            ThemeManager.GetAccent(Properties.Settings.Default.akzentfarbe),
-                                            ThemeManager.GetAppTheme("BaseLight"));
-
-                text_code_template.TextArea.Foreground = Brushes.Black;
-                text_code_output.TextArea.Foreground = Brushes.Black;
-
-                text_code_output.Background = Brushes.Gainsboro;
-                border_code_output.Background = Brushes.Gainsboro;
-
-                text_decode_out1.Background = Brushes.Gainsboro;
-                text_decode_out2.Background = Brushes.Gainsboro;
-                text_encode_bin.Background = Brushes.Gainsboro;
-                text_encode_dec.Background = Brushes.Gainsboro;
-                text_encode_hex.Background = Brushes.Gainsboro;
-            }
-
-            //Decode Matrix von Bitset neu Aufbauen
-            DecodeText();
         }
 
         private void NumericUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -1079,11 +1027,63 @@ namespace IECMate
 
         private void Cb_akzent_farbe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string theme;
+            if ((bool)tg_theme.IsChecked)
+            {
+                theme = "BaseDark";
+            }
+            else
+            {
+                theme = "BaseLight";
+            }
+
             ThemeManager.ChangeAppStyle(Application.Current,
-                                        ThemeManager.GetAccent(Properties.Settings.Default.akzentfarbe),
-                                        ThemeManager.GetAppTheme(Properties.Settings.Default.theme));
+                                        ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                        ThemeManager.GetAppTheme(theme));
 
             //Decode Matrix von Bitset neu Aufbauen damit die Farben stimmen
+            DecodeText();
+        }
+
+        private void Tg_theme_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if ((bool)tg_theme.IsChecked)
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                            ThemeManager.GetAppTheme("BaseDark"));
+
+                text_code_template.TextArea.Foreground = Brushes.White;
+                text_code_output.TextArea.Foreground = Brushes.White;
+                text_code_output.Background = DarkBackground;
+                border_code_output.Background = DarkBackground;
+
+                text_decode_out1.Background = DarkBackground;
+                text_decode_out2.Background = DarkBackground;
+                text_encode_bin.Background = DarkBackground;
+                text_encode_dec.Background = DarkBackground;
+                text_encode_hex.Background = DarkBackground;
+            }
+            else
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                            ThemeManager.GetAppTheme("BaseLight"));
+
+                text_code_template.TextArea.Foreground = Brushes.Black;
+                text_code_output.TextArea.Foreground = Brushes.Black;
+
+                text_code_output.Background = Brushes.Gainsboro;
+                border_code_output.Background = Brushes.Gainsboro;
+
+                text_decode_out1.Background = Brushes.Gainsboro;
+                text_decode_out2.Background = Brushes.Gainsboro;
+                text_encode_bin.Background = Brushes.Gainsboro;
+                text_encode_dec.Background = Brushes.Gainsboro;
+                text_encode_hex.Background = Brushes.Gainsboro;
+            }
+
+            //Decode Matrix von Bitset neu Aufbauen
             DecodeText();
         }
 
