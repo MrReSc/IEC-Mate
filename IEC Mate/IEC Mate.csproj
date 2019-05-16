@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>IEC Code Generator</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -137,11 +137,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Inhalt.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Inhalt.settings</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -175,11 +170,6 @@
     </EmbeddedResource>
     <Resource Include="resources\Entypo.ttf" />
     <Resource Include="packages.config" />
-    <None Include="IECcodeGen_TemporaryKey.pfx" />
-    <None Include="Inhalt.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Inhalt.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -204,6 +194,7 @@
     </Content>
     <Content Include="resources\st_syntax.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Resource Include="resources\WindowsIcons-license.txt" />
   </ItemGroup>

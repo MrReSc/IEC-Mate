@@ -190,5 +190,53 @@ namespace IECMate.Properties {
                 this["akzentfarbe"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string variable_1 {
+            get {
+                return ((string)(this["variable_1"]));
+            }
+            set {
+                this["variable_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string variable_2 {
+            get {
+                return ((string)(this["variable_2"]));
+            }
+            set {
+                this["variable_2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string variable_3 {
+            get {
+                return ((string)(this["variable_3"]));
+            }
+            set {
+                this["variable_3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string vorlage {
+            get {
+                return ((string)(this["vorlage"]));
+            }
+            set {
+                this["vorlage"] = value;
+            }
+        }
     }
 }
