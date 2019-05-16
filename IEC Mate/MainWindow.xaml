@@ -347,8 +347,8 @@
                                     <Label Grid.Row="1" Grid.Column="2" Content="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
 
                                     <ComboBox x:Name="combo_vars" Controls:ControlsHelper.CornerRadius="3" Grid.Row="1" Grid.Column="3"
-                                              BorderBrush="LightGray" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"
-                                              HorizontalContentAlignment="Left" SelectedIndex="0">
+                                              BorderBrush="LightGray" Width="180" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"
+                                              HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="Variable auswählen...">
                                     </ComboBox>
 
                                     <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0,0,10,0" Width="30" Height="30" ToolTip="">
@@ -1089,7 +1089,7 @@
 
                             <StackPanel Grid.Column="1" Grid.Row="1">
                                 <ComboBox x:Name="cb_select_me" Controls:ControlsHelper.CornerRadius="3" Width="310" Margin="0,0,0,12" 
-                                          Height="40" DropDownOpened="Cb_select_me_DropDownOpened" FontSize="14"/>
+                                          Height="40" DropDownOpened="Cb_select_me_DropDownOpened" FontSize="14" Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."/>
 
                                 <Button x:Name="btn_open_me_folder"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Btn_open_me_folder_Click">
                                     <StackPanel Orientation="Horizontal">
