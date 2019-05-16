@@ -1,13 +1,10 @@
 ﻿<Controls:MetroWindow x:Name="root_window" x:Class="IECMate.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"           
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
-        xmlns:local="clr-namespace:IECMate"
         Title="IEC Mate - BETA" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
@@ -15,7 +12,7 @@
         BorderThickness="1" Closing="MetroWindow_Closing"
         >
 
-
+    <!--Einstellungs Button oben rechts-->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <ToggleButton IsChecked="{Binding ElementName=fo_einstellungen, Path=IsOpen}" Cursor="Hand">
@@ -24,11 +21,11 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
+    <!--Einstellung menu-->
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-
             <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300" IsPinned="False" Theme="Adapt">
-
+                
                 <Controls:Flyout.Resources>
                     <Style TargetType="Controls:ToggleSwitch">
                         <Setter Property="Margin" Value="5,0,0,0"/>
@@ -78,12 +75,11 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
+    <!--Haupt Grid-->
     <Grid x:Name="RootGrid">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
-            <!--<ColumnDefinition Width="auto" />-->
-            <!--<ColumnDefinition Width="auto" />-->
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
@@ -94,6 +90,7 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
+        <!--Info Fenster-->
         <simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
                                  x:Name="child_Infos"
                                  Title="Info"
@@ -105,6 +102,7 @@
                                  ShowCloseButton="True"
                                  MinHeight="400"
                                  MinWidth="400">
+
             <StackPanel Margin="20">
                 <iconPacks:PackIconMaterial Kind="CodeBraces" Width="30" Height="30" HorizontalAlignment="Center"/>
                 <Label Content="IEC Mate - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
@@ -135,6 +133,7 @@
             </StackPanel>
         </simpleChildWindow:ChildWindow>
 
+        <!--Menu Leiste-->
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,3">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Datei">
@@ -152,7 +151,9 @@
             </Menu>
         </DockPanel>
 
+        <!--Alle Tabs-->
         <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" SelectionChanged="Tc_root_SelectionChanged">
+            <!--Code Tab-->
             <TabItem Header="Code">
                 <Grid Margin="0,5,0,0">
 
@@ -181,6 +182,7 @@
                                 <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
 
+                            <!--Variable 1-->
                             <Grid Grid.Column="1" Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
@@ -193,22 +195,11 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <!--<TextBox Grid.Row="0" Width="200" Text="VARIABLE 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
-                             Controls:TextBoxHelper.ClearTextButton="False" Background="DodgerBlue" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             FontWeight="Regular" FontSize="11" IsReadOnly="True" IsTabStop="False">
-                                    <TextBox.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="3"/>
-                                        </Style>
-                                    </TextBox.Resources>
-                                </TextBox>-->
-
-                               <Label Grid.Row="0" Content="VARIABLE 1" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
+                                <Label Grid.Row="0" Content="VARIABLE 1" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
-                             IsTabStop="False">
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
+                                         Controls:TextBoxHelper.Watermark="Variablen hier einfügen..." IsTabStop="False">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
@@ -217,8 +208,7 @@
                                 </TextBox>
                             </Grid>
 
-                            <!--<Separator Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"   />-->
-
+                            <!--Variable 2-->
                             <Grid Grid.Column="1" Grid.Row="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
@@ -232,22 +222,11 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <!--<TextBox Grid.Row="0" Width="200" Text="VARIABLE 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
-                             Controls:TextBoxHelper.ClearTextButton="False" Background="DodgerBlue" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             FontWeight="Regular" FontSize="11" IsReadOnly="True" IsTabStop="False">
-                                    <TextBox.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="3"/>
-                                        </Style>
-                                    </TextBox.Resources>
-                                </TextBox>-->
-                                
                                 <Label Content="VARIABLE 2" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
-                             IsTabStop="False">
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
+                                         Controls:TextBoxHelper.Watermark="Variablen hier einfügen..." IsTabStop="False">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
@@ -256,8 +235,7 @@
                                 </TextBox>
                             </Grid>
 
-                            <!--<Separator Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" />-->
-
+                            <!--Variable 3-->
                             <Grid Grid.Column="1" Grid.Row="5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
@@ -271,38 +249,26 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <!--<TextBox Grid.Row="0" Width="200" Text="VARIABLE 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0"
-                             Controls:TextBoxHelper.ClearTextButton="False" Background="DodgerBlue" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
-                             FontWeight="Regular" FontSize="11" IsReadOnly="True" IsTabStop="False">
-                                    <TextBox.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="3"/>
-                                        </Style>
-                                    </TextBox.Resources>
-                                </TextBox>-->
-                                
                                 <Label Content="VARIABLE 3" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                             Controls:TextBoxHelper.Watermark="Variablen hier einfügen..."
-                             IsTabStop="False">
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
+                                         Controls:TextBoxHelper.Watermark="Variablen hier einfügen..." IsTabStop="False">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
                                         </Style>
                                     </TextBox.Resources>
                                 </TextBox>
-                                
                             </Grid>
 
                             <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="7" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" Click="Btn_vaiablenliste_loschen_Click">
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                             </Button>
-
                         </Grid>
                     </GroupBox>
 
+                    <!--Grid für Vorlage und Code-->
                     <Grid  Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20" />
@@ -315,6 +281,7 @@
                             <RowDefinition Height="*" MinHeight="150"/>
                         </Grid.RowDefinitions>
 
+                        <!--Code Vorlage-->
                         <GroupBox Grid.Column="1" Grid.Row="0" Header="Code Vorlage">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -368,10 +335,9 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <!--<Label Grid.Row="1" Grid.Column="0" Content="Suchen nach:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>-->
                                     <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" 
-                                 VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Suchen nach..."
-                                 Controls:TextBoxHelper.ClearTextButton="True">
+                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Suchen nach..."
+                                             Controls:TextBoxHelper.ClearTextButton="True">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -379,10 +345,7 @@
                                         </TextBox.Resources>
                                     </TextBox>
                                     <Label Grid.Row="1" Grid.Column="2" Content="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
-                                    <!--<Controls:SplitButton  Grid.Row="1" x:Name="combo_vars" Grid.Column="3" BorderBrush="LightGray" Width="130" 
-                                               Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14" Controls:ControlsHelper.CornerRadius="3"
-                                               HorizontalContentAlignment="Left" SelectedIndex="0">
-                                    </Controls:SplitButton>-->
+
                                     <ComboBox x:Name="combo_vars" Controls:ControlsHelper.CornerRadius="3" Grid.Row="1" Grid.Column="3"
                                               BorderBrush="LightGray" Width="130" Margin="0,0,20,0" VerticalContentAlignment="Center" FontSize="14"
                                               HorizontalContentAlignment="Left" SelectedIndex="0">
@@ -401,19 +364,16 @@
                                     </Button>
                                 </Grid>
                             </Grid>
-
                         </GroupBox>
 
-
+                        <!--Gridsplitter mit Textbox für das Zeichen-->
                         <GridSplitter Grid.Column="1" Grid.Row="1" Height="15" HorizontalAlignment="Stretch" Background="Transparent"/>
-                        <TextBox    Grid.Column="1" Grid.Row="1" BorderThickness="0" HorizontalAlignment="Center"  IsHitTestVisible="False"
-                                    VerticalAlignment="Center" Text="&#xE76F;&#xE76F;&#xE76F;" FontSize="16" Background="Transparent"
-                                    Foreground="gray" FontFamily="Segoe MDL2 Assets"
-                                    VerticalContentAlignment="Center" IsTabStop="False"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" BorderThickness="0" HorizontalAlignment="Center"  IsHitTestVisible="False"
+                                 VerticalAlignment="Center" Text="&#xE76F;&#xE76F;&#xE76F;" FontSize="16" Background="Transparent"
+                                 Foreground="gray" FontFamily="Segoe MDL2 Assets"
+                                 VerticalContentAlignment="Center" IsTabStop="False"/>
 
-
-
-
+                        <!--Code-->
                         <GroupBox Grid.Column="1" Grid.Row="3" Header="Code">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -441,7 +401,6 @@
                                                 <MenuItem Header="Alles in Zwischenablage kopieren" Click="CopyToClipboard_Click_1" />
                                             </ContextMenu>
                                         </avalonEdit:TextEditor.ContextMenu>
-
                                     </avalonEdit:TextEditor>
                                 </Border>
 
@@ -474,6 +433,7 @@
                 </Grid>
             </TabItem>
 
+            <!--Tab Suche-->
             <TabItem x:Name="ti_suche" Header="Suche">
                 <Grid Margin="0,5,0,0">
 
@@ -524,7 +484,6 @@
                     <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" OnLabel="In Binär Dateien suchen ein" OffLabel="In Binär Dateien suchen aus" Padding="0,0,5,0" IsChecked="False" ToolTip="Such auch nach *.fud, *.ful, *.fu, *.**O Dateien." Width="320" HorizontalAlignment="Right"/>
                     <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="4" OnLabel="Nur in HW-Konfig suchen ein" OffLabel="Nur in HW-Konfig suchen aus" Padding="0,0,5,0" IsChecked="False"  ToolTip="Such nur im Unterverzeichnis \application\control\config\" Width="320" HorizontalAlignment="Right"/>
 
-
                     <GroupBox Grid.Column="0" Grid.Row="6" Header="Ergebnis" Grid.ColumnSpan="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -550,12 +509,10 @@
                             </Button>
                         </Grid>
                     </GroupBox>
-
-
-
                 </Grid>
             </TabItem>
 
+            <!--Tab Bitset-->
             <TabItem x:Name="ti_bitset" Header="Bitset">
                 <Grid Margin="0,5,0,0">
 
@@ -565,6 +522,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
+                    <!--Encoding-->
                     <GroupBox x:Name="gb_encoding" Grid.Row="0" Header="Encoding">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -615,10 +573,7 @@
                                 <Button x:Name="btn_encoding_loschen" Grid.Row="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_encoding_loschen_Click">
                                     <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                                 </Button>
-
                             </Grid>
-
-                           
 
                             <Grid x:Name="grid_encoding" Grid.Column="2" Grid.Row="1" ToggleButton.Checked="Encoding_Checked" ToggleButton.Unchecked="Encoding_Checked">
                                 <Grid.ColumnDefinitions>
@@ -669,9 +624,7 @@
                                     <ToggleButton x:Name="tb_bit7" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
                                         7
                                     </ToggleButton>
-
                                 </StackPanel>
-
 
                                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ToggleButton x:Name="tb_bit8" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
@@ -705,8 +658,6 @@
                                     <ToggleButton x:Name="tb_bit15" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
                                         15
                                     </ToggleButton>
-
-
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -775,13 +726,12 @@
                                     <ToggleButton x:Name="tb_bit31" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
                                         31
                                     </ToggleButton>
-
                                 </StackPanel>
                             </Grid>
-
                         </Grid>
                     </GroupBox>
 
+                    <!--Decoding-->
                     <GroupBox Grid.Row="2" Header="Decoding">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -814,6 +764,7 @@
                                         </Style>
                                     </TextBox.Resources>
                                 </TextBox>
+
                                 <TextBox x:Name="text_decode_out2" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" IsReadOnly="True" Background="Gainsboro">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
@@ -869,7 +820,7 @@
                                     <Grid Width="52" Height="52" Margin="0,0,23,0" >
                                         <Ellipse x:Name="el_bit5" Stroke="Silver" StrokeThickness="2"/>
                                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="5" FontSize="18" FontWeight="Bold"/>
-                                     </Grid>
+                                    </Grid>
 
                                     <Grid Width="52" Height="52" Margin="0,0,23,0" >
                                         <Ellipse x:Name="el_bit6" Stroke="Silver" StrokeThickness="2"/>
@@ -880,9 +831,7 @@
                                         <Ellipse x:Name="el_bit7" Stroke="Silver" StrokeThickness="2"/>
                                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="7" FontSize="18" FontWeight="Bold"/>
                                     </Grid>
-
                                 </StackPanel>
-
 
                                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Grid Width="52" Height="52" Margin="8,0,23,0" >
@@ -1008,19 +957,15 @@
                                         <Ellipse x:Name="el_bit31" Stroke="Silver" StrokeThickness="2"/>
                                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="31" FontSize="18" FontWeight="Bold"/>
                                     </Grid>
-
                                 </StackPanel>
                             </Grid>
-
                         </Grid>
                     </GroupBox>
-
-
                 </Grid>
             </TabItem>
 
+            <!--Tab Helfer-->
             <TabItem Header="Helfer">
-
                 <Grid Margin="0,5,0,0">
 
                     <Grid.ColumnDefinitions>
@@ -1050,6 +995,7 @@
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
+                    <!--Datein öffnen Allgemein-->
                     <GroupBox Grid.Column="0" Grid.Row="2" Header="Dateine öffnen oder Funktion starten" Grid.ColumnSpan="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1068,7 +1014,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Column="1" Grid.Row="1">
-                                
+
                                 <Button x:Name="btn_open_systemoptions"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Btn_open_systemoptions_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FileOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
@@ -1122,10 +1068,10 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-
                         </Grid>
                     </GroupBox>
 
+                    <!--Datein öffnen ME-->
                     <GroupBox Grid.Column="0" Grid.Row="4" Header="Funktion für ME" Grid.ColumnSpan="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1158,23 +1104,11 @@
                                         <Label Content="HMI xml" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
-
                             </StackPanel>
-
-
-
                         </Grid>
                     </GroupBox>
-
                 </Grid>
-
             </TabItem>
-
         </TabControl>
-
-       
-
     </Grid>
-
-
 </Controls:MetroWindow>
