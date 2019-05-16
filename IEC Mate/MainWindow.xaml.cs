@@ -35,10 +35,7 @@ using System.Windows.Threading;
 
 namespace IECMate
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
-    ///
+
     public partial class MainWindow : MetroWindow
     {
         public static BrushConverter bc = new BrushConverter();
@@ -125,10 +122,10 @@ namespace IECMate
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
 
             //Inhalt laden
-            text_var1.Text = Inhalt.Default.variable_1;
-            text_var2.Text = Inhalt.Default.variable_2;
-            text_var3.Text = Inhalt.Default.variable_3;
-            text_code_template.Text = Inhalt.Default.vorlage;
+            text_var1.Text = Properties.Settings.Default.variable_1;
+            text_var2.Text = Properties.Settings.Default.variable_2;
+            text_var3.Text = Properties.Settings.Default.variable_3;
+            text_code_template.Text = Properties.Settings.Default.vorlage;
         }
 
         private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
@@ -159,7 +156,6 @@ namespace IECMate
             {
                 ;
             }
-
         }
 
         private void Btn_template_speichern_Click(object sender, RoutedEventArgs e)
@@ -182,6 +178,7 @@ namespace IECMate
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            //Wenn ctrl + F gedrückt wird, wird das ausgewählte Wort in das Suchfeld kopiert
             if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 text_suchen.Text = text_code_template.SelectedText;
@@ -224,7 +221,6 @@ namespace IECMate
             try
             {
                 int lines = vars_1.Length;
-
 
                 if (lines == 0)
                 {
@@ -269,7 +265,6 @@ namespace IECMate
                         outtext = outtext + Environment.NewLine + Environment.NewLine + temp_text;
                     }
                 }
-
             }
             catch (Exception)
             {
@@ -292,7 +287,7 @@ namespace IECMate
                 File.WriteAllText(saveFileDialog.FileName, text_code_output.Text);
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void Mi_app_beenden_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
@@ -304,20 +299,7 @@ namespace IECMate
 
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)tg_leerzeichen.IsChecked)
-            {
-                text_code_template.Options.ShowSpaces = true;
-
-                Properties.Settings.Default.leerzeichen = true;
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                text_code_template.Options.ShowSpaces = false;
-
-                Properties.Settings.Default.leerzeichen = false;
-                Properties.Settings.Default.Save();
-            }
+            text_code_template.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
         }
 
         private void Tg_theme_IsCheckedChanged(object sender, EventArgs e)
@@ -338,9 +320,6 @@ namespace IECMate
                 text_encode_bin.Background = DarkBackground;
                 text_encode_dec.Background = DarkBackground;
                 text_encode_hex.Background = DarkBackground;
-
-                Properties.Settings.Default.theme = "BaseDark";
-                Properties.Settings.Default.Save();
             }
             else
             {
@@ -359,9 +338,6 @@ namespace IECMate
                 text_encode_bin.Background = Brushes.Gainsboro;
                 text_encode_dec.Background = Brushes.Gainsboro;
                 text_encode_hex.Background = Brushes.Gainsboro;
-
-                Properties.Settings.Default.theme = "BaseLight";
-                Properties.Settings.Default.Save();
             }
 
             //Decode Matrix von Bitset neu Aufbauen
@@ -372,29 +348,12 @@ namespace IECMate
         {
             text_code_template.TextArea.FontSize = (double)nc_font_size.Value;
             text_code_output.TextArea.FontSize = (double)nc_font_size.Value;
-
-            Properties.Settings.Default.schriftgrosse = (double)nc_font_size.Value;
-            Properties.Settings.Default.Save();
         }
 
         private void Tg_line_no_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)tg_line_no.IsChecked)
-            {
-                text_code_template.ShowLineNumbers = true;
-                text_code_output.ShowLineNumbers = true;
-
-                Properties.Settings.Default.zeilennummern = true;
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                text_code_template.ShowLineNumbers = false;
-                text_code_output.ShowLineNumbers = false;
-
-                Properties.Settings.Default.zeilennummern = false;
-                Properties.Settings.Default.Save();
-            }
+            text_code_template.ShowLineNumbers = (bool)tg_line_no.IsChecked;
+            text_code_output.ShowLineNumbers = (bool)tg_line_no.IsChecked;
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -417,14 +376,27 @@ namespace IECMate
                 Properties.Settings.Default.fenster_max = false;
             }
 
-            Inhalt.Default.variable_1 = text_var1.Text;
-            Inhalt.Default.variable_2 = text_var2.Text;
-            Inhalt.Default.variable_3 = text_var3.Text;
-            Inhalt.Default.vorlage = text_code_template.Text;
+            if ((bool)tg_theme.IsChecked)
+            {
+                Properties.Settings.Default.theme = "BaseDark";
+            }
+            else
+            {
+                Properties.Settings.Default.theme = "BaseLight";
+            }
 
+            Properties.Settings.Default.variable_1 = text_var1.Text;
+            Properties.Settings.Default.variable_2 = text_var2.Text;
+            Properties.Settings.Default.variable_3 = text_var3.Text;
+            Properties.Settings.Default.vorlage = text_code_template.Text;
+            Properties.Settings.Default.leerzeichen = (bool)tg_leerzeichen.IsChecked;
             Properties.Settings.Default.tabcontrol_index = tc_root.SelectedIndex;
+            Properties.Settings.Default.schriftgrosse = (double)nc_font_size.Value;
+            Properties.Settings.Default.zeilennummern = (bool)tg_line_no.IsChecked;
+            Properties.Settings.Default.projekt_pfad_suche = text_projktpfad_suche.Text;
+            Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
+            Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
 
-            Inhalt.Default.Save();
             Properties.Settings.Default.Save();
         }
 
@@ -439,30 +411,33 @@ namespace IECMate
             child_Infos.IsOpen = true;
             try
             {
-                //// get deployment version
+                // get deployment version
                 lb_version.Content = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
             }
             catch (InvalidDeploymentException)
             {
-                //// you cannot read publish version when app isn't installed 
-                //// (e.g. during debug)
+                // you cannot read publish version when app isn't installed 
+                // (e.g. during debug)
                 lb_version.Content = "not installed";
             }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
+            //Mailprogramm öffnen wenn auf Link geklickt wird
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
 
         private void Btn_template_undo_Click(object sender, RoutedEventArgs e)
         {
+            //Nur wenn es etwas im Stack hat dann wird auch das Undo gemacht
             if (undoList.Count > 0)
             {
                 text_code_template.Text = undoList.Pop();
             }
 
+            //Wenn Stack leer ist, dann wir der Button deaktiviert
             if (undoList.Count == 0)
             {
                 btn_template_undo.IsEnabled = false;
@@ -474,7 +449,7 @@ namespace IECMate
         {
             WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
             folderDialog.ShowNewFolderButton = false;
-            if (!String.IsNullOrWhiteSpace(text_projktpfad_suche.Text))
+            if (Directory.Exists(text_projktpfad_suche.Text))
             {
                 folderDialog.SelectedPath = text_projktpfad_suche.Text;
             }
@@ -487,25 +462,20 @@ namespace IECMate
 
             if (result == WinForms.DialogResult.OK)
             {
-                String sPath = folderDialog.SelectedPath;
-                text_projktpfad_suche.Text = sPath;
-
-                Properties.Settings.Default.projekt_pfad_suche = sPath;
-                Properties.Settings.Default.Save();
+                text_projktpfad_suche.Text = folderDialog.SelectedPath;
             }
         }
 
         private async void Btn_suche_Click(object sender, RoutedEventArgs e)
         {
+            //Listebox löschen
             listbox_ergebnis.Items.Clear();
 
-            if ((!String.IsNullOrEmpty(text_pattern_suche.Text)) && (!(String.IsNullOrWhiteSpace(text_pattern_suche.Text))))
+            //Wennn etwas im Suchfeld steht und das Verzeichnis existiert dann wird gesucht
+            if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)))
             {
-                var mymessageboxsettings = new MetroDialogSettings()
-                {
-                    NegativeButtonText = "Abbrechen"
-                };
-
+                //Dialog öffnen
+                var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = "Abbrechen"};
                 var x = await this.ShowProgressAsync("Suchen", "Die Suche läuft. Bite warten...", true, mymessageboxsettings) as ProgressDialogController;
                 x.SetIndeterminate();
 
@@ -514,9 +484,12 @@ namespace IECMate
                     List<string> allFiles = new List<string>();
                     string suchpfad = "";
 
+                    //Wenn der Swicth "Nur HW suche" ein ist, wird der Pfad angepasst
                     if ((bool)ts_kbus_suche.IsChecked)
                     {
                         suchpfad = text_projktpfad_suche.Text + "\\application\\control\\config";
+                        //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
+                        Directory.Exists(suchpfad);
                     }
                     else
                     {
@@ -525,7 +498,8 @@ namespace IECMate
 
                     AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
 
-                    if ((!String.IsNullOrEmpty(text_pattern_suche.Text)) && (x.IsOpen))
+                    //Sobald der Dialog offen ist wird mit der suche gestartet
+                    if (x.IsOpen)
                     {
                         foreach (string fileName in allFiles)
                         {
@@ -537,7 +511,6 @@ namespace IECMate
                             using (var reader = File.OpenText(fileName))
                             {
                                 var fileText = await reader.ReadToEndAsync();
-
                                 if ((bool)ts_exakte_suche.IsChecked)
                                 {
                                     if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text))))
@@ -559,32 +532,27 @@ namespace IECMate
                 }
                 catch (Exception)
                 {
-                    ;
+                    await this.ShowMessageAsync("Fehler bei der Suche", "Das Verzeichnis ist kein IEC Projekt.", MessageDialogStyle.Affirmative);
                 }
 
                 await x.CloseAsync();
             }
             else
             {
-                if (String.IsNullOrWhiteSpace(text_pattern_suche.Text))
-                {
-                    text_pattern_suche.Text = "";
-                }
+                await this.ShowMessageAsync("Fehler bei der Suche", "Suchfeld ist leer oder das Verzeichnis existiert nicht.", MessageDialogStyle.Affirmative);
             }
         }
-
-
 
         public static void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin)
         {
             IEnumerable<string> fileEntries = Enumerable.Empty<string>();
-
             if (bin)
             {
                 fileEntries = Directory.GetFiles(sourceDir);
             }
             else
             {
+                //Hier werden die Binär Files aus dem IEC Projekt ausgeschlossen
                 fileEntries = Directory.GetFiles(sourceDir).Where(name => !name.EndsWith(".fu") &&
                                                                           !name.EndsWith(".fud") &&
                                                                           !name.EndsWith(".ful") &&
@@ -608,28 +576,22 @@ namespace IECMate
             }
         }
 
-        private void Btn_suche_offnen_Click(object sender, RoutedEventArgs e)
+        private async void Btn_suche_offnen_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string selectedText = listbox_ergebnis.SelectedItem.ToString();
-
-                if (!String.IsNullOrEmpty(selectedText))
-                {
-                    System.Diagnostics.Process.Start(selectedText);
-                }
+                System.Diagnostics.Process.Start(listbox_ergebnis.SelectedItem.ToString());
             }
             catch (Exception)
             {
-                ;
+                await this.ShowMessageAsync("Fehler beim Öffnen", "Bitte eine Datei auswählen.", MessageDialogStyle.Affirmative);
             }
-            
         }
-
 
         private void Encoding_Checked(object sender, RoutedEventArgs args)
         {
             long ResulateDezimal = 0;
+            //Alle Objekte vom Grid holen
             var objects = grid_encoding.GetChildObjects();
             foreach (object child in objects)
             {
@@ -671,7 +633,6 @@ namespace IECMate
                 text_decode_out2.Text = "";
                 return;
             }
-
 
             //Hex Zahl wurde eingegeben
             if (text_decode.Text.StartsWith("16#"))
@@ -807,11 +768,24 @@ namespace IECMate
             DecodeText();   
         }
 
+        private async void ShowFehlerBitsetAsync(string message)
+        {
+            text_decode.IsEnabled = false;
+            MessageDialogResult result = await this.ShowMessageAsync("Fehler bei der Eingabe", message, MessageDialogStyle.Affirmative);
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                text_decode.IsEnabled = true;
+            }
+        }
+
         private void ShowDecodeResult(List<char> list)
         {
             var converter = new System.Windows.Media.BrushConverter();
+            //Akzentfarbe von Theme
             var accentColor = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor").ToString());
             var accentColor2 = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor2").ToString());
+            //Alle Objekte von Grid
             var objects = grid_decoding.GetChildObjects();
 
             foreach (object child in objects)
@@ -829,6 +803,7 @@ namespace IECMate
 
                             foreach (object it in gr)
                             {
+                                //Wennn die Eingabe gelöscht wird dann zurücksetzten
                                 if (it.GetType() == typeof(Ellipse))
                                 {
                                     Ellipse el = it as Ellipse;
@@ -836,6 +811,7 @@ namespace IECMate
                                     el.Stroke = Brushes.Silver;
                                 }
 
+                                //Schriftfarbe abhängig von Theme einstellen
                                 if (it.GetType() == typeof(TextBlock))
                                 {
                                     TextBlock el = it as TextBlock;
@@ -850,6 +826,7 @@ namespace IECMate
                                     }
                                 }
 
+                                //Abhängig vom Bit in der Liste Elippse mit Akzentfarbe füllen
                                 if (it.GetType() == typeof(Ellipse))
                                 {
                                     Ellipse el = it as Ellipse;
@@ -895,11 +872,9 @@ namespace IECMate
                                             {
                                                 el.Foreground = Brushes.Black;
                                             }
-
                                         }
                                     }
                                 }
-
                             }
                         }
                     }
@@ -907,24 +882,12 @@ namespace IECMate
             }
         }
 
-        private async void ShowFehlerBitsetAsync(string message)
-        {
-            text_decode.IsEnabled = false;
-            MessageDialogResult result = await this.ShowMessageAsync("Fehler bei der Eingabe", message, MessageDialogStyle.Affirmative);
-
-            if (result == MessageDialogResult.Affirmative)
-            {
-                text_decode.IsEnabled = true;
-            }
-
-        }
-
-
         private void Btn_pfad_helfer_auswahlen_Click(object sender, RoutedEventArgs e)
         {
             WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
             folderDialog.ShowNewFolderButton = false;
-            if (!String.IsNullOrWhiteSpace(text_projktpfad_suche.Text))
+
+            if (Directory.Exists(text_projktpfad_helfer.Text))
             {
                 folderDialog.SelectedPath = text_projktpfad_helfer.Text;
             }
@@ -937,15 +900,9 @@ namespace IECMate
 
             if (result == WinForms.DialogResult.OK)
             {
-                String sPath = folderDialog.SelectedPath;
-                text_projktpfad_helfer.Text = sPath;
-
-                Properties.Settings.Default.projekt_pfad_helfer= sPath;
-                Properties.Settings.Default.Save();
+                text_projktpfad_helfer.Text = folderDialog.SelectedPath;
             }
-
         }
-
 
         private async void FehlerHelferAsync()
         {
@@ -965,10 +922,7 @@ namespace IECMate
         {
             try
             {
-                if (!String.IsNullOrEmpty(input))
-                {
-                    System.Diagnostics.Process.Start(input);
-                }
+                System.Diagnostics.Process.Start(input);
             }
             catch (Exception)
             {
@@ -1012,37 +966,6 @@ namespace IECMate
             OpenFileOrFolder(open);
         }
 
-        //public Task<Process> BackupProjekt(CancellationToken cancellationToken)
-        //{
-        //    string ordnername = new DirectoryInfo(text_projktpfad_helfer.Text).Name;
-        //    string targetArchive = text_projktpfad_helfer.Text.Replace(ordnername, "") + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + ordnername + ".7z";
-        //    string sourceName = text_projktpfad_helfer.Text;
-
-        //    Process x = new Process();
-        //    ProcessStartInfo p = new ProcessStartInfo();
-        //    p.FileName = @"resources\7z\7za.exe";
-        //    p.Arguments = string.Format("a -t7z \"{0}\" \"{1}\" -mx=9", targetArchive, sourceName);
-        //    p.WindowStyle = ProcessWindowStyle.Normal;
-
-        //    Task<Process> taskB = null;
-
-        //    taskB = Task.Run(() =>
-        //    {
-        //        x = Process.Start(p);
-
-        //        if (cancellationToken.IsCancellationRequested)
-        //        {
-        //            throw new TaskCanceledException(taskB);
-        //        }
-
-        //        x.WaitForExit();
-
-        //        return x;
-        //    });
-
-        //    return taskB;
-        //}
-
         private async void Bt_BackupProject_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1069,19 +992,18 @@ namespace IECMate
                 await Task.Run(() =>
                 {
                     x = Process.Start(p);
-
-                    if (xp.IsCanceled)
-                    {
-                        x.Kill();
-                    }
-                    else
-                    {
-                        x.WaitForExit();
-                    }     
+                    x.WaitForExit();
                 });
 
+                //Dateigrösse
+                //Wenn Datei sehr klein ist, dann wurde abgebrochen
+                //FIX IT
+                long length = new System.IO.FileInfo(targetArchive).Length;
+                if (length < 40)
+                {
+                    File.Delete(targetArchive);
+                }
                 await xp.CloseAsync();
-
             }
             catch (Exception ex)
             {
@@ -1090,8 +1012,6 @@ namespace IECMate
                 await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
             }
         }
-
-
 
         private void Cb_select_me_DropDownOpened(object sender, EventArgs e)
         {
@@ -1103,8 +1023,7 @@ namespace IECMate
 
                 foreach (string subdirectory in subdirectoryEntries)
                 {
-                    string ordnername = new DirectoryInfo(subdirectory).Name;
-                    cb_select_me.Items.Add(ordnername);
+                    cb_select_me.Items.Add(new DirectoryInfo(subdirectory).Name);
                 }
             }
             else
@@ -1145,28 +1064,26 @@ namespace IECMate
 
         private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Wenn ein Tab gewechselt wird, dann wird der Fokus entsprechend ins richtige Feld gesetzt
+            //Dsipachter wird benötigt da das Fenster noch nicht fertig geladen aber der Event schon abgesetzt wird
+            if (ti_suche.IsSelected)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+            }
 
-                if (ti_suche.IsSelected)
-                {
-                    Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
-                }
-
-                if (ti_bitset.IsSelected)
-                {
-                    Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
-                }
+            if (ti_bitset.IsSelected)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
+            }
         }
 
         private void Cb_akzent_farbe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
-            Properties.Settings.Default.Save();
-
             ThemeManager.ChangeAppStyle(Application.Current,
                                         ThemeManager.GetAccent(Properties.Settings.Default.akzentfarbe),
                                         ThemeManager.GetAppTheme(Properties.Settings.Default.theme));
 
-            //Decode Matrix von Bitset neu Aufbauen
+            //Decode Matrix von Bitset neu Aufbauen damit die Farben stimmen
             DecodeText();
         }
 
