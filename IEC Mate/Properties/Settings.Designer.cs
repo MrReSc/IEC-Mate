@@ -178,5 +178,17 @@ namespace IECMate.Properties {
                 this["projekt_pfad_helfer"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Steel")]
+        public string akzentfarbe {
+            get {
+                return ((string)(this["akzentfarbe"]));
+            }
+            set {
+                this["akzentfarbe"] = value;
+            }
+        }
     }
 }
