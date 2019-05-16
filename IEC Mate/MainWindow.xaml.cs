@@ -200,7 +200,6 @@ namespace IECMate
             {
                 ;
             }
-
         }
 
         private string Code_gen(string var_1, string var_1_text,
