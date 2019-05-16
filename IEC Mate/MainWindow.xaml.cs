@@ -734,6 +734,7 @@ namespace IECMate
             if (result == MessageDialogResult.Affirmative)
             {
                 text_decode.IsEnabled = true;
+                await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
             }
         }
 
