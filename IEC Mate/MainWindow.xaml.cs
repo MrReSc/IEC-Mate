@@ -38,17 +38,21 @@ namespace IECMate
         public Stack<string> undoList = new Stack<string>();
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         public InputSimulator sim = new InputSimulator();
+        public int prevHotComment;
+        public int prevHotBeginEnd;
+        public int prevHotPlai;
 
         public MainWindow()
         {
             InitializeComponent();
 
             //Hotkey
-            HotkeyManager.Current.AddOrReplace("PxComment", Key.Y, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            HotkeyManager.Current.AddOrReplace("PxBeginEnd", Key.X, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            HotkeyManager.Current.AddOrReplace("PxPlain", Key.A, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-
-
+            var key1 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_comment);
+            var key2 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_beginend);
+            var key3 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_plain);
+            HotkeyManager.Current.AddOrReplace("PxComment", key1, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            HotkeyManager.Current.AddOrReplace("PxBeginEnd", key2, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            HotkeyManager.Current.AddOrReplace("PxPlain", key3, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
 
             // Editor Setup
             string file = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"resources\st_syntax.xshd");
@@ -71,6 +75,12 @@ namespace IECMate
             combo_vars.ItemsSource = variablen_liste;
             cb_akzent_farbe.ItemsSource = AccentColor;
             cb_akzent_farbe.SelectedItem = Properties.Settings.Default.akzentfarbe;
+            foreach (var letter in Enum.GetValues(typeof(Key)))
+            {
+                cb_hotkey_pxBeginEnd.Items.Add(letter);
+                cb_hotekey_plain.Items.Add(letter);
+                cb_hotkey_pxComment.Items.Add(letter);
+            }
 
             //Einstellungen laden
             ThemeManager.ChangeAppStyle(Application.Current,
@@ -124,8 +134,15 @@ namespace IECMate
             ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
 
-            //Inhalt laden
-            text_var1.Text = Properties.Settings.Default.variable_1;
+            cb_hotkey_pxBeginEnd.Text = key2.ToString();
+            cb_hotekey_plain.Text = key3.ToString();
+            cb_hotkey_pxComment.Text = key1.ToString();
+            prevHotComment = cb_hotkey_pxComment.SelectedIndex;
+            prevHotBeginEnd = cb_hotkey_pxBeginEnd.SelectedIndex;
+            prevHotPlai = cb_hotekey_plain.SelectedIndex;
+
+        //Inhalt laden
+        text_var1.Text = Properties.Settings.Default.variable_1;
             text_var2.Text = Properties.Settings.Default.variable_2;
             text_var3.Text = Properties.Settings.Default.variable_3;
             text_code_template.Text = Properties.Settings.Default.vorlage;
@@ -143,11 +160,11 @@ namespace IECMate
                     switch (e.Name)
                     {
                         case "PxComment":
-                            text = "//" + px;
+                            text = "// " + px;
                             sim.Keyboard.TextEntry(text);
                             break;
                         case "PxBeginEnd":
-                            text = "//" + px + " begin" + Environment.NewLine + Environment.NewLine + "//" + px + " end";
+                            text = "// " + px + " begin" + Environment.NewLine + Environment.NewLine + "// " + px + " end";
                             sim.Keyboard.TextEntry(text);
                             break;
                         case "PxPlain":
@@ -412,6 +429,9 @@ namespace IECMate
             Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
             Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
             Properties.Settings.Default.pxnummer = text_px_nummer.Text;
+            Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
+            Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
+            Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString(); 
 
             Properties.Settings.Default.Save();
         }
@@ -1245,6 +1265,53 @@ namespace IECMate
             }
         }
 
+        private async void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cb_hotekey_plain.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex || cb_hotekey_plain.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
+            {
+                cb_hotekey_plain.SelectedIndex = prevHotPlai;
+                await this.ShowMessageAsync("Fehler", "Der Hot Key wird schon verwedent.", MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                var key = (Key)cb_hotekey_plain.SelectedValue;
+                HotkeyManager.Current.AddOrReplace("PxPlain", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            }
+        }
+
+        private async void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
+            {
+                cb_hotkey_pxBeginEnd.SelectedIndex = prevHotBeginEnd;
+                await this.ShowMessageAsync("Fehler", "Der Hot Key wird schon verwedent.", MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                var key = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                HotkeyManager.Current.AddOrReplace("PxBeginEnd", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            }
+        }
+
+        private async void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cb_hotkey_pxComment.SelectedIndex == 0)
+            {
+                HotkeyManager.Current.Remove("PxComment");
+                return;
+            }
+
+            if (cb_hotkey_pxComment.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxComment.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
+            {
+                cb_hotkey_pxComment.SelectedIndex = prevHotComment;
+                await this.ShowMessageAsync("Fehler", "Der Hot Key wird schon verwedent.", MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                var key = (Key)cb_hotkey_pxComment.SelectedValue;
+                HotkeyManager.Current.AddOrReplace("PxComment", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            }
+        }
     }
 }
 

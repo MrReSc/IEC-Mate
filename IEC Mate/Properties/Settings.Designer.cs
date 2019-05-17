@@ -262,5 +262,41 @@ namespace IECMate.Properties {
                 this["hotkey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("A")]
+        public string hotkey_plain {
+            get {
+                return ((string)(this["hotkey_plain"]));
+            }
+            set {
+                this["hotkey_plain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Y")]
+        public string hotkey_comment {
+            get {
+                return ((string)(this["hotkey_comment"]));
+            }
+            set {
+                this["hotkey_comment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("X")]
+        public string hotkey_beginend {
+            get {
+                return ((string)(this["hotkey_beginend"]));
+            }
+            set {
+                this["hotkey_beginend"] = value;
+            }
+        }
     }
 }

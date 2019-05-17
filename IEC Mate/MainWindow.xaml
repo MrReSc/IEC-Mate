@@ -1134,6 +1134,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
                                     <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="20" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="5" />
                                 </Grid.ColumnDefinitions>
@@ -1145,7 +1146,7 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
-                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Right" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged"/>
+                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Right" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt."/>
 
                                     <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="PX Nummer eingeben..." Margin="0,0,0,12.2" 
                                          VerticalContentAlignment="Center" Height="40" Controls:TextBoxHelper.ClearTextButton="True">
@@ -1155,23 +1156,41 @@
                                             </Style>
                                         </TextBox.Resources>
                                     </TextBox>
+                                
+                                </StackPanel>
 
-                                    <TextBlock FontWeight="Bold" FontSize="15" Margin="0"> CTRL + SHIFT + Y</TextBlock>
-                                    <TextBlock> Fügt die PX Nummer als Kommentar ein.</TextBlock>
-                                    <TextBlock Foreground="Firebrick" Margin="0,0,0,15"> //PX05010</TextBlock>
+                                <StackPanel Grid.Column="3" Grid.Row="1">
 
-                                    <TextBlock FontWeight="Bold" FontSize="15" Margin="0"> CTRL + SHIFT + X</TextBlock>
-                                    <TextBlock> Fügt ein Block mit "begin" und "end" ein.</TextBlock>
-                                    <TextBlock Foreground="Firebrick"> //PX05010 begin</TextBlock>
-                                    <TextBlock Foreground="SteelBlue" Text="    hier kommt der Code;" FontStyle="Italic"></TextBlock>
-                                    <TextBlock Foreground="Firebrick" Margin="0,0,0,15"> //PX05010 end</TextBlock>
+                                    <DockPanel>
+                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left">CTRL + SHIFT +</Label>
+                                        <ComboBox x:Name="cb_hotkey_pxComment" FontSize="14" DockPanel.Dock="Right" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotkey_pxComment_SelectionChanged"/>
+                                    </DockPanel>
 
-                                    <TextBlock FontWeight="Bold" FontSize="15" Margin="0"> CTRL + SHIFT + A</TextBlock>
-                                    <TextBlock> Fügt die PX Nummer ein.</TextBlock>
-                                    <TextBlock Foreground="Firebrick" Margin="0,0,0,15"> PX05010</TextBlock>
+                                    <Label>Fügt die PX Nummer als Kommentar ein.</Label>
+                                    <Label Foreground="ForestGreen" Margin="0">// PX05010</Label>
+
+                                    <Separator Margin="0,2,0,5"/>
+
+                                    <DockPanel>
+                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left">CTRL + SHIFT +</Label>
+                                        <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" FontSize="14" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
+                                    </DockPanel>
+                                    <Label>Fügt ein Block mit "begin" und "end" ein.</Label>
+                                    <Label Foreground="ForestGreen">// PX05010 begin</Label>
+                                    <Label Foreground="SteelBlue" Content="    hier kommt der Code;" FontStyle="Italic"></Label>
+                                    <Label Foreground="ForestGreen" Margin="0">// PX05010 end</Label>
+
+                                    <Separator Margin="0,2,0,5"/>
+
+                                    <DockPanel>
+                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left">CTRL + SHIFT +</Label>
+                                        <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" FontSize="14" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
+                                    </DockPanel>
+                                    <Label>Fügt die PX Nummer ein.</Label>
+                                    <Label Foreground="ForestGreen" Margin="0">PX05010</Label>
 
                                 </StackPanel>
-                          </Grid>
+                            </Grid>
                         </GroupBox>
                     </Grid>
                     

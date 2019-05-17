@@ -62,5 +62,14 @@
     <Setting Name="hotkey" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="hotkey_plain" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="hotkey_comment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Y</Value>
+    </Setting>
+    <Setting Name="hotkey_beginend" Type="System.String" Scope="User">
+      <Value Profile="(Default)">X</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
