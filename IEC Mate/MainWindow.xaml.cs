@@ -1007,6 +1007,12 @@ namespace IECMate
             OpenFileOrFolder(open);
         }
 
+        private void Bt_openConfig_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + "\\application\\control\\config";
+            OpenFileOrFolder(open);
+        }
+
         private async void Bt_BackupProject_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1326,6 +1332,8 @@ namespace IECMate
                 HotkeyManager.Current.AddOrReplace("PxComment", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
             }
         }
+
+
     }
 }
 

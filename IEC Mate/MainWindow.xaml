@@ -1045,12 +1045,14 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_BackupProject"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_BackupProject_Click">
+                                <Button x:Name="bt_openConfig"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openConfig_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="ZipBox" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="Backup Projekt" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="config" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
+
+
 
                             </StackPanel>
 
@@ -1060,6 +1062,13 @@
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
                                         <Label Content="puLock Datein löschen" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_BackupProject"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_BackupProject_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="ZipBox" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="Backup Projekt" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
