@@ -1144,6 +1144,48 @@ namespace IECMate
             // Select the Text
             (sender as TextBox).SelectAll();
         }
+
+        private async void Bt_lock_loschen_Click(object sender, RoutedEventArgs e)
+        {
+            var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen", AffirmativeButtonText = "OK"};
+            string message = "Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren?";
+            string titel = "Löschen von puLock Datein";
+            MessageDialogResult result = await this.ShowMessageAsync(titel, message, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+            if (!(result == MessageDialogResult.Affirmative))
+            {
+                return;
+            }
+
+            try
+            {
+                List<string> allFiles = new List<string>();
+                string suchpfad = text_projktpfad_helfer.Text;
+
+                //Check if Path exists
+                Directory.GetAccessControl(suchpfad);
+
+                AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
+                //DirectoryInfo directory = new DirectoryInfo(suchpfad);
+                //FileInfo[] files = directory.GetFiles();
+
+                foreach (var file in allFiles)
+                {
+                    FileInfo info = new FileInfo(file);
+                    string actual = info.Extension;
+
+                    if (actual.Equals(".puLock"))
+                    {
+                        File.Delete(file);
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                FehlerHelferAsync();
+            }
+        }
     }
 }
 
