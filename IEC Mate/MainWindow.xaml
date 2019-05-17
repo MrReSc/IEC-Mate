@@ -1003,6 +1003,7 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="5" />
                             </Grid.ColumnDefinitions>
@@ -1053,6 +1054,17 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="3" Grid.Row="1">
+
+                                <Button x:Name="bt_lock_loschen"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_lock_loschen_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="puLock Datein löschen" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="5" Grid.Row="1">
 
                                 <Button x:Name="bt_simStarten"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_simStarten_Click">
                                     <StackPanel Orientation="Horizontal">
