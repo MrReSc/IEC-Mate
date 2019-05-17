@@ -972,12 +972,13 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="30" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="20" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
@@ -996,7 +997,7 @@
                     </Button>
 
                     <!--Datein öffnen Allgemein-->
-                    <GroupBox Grid.Column="0" Grid.Row="2" Header="Dateine öffnen oder Funktion starten" Grid.ColumnSpan="3">
+                    <GroupBox Grid.Column="0" Grid.Row="2" Header="Dateine öffnen oder Funktion starten" Grid.ColumnSpan="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -1117,6 +1118,53 @@
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <!--Datein öffnen ME-->
+                    <GroupBox Grid.Column="3" Grid.Row="4" Header="Hot Keys" Margin="20,0,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Right" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged"/>
+
+                                <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="PX Nummer eingeben..." Margin="0,0,0,12.2" 
+                                         VerticalContentAlignment="Center" Height="40" Controls:TextBoxHelper.ClearTextButton="True">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                                <TextBlock FontWeight="Bold" FontSize="15" Margin="0"> CTRL + SHIFT + Y</TextBlock>
+                                <TextBlock> Fügt die PX Nummer als Kommentar ein.</TextBlock>
+                                <TextBlock Foreground="Firebrick" Margin="0,0,0,15"> //PX05010 </TextBlock>
+
+                                <TextBlock FontWeight="Bold" FontSize="15" Margin="0"> CTRL + SHIFT + X</TextBlock>
+                                <TextBlock> Fügt ein Block mit "begin" und "end" ein.</TextBlock>
+                                <TextBlock Foreground="Firebrick"> //PX05010 begin</TextBlock>
+                                <TextBlock Foreground="SteelBlue" Text="    hier kommt der Code;" FontStyle="Italic"> </TextBlock>
+                                <TextBlock Foreground="Firebrick" Margin="0,0,0,15"> //PX05010 end</TextBlock>
+
+                                <TextBlock FontWeight="Bold" FontSize="15" Margin="0"> CTRL + SHIFT + A</TextBlock>
+                                <TextBlock> Fügt die PX Nummer ein.</TextBlock>
+                                <TextBlock Foreground="Firebrick" Margin="0,0,0,15"> PX05010</TextBlock>
+
+                            </StackPanel>
+
                         </Grid>
                     </GroupBox>
                 </Grid>

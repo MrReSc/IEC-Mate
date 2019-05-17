@@ -238,5 +238,29 @@ namespace IECMate.Properties {
                 this["vorlage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pxnummer {
+            get {
+                return ((string)(this["pxnummer"]));
+            }
+            set {
+                this["pxnummer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hotkey {
+            get {
+                return ((bool)(this["hotkey"]));
+            }
+            set {
+                this["hotkey"] = value;
+            }
+        }
     }
 }

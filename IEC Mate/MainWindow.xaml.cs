@@ -22,6 +22,10 @@ using WinForms = System.Windows.Forms; //FolderDialog
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
+using NHotkey.Wpf;
+using NHotkey;
+using WindowsInput.Native;
+using WindowsInput;
 
 namespace IECMate
 {
@@ -33,10 +37,18 @@ namespace IECMate
         public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
         public Stack<string> undoList = new Stack<string>();
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
+        public InputSimulator sim = new InputSimulator();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            //Hotkey
+            HotkeyManager.Current.AddOrReplace("PxComment", Key.Y, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            HotkeyManager.Current.AddOrReplace("PxBeginEnd", Key.X, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            HotkeyManager.Current.AddOrReplace("PxPlain", Key.A, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+
+
 
             // Editor Setup
             string file = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"resources\st_syntax.xshd");
@@ -108,14 +120,58 @@ namespace IECMate
 
             text_projktpfad_suche.Text = Properties.Settings.Default.projekt_pfad_suche;
             text_projktpfad_helfer.Text = Properties.Settings.Default.projekt_pfad_helfer;
-
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
+            ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
+            text_px_nummer.Text = Properties.Settings.Default.pxnummer;
 
             //Inhalt laden
             text_var1.Text = Properties.Settings.Default.variable_1;
             text_var2.Text = Properties.Settings.Default.variable_2;
             text_var3.Text = Properties.Settings.Default.variable_3;
             text_code_template.Text = Properties.Settings.Default.vorlage;
+        }
+
+        private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
+        {
+            try
+            {
+                string px = text_px_nummer.Text;
+
+                if ((bool)ts_hotkey.IsChecked && !String.IsNullOrWhiteSpace(px))
+                {
+                    string text = "";
+                    switch (e.Name)
+                    {
+                        case "PxComment":
+                            text = "//" + px;
+                            sim.Keyboard.TextEntry(text);
+                            break;
+                        case "PxBeginEnd":
+                            text = "//" + px + " begin" + Environment.NewLine + Environment.NewLine + "//" + px + " end";
+                            sim.Keyboard.TextEntry(text);
+                            break;
+                        case "PxPlain":
+                            text = px;
+                            sim.Keyboard.TextEntry(text);
+                            break;
+                    }
+                    e.Handled = true;
+                }  
+            }
+            catch (Exception)
+            {
+                ;
+            }         
+        }
+
+        private async void Ts_hotkey_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if (((bool)ts_hotkey.IsChecked) && (String.IsNullOrWhiteSpace(text_px_nummer.Text)))
+            {
+                await this.ShowMessageAsync("Hotkey", "Bitte eine PX Nummer eingeben.", MessageDialogStyle.Affirmative);
+                ts_hotkey.IsChecked = false;
+                await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_px_nummer.Focus()));
+            }
         }
 
         private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
@@ -354,6 +410,8 @@ namespace IECMate
             Properties.Settings.Default.projekt_pfad_suche = text_projktpfad_suche.Text;
             Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
             Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
+            Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
+            Properties.Settings.Default.pxnummer = text_px_nummer.Text;
 
             Properties.Settings.Default.Save();
         }
@@ -1186,6 +1244,7 @@ namespace IECMate
                 FehlerHelferAsync();
             }
         }
+
     }
 }
 
