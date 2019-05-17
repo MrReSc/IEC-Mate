@@ -26,6 +26,7 @@ using NHotkey.Wpf;
 using NHotkey;
 using WindowsInput.Native;
 using WindowsInput;
+using System.Text;
 
 namespace IECMate
 {
@@ -1019,20 +1020,33 @@ namespace IECMate
 
                 //New Messagbox
                 var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen" };
-                var xp = await this.ShowProgressAsync("Backup", "Das Backup läuft bitte warten...", false, mymessageboxsettings);
+                var xp = await this.ShowProgressAsync("Backup", "Das Backup kann einige Zeit in anspruch nehemen." + Environment.NewLine + "Bitte warten...", true, mymessageboxsettings);
                 xp.SetIndeterminate();
 
+                StringBuilder outputBuilder = new StringBuilder();
+
                 //Process
-                Process x = new Process();
+                
                 ProcessStartInfo p = new ProcessStartInfo();
                 p.FileName = @"resources\7z\7za.exe";
                 p.Arguments = string.Format("a -t7z \"{0}\" \"{1}\" -mx=9", targetArchive, sourceName);
-                p.WindowStyle = ProcessWindowStyle.Normal;
+                //p.WindowStyle = ProcessWindowStyle.Hidden;
+                p.CreateNoWindow = true;
+                p.UseShellExecute = false;
+
+                Process x = new Process();
 
                 await Task.Run(() =>
                 {
                     x = Process.Start(p);
-                    x.WaitForExit();
+
+                    EventHandler canceled = (o, args) =>
+                    {
+                        x?.Kill();
+                    };
+                    xp.Canceled += canceled;
+
+                    x?.WaitForExit();
                 });
 
                 //Dateigrösse
