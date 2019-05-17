@@ -25,6 +25,7 @@
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>AssemblyVersion</InheritWinAppVersionFrom>
     <AssemblyVersionSettings>None.None.Increment.DateStamp</AssemblyVersionSettings>
+    <PrimaryVersionType>AssemblyInfoVersionAttribute</PrimaryVersionType>
     <PublishUrl>C:\Users\r.scheidegger\Downloads\IEC Mate\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -42,7 +43,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PrimaryVersionType>AssemblyInfoVersionAttribute</PrimaryVersionType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
