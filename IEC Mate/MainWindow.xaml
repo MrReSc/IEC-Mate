@@ -1088,7 +1088,7 @@
                     <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
