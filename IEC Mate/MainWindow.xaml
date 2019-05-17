@@ -108,8 +108,8 @@
                 <Label Content="IEC Mate - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
                 <Label x:Name="lb_version" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
                 <TextBlock HorizontalAlignment="Center" Margin="0,0,0,20">           
-                    <Hyperlink NavigateUri="mailto:iecmate@mailbox.org?subject=IEC Mate" RequestNavigate="Hyperlink_RequestNavigate" >
-                        Remo Scheidegger
+                    <Hyperlink NavigateUri="https://github.com/MrReSc/IEC-Mate" RequestNavigate="Hyperlink_RequestNavigate" >
+                        IEC-Mate aus GitHub
                     </Hyperlink>
                 </TextBlock>
                 <Label Content="MIT Lizenz:" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
