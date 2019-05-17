@@ -60,6 +60,8 @@
       <Word>/</Word>
       <Word>*</Word>
       <Word>MOD</Word>
+      <Word>TRUE</Word>
+      <Word>FALSE</Word>
     </Keywords>
     
     <Keywords foreground="MediumVioletRed">
