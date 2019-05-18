@@ -61,7 +61,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die IEC Mate - BETA ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die IEC-Mate - BETA ähnelt.
         /// </summary>
         public static string app_titel {
             get {
