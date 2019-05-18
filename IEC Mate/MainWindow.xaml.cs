@@ -77,13 +77,15 @@ namespace IECMate
             cb_akzent_farbe.ItemsSource = AccentColor;
             cb_akzent_farbe.SelectedItem = Properties.Settings.Default.akzentfarbe;
 
-            //char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
-            foreach (var letter in Enum.GetValues(typeof(Key)))
-            //foreach (var letter in alpha)
+            char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
+            foreach (var letter in alpha)
             {
-                cb_hotkey_pxBeginEnd.Items.Add(letter);
-                cb_hotekey_plain.Items.Add(letter);
-                cb_hotkey_pxComment.Items.Add(letter);
+                KeyConverter k = new KeyConverter();
+                var le = (Key)k.ConvertFromString(letter.ToString());
+
+                cb_hotkey_pxBeginEnd.Items.Add(le);
+                cb_hotekey_plain.Items.Add(le);
+                cb_hotkey_pxComment.Items.Add(le);
             }
 
             //Einstellungen laden
