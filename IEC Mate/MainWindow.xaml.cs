@@ -76,7 +76,10 @@ namespace IECMate
             combo_vars.ItemsSource = variablen_liste;
             cb_akzent_farbe.ItemsSource = AccentColor;
             cb_akzent_farbe.SelectedItem = Properties.Settings.Default.akzentfarbe;
+
+            //char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
             foreach (var letter in Enum.GetValues(typeof(Key)))
+            //foreach (var letter in alpha)
             {
                 cb_hotkey_pxBeginEnd.Items.Add(letter);
                 cb_hotekey_plain.Items.Add(letter);
@@ -186,7 +189,7 @@ namespace IECMate
         {
             if (((bool)ts_hotkey.IsChecked) && (String.IsNullOrWhiteSpace(text_px_nummer.Text)))
             {
-                await this.ShowMessageAsync("Hotkey", "Bitte eine PX Nummer eingeben.", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkey, MessageDialogStyle.Affirmative);
                 ts_hotkey.IsChecked = false;
                 await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_px_nummer.Focus()));
             }
@@ -254,19 +257,18 @@ namespace IECMate
         {
             try
             {
-                string code = Code_gen("Variable_1", text_var1.Text,
-                                                 "Variable_2", text_var2.Text,
-                                                 "Variable_3", text_var3.Text,
-                                                 text_code_template.Text);
+                var code = Code_gen("Variable_1", text_var1.Text,
+                                    "Variable_2", text_var2.Text,
+                                    "Variable_3", text_var3.Text,
+                                    text_code_template.Text);
 
-                if (code.StartsWith("#-->"))
+                if (!String.IsNullOrWhiteSpace(code.error))
                 {
-                    var message = code.Replace("#--> ", "");
-                    await this.ShowMessageAsync("Fehler beim Erzeugen vom Code", message, MessageDialogStyle.Affirmative);
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.error, MessageDialogStyle.Affirmative);
                 }
                 else
                 {
-                    text_code_output.Text = code;
+                    text_code_output.Text = code.code;
                 }
 
             }
@@ -276,7 +278,7 @@ namespace IECMate
             }
         }
 
-        private string Code_gen(string var_1, string var_1_text,
+        private (string code, string error) Code_gen(string var_1, string var_1_text,
                                 string var_2, string var_2_text,
                                 string var_3, string var_3_text,
                                 string template)
@@ -287,10 +289,10 @@ namespace IECMate
             string[] vars_3 = var_3_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
 
             string outtext = "";
-            string error0 = "#--> Die Anzahl Variabeln ist nicht identisch.";
-            string error1 = "#--> Keine Variable in Liste 1.";
-            string error2 = "#--> Keine Variable in Liste 2.";
-            string error3 = "#--> Keine Variable in Liste 3.";
+            string error0 = Properties.Resources.dialogMsgCodeGen00;
+            string error1 = Properties.Resources.dialogMsgCodeGen01;
+            string error2 = Properties.Resources.dialogMsgCodeGen02;
+            string error3 = Properties.Resources.dialogMsgCodeGen03;
 
             try
             {
@@ -298,22 +300,22 @@ namespace IECMate
 
                 if (lines == 0)
                 {
-                    return error1;
+                    return (outtext, error1);
                 }
 
                 if ((lines < vars_2.Length) || (lines < vars_3.Length))
                 {
-                    return error0;
+                    return (outtext, error0);
                 }
 
                 if ((template.Contains(var_2)) && (vars_2.Length == 0))
                 {
-                    return error2;
+                    return (outtext, error2);
                 }
 
                 if ((template.Contains(var_3)) && (vars_3.Length == 0))
                 {
-                    return error3;
+                    return (outtext,  error3);
                 }
 
                 for (int i = 0; i < lines; i++)
@@ -342,9 +344,9 @@ namespace IECMate
             }
             catch (Exception)
             {
-                return error0;
+                return (outtext, error0);
             }
-            return outtext;
+            return (outtext, "");
         }
 
         private void Btn_gen_loschen_Click(object sender, RoutedEventArgs e)
@@ -456,7 +458,7 @@ namespace IECMate
             {
                 // you cannot read publish version when app isn't installed 
                 // (e.g. during debug)
-                lb_version.Content = "not installed";
+                lb_version.Content = Properties.Resources.lb_version;
             }
         }
 
@@ -493,7 +495,7 @@ namespace IECMate
             }
             else
             {
-                folderDialog.SelectedPath = "c:\\";
+                folderDialog.SelectedPath = Properties.Paths.drive_c;
             }
            
             WinForms.DialogResult result = folderDialog.ShowDialog();
@@ -513,8 +515,8 @@ namespace IECMate
             if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)))
             {
                 //Dialog öffnen
-                var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = "Abbrechen"};
-                var x = await this.ShowProgressAsync("Suchen", "Die Suche läuft. Bite warten...", true, mymessageboxsettings) as ProgressDialogController;
+                var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = Properties.Resources.dialogNegButton};
+                var x = await this.ShowProgressAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLauft, true, mymessageboxsettings) as ProgressDialogController;
                 x.SetIndeterminate();
 
                 try
@@ -525,7 +527,7 @@ namespace IECMate
                     //Wenn der Swicth "Nur HW suche" ein ist, wird der Pfad angepasst
                     if ((bool)ts_kbus_suche.IsChecked)
                     {
-                        suchpfad = text_projktpfad_suche.Text + "\\application\\control\\config";
+                        suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
                         //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
                         Directory.Exists(suchpfad);
                     }
@@ -570,7 +572,7 @@ namespace IECMate
                 }
                 catch (Exception)
                 {
-                    await this.ShowMessageAsync("Fehler bei der Suche", "Das Verzeichnis ist kein IEC Projekt.", MessageDialogStyle.Affirmative);
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
                 }
 
@@ -578,7 +580,7 @@ namespace IECMate
             }
             else
             {
-                await this.ShowMessageAsync("Fehler bei der Suche", "Suchfeld ist leer oder das Verzeichnis existiert nicht.", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLeer, MessageDialogStyle.Affirmative);
                 await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
             }
         }
@@ -624,7 +626,7 @@ namespace IECMate
             }
             catch (Exception)
             {
-                await this.ShowMessageAsync("Fehler beim Öffnen", "Bitte eine Datei auswählen.", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
             }
         }
 
@@ -684,13 +686,13 @@ namespace IECMate
 
                     if (!System.Text.RegularExpressions.Regex.IsMatch(hex, @"\A\b[0-9a-fA-F]+\b\Z"))
                     {
-                        ShowFehlerBitsetAsync("Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F.");
+                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetHexFehler);
                         return;
                     }
 
                     if (Convert.ToInt64(hex, 16) > 4294967295)
                     {
-                        ShowFehlerBitsetAsync("Die eingegebene Zahl ist grösser als 32bit.");
+                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetGrosseFehler);
                         return;
                     }
 
@@ -725,13 +727,13 @@ namespace IECMate
                 {
                     if (!System.Text.RegularExpressions.Regex.IsMatch(bin, @"\A\b[0-1]+\b\Z"))
                     {
-                        ShowFehlerBitsetAsync("Die Binär - Eingabe enthält andere Zeichen als 0 oder 1.");
+                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetBinFehler);
                         return;
                     }
 
                     if (Convert.ToInt64(bin, 2) > 4294967295)
                     {
-                        ShowFehlerBitsetAsync("Die eingegebene Zahl ist grösser als 32bit.");
+                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetGrosseFehler);
                         return;
                     }
 
@@ -772,13 +774,13 @@ namespace IECMate
             {
                 if (!dez.All(Char.IsDigit))
                 {
-                    ShowFehlerBitsetAsync("Die Dezimal - Eingabe enthält andere Zeichen als 0 - 9.");
+                    ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetBinFehler);
                     return;
                 }
 
                 if (Convert.ToInt64(dez) > 4294967295)
                 {
-                    ShowFehlerBitsetAsync("Die eingegebene Zahl ist grösser als 32bit.");
+                    ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetDezFehler);
                     return;
                 }
 
@@ -811,7 +813,7 @@ namespace IECMate
         private async void ShowFehlerBitsetAsync(string message)
         {
             text_decode.IsEnabled = false;
-            MessageDialogResult result = await this.ShowMessageAsync("Fehler bei der Eingabe", message, MessageDialogStyle.Affirmative);
+            MessageDialogResult result = await this.ShowMessageAsync(Properties.Resources.dialogTitelBitset, message, MessageDialogStyle.Affirmative);
 
             if (result == MessageDialogResult.Affirmative)
             {
@@ -934,7 +936,7 @@ namespace IECMate
             }
             else
             {
-                folderDialog.SelectedPath = "c:\\";
+                folderDialog.SelectedPath = Properties.Paths.drive_c;
             }
 
             WinForms.DialogResult result = folderDialog.ShowDialog();
@@ -947,16 +949,12 @@ namespace IECMate
 
         private async void FehlerHelferAsync()
         {
-            string message = "Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.";
-            string titel = "Fehler beim öffnen";
-            await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+            await this.ShowMessageAsync(Properties.Resources.dialogTitelHelfer, Properties.Resources.dialogMsgHelferFehler, MessageDialogStyle.Affirmative);
         }
 
         private async void FehlerHelferAsyncME()
         {
-            string message = "Bitte eine ME auswählen.";
-            string titel = "Fehler beim öffnen";
-            await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+            await this.ShowMessageAsync(Properties.Resources.dialogTitelHelfer, Properties.Resources.dialogMsgHelferFehlerME, MessageDialogStyle.Affirmative);
         }
 
         private void OpenFileOrFolder(string input)
@@ -973,43 +971,43 @@ namespace IECMate
 
         private void Btn_open_systemoptions_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\data_Machine\\machineSetup\\systemOptions.properties";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
             OpenFileOrFolder(open);
         }
 
         private void Bt_openFormProgram_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\data_Customer\\formProgram";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.formProgram;
             OpenFileOrFolder(open);
         }
 
         private void Bt_openDiagnoseData_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\data_Customer\\diagnoseData";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.diagnoseData;
             OpenFileOrFolder(open);
         }
 
         private void Bt_openDiagramSetup_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\data_Customer\\diagramSetup";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.diagramSetup;
             OpenFileOrFolder(open);
         }
 
         private void Bt_simStarten_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\Start_Simulation.bat";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation;
             OpenFileOrFolder(open);
         }
 
         private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\Start_Visualization.bat";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Visualization;
             OpenFileOrFolder(open);
         }
 
         private void Bt_openConfig_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + "\\application\\control\\config";
+            string open = text_projktpfad_helfer.Text + Properties.Paths.config;
             OpenFileOrFolder(open);
         }
 
@@ -1025,8 +1023,8 @@ namespace IECMate
                 Directory.GetAccessControl(sourceName);
 
                 //New Messagbox
-                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen" };
-                var xp = await this.ShowProgressAsync("Backup", "Das Backup kann einige Zeit in anspruch nehemen." + Environment.NewLine + "Bitte warten...", true, mymessageboxsettings);
+                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                var xp = await this.ShowProgressAsync(Properties.Resources.dialogTitelBackup, Properties.Resources.dialogMsgBackup, true, mymessageboxsettings);
                 xp.SetIndeterminate();
 
                 StringBuilder outputBuilder = new StringBuilder();
@@ -1071,17 +1069,15 @@ namespace IECMate
                 }
                 await xp.CloseAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                string message = "Projektordner existiert nicht " + ex.Message;
-                string titel = "Fehler beim Backup";
-                await this.ShowMessageAsync(titel, message, MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelBackup, Properties.Resources.dialogMsgBackupFehler, MessageDialogStyle.Affirmative);
             }
         }
 
         private void Cb_select_me_DropDownOpened(object sender, EventArgs e)
         {
-            string mepfad = text_projktpfad_helfer.Text + "\\application\\control\\ieccontrol";
+            string mepfad = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol;
 
             if (Directory.Exists(mepfad))
             {
@@ -1104,7 +1100,7 @@ namespace IECMate
             try
             {
                 string me = cb_select_me.SelectedValue.ToString();
-                string open = text_projktpfad_helfer.Text + "\\application\\control\\ieccontrol\\" + me;
+                string open = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol+ "\\" + me;
                 OpenFileOrFolder(open);
             }
             catch (Exception)
@@ -1251,10 +1247,8 @@ namespace IECMate
 
         private async void Bt_lock_loschen_Click(object sender, RoutedEventArgs e)
         {
-            var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen", AffirmativeButtonText = "OK"};
-            string message = "Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren?";
-            string titel = "Löschen von puLock Datein";
-            MessageDialogResult result = await this.ShowMessageAsync(titel, message, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+            var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton};
+            MessageDialogResult result = await this.ShowMessageAsync(Properties.Resources.dialogTitelHelferLock, Properties.Resources.dialogMsgHelferLock, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
 
             if (!(result == MessageDialogResult.Affirmative))
             {
@@ -1293,10 +1287,16 @@ namespace IECMate
 
         private async void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (cb_hotekey_plain.SelectedIndex == 0)
+            {
+                HotkeyManager.Current.Remove("PxPlain");
+                return;
+            }
+
             if (cb_hotekey_plain.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex || cb_hotekey_plain.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
             {
                 cb_hotekey_plain.SelectedIndex = prevHotPlai;
-                await this.ShowMessageAsync("Fehler", "Der Hot Key wird schon verwedent.", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
             }
             else
             {
@@ -1307,10 +1307,16 @@ namespace IECMate
 
         private async void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (cb_hotkey_pxBeginEnd.SelectedIndex == 0)
+            {
+                HotkeyManager.Current.Remove("PxBeginEnd");
+                return;
+            }
+
             if (cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
             {
                 cb_hotkey_pxBeginEnd.SelectedIndex = prevHotBeginEnd;
-                await this.ShowMessageAsync("Fehler", "Der Hot Key wird schon verwedent.", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
             }
             else
             {
@@ -1330,7 +1336,7 @@ namespace IECMate
             if (cb_hotkey_pxComment.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxComment.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
             {
                 cb_hotkey_pxComment.SelectedIndex = prevHotComment;
-                await this.ShowMessageAsync("Fehler", "Der Hot Key wird schon verwedent.", MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
             }
             else
             {

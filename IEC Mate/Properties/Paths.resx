@@ -117,91 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="dialogMsgBackup" xml:space="preserve">
-    <value>Das Backup läuft, bitte warte...</value>
+  <data name="config" xml:space="preserve">
+    <value>\\application\\control\\config</value>
   </data>
-  <data name="dialogMsgBackupFehler" xml:space="preserve">
-    <value>Das Verzeichnis existiert nicht.</value>
+  <data name="diagnoseData" xml:space="preserve">
+    <value>\\data_Customer\\diagnoseData</value>
   </data>
-  <data name="dialogMsgBitsetBinFehler" xml:space="preserve">
-    <value>Die Binär - Eingabe enthält andere Zeichen als 0 oder 1.</value>
+  <data name="diagramSetup" xml:space="preserve">
+    <value>\\data_Customer\\diagramSetup</value>
   </data>
-  <data name="dialogMsgBitsetDezFehler" xml:space="preserve">
-    <value>Die Dezimal - Eingabe enthält andere Zeichen als 0 - 9.</value>
+  <data name="drive_c" xml:space="preserve">
+    <value>c:</value>
   </data>
-  <data name="dialogMsgBitsetGrosseFehler" xml:space="preserve">
-    <value>Die eingegebene Zahl ist länger als 32bit.</value>
+  <data name="formProgram" xml:space="preserve">
+    <value>\\data_Customer\\formProgram</value>
   </data>
-  <data name="dialogMsgBitsetHexFehler" xml:space="preserve">
-    <value>Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F.</value>
+  <data name="ieccontrol" xml:space="preserve">
+    <value>\\application\\control\\ieccontrol</value>
   </data>
-  <data name="dialogMsgCodeGen00" xml:space="preserve">
-    <value>Die Anzahl Variabeln ist nicht identisch.</value>
+  <data name="Start_Simulation" xml:space="preserve">
+    <value>\\Start_Simulation.bat</value>
   </data>
-  <data name="dialogMsgCodeGen01" xml:space="preserve">
-    <value>Keine Variable in Liste 1.</value>
+  <data name="Start_Visualization" xml:space="preserve">
+    <value>\\Start_Visualization.bat</value>
   </data>
-  <data name="dialogMsgCodeGen02" xml:space="preserve">
-    <value>Keine Variable in Liste 2.</value>
-  </data>
-  <data name="dialogMsgCodeGen03" xml:space="preserve">
-    <value>Keine Variable in Liste 3.</value>
-  </data>
-  <data name="dialogMsgDateiOffnenFehler" xml:space="preserve">
-    <value>Bitte eine Datei auswählen.</value>
-  </data>
-  <data name="dialogMsgHelferFehler" xml:space="preserve">
-    <value>Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.</value>
-  </data>
-  <data name="dialogMsgHelferFehlerME" xml:space="preserve">
-    <value>Bitte eine ME auswählen.</value>
-  </data>
-  <data name="dialogMsgHelferLock" xml:space="preserve">
-    <value>Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren?</value>
-  </data>
-  <data name="dialogMsgHotkey" xml:space="preserve">
-    <value>Bitte eine PX Nummer eingeben.</value>
-  </data>
-  <data name="dialogMsgHotkeyFehler" xml:space="preserve">
-    <value>Der Hot Key wird schon verwedent.</value>
-  </data>
-  <data name="dialogMsgSucheLauft" xml:space="preserve">
-    <value>Die Suche läuft. Bite warten...</value>
-  </data>
-  <data name="dialogMsgSucheLeer" xml:space="preserve">
-    <value>Suchfeld ist leer oder das Verzeichnis existiert nicht.</value>
-  </data>
-  <data name="dialogMsgSucheVerzeichnisFehler" xml:space="preserve">
-    <value>Das Verzeichnis ist kein IEC Projekt.</value>
-  </data>
-  <data name="dialogNegButton" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="dialogTitelBackup" xml:space="preserve">
-    <value>Backup</value>
-  </data>
-  <data name="dialogTitelBitset" xml:space="preserve">
-    <value>Fehler bei der Eingabe</value>
-  </data>
-  <data name="dialogTitelCodeGen" xml:space="preserve">
-    <value>Fehler beim Erzeugen vom Code</value>
-  </data>
-  <data name="dialogTitelDateiOffnen" xml:space="preserve">
-    <value>Datei öffnen</value>
-  </data>
-  <data name="dialogTitelHelfer" xml:space="preserve">
-    <value>Fehler beim öffnen</value>
-  </data>
-  <data name="dialogTitelHelferLock" xml:space="preserve">
-    <value>Löschen von puLock Datein</value>
-  </data>
-  <data name="dialogTitelHotkey" xml:space="preserve">
-    <value>Hotkey</value>
-  </data>
-  <data name="dialogTitelSuche" xml:space="preserve">
-    <value>Suche</value>
-  </data>
-  <data name="lb_version" xml:space="preserve">
-    <value>nicht installiert</value>
+  <data name="systemOptions" xml:space="preserve">
+    <value>\\data_Machine\\machineSetup\\systemOptions.properties</value>
   </data>
 </root>

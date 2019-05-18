@@ -59,5 +59,266 @@ namespace IECMate.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Das Backup läuft, bitte warte... ähnelt.
+        /// </summary>
+        internal static string dialogMsgBackup {
+            get {
+                return ResourceManager.GetString("dialogMsgBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Das Verzeichnis existiert nicht. ähnelt.
+        /// </summary>
+        internal static string dialogMsgBackupFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgBackupFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Binär - Eingabe enthält andere Zeichen als 0 oder 1. ähnelt.
+        /// </summary>
+        internal static string dialogMsgBitsetBinFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgBitsetBinFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Dezimal - Eingabe enthält andere Zeichen als 0 - 9. ähnelt.
+        /// </summary>
+        internal static string dialogMsgBitsetDezFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgBitsetDezFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die eingegebene Zahl ist länger als 32bit. ähnelt.
+        /// </summary>
+        internal static string dialogMsgBitsetGrosseFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgBitsetGrosseFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F. ähnelt.
+        /// </summary>
+        internal static string dialogMsgBitsetHexFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgBitsetHexFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Anzahl Variabeln ist nicht identisch. ähnelt.
+        /// </summary>
+        internal static string dialogMsgCodeGen00 {
+            get {
+                return ResourceManager.GetString("dialogMsgCodeGen00", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 1. ähnelt.
+        /// </summary>
+        internal static string dialogMsgCodeGen01 {
+            get {
+                return ResourceManager.GetString("dialogMsgCodeGen01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 2. ähnelt.
+        /// </summary>
+        internal static string dialogMsgCodeGen02 {
+            get {
+                return ResourceManager.GetString("dialogMsgCodeGen02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 3. ähnelt.
+        /// </summary>
+        internal static string dialogMsgCodeGen03 {
+            get {
+                return ResourceManager.GetString("dialogMsgCodeGen03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine Datei auswählen. ähnelt.
+        /// </summary>
+        internal static string dialogMsgDateiOffnenFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgDateiOffnenFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen. ähnelt.
+        /// </summary>
+        internal static string dialogMsgHelferFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgHelferFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine ME auswählen. ähnelt.
+        /// </summary>
+        internal static string dialogMsgHelferFehlerME {
+            get {
+                return ResourceManager.GetString("dialogMsgHelferFehlerME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren? ähnelt.
+        /// </summary>
+        internal static string dialogMsgHelferLock {
+            get {
+                return ResourceManager.GetString("dialogMsgHelferLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine PX Nummer eingeben. ähnelt.
+        /// </summary>
+        internal static string dialogMsgHotkey {
+            get {
+                return ResourceManager.GetString("dialogMsgHotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Der Hot Key wird schon verwedent. ähnelt.
+        /// </summary>
+        internal static string dialogMsgHotkeyFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgHotkeyFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Suche läuft. Bite warten... ähnelt.
+        /// </summary>
+        internal static string dialogMsgSucheLauft {
+            get {
+                return ResourceManager.GetString("dialogMsgSucheLauft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchfeld ist leer oder das Verzeichnis existiert nicht. ähnelt.
+        /// </summary>
+        internal static string dialogMsgSucheLeer {
+            get {
+                return ResourceManager.GetString("dialogMsgSucheLeer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Das Verzeichnis ist kein IEC Projekt. ähnelt.
+        /// </summary>
+        internal static string dialogMsgSucheVerzeichnisFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgSucheVerzeichnisFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Abbrechen ähnelt.
+        /// </summary>
+        internal static string dialogNegButton {
+            get {
+                return ResourceManager.GetString("dialogNegButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Backup ähnelt.
+        /// </summary>
+        internal static string dialogTitelBackup {
+            get {
+                return ResourceManager.GetString("dialogTitelBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fehler bei der Eingabe ähnelt.
+        /// </summary>
+        internal static string dialogTitelBitset {
+            get {
+                return ResourceManager.GetString("dialogTitelBitset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fehler beim Erzeugen vom Code ähnelt.
+        /// </summary>
+        internal static string dialogTitelCodeGen {
+            get {
+                return ResourceManager.GetString("dialogTitelCodeGen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Datei öffnen ähnelt.
+        /// </summary>
+        internal static string dialogTitelDateiOffnen {
+            get {
+                return ResourceManager.GetString("dialogTitelDateiOffnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fehler beim öffnen ähnelt.
+        /// </summary>
+        internal static string dialogTitelHelfer {
+            get {
+                return ResourceManager.GetString("dialogTitelHelfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Löschen von puLock Datein ähnelt.
+        /// </summary>
+        internal static string dialogTitelHelferLock {
+            get {
+                return ResourceManager.GetString("dialogTitelHelferLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hotkey ähnelt.
+        /// </summary>
+        internal static string dialogTitelHotkey {
+            get {
+                return ResourceManager.GetString("dialogTitelHotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suche ähnelt.
+        /// </summary>
+        internal static string dialogTitelSuche {
+            get {
+                return ResourceManager.GetString("dialogTitelSuche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die nicht installiert ähnelt.
+        /// </summary>
+        internal static string lb_version {
+            get {
+                return ResourceManager.GetString("lb_version", resourceCulture);
+            }
+        }
     }
 }
