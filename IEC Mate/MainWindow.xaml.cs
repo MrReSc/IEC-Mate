@@ -1079,11 +1079,6 @@ namespace IECMate
                     x?.WaitForExit();
                 });
 
-                //Dateigrösse
-                //Wenn Datei sehr klein ist, dann wurde abgebrochen
-                //long length = new System.IO.FileInfo(targetArchive).Length;
-                //if (length < 40)
-
                 //Wenn abgebrochen wurde, dann datei löschen
                 if(xp.IsCanceled)
                 {

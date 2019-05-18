@@ -51,6 +51,8 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Label Content="{x:Static p:Resources.lb_aussehen}" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
@@ -75,6 +77,12 @@
 
                     <Label Content="{x:Static p:Resources.lb_sprache}" Grid.Column="1" Grid.Row="7" FontSize="30" Margin="0,25,0,0"/>
                     <ComboBox x:Name="cb_sprache" Grid.Column="1" Grid.Row="8" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged"/>
+
+                    <Label Content="{x:Static p:Resources.dp_hilfe}" Grid.Column="1" Grid.Row="9" FontSize="30" Margin="0,25,0,0"/>
+                    <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
+                        <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
+                    </Button>
+
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
@@ -134,9 +142,6 @@
                     <MenuItem x:Name="mi_app_beenden" Header="{x:Static p:Resources.dp_datei_beenden}" Click="Mi_app_beenden_Click" />
                 </MenuItem>
 
-                <MenuItem Header="{x:Static p:Resources.dp_hilfe}">
-                    <MenuItem Header="{x:Static p:Resources.dp_hilfe_info}" Click="MenuItem_Click_About" />
-                </MenuItem>
             </Menu>
         </DockPanel>
 
