@@ -121,145 +121,145 @@
     <value>IEC Mate - BETA</value>
   </data>
   <data name="cb_var_auswahlen" xml:space="preserve">
-    <value>Variable auswählen...</value>
+    <value>Select variable...</value>
   </data>
   <data name="dialogMsgBackup" xml:space="preserve">
-    <value>Das Backup läuft, bitte warte...</value>
+    <value>The backup is running, please wait...</value>
   </data>
   <data name="dialogMsgBackupFehler" xml:space="preserve">
-    <value>Das Verzeichnis existiert nicht.</value>
+    <value>The directory does not exist.</value>
   </data>
   <data name="dialogMsgBitsetBinFehler" xml:space="preserve">
-    <value>Die Binär - Eingabe enthält andere Zeichen als 0 oder 1.</value>
+    <value>The binary input contains characters other than 0 or 1.</value>
   </data>
   <data name="dialogMsgBitsetDezFehler" xml:space="preserve">
-    <value>Die Dezimal - Eingabe enthält andere Zeichen als 0 - 9.</value>
+    <value>The decimal input contains characters other than 0 - 9.</value>
   </data>
   <data name="dialogMsgBitsetGrosseFehler" xml:space="preserve">
-    <value>Die eingegebene Zahl ist länger als 32bit.</value>
+    <value>The entered number is longer than 32bit.</value>
   </data>
   <data name="dialogMsgBitsetHexFehler" xml:space="preserve">
-    <value>Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F.</value>
+    <value>The hex input contains characters other than 0-9, a-f, or A-F.</value>
   </data>
   <data name="dialogMsgCodeGen00" xml:space="preserve">
-    <value>Die Anzahl Variabeln ist nicht identisch.</value>
+    <value>The number of variables is not identical.</value>
   </data>
   <data name="dialogMsgCodeGen01" xml:space="preserve">
-    <value>Keine Variable in Liste 1.</value>
+    <value>No variable in list 1.</value>
   </data>
   <data name="dialogMsgCodeGen02" xml:space="preserve">
-    <value>Keine Variable in Liste 2.</value>
+    <value>No variable in list 2.</value>
   </data>
   <data name="dialogMsgCodeGen03" xml:space="preserve">
-    <value>Keine Variable in Liste 3.</value>
+    <value>No variable in list 3.</value>
   </data>
   <data name="dialogMsgDateiOffnenFehler" xml:space="preserve">
-    <value>Bitte eine Datei auswählen.</value>
+    <value>Please select a file.</value>
   </data>
   <data name="dialogMsgHelferFehler" xml:space="preserve">
-    <value>Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.</value>
+    <value>File or folder does not exist. Please check the project path.</value>
   </data>
   <data name="dialogMsgHelferFehlerME" xml:space="preserve">
-    <value>Bitte eine ME auswählen.</value>
+    <value>Please select a ME.</value>
   </data>
   <data name="dialogMsgHelferLock" xml:space="preserve">
-    <value>Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren?</value>
+    <value>All files with the file extension *.puLock will be deleted. Do you want to continue?</value>
   </data>
   <data name="dialogMsgHotkey" xml:space="preserve">
-    <value>Bitte eine PX Nummer eingeben.</value>
+    <value>Please enter a PX number.</value>
   </data>
   <data name="dialogMsgHotkeyFehler" xml:space="preserve">
-    <value>Der Hot Key wird schon verwedent.</value>
+    <value>This Hot Key is already used.</value>
   </data>
   <data name="dialogMsgSpracheUmschalten" xml:space="preserve">
-    <value>Die Anwendung muss neue gestartet werden um die Sprache zu wechseln.</value>
+    <value>The application must be restarted to change the language.</value>
   </data>
   <data name="dialogMsgSucheLauft" xml:space="preserve">
-    <value>Die Suche läuft. Bite warten...</value>
+    <value>The search is running. Please wait...</value>
   </data>
   <data name="dialogMsgSucheLeer" xml:space="preserve">
-    <value>Suchfeld ist leer oder das Verzeichnis existiert nicht.</value>
+    <value>Search field is empty or the directory does not exist.</value>
   </data>
   <data name="dialogMsgSucheVerzeichnisFehler" xml:space="preserve">
-    <value>Das Verzeichnis ist kein IEC Projekt.</value>
+    <value>The directory is not an IEC project.</value>
   </data>
   <data name="dialogNegButton" xml:space="preserve">
-    <value>Abbrechen</value>
+    <value>Cancel</value>
   </data>
   <data name="dialogTitelBackup" xml:space="preserve">
     <value>Backup</value>
   </data>
   <data name="dialogTitelBitset" xml:space="preserve">
-    <value>Fehler bei der Eingabe</value>
+    <value>Input error</value>
   </data>
   <data name="dialogTitelCodeGen" xml:space="preserve">
-    <value>Fehler beim Erzeugen vom Code</value>
+    <value>Error during code generation</value>
   </data>
   <data name="dialogTitelDateiOffnen" xml:space="preserve">
-    <value>Datei öffnen</value>
+    <value>Open file</value>
   </data>
   <data name="dialogTitelHelfer" xml:space="preserve">
-    <value>Fehler beim öffnen</value>
+    <value>Error during opening</value>
   </data>
   <data name="dialogTitelHelferLock" xml:space="preserve">
-    <value>Löschen von puLock Datein</value>
+    <value>Delete puLock files</value>
   </data>
   <data name="dialogTitelHotkey" xml:space="preserve">
     <value>Hotkey</value>
   </data>
   <data name="dialogTitelSuche" xml:space="preserve">
-    <value>Suche</value>
+    <value>Search</value>
   </data>
   <data name="dp_datei" xml:space="preserve">
-    <value>Datei</value>
+    <value>File</value>
   </data>
   <data name="dp_datei_beenden" xml:space="preserve">
-    <value>Beenden</value>
+    <value>Exit</value>
   </data>
   <data name="dp_datei_code_speichern" xml:space="preserve">
-    <value>Code Speichern</value>
+    <value>Save code</value>
   </data>
   <data name="dp_datei_import" xml:space="preserve">
-    <value>Vorlage Importieren</value>
+    <value>Import template</value>
   </data>
   <data name="dp_datei_speichern" xml:space="preserve">
-    <value>Vorlage Speichern</value>
+    <value>Save template</value>
   </data>
   <data name="dp_hilfe" xml:space="preserve">
-    <value>Hilfe</value>
+    <value>Help</value>
   </data>
   <data name="dp_hilfe_info" xml:space="preserve">
-    <value>Infos</value>
+    <value>Info</value>
   </data>
   <data name="fo_einstellungen" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Settings</value>
   </data>
   <data name="gb_code_vorlage" xml:space="preserve">
-    <value>Code Vorlage</value>
+    <value>Code Template</value>
   </data>
   <data name="gb_datei_funktion" xml:space="preserve">
-    <value>Dateine öffnen oder Funktion starten</value>
+    <value>Open date or start function</value>
   </data>
   <data name="gb_decoding" xml:space="preserve">
-    <value>Decodieren</value>
+    <value>Decoding</value>
   </data>
   <data name="gb_encoding" xml:space="preserve">
-    <value>Encodieren</value>
+    <value>Encoding</value>
   </data>
   <data name="gb_ergebnis" xml:space="preserve">
-    <value>Suchergebnis</value>
+    <value>Search result</value>
   </data>
   <data name="gb_helfer_funkionen_me" xml:space="preserve">
-    <value>Funktion für ME</value>
+    <value>Function for ME</value>
   </data>
   <data name="gb_hotkeys" xml:space="preserve">
-    <value>Hot Keys</value>
+    <value>Hotkeys</value>
   </data>
   <data name="gb_variablen" xml:space="preserve">
-    <value>Variablen</value>
+    <value>variables</value>
   </data>
   <data name="info_link_text" xml:space="preserve">
-    <value>IEC-Mate auf GitHub</value>
+    <value>IEC-Mate on GitHub</value>
   </data>
   <data name="info_lizenztext" xml:space="preserve">
     <value>Copyright (c) 2019 Remo Scheidegger
@@ -271,16 +271,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>Info</value>
   </data>
   <data name="lanDE" xml:space="preserve">
-    <value>Deutsch</value>
+    <value>German</value>
   </data>
   <data name="lanEN" xml:space="preserve">
-    <value>Eglisch</value>
+    <value>Englisch</value>
   </data>
   <data name="lb_aussehen" xml:space="preserve">
-    <value>Aussehen</value>
+    <value>Appearance</value>
   </data>
   <data name="lb_backup" xml:space="preserve">
-    <value>Backup Projekt</value>
+    <value>Backup Project</value>
   </data>
   <data name="lb_config" xml:space="preserve">
     <value>config</value>
@@ -301,16 +301,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>formProgram</value>
   </data>
   <data name="lb_lizenz" xml:space="preserve">
-    <value>MIT Lizenz:</value>
+    <value>MIT license:</value>
   </data>
   <data name="lb_me" xml:space="preserve">
-    <value>ME Ordner</value>
+    <value>ME folder</value>
   </data>
   <data name="lb_me_xml" xml:space="preserve">
-    <value>xml der ME</value>
+    <value>xml of the ME</value>
   </data>
   <data name="lb_puLock" xml:space="preserve">
-    <value>puLock Datein löschen</value>
+    <value>Delete puLock files</value>
   </data>
   <data name="lb_px" xml:space="preserve">
     <value>// PX05010</value>
@@ -319,28 +319,28 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>// PX05010 begin</value>
   </data>
   <data name="lb_px_beginend" xml:space="preserve">
-    <value>Fügt ein Block mit "begin" und "end" ein.</value>
+    <value>Inserts a block with "begin" and "end".</value>
   </data>
   <data name="lb_px_code" xml:space="preserve">
-    <value>hier kommt der Code;</value>
+    <value>here comes the code;</value>
   </data>
   <data name="lb_px_comment" xml:space="preserve">
-    <value>Fügt die PX Nummer als Kommentar ein.</value>
+    <value>Inserts the PX number as comment.</value>
   </data>
   <data name="lb_px_end" xml:space="preserve">
     <value>// PX05010 end</value>
   </data>
   <data name="lb_px_plain" xml:space="preserve">
-    <value>Fügt die PX Nummer ein.</value>
+    <value>Inserts the PX number.</value>
   </data>
   <data name="lb_schrift" xml:space="preserve">
-    <value>Schriftgrösse</value>
+    <value>Font size</value>
   </data>
   <data name="lb_sim" xml:space="preserve">
-    <value>Simulation starten</value>
+    <value>Start simulation</value>
   </data>
   <data name="lb_sprache" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Language</value>
   </data>
   <data name="lb_systemOptions" xml:space="preserve">
     <value>systemOptions.properties</value>
@@ -355,61 +355,61 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>VARIABLE 3</value>
   </data>
   <data name="lb_version" xml:space="preserve">
-    <value>nicht installiert</value>
+    <value>not installed</value>
   </data>
   <data name="lb_visu" xml:space="preserve">
-    <value>Visualisierung starten</value>
+    <value>Start visualization</value>
   </data>
   <data name="mi_ers_ruck" xml:space="preserve">
-    <value>Ersetzten Rückgängig</value>
+    <value>Replace Undo</value>
   </data>
   <data name="mi_in_clipboard" xml:space="preserve">
-    <value>Alles in Zwischenablage kopieren</value>
+    <value>Copy all to clipboard</value>
   </data>
   <data name="tb_bitset_bin" xml:space="preserve">
-    <value>Binär 2#</value>
+    <value>Binary 2#</value>
   </data>
   <data name="tb_bitset_decode" xml:space="preserve">
-    <value>Dezimal, 16# Hex oder 2# Binär</value>
+    <value>Decimal, 16# Hex or 2# Binary</value>
   </data>
   <data name="tb_bitset_dez" xml:space="preserve">
-    <value>Dezimal 10#</value>
+    <value>Decimal 10#</value>
   </data>
   <data name="tb_bitset_hex" xml:space="preserve">
-    <value>Hexadezimal 16#</value>
+    <value>Hexadecimal 16#</value>
   </data>
   <data name="tb_ersetzten_druch" xml:space="preserve">
-    <value>Ersetzten durch:</value>
+    <value>Replace by:</value>
   </data>
   <data name="tb_proj_auswahlen" xml:space="preserve">
-    <value>Projekt Ordner auswählen...</value>
+    <value>Select project folder...</value>
   </data>
   <data name="tb_px_nummer" xml:space="preserve">
-    <value>PX Nummer eingeben...</value>
+    <value>Enter PX number...</value>
   </data>
   <data name="tb_suchen_nach" xml:space="preserve">
-    <value>Suchen nach...</value>
+    <value>Search for...</value>
   </data>
   <data name="tb_var_einfügen" xml:space="preserve">
-    <value>Variablen hier einfügen...</value>
+    <value>Insert variables here...</value>
   </data>
   <data name="tg_leer_aus" xml:space="preserve">
-    <value>Leerzeichen Aus</value>
+    <value>Blanks Off</value>
   </data>
   <data name="tg_leer_ein" xml:space="preserve">
-    <value>Leerzeichen Ein</value>
+    <value>Blanks On</value>
   </data>
   <data name="tg_line_aus" xml:space="preserve">
-    <value>Zeilennummern Aus</value>
+    <value>Line numbers Off</value>
   </data>
   <data name="tg_line_ein" xml:space="preserve">
-    <value>Zeilennummern Ein</value>
+    <value>Line numbers On</value>
   </data>
   <data name="tg_theme_dunkel" xml:space="preserve">
-    <value>Dunkel</value>
+    <value>Dark</value>
   </data>
   <data name="tg_theme_hell" xml:space="preserve">
-    <value>Hell</value>
+    <value>Light</value>
   </data>
   <data name="ti_bitset" xml:space="preserve">
     <value>Bitset</value>
@@ -418,48 +418,48 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>Code</value>
   </data>
   <data name="ti_helfer" xml:space="preserve">
-    <value>Helfer</value>
+    <value>Helpers</value>
   </data>
   <data name="ti_suche" xml:space="preserve">
-    <value>Suche</value>
+    <value>Search</value>
   </data>
   <data name="ts_bin_aus" xml:space="preserve">
-    <value>In Binär Dateien suchen aus</value>
+    <value>Search in binary files off</value>
   </data>
   <data name="ts_bin_ein" xml:space="preserve">
-    <value>In Binär Dateien suchen ein</value>
+    <value>Search in binary files on</value>
   </data>
   <data name="ts_exakte_aus" xml:space="preserve">
-    <value>Exakte Zeichenfolge suchen aus</value>
+    <value>Search exact string off</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
-    <value>Exakte Zeichenfolge suchen ein</value>
+    <value>Search exact string on</value>
   </data>
   <data name="ts_hw_aus" xml:space="preserve">
-    <value>Nur in HW-Konfig suchen aus</value>
+    <value>Search only in HW-Config off</value>
   </data>
   <data name="ts_hw_ein" xml:space="preserve">
-    <value>Nur in HW-Konfig suchen ein</value>
+    <value>Search only in HW-Config on</value>
   </data>
   <data name="tt_code_gen_copy" xml:space="preserve">
-    <value>Kopiert den kompletten Code in die Zwischenablage.</value>
+    <value>Copies the complete code to the clipboard.</value>
   </data>
   <data name="tt_ers_ruck" xml:space="preserve">
-    <value>Macht das ersetzten wieder Rückgangig.</value>
+    <value>Makes the replaced code recede.</value>
   </data>
   <data name="tt_hotkey" xml:space="preserve">
-    <value>Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt.</value>
+    <value>If the configured key combination is pressed, then the text is inserted automatically.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
-    <value>Such auch nach *.fud, *.ful, *.fu, *.**O Dateien.</value>
+    <value>Search also for *.fud, *.ful, *.fu, *.**O files.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
-    <value>Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive).</value>
+    <value>Only the exact string will be searched (Case Sensitive).</value>
   </data>
   <data name="tt_suche_hw" xml:space="preserve">
-    <value>Such nur im Unterverzeichnis \application\control\config\.</value>
+    <value>Search only in subdirectory \application\control\config\.</value>
   </data>
   <data name="tt_suche_offnen" xml:space="preserve">
-    <value>Ausgewählte Datei öffnen.</value>
+    <value>Open selected file.</value>
   </data>
 </root>

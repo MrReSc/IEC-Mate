@@ -223,6 +223,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Anwendung muss neue gestartet werden um die Sprache zu wechseln. ähnelt.
+        /// </summary>
+        public static string dialogMsgSpracheUmschalten {
+            get {
+                return ResourceManager.GetString("dialogMsgSpracheUmschalten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die Suche läuft. Bite warten... ähnelt.
         /// </summary>
         public static string dialogMsgSucheLauft {
@@ -504,6 +513,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Deutsch ähnelt.
+        /// </summary>
+        public static string lanDE {
+            get {
+                return ResourceManager.GetString("lanDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Eglisch ähnelt.
+        /// </summary>
+        public static string lanEN {
+            get {
+                return ResourceManager.GetString("lanEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Aussehen ähnelt.
         /// </summary>
         public static string lb_aussehen {
@@ -689,6 +716,15 @@ namespace IECMate.Properties {
         public static string lb_sim {
             get {
                 return ResourceManager.GetString("lb_sim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sprache ähnelt.
+        /// </summary>
+        public static string lb_sprache {
+            get {
+                return ResourceManager.GetString("lb_sprache", resourceCulture);
             }
         }
         

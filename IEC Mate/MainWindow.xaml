@@ -50,6 +50,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Label Content="{x:Static p:Resources.lb_aussehen}" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
@@ -71,6 +72,9 @@
                                                 HorizontalAlignment="Right" Width="80" ValueChanged="NumericUpDown_ValueChanged" 
                                                 HorizontalContentAlignment="Left" FontSize="15" FontWeight="Medium"/>
                     </Grid>
+
+                    <Label Content="{x:Static p:Resources.lb_sprache}" Grid.Column="1" Grid.Row="7" FontSize="30" Margin="0,25,0,0"/>
+                    <ComboBox x:Name="cb_sprache" Grid.Column="1" Grid.Row="8" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged"/>
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>

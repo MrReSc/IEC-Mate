@@ -298,5 +298,17 @@ namespace IECMate.Properties {
                 this["hotkey_beginend"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("de-DE")]
+        public string sprache {
+            get {
+                return ((string)(this["sprache"]));
+            }
+            set {
+                this["sprache"] = value;
+            }
+        }
     }
 }

@@ -71,5 +71,8 @@
     <Setting Name="hotkey_beginend" Type="System.String" Scope="User">
       <Value Profile="(Default)">X</Value>
     </Setting>
+    <Setting Name="sprache" Type="System.String" Scope="User">
+      <Value Profile="(Default)">de-DE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

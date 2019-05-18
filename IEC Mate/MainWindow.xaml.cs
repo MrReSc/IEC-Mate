@@ -24,9 +24,10 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 using NHotkey.Wpf;
 using NHotkey;
-using WindowsInput.Native;
 using WindowsInput;
 using System.Text;
+using System.Threading;
+using System.Globalization;
 
 namespace IECMate
 {
@@ -43,8 +44,11 @@ namespace IECMate
         public int prevHotBeginEnd;
         public int prevHotPlai;
 
+
+
         public MainWindow()
         {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
             InitializeComponent();
 
             //Hotkey
@@ -77,7 +81,7 @@ namespace IECMate
             cb_akzent_farbe.ItemsSource = AccentColor;
             cb_akzent_farbe.SelectedItem = Properties.Settings.Default.akzentfarbe;
 
-            char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
+            char[] alpha = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
             foreach (var letter in alpha)
             {
                 KeyConverter k = new KeyConverter();
@@ -87,6 +91,9 @@ namespace IECMate
                 cb_hotekey_plain.Items.Add(le);
                 cb_hotkey_pxComment.Items.Add(le);
             }
+
+            string[] Sprachen = new string[] { Properties.Resources.lanDE, Properties.Resources.lanEN };
+            cb_sprache.ItemsSource = Sprachen;
 
             //Einstellungen laden
             ThemeManager.ChangeAppStyle(Application.Current,
@@ -146,9 +153,18 @@ namespace IECMate
             prevHotComment = cb_hotkey_pxComment.SelectedIndex;
             prevHotBeginEnd = cb_hotkey_pxBeginEnd.SelectedIndex;
             prevHotPlai = cb_hotekey_plain.SelectedIndex;
+            if (Properties.Settings.Default.sprache == "de-DE")
+            {
+                cb_sprache.Text = Properties.Resources.lanDE;
+            }
+            if (Properties.Settings.Default.sprache == "en-GB")
+            {
+                cb_sprache.Text = Properties.Resources.lanEN;
+            }
 
-        //Inhalt laden
-        text_var1.Text = Properties.Settings.Default.variable_1;
+
+            //Inhalt laden
+            text_var1.Text = Properties.Settings.Default.variable_1;
             text_var2.Text = Properties.Settings.Default.variable_2;
             text_var3.Text = Properties.Settings.Default.variable_3;
             text_code_template.Text = Properties.Settings.Default.vorlage;
@@ -436,8 +452,8 @@ namespace IECMate
             Properties.Settings.Default.pxnummer = text_px_nummer.Text;
             Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
             Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
-            Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString(); 
-
+            Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
+            
             Properties.Settings.Default.Save();
         }
 
@@ -1347,7 +1363,36 @@ namespace IECMate
             }
         }
 
+        private async void Cb_sprache_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string setting = "";
 
+            if (Properties.Settings.Default.sprache == "de-DE")
+            {
+                setting = Properties.Resources.lanDE;
+            }
+
+            if (Properties.Settings.Default.sprache == "en-GB")
+            {
+                setting = Properties.Resources.lanEN;
+            }
+
+            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanDE && cb_sprache.SelectedValue.ToString() != setting) 
+            {
+                Properties.Settings.Default.sprache = "de-DE";
+                await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.Affirmative);
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+            }
+
+            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanEN && cb_sprache.SelectedValue.ToString() != setting)
+            {
+                Properties.Settings.Default.sprache = "en-GB";
+                await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.Affirmative);
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+            }
+        }
     }
 }
 
