@@ -1379,18 +1379,39 @@ namespace IECMate
 
             if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanDE && cb_sprache.SelectedValue.ToString() != setting) 
             {
-                Properties.Settings.Default.sprache = "de-DE";
-                await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.Affirmative);
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                Application.Current.Shutdown();
+                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+                if (!(result == MessageDialogResult.Affirmative))
+                {
+                    cb_sprache.Text = setting;
+                    return;
+                }
+                else
+                {
+                    Properties.Settings.Default.sprache = "de-DE";
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+               
             }
 
             if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanEN && cb_sprache.SelectedValue.ToString() != setting)
             {
-                Properties.Settings.Default.sprache = "en-GB";
-                await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.Affirmative);
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                Application.Current.Shutdown();
+                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+                if (!(result == MessageDialogResult.Affirmative))
+                {
+                    cb_sprache.Text = setting;
+                    return;
+                }
+                else
+                {
+                    Properties.Settings.Default.sprache = "en-GB";
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
             }
         }
     }
