@@ -394,10 +394,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>Insert variables here...</value>
   </data>
   <data name="tg_leer_aus" xml:space="preserve">
-    <value>Show whitespace Off</value>
+    <value>Blanks Off</value>
   </data>
   <data name="tg_leer_ein" xml:space="preserve">
-    <value>Show whitespace On</value>
+    <value>Blanks On</value>
   </data>
   <data name="tg_line_aus" xml:space="preserve">
     <value>Line numbers Off</value>
