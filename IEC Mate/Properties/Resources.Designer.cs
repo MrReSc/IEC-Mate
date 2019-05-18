@@ -522,7 +522,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Eglisch ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Englisch ähnelt.
         /// </summary>
         public static string lanEN {
             get {
