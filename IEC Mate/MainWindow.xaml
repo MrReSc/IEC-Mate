@@ -83,6 +83,9 @@
                         <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
                     </Button>
 
+                    <!--<Separator />
+                    <MenuItem x:Name="mi_app_beenden" Header="{x:Static p:Resources.dp_datei_beenden}" Click="Mi_app_beenden_Click" />-->
+
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
@@ -131,7 +134,7 @@
         </simpleChildWindow:ChildWindow>
 
         <!--Menu Leiste-->
-        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,3">
+        <!--<DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,3">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="{x:Static p:Resources.dp_datei}">
                     <MenuItem Header="{x:Static p:Resources.dp_datei_import}" Click="Btn_template_offnen_Click"/>
@@ -143,10 +146,10 @@
                 </MenuItem>
 
             </Menu>
-        </DockPanel>
+        </DockPanel>-->
 
         <!--Alle Tabs-->
-        <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" SelectionChanged="Tc_root_SelectionChanged">
+        <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" SelectionChanged="Tc_root_SelectionChanged" Margin="0,5,0,0">
             <!--Code Tab-->
             <TabItem x:Name="ti_code" Header="{x:Static p:Resources.ti_code}">
                 <Grid Margin="0,5,0,0">
@@ -301,6 +304,9 @@
                                             <ContextMenu>
                                                 <MenuItem x:Name="mitem_undo" Header="{x:Static p:Resources.mi_ers_ruck}" Click="Btn_template_undo_Click" IsEnabled="False"/>
                                                 <Separator/>
+                                                <MenuItem Header="{x:Static p:Resources.dp_datei_import}" Click="Btn_template_offnen_Click"/>
+                                                <MenuItem Header="{x:Static p:Resources.dp_datei_speichern}" Click="Btn_template_speichern_Click"/>
+                                                <Separator />
                                                 <MenuItem Command="Undo" />
                                                 <MenuItem Command="Redo" />
                                                 <Separator/>
@@ -393,6 +399,8 @@
                                         <avalonEdit:TextEditor.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="{x:Static p:Resources.mi_in_clipboard}" Click="CopyToClipboard_Click_1" />
+                                                <Separator />
+                                                <MenuItem Header="{x:Static p:Resources.dp_datei_code_speichern}" Click="Btn_gen_speichern_Click"/>
                                             </ContextMenu>
                                         </avalonEdit:TextEditor.ContextMenu>
                                     </avalonEdit:TextEditor>
