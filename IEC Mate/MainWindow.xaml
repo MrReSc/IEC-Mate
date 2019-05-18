@@ -57,7 +57,7 @@
 
                     <Label Content="{x:Static p:Resources.lb_aussehen}" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
                     <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="{x:Static p:Resources.tg_theme_dunkel}" OffLabel="{x:Static p:Resources.tg_theme_hell}" IsCheckedChanged="Tg_theme_IsCheckedChanged" Margin="5,0,0,5" />
-                    <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" SelectionChanged="Cb_akzent_farbe_SelectionChanged"/>
+                    <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" SelectionChanged="Cb_akzent_farbe_SelectionChanged" FontSize="15"/>
 
                     <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
                     <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="4" OnLabel="{x:Static p:Resources.tg_leer_ein}" OffLabel="{x:Static p:Resources.tg_leer_aus}" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
@@ -76,7 +76,7 @@
                     </Grid>
 
                     <Label Content="{x:Static p:Resources.lb_sprache}" Grid.Column="1" Grid.Row="7" FontSize="30" Margin="0,25,0,0"/>
-                    <ComboBox x:Name="cb_sprache" Grid.Column="1" Grid.Row="8" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged"/>
+                    <ComboBox x:Name="cb_sprache" Grid.Column="1" Grid.Row="8" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
 
                     <Label Content="{x:Static p:Resources.dp_hilfe}" Grid.Column="1" Grid.Row="9" FontSize="30" Margin="0,25,0,0"/>
                     <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
