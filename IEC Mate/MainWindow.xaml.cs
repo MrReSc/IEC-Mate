@@ -535,7 +535,8 @@ namespace IECMate
                 //Dialog öffnen
                 var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = Properties.Resources.dialogNegButton};
                 var x = await this.ShowProgressAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLauft, true, mymessageboxsettings) as ProgressDialogController;
-                x.SetIndeterminate();
+                double percent = 0;
+                x.SetProgress(percent);
 
                 try
                 {
@@ -555,12 +556,18 @@ namespace IECMate
                     }
 
                     AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
+                    double filecount = allFiles.Count();
+                    double count = 0;
 
                     //Sobald der Dialog offen ist wird mit der suche gestartet
                     if (x.IsOpen)
                     {
                         foreach (string fileName in allFiles)
                         {
+                            count ++;
+                            percent = 100 / filecount * count / 100;
+                            x.SetProgress(percent);
+
                             if (x.IsCanceled)
                             {
                                 break;
@@ -588,9 +595,10 @@ namespace IECMate
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
+                    //await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, ex.Message, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
                 }
 
