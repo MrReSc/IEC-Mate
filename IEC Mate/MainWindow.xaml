@@ -5,7 +5,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
-        Title="IEC Mate - BETA" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
+        xmlns:p = "clr-namespace:IECMate.Properties"
+        Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         BorderBrush="{DynamicResource AccentColorBrush}"
@@ -24,7 +25,7 @@
     <!--Einstellung menu-->
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="fo_einstellungen" Header="Einstellungen" Position="Right" Width="300" IsPinned="False" Theme="Adapt">
+            <Controls:Flyout x:Name="fo_einstellungen" Header="{x:Static p:Resources.fo_einstellungen}" Position="Right" Width="300" IsPinned="False" Theme="Adapt">
                 
                 <Controls:Flyout.Resources>
                     <Style TargetType="Controls:ToggleSwitch">
@@ -51,13 +52,13 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Aussehen" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
-                    <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="Dunkel" OffLabel="Hell" IsCheckedChanged="Tg_theme_IsCheckedChanged" Margin="5,0,0,5" />
+                    <Label Content="{x:Static p:Resources.lb_aussehen}" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
+                    <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="{x:Static p:Resources.tg_theme_dunkel}" OffLabel="{x:Static p:Resources.tg_theme_hell}" IsCheckedChanged="Tg_theme_IsCheckedChanged" Margin="5,0,0,5" />
                     <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" SelectionChanged="Cb_akzent_farbe_SelectionChanged"/>
 
-                    <Label Content="Editor" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
-                    <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="4" OnLabel="Leerzeichen Ein" OffLabel="Leerzeichen Aus" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
-                    <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="5" OnLabel="Zeilennummern Ein" OffLabel="Zeilennummern Aus" IsCheckedChanged="Tg_line_no_IsCheckedChanged" />
+                    <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
+                    <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="4" OnLabel="{x:Static p:Resources.tg_leer_ein}" OffLabel="{x:Static p:Resources.tg_leer_aus}" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
+                    <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="5" OnLabel="{x:Static p:Resources.tg_line_ein}" OffLabel="{x:Static p:Resources.tg_line_aus}" IsCheckedChanged="Tg_line_no_IsCheckedChanged" />
 
                     <Grid Grid.Column="1" Grid.Row="6" Margin="0,3,0,0">
                         <Grid.ColumnDefinitions>
@@ -65,7 +66,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Schriftgrösse" FontSize="15" FontWeight="Medium" Margin="0" />
+                        <Label Content="{x:Static p:Resources.lb_schrift}" FontSize="15" FontWeight="Medium" Margin="0" />
                         <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Column="1" Grid.Row="4" Margin="20,0,5,0" 
                                                 HorizontalAlignment="Right" Width="80" ValueChanged="NumericUpDown_ValueChanged" 
                                                 HorizontalContentAlignment="Left" FontSize="15" FontWeight="Medium"/>
@@ -93,7 +94,7 @@
         <!--Info Fenster-->
         <simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
                                  x:Name="child_Infos"
-                                 Title="Info"
+                                 Title="{x:Static p:Resources.info_titel}"
                                  BorderBrush="{DynamicResource AccentBaseColorBrush}"
                                  BorderThickness="1"
                                  GlowBrush="{DynamicResource AccentColorBrush}"
@@ -105,48 +106,32 @@
 
             <StackPanel Margin="20">
                 <iconPacks:PackIconMaterial Kind="CodeBraces" Width="30" Height="30" HorizontalAlignment="Center"/>
-                <Label Content="IEC Mate - BETA" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
+                <Label Content="{x:Static p:Resources.app_titel}" HorizontalAlignment="Center" FontSize="20" FontFamily="Consola" FontWeight="Bold"/>
                 <Label x:Name="lb_version" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
                 <TextBlock HorizontalAlignment="Center" Margin="0,0,0,20">           
                     <Hyperlink NavigateUri="https://github.com/MrReSc/IEC-Mate" RequestNavigate="Hyperlink_RequestNavigate" >
-                        IEC-Mate aus GitHub
+                        <TextBlock Text="{x:Static p:Resources.info_link_text}"/>
                     </Hyperlink>
                 </TextBlock>
-                <Label Content="MIT Lizenz:" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
-                <TextBlock FontSize="12" TextWrapping="Wrap" MaxWidth="400" MaxHeight="400" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <TextBlock.Text>
-                        Copyright (c) 2019 Remo Scheidegger
-                        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
-                        associated documentation files (the "Software"), to deal in the Software without restriction, 
-                        including without limitation the rights to use, copy, modify, merge, publish, 
-                        distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
-                        Software is furnished to do so, subject to the following conditions:
-                        The above copyright notice and this permission notice shall be included in all copies or 
-                        substantial portions of the Software.
-                        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT 
-                        NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-                        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
-                        DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-                        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-                    </TextBlock.Text>
-                </TextBlock>
+                <Label Content="{x:Static p:Resources.lb_lizenz}" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
+                <TextBlock FontSize="12" TextWrapping="Wrap" MaxWidth="400" MaxHeight="400" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{x:Static p:Resources.info_lizenztext}"/>
             </StackPanel>
         </simpleChildWindow:ChildWindow>
 
         <!--Menu Leiste-->
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,3">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_Datei">
-                    <MenuItem Header="Vorlage _Importieren" Click="Btn_template_offnen_Click"/>
-                    <MenuItem Header="Vorlage _Speichern" Click="Btn_template_speichern_Click"/>
+                <MenuItem Header="{x:Static p:Resources.dp_datei}">
+                    <MenuItem Header="{x:Static p:Resources.dp_datei_import}" Click="Btn_template_offnen_Click"/>
+                    <MenuItem Header="{x:Static p:Resources.dp_datei_speichern}" Click="Btn_template_speichern_Click"/>
                     <Separator />
-                    <MenuItem Header="_Code Speichern" Click="Btn_gen_speichern_Click"/>
+                    <MenuItem Header="{x:Static p:Resources.dp_datei_code_speichern}" Click="Btn_gen_speichern_Click"/>
                     <Separator />
-                    <MenuItem x:Name="mi_app_beenden" Header="_Beenden" Click="Mi_app_beenden_Click" />
+                    <MenuItem x:Name="mi_app_beenden" Header="{x:Static p:Resources.dp_datei_beenden}" Click="Mi_app_beenden_Click" />
                 </MenuItem>
 
-                <MenuItem Header="_Hilfe">
-                    <MenuItem Header="_Infos" Click="MenuItem_Click_About" />
+                <MenuItem Header="{x:Static p:Resources.dp_hilfe}">
+                    <MenuItem Header="{x:Static p:Resources.dp_hilfe_info}" Click="MenuItem_Click_About" />
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -154,7 +139,7 @@
         <!--Alle Tabs-->
         <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" SelectionChanged="Tc_root_SelectionChanged">
             <!--Code Tab-->
-            <TabItem x:Name="ti_code" Header="Code">
+            <TabItem x:Name="ti_code" Header="{x:Static p:Resources.ti_code}">
                 <Grid Margin="0,5,0,0">
 
                     <Grid.ColumnDefinitions>
@@ -162,7 +147,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <GroupBox Grid.Column="0" Header="Variablen">
+                    <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_variablen}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -195,11 +180,11 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Label Grid.Row="0" Content="VARIABLE 1" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
+                                <Label Grid.Row="0" Content="{x:Static p:Resources.lb_var1}" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                                         Controls:TextBoxHelper.Watermark="Variablen hier einfügen..." IsTabStop="False">
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
@@ -222,11 +207,11 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Label Content="VARIABLE 2" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                <Label Content="{x:Static p:Resources.lb_var2}" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                                         Controls:TextBoxHelper.Watermark="Variablen hier einfügen..." IsTabStop="False">
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
@@ -249,11 +234,11 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Label Content="VARIABLE 3" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                <Label Content="{x:Static p:Resources.lb_var3}" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                                         Controls:TextBoxHelper.Watermark="Variablen hier einfügen..." IsTabStop="False">
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
@@ -282,7 +267,7 @@
                         </Grid.RowDefinitions>
 
                         <!--Code Vorlage-->
-                        <GroupBox Grid.Column="1" Grid.Row="0" Header="Code Vorlage">
+                        <GroupBox Grid.Column="1" Grid.Row="0" Header="{x:Static p:Resources.gb_code_vorlage}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -305,7 +290,7 @@
                                             ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                         <avalonEdit:TextEditor.ContextMenu>
                                             <ContextMenu>
-                                                <MenuItem x:Name="mitem_undo" Header="Ersetzten Rückgängig" Click="Btn_template_undo_Click" IsEnabled="False"/>
+                                                <MenuItem x:Name="mitem_undo" Header="{x:Static p:Resources.mi_ers_ruck}" Click="Btn_template_undo_Click" IsEnabled="False"/>
                                                 <Separator/>
                                                 <MenuItem Command="Undo" />
                                                 <MenuItem Command="Redo" />
@@ -336,7 +321,7 @@
                                     </Grid.RowDefinitions>
 
                                     <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" 
-                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Suchen nach..."
+                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}"
                                              Controls:TextBoxHelper.ClearTextButton="True">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
@@ -344,18 +329,18 @@
                                             </Style>
                                         </TextBox.Resources>
                                     </TextBox>
-                                    <Label Grid.Row="1" Grid.Column="2" Content="Ersetzten durch:" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Content="{x:Static p:Resources.tb_ersetzten_druch}" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
 
                                     <ComboBox x:Name="combo_vars" Controls:ControlsHelper.CornerRadius="3" Grid.Row="1" Grid.Column="3"
                                               BorderBrush="LightGray" Width="180" Margin="0,0,20,0" VerticalContentAlignment="Center" 
-                                              HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="Variable auswählen...">
+                                              HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
                                     <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0,0,10,0" Width="30" Height="30">
                                         <iconPacks:PackIconMaterial Kind="SwapHorizontal" Width="auto" Height="auto"/>
                                     </Button>
 
-                                    <Button Grid.Row="1" x:Name="btn_template_undo" Grid.Column="6" Width="30" Height="30" IsEnabled="False" Click="Btn_template_undo_Click" ToolTip="Ersetzten Rückgängig">
+                                    <Button Grid.Row="1" x:Name="btn_template_undo" Grid.Column="6" Width="30" Height="30" IsEnabled="False" Click="Btn_template_undo_Click" ToolTip="{x:Static p:Resources.tt_ers_ruck}">
                                         <iconPacks:PackIconMaterial Kind="Undo" Width="auto" Height="auto" />
                                     </Button>
 
@@ -374,7 +359,7 @@
                                  VerticalContentAlignment="Center" IsTabStop="False"/>
 
                         <!--Code-->
-                        <GroupBox Grid.Column="1" Grid.Row="3" Header="Code">
+                        <GroupBox Grid.Column="1" Grid.Row="3" Header="{x:Static p:Resources.ti_code}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -398,7 +383,7 @@
                                             ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsTabStop="False">
                                         <avalonEdit:TextEditor.ContextMenu>
                                             <ContextMenu>
-                                                <MenuItem Header="Alles in Zwischenablage kopieren" Click="CopyToClipboard_Click_1" />
+                                                <MenuItem Header="{x:Static p:Resources.mi_in_clipboard}" Click="CopyToClipboard_Click_1" />
                                             </ContextMenu>
                                         </avalonEdit:TextEditor.ContextMenu>
                                     </avalonEdit:TextEditor>
@@ -423,7 +408,7 @@
                                     <Button Grid.Row="1" x:Name="btn_gen_loschen" Grid.Column="3" Click="Btn_gen_loschen_Click" Width="30" Height="30">
                                         <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                                     </Button>
-                                    <Button Grid.Row="1" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="Kopiert den kompletten Code in die Zwischenablage">
+                                    <Button Grid.Row="1" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                                     </Button>
                                 </Grid>
@@ -434,7 +419,7 @@
             </TabItem>
 
             <!--Tab Suche-->
-            <TabItem x:Name="ti_suche" Header="Suche">
+            <TabItem x:Name="ti_suche" Header="{x:Static p:Resources.ti_suche}">
                 <Grid Margin="0,5,0,0">
 
                     <Grid.ColumnDefinitions>
@@ -454,7 +439,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="Projekt Ordner auswählen" Margin="0,0,10,0" 
+                    <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
                              Width="300" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -467,7 +452,7 @@
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
-                    <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="Suchen nach..." Margin="0,0,10,0" 
+                    <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0,0,10,0" 
                              Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -480,11 +465,11 @@
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
                     </Button>
 
-                    <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" OnLabel="Exakte Zeichenfolge suchen ein" OffLabel="Exakte Zeichenfolge suchen aus" Padding="0,0,5,0" IsChecked="True" ToolTip="Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive)." Width="320" HorizontalAlignment="Right"/>
-                    <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" OnLabel="In Binär Dateien suchen ein" OffLabel="In Binär Dateien suchen aus" Padding="0,0,5,0" IsChecked="False" ToolTip="Such auch nach *.fud, *.ful, *.fu, *.**O Dateien." Width="320" HorizontalAlignment="Right"/>
-                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="4" OnLabel="Nur in HW-Konfig suchen ein" OffLabel="Nur in HW-Konfig suchen aus" Padding="0,0,5,0" IsChecked="False"  ToolTip="Such nur im Unterverzeichnis \application\control\config\" Width="320" HorizontalAlignment="Right"/>
+                    <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" OnLabel="{x:Static p:Resources.ts_exakte_ein}" OffLabel="{x:Static p:Resources.ts_exakte_aus}" Padding="0,0,5,0" IsChecked="True" ToolTip="{x:Static p:Resources.tt_suche_exakt}" Width="320" HorizontalAlignment="Right"/>
+                    <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" OnLabel="{x:Static p:Resources.ts_bin_ein}" OffLabel="{x:Static p:Resources.ts_bin_aus}" Padding="0,0,5,0" IsChecked="False" ToolTip="{x:Static p:Resources.tt_suche_bin}" Width="320" HorizontalAlignment="Right"/>
+                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="4" OnLabel="{x:Static p:Resources.ts_hw_ein}" OffLabel="{x:Static p:Resources.ts_hw_aus}" Padding="0,0,5,0" IsChecked="False"  ToolTip="{x:Static p:Resources.tt_suche_hw}" Width="320" HorizontalAlignment="Right"/>
 
-                    <GroupBox Grid.Column="0" Grid.Row="6" Header="Ergebnis" Grid.ColumnSpan="4">
+                    <GroupBox Grid.Column="0" Grid.Row="6" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -504,7 +489,7 @@
                                 <ListBox x:Name="listbox_ergebnis"/>
                             </Border>
 
-                            <Button x:Name="btn_suche_offnen" Grid.Row="3" Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_offnen_Click" ToolTip="Ausgewählte Datei öffnen.">
+                            <Button x:Name="btn_suche_offnen" Grid.Row="3" Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_offnen_Click" ToolTip="{x:Static p:Resources.tt_suche_offnen}">
                                 <iconPacks:PackIconMaterial Kind="OpenInApp" Width="auto" Height="auto"/>
                             </Button>
                         </Grid>
@@ -513,7 +498,7 @@
             </TabItem>
 
             <!--Tab Bitset-->
-            <TabItem x:Name="ti_bitset" Header="Bitset">
+            <TabItem x:Name="ti_bitset" Header="{x:Static p:Resources.ti_bitset}">
                 <Grid Margin="0,5,0,0">
 
                     <Grid.RowDefinitions>
@@ -523,7 +508,7 @@
                     </Grid.RowDefinitions>
 
                     <!--Encoding-->
-                    <GroupBox x:Name="gb_encoding" Grid.Row="0" Header="Encoding">
+                    <GroupBox x:Name="gb_encoding" Grid.Row="0" Header="{x:Static p:Resources.gb_encoding}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -545,7 +530,7 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel VerticalAlignment="Top">
-                                    <TextBox x:Name="text_encode_dec"  Text="Dezimal 10#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
+                                    <TextBox x:Name="text_encode_dec"  Text="{x:Static p:Resources.tb_bitset_dez}" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -553,7 +538,7 @@
                                         </TextBox.Resources>
                                     </TextBox>
 
-                                    <TextBox x:Name="text_encode_hex"  Text="Hexadezimal 16#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
+                                    <TextBox x:Name="text_encode_hex"  Text="{x:Static p:Resources.tb_bitset_hex}" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -561,7 +546,7 @@
                                         </TextBox.Resources>
                                     </TextBox>
 
-                                    <TextBox x:Name="text_encode_bin"  Text="Binär 2#" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
+                                    <TextBox x:Name="text_encode_bin"  Text="{x:Static p:Resources.tb_bitset_bin}" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -732,7 +717,7 @@
                     </GroupBox>
 
                     <!--Decoding-->
-                    <GroupBox Grid.Row="2" Header="Decoding">
+                    <GroupBox Grid.Row="2" Header="{x:Static p:Resources.gb_decoding}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -748,7 +733,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
-                                <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="Dezimal, 16# Hex oder 2# Binär" Controls:TextBoxHelper.ClearTextButton="True"
+                                <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_bitset_decode}" Controls:TextBoxHelper.ClearTextButton="True"
                                          Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" TextChanged="Text_decode_TextChanged">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
@@ -965,7 +950,7 @@
             </TabItem>
 
             <!--Tab Helfer-->
-            <TabItem Header="Helfer">
+            <TabItem Header="{x:Static p:Resources.ti_helfer}">
                 <Grid Margin="0,5,0,0">
 
                     <Grid.ColumnDefinitions>
@@ -983,7 +968,7 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="Projekt Ordner auswählen" Margin="0,0,10,0" 
+                    <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
                              Width="300" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -997,7 +982,7 @@
                     </Button>
 
                     <!--Datein öffnen Allgemein-->
-                    <GroupBox Grid.Column="0" Grid.Row="2" Header="Dateine öffnen oder Funktion starten" Grid.ColumnSpan="4">
+                    <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_datei_funktion}" Grid.ColumnSpan="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -1020,35 +1005,35 @@
                                 <Button x:Name="btn_open_systemoptions"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Btn_open_systemoptions_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FileOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="systemOptions.properties" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_systemOptions}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_openFormProgram"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openFormProgram_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="formProgram" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_formProgram}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_openDiagnoseData"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openDiagnoseData_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="diagnoseData" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_diagnoseData}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_openDiagramSetup"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openDiagramSetup_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="diagramSetup" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_diagramSetup}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_openConfig"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openConfig_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="config" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_config}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
@@ -1061,14 +1046,14 @@
                                 <Button x:Name="bt_lock_loschen"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_lock_loschen_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="puLock Datein löschen" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_puLock}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_BackupProject"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_BackupProject_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="ZipBox" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="Backup Projekt" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_backup}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
@@ -1079,14 +1064,14 @@
                                 <Button x:Name="bt_simStarten"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_simStarten_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="Simulation starten" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_sim}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_visuStarten"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_visuStarten_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Monitor" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="Visualisierung starten" FontSize="14"/>
+                                        <Label Content="{x:Static p:Resources.lb_visu}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -1101,7 +1086,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <GroupBox Grid.Column="0" Header="Funktion für ME">
+                        <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -1123,14 +1108,14 @@
                                     <Button x:Name="btn_open_me_folder"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Btn_open_me_folder_Click">
                                         <StackPanel Orientation="Horizontal">
                                             <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                            <Label Content="ME" FontSize="14"/>
+                                            <Label Content="{x:Static p:Resources.lb_me}" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
 
                                     <Button x:Name="btn_open_xml_hmi"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Btn_open_xml_hmi_Click">
                                         <StackPanel Orientation="Horizontal">
                                             <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                            <Label Content="HMI xml" FontSize="14"/>
+                                            <Label Content="{x:Static p:Resources.lb_me_xml}" FontSize="14"/>
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
@@ -1138,7 +1123,7 @@
                         </GroupBox>
 
                         <!--Hot Keys-->
-                        <GroupBox Grid.Column="2" Header="Hot Keys">
+                        <GroupBox Grid.Column="2" Header="{x:Static p:Resources.gb_hotkeys}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -1155,9 +1140,9 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
-                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Right" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt."/>
+                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Right" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="{x:Static p:Resources.tt_hotkey}"/>
 
-                                    <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="PX Nummer eingeben..." Margin="0,0,0,12.2" 
+                                    <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" Margin="0,0,0,12.2" 
                                          VerticalContentAlignment="Center" Height="40" Controls:TextBoxHelper.ClearTextButton="True">
                                         <TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
@@ -1165,45 +1150,43 @@
                                             </Style>
                                         </TextBox.Resources>
                                     </TextBox>
-                                
+
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="3" Grid.Row="1">
 
                                     <DockPanel>
-                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left">CTRL + SHIFT +</Label>
+                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
                                         <ComboBox x:Name="cb_hotkey_pxComment" FontSize="14" DockPanel.Dock="Right" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotkey_pxComment_SelectionChanged"/>
                                     </DockPanel>
 
-                                    <Label>Fügt die PX Nummer als Kommentar ein.</Label>
-                                    <Label Foreground="ForestGreen" Margin="0">// PX05010</Label>
+                                    <Label Content="{x:Static p:Resources.lb_px_comment}"/>
+                                    <Label Foreground="ForestGreen" Margin="0" Content="{x:Static p:Resources.lb_px}"/>
 
                                     <Separator Margin="0,2,0,5"/>
 
                                     <DockPanel>
-                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left">CTRL + SHIFT +</Label>
+                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
                                         <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" FontSize="14" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
                                     </DockPanel>
-                                    <Label>Fügt ein Block mit "begin" und "end" ein.</Label>
-                                    <Label Foreground="ForestGreen">// PX05010 begin</Label>
-                                    <Label Foreground="SteelBlue" Content="    hier kommt der Code;" FontStyle="Italic"></Label>
-                                    <Label Foreground="ForestGreen" Margin="0">// PX05010 end</Label>
+                                    <Label Content="{x:Static p:Resources.lb_px_beginend}"/>
+                                    <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}"/>
+                                    <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic"></Label>
+                                    <Label Foreground="ForestGreen" Margin="0" Content="{x:Static p:Resources.lb_px_end}"/>
 
                                     <Separator Margin="0,2,0,5"/>
 
                                     <DockPanel>
-                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left">CTRL + SHIFT +</Label>
+                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
                                         <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" FontSize="14" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
                                     </DockPanel>
-                                    <Label>Fügt die PX Nummer ein.</Label>
-                                    <Label Foreground="ForestGreen" Margin="0">PX05010</Label>
+                                    <Label Content="{x:Static p:Resources.lb_px_plain}"/>
+                                    <Label Foreground="ForestGreen" Margin="0" Content="{x:Static p:Resources.lb_px}"/>
 
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
                     </Grid>
-                    
-                    
                 </Grid>
             </TabItem>
         </TabControl>

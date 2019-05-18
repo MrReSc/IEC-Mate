@@ -39,7 +39,7 @@
     <ProductName>IEC Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>23</ApplicationRevision>
-    <ApplicationVersion>0.0.77.19138</ApplicationVersion>
+    <ApplicationVersion>0.0.98.19138</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -193,7 +193,7 @@
       <LastGenOutput>Paths.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="resources\Entypo.ttf" />

@@ -22,7 +22,7 @@ namespace IECMate.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace IECMate.Properties {
         ///   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("IECMate.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace IECMate.Properties {
         ///   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,27 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die IEC Mate - BETA ähnelt.
+        /// </summary>
+        public static string app_titel {
+            get {
+                return ResourceManager.GetString("app_titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Variable auswählen... ähnelt.
+        /// </summary>
+        public static string cb_var_auswahlen {
+            get {
+                return ResourceManager.GetString("cb_var_auswahlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Backup läuft, bitte warte... ähnelt.
         /// </summary>
-        internal static string dialogMsgBackup {
+        public static string dialogMsgBackup {
             get {
                 return ResourceManager.GetString("dialogMsgBackup", resourceCulture);
             }
@@ -72,7 +90,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Verzeichnis existiert nicht. ähnelt.
         /// </summary>
-        internal static string dialogMsgBackupFehler {
+        public static string dialogMsgBackupFehler {
             get {
                 return ResourceManager.GetString("dialogMsgBackupFehler", resourceCulture);
             }
@@ -81,7 +99,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die Binär - Eingabe enthält andere Zeichen als 0 oder 1. ähnelt.
         /// </summary>
-        internal static string dialogMsgBitsetBinFehler {
+        public static string dialogMsgBitsetBinFehler {
             get {
                 return ResourceManager.GetString("dialogMsgBitsetBinFehler", resourceCulture);
             }
@@ -90,7 +108,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die Dezimal - Eingabe enthält andere Zeichen als 0 - 9. ähnelt.
         /// </summary>
-        internal static string dialogMsgBitsetDezFehler {
+        public static string dialogMsgBitsetDezFehler {
             get {
                 return ResourceManager.GetString("dialogMsgBitsetDezFehler", resourceCulture);
             }
@@ -99,7 +117,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die eingegebene Zahl ist länger als 32bit. ähnelt.
         /// </summary>
-        internal static string dialogMsgBitsetGrosseFehler {
+        public static string dialogMsgBitsetGrosseFehler {
             get {
                 return ResourceManager.GetString("dialogMsgBitsetGrosseFehler", resourceCulture);
             }
@@ -108,7 +126,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F. ähnelt.
         /// </summary>
-        internal static string dialogMsgBitsetHexFehler {
+        public static string dialogMsgBitsetHexFehler {
             get {
                 return ResourceManager.GetString("dialogMsgBitsetHexFehler", resourceCulture);
             }
@@ -117,7 +135,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die Anzahl Variabeln ist nicht identisch. ähnelt.
         /// </summary>
-        internal static string dialogMsgCodeGen00 {
+        public static string dialogMsgCodeGen00 {
             get {
                 return ResourceManager.GetString("dialogMsgCodeGen00", resourceCulture);
             }
@@ -126,7 +144,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 1. ähnelt.
         /// </summary>
-        internal static string dialogMsgCodeGen01 {
+        public static string dialogMsgCodeGen01 {
             get {
                 return ResourceManager.GetString("dialogMsgCodeGen01", resourceCulture);
             }
@@ -135,7 +153,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 2. ähnelt.
         /// </summary>
-        internal static string dialogMsgCodeGen02 {
+        public static string dialogMsgCodeGen02 {
             get {
                 return ResourceManager.GetString("dialogMsgCodeGen02", resourceCulture);
             }
@@ -144,7 +162,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 3. ähnelt.
         /// </summary>
-        internal static string dialogMsgCodeGen03 {
+        public static string dialogMsgCodeGen03 {
             get {
                 return ResourceManager.GetString("dialogMsgCodeGen03", resourceCulture);
             }
@@ -153,7 +171,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine Datei auswählen. ähnelt.
         /// </summary>
-        internal static string dialogMsgDateiOffnenFehler {
+        public static string dialogMsgDateiOffnenFehler {
             get {
                 return ResourceManager.GetString("dialogMsgDateiOffnenFehler", resourceCulture);
             }
@@ -162,7 +180,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen. ähnelt.
         /// </summary>
-        internal static string dialogMsgHelferFehler {
+        public static string dialogMsgHelferFehler {
             get {
                 return ResourceManager.GetString("dialogMsgHelferFehler", resourceCulture);
             }
@@ -171,7 +189,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine ME auswählen. ähnelt.
         /// </summary>
-        internal static string dialogMsgHelferFehlerME {
+        public static string dialogMsgHelferFehlerME {
             get {
                 return ResourceManager.GetString("dialogMsgHelferFehlerME", resourceCulture);
             }
@@ -180,7 +198,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren? ähnelt.
         /// </summary>
-        internal static string dialogMsgHelferLock {
+        public static string dialogMsgHelferLock {
             get {
                 return ResourceManager.GetString("dialogMsgHelferLock", resourceCulture);
             }
@@ -189,7 +207,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine PX Nummer eingeben. ähnelt.
         /// </summary>
-        internal static string dialogMsgHotkey {
+        public static string dialogMsgHotkey {
             get {
                 return ResourceManager.GetString("dialogMsgHotkey", resourceCulture);
             }
@@ -198,7 +216,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Der Hot Key wird schon verwedent. ähnelt.
         /// </summary>
-        internal static string dialogMsgHotkeyFehler {
+        public static string dialogMsgHotkeyFehler {
             get {
                 return ResourceManager.GetString("dialogMsgHotkeyFehler", resourceCulture);
             }
@@ -207,7 +225,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Die Suche läuft. Bite warten... ähnelt.
         /// </summary>
-        internal static string dialogMsgSucheLauft {
+        public static string dialogMsgSucheLauft {
             get {
                 return ResourceManager.GetString("dialogMsgSucheLauft", resourceCulture);
             }
@@ -216,7 +234,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Suchfeld ist leer oder das Verzeichnis existiert nicht. ähnelt.
         /// </summary>
-        internal static string dialogMsgSucheLeer {
+        public static string dialogMsgSucheLeer {
             get {
                 return ResourceManager.GetString("dialogMsgSucheLeer", resourceCulture);
             }
@@ -225,7 +243,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Verzeichnis ist kein IEC Projekt. ähnelt.
         /// </summary>
-        internal static string dialogMsgSucheVerzeichnisFehler {
+        public static string dialogMsgSucheVerzeichnisFehler {
             get {
                 return ResourceManager.GetString("dialogMsgSucheVerzeichnisFehler", resourceCulture);
             }
@@ -234,7 +252,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Abbrechen ähnelt.
         /// </summary>
-        internal static string dialogNegButton {
+        public static string dialogNegButton {
             get {
                 return ResourceManager.GetString("dialogNegButton", resourceCulture);
             }
@@ -243,7 +261,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Backup ähnelt.
         /// </summary>
-        internal static string dialogTitelBackup {
+        public static string dialogTitelBackup {
             get {
                 return ResourceManager.GetString("dialogTitelBackup", resourceCulture);
             }
@@ -252,7 +270,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Fehler bei der Eingabe ähnelt.
         /// </summary>
-        internal static string dialogTitelBitset {
+        public static string dialogTitelBitset {
             get {
                 return ResourceManager.GetString("dialogTitelBitset", resourceCulture);
             }
@@ -261,7 +279,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Fehler beim Erzeugen vom Code ähnelt.
         /// </summary>
-        internal static string dialogTitelCodeGen {
+        public static string dialogTitelCodeGen {
             get {
                 return ResourceManager.GetString("dialogTitelCodeGen", resourceCulture);
             }
@@ -270,7 +288,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Datei öffnen ähnelt.
         /// </summary>
-        internal static string dialogTitelDateiOffnen {
+        public static string dialogTitelDateiOffnen {
             get {
                 return ResourceManager.GetString("dialogTitelDateiOffnen", resourceCulture);
             }
@@ -279,7 +297,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Fehler beim öffnen ähnelt.
         /// </summary>
-        internal static string dialogTitelHelfer {
+        public static string dialogTitelHelfer {
             get {
                 return ResourceManager.GetString("dialogTitelHelfer", resourceCulture);
             }
@@ -288,7 +306,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Löschen von puLock Datein ähnelt.
         /// </summary>
-        internal static string dialogTitelHelferLock {
+        public static string dialogTitelHelferLock {
             get {
                 return ResourceManager.GetString("dialogTitelHelferLock", resourceCulture);
             }
@@ -297,7 +315,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Hotkey ähnelt.
         /// </summary>
-        internal static string dialogTitelHotkey {
+        public static string dialogTitelHotkey {
             get {
                 return ResourceManager.GetString("dialogTitelHotkey", resourceCulture);
             }
@@ -306,18 +324,731 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Suche ähnelt.
         /// </summary>
-        internal static string dialogTitelSuche {
+        public static string dialogTitelSuche {
             get {
                 return ResourceManager.GetString("dialogTitelSuche", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Datei ähnelt.
+        /// </summary>
+        public static string dp_datei {
+            get {
+                return ResourceManager.GetString("dp_datei", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beenden ähnelt.
+        /// </summary>
+        public static string dp_datei_beenden {
+            get {
+                return ResourceManager.GetString("dp_datei_beenden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code Speichern ähnelt.
+        /// </summary>
+        public static string dp_datei_code_speichern {
+            get {
+                return ResourceManager.GetString("dp_datei_code_speichern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vorlage Importieren ähnelt.
+        /// </summary>
+        public static string dp_datei_import {
+            get {
+                return ResourceManager.GetString("dp_datei_import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vorlage Speichern ähnelt.
+        /// </summary>
+        public static string dp_datei_speichern {
+            get {
+                return ResourceManager.GetString("dp_datei_speichern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hilfe ähnelt.
+        /// </summary>
+        public static string dp_hilfe {
+            get {
+                return ResourceManager.GetString("dp_hilfe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Infos ähnelt.
+        /// </summary>
+        public static string dp_hilfe_info {
+            get {
+                return ResourceManager.GetString("dp_hilfe_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Einstellungen ähnelt.
+        /// </summary>
+        public static string fo_einstellungen {
+            get {
+                return ResourceManager.GetString("fo_einstellungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code Vorlage ähnelt.
+        /// </summary>
+        public static string gb_code_vorlage {
+            get {
+                return ResourceManager.GetString("gb_code_vorlage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dateine öffnen oder Funktion starten ähnelt.
+        /// </summary>
+        public static string gb_datei_funktion {
+            get {
+                return ResourceManager.GetString("gb_datei_funktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Decodieren ähnelt.
+        /// </summary>
+        public static string gb_decoding {
+            get {
+                return ResourceManager.GetString("gb_decoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Encodieren ähnelt.
+        /// </summary>
+        public static string gb_encoding {
+            get {
+                return ResourceManager.GetString("gb_encoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchergebnis ähnelt.
+        /// </summary>
+        public static string gb_ergebnis {
+            get {
+                return ResourceManager.GetString("gb_ergebnis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Funktion für ME ähnelt.
+        /// </summary>
+        public static string gb_helfer_funkionen_me {
+            get {
+                return ResourceManager.GetString("gb_helfer_funkionen_me", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hot Keys ähnelt.
+        /// </summary>
+        public static string gb_hotkeys {
+            get {
+                return ResourceManager.GetString("gb_hotkeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Variablen ähnelt.
+        /// </summary>
+        public static string gb_variablen {
+            get {
+                return ResourceManager.GetString("gb_variablen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die IEC-Mate auf GitHub ähnelt.
+        /// </summary>
+        public static string info_link_text {
+            get {
+                return ResourceManager.GetString("info_link_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Copyright (c) 2019 Remo Scheidegger
+        ///
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permis [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string info_lizenztext {
+            get {
+                return ResourceManager.GetString("info_lizenztext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Info ähnelt.
+        /// </summary>
+        public static string info_titel {
+            get {
+                return ResourceManager.GetString("info_titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Aussehen ähnelt.
+        /// </summary>
+        public static string lb_aussehen {
+            get {
+                return ResourceManager.GetString("lb_aussehen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Backup Projekt ähnelt.
+        /// </summary>
+        public static string lb_backup {
+            get {
+                return ResourceManager.GetString("lb_backup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die config ähnelt.
+        /// </summary>
+        public static string lb_config {
+            get {
+                return ResourceManager.GetString("lb_config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die CTRL + SHIFT + ähnelt.
+        /// </summary>
+        public static string lb_ctrl_shift {
+            get {
+                return ResourceManager.GetString("lb_ctrl_shift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die diagnoseData ähnelt.
+        /// </summary>
+        public static string lb_diagnoseData {
+            get {
+                return ResourceManager.GetString("lb_diagnoseData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die diagramSetup ähnelt.
+        /// </summary>
+        public static string lb_diagramSetup {
+            get {
+                return ResourceManager.GetString("lb_diagramSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Editor ähnelt.
+        /// </summary>
+        public static string lb_editor {
+            get {
+                return ResourceManager.GetString("lb_editor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die formProgram ähnelt.
+        /// </summary>
+        public static string lb_formProgram {
+            get {
+                return ResourceManager.GetString("lb_formProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die MIT Lizenz: ähnelt.
+        /// </summary>
+        public static string lb_lizenz {
+            get {
+                return ResourceManager.GetString("lb_lizenz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ME Ordner ähnelt.
+        /// </summary>
+        public static string lb_me {
+            get {
+                return ResourceManager.GetString("lb_me", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die xml der ME ähnelt.
+        /// </summary>
+        public static string lb_me_xml {
+            get {
+                return ResourceManager.GetString("lb_me_xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die puLock Datein löschen ähnelt.
+        /// </summary>
+        public static string lb_puLock {
+            get {
+                return ResourceManager.GetString("lb_puLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die // PX05010 ähnelt.
+        /// </summary>
+        public static string lb_px {
+            get {
+                return ResourceManager.GetString("lb_px", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die // PX05010 begin ähnelt.
+        /// </summary>
+        public static string lb_px_begin {
+            get {
+                return ResourceManager.GetString("lb_px_begin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt ein Block mit &quot;begin&quot; und &quot;end&quot; ein. ähnelt.
+        /// </summary>
+        public static string lb_px_beginend {
+            get {
+                return ResourceManager.GetString("lb_px_beginend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die hier kommt der Code; ähnelt.
+        /// </summary>
+        public static string lb_px_code {
+            get {
+                return ResourceManager.GetString("lb_px_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer als Kommentar ein. ähnelt.
+        /// </summary>
+        public static string lb_px_comment {
+            get {
+                return ResourceManager.GetString("lb_px_comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die // PX05010 end ähnelt.
+        /// </summary>
+        public static string lb_px_end {
+            get {
+                return ResourceManager.GetString("lb_px_end", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer ein. ähnelt.
+        /// </summary>
+        public static string lb_px_plain {
+            get {
+                return ResourceManager.GetString("lb_px_plain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Schriftgrösse ähnelt.
+        /// </summary>
+        public static string lb_schrift {
+            get {
+                return ResourceManager.GetString("lb_schrift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Simulation starten ähnelt.
+        /// </summary>
+        public static string lb_sim {
+            get {
+                return ResourceManager.GetString("lb_sim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die systemOptions.properties ähnelt.
+        /// </summary>
+        public static string lb_systemOptions {
+            get {
+                return ResourceManager.GetString("lb_systemOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die VARIABLE 1 ähnelt.
+        /// </summary>
+        public static string lb_var1 {
+            get {
+                return ResourceManager.GetString("lb_var1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die VARIABLE 2 ähnelt.
+        /// </summary>
+        public static string lb_var2 {
+            get {
+                return ResourceManager.GetString("lb_var2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die VARIABLE 3 ähnelt.
+        /// </summary>
+        public static string lb_var3 {
+            get {
+                return ResourceManager.GetString("lb_var3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die nicht installiert ähnelt.
         /// </summary>
-        internal static string lb_version {
+        public static string lb_version {
             get {
                 return ResourceManager.GetString("lb_version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Visualisierung starten ähnelt.
+        /// </summary>
+        public static string lb_visu {
+            get {
+                return ResourceManager.GetString("lb_visu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ersetzten Rückgängig ähnelt.
+        /// </summary>
+        public static string mi_ers_ruck {
+            get {
+                return ResourceManager.GetString("mi_ers_ruck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alles in Zwischenablage kopieren ähnelt.
+        /// </summary>
+        public static string mi_in_clipboard {
+            get {
+                return ResourceManager.GetString("mi_in_clipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Binär 2# ähnelt.
+        /// </summary>
+        public static string tb_bitset_bin {
+            get {
+                return ResourceManager.GetString("tb_bitset_bin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dezimal, 16# Hex oder 2# Binär ähnelt.
+        /// </summary>
+        public static string tb_bitset_decode {
+            get {
+                return ResourceManager.GetString("tb_bitset_decode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dezimal 10# ähnelt.
+        /// </summary>
+        public static string tb_bitset_dez {
+            get {
+                return ResourceManager.GetString("tb_bitset_dez", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hexadezimal 16# ähnelt.
+        /// </summary>
+        public static string tb_bitset_hex {
+            get {
+                return ResourceManager.GetString("tb_bitset_hex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ersetzten durch: ähnelt.
+        /// </summary>
+        public static string tb_ersetzten_druch {
+            get {
+                return ResourceManager.GetString("tb_ersetzten_druch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Projekt Ordner auswählen... ähnelt.
+        /// </summary>
+        public static string tb_proj_auswahlen {
+            get {
+                return ResourceManager.GetString("tb_proj_auswahlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PX Nummer eingeben... ähnelt.
+        /// </summary>
+        public static string tb_px_nummer {
+            get {
+                return ResourceManager.GetString("tb_px_nummer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchen nach... ähnelt.
+        /// </summary>
+        public static string tb_suchen_nach {
+            get {
+                return ResourceManager.GetString("tb_suchen_nach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Variablen hier einfügen... ähnelt.
+        /// </summary>
+        public static string tb_var_einfügen {
+            get {
+                return ResourceManager.GetString("tb_var_einfügen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Leerzeichen Aus ähnelt.
+        /// </summary>
+        public static string tg_leer_aus {
+            get {
+                return ResourceManager.GetString("tg_leer_aus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Leerzeichen Ein ähnelt.
+        /// </summary>
+        public static string tg_leer_ein {
+            get {
+                return ResourceManager.GetString("tg_leer_ein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zeilennummern Aus ähnelt.
+        /// </summary>
+        public static string tg_line_aus {
+            get {
+                return ResourceManager.GetString("tg_line_aus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zeilennummern Ein ähnelt.
+        /// </summary>
+        public static string tg_line_ein {
+            get {
+                return ResourceManager.GetString("tg_line_ein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dunkel ähnelt.
+        /// </summary>
+        public static string tg_theme_dunkel {
+            get {
+                return ResourceManager.GetString("tg_theme_dunkel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hell ähnelt.
+        /// </summary>
+        public static string tg_theme_hell {
+            get {
+                return ResourceManager.GetString("tg_theme_hell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset ähnelt.
+        /// </summary>
+        public static string ti_bitset {
+            get {
+                return ResourceManager.GetString("ti_bitset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code ähnelt.
+        /// </summary>
+        public static string ti_code {
+            get {
+                return ResourceManager.GetString("ti_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Helfer ähnelt.
+        /// </summary>
+        public static string ti_helfer {
+            get {
+                return ResourceManager.GetString("ti_helfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suche ähnelt.
+        /// </summary>
+        public static string ti_suche {
+            get {
+                return ResourceManager.GetString("ti_suche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In Binär Dateien suchen aus ähnelt.
+        /// </summary>
+        public static string ts_bin_aus {
+            get {
+                return ResourceManager.GetString("ts_bin_aus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In Binär Dateien suchen ein ähnelt.
+        /// </summary>
+        public static string ts_bin_ein {
+            get {
+                return ResourceManager.GetString("ts_bin_ein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Exakte Zeichenfolge suchen aus ähnelt.
+        /// </summary>
+        public static string ts_exakte_aus {
+            get {
+                return ResourceManager.GetString("ts_exakte_aus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Exakte Zeichenfolge suchen ein ähnelt.
+        /// </summary>
+        public static string ts_exakte_ein {
+            get {
+                return ResourceManager.GetString("ts_exakte_ein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nur in HW-Konfig suchen aus ähnelt.
+        /// </summary>
+        public static string ts_hw_aus {
+            get {
+                return ResourceManager.GetString("ts_hw_aus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nur in HW-Konfig suchen ein ähnelt.
+        /// </summary>
+        public static string ts_hw_ein {
+            get {
+                return ResourceManager.GetString("ts_hw_ein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kopiert den kompletten Code in die Zwischenablage. ähnelt.
+        /// </summary>
+        public static string tt_code_gen_copy {
+            get {
+                return ResourceManager.GetString("tt_code_gen_copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Macht das ersetzten wieder Rückgangig. ähnelt.
+        /// </summary>
+        public static string tt_ers_ruck {
+            get {
+                return ResourceManager.GetString("tt_ers_ruck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt. ähnelt.
+        /// </summary>
+        public static string tt_hotkey {
+            get {
+                return ResourceManager.GetString("tt_hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Such auch nach *.fud, *.ful, *.fu, *.**O Dateien. ähnelt.
+        /// </summary>
+        public static string tt_suche_bin {
+            get {
+                return ResourceManager.GetString("tt_suche_bin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive). ähnelt.
+        /// </summary>
+        public static string tt_suche_exakt {
+            get {
+                return ResourceManager.GetString("tt_suche_exakt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Such nur im Unterverzeichnis \application\control\config\. ähnelt.
+        /// </summary>
+        public static string tt_suche_hw {
+            get {
+                return ResourceManager.GetString("tt_suche_hw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ausgewählte Datei öffnen. ähnelt.
+        /// </summary>
+        public static string tt_suche_offnen {
+            get {
+                return ResourceManager.GetString("tt_suche_offnen", resourceCulture);
             }
         }
     }
