@@ -368,10 +368,16 @@
 
                         <!--Gridsplitter mit Textbox für das Zeichen-->
                         <GridSplitter Grid.Column="1" Grid.Row="1" Height="15" HorizontalAlignment="Stretch" Background="Transparent"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" BorderThickness="0" HorizontalAlignment="Center"  IsHitTestVisible="False"
+                        <!--<TextBox Grid.Column="1" Grid.Row="1" BorderThickness="0" HorizontalAlignment="Center"  IsHitTestVisible="False"
                                  VerticalAlignment="Center" Text="&#xE76F;&#xE76F;&#xE76F;" FontSize="16" Background="Transparent"
                                  Foreground="gray" FontFamily="Segoe MDL2 Assets"
-                                 VerticalContentAlignment="Center" IsTabStop="False"/>
+                                 VerticalContentAlignment="Center" IsTabStop="False"/>-->
+
+                        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                            <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Gray" Stroke="Gray" Width="40" IsHitTestVisible="False"/>
+                            <Rectangle  HorizontalAlignment="Stretch"  Height="3" Fill="Transparent" Stroke="Transparent" Width="40" IsHitTestVisible="False"/>
+                            <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Gray" Stroke="Gray" Width="40" IsHitTestVisible="False"/>
+                        </StackPanel>
 
                         <!--Code-->
                         <GroupBox Grid.Column="1" Grid.Row="3" Header="{x:Static p:Resources.ti_code}">
@@ -1073,6 +1079,8 @@
                                         <Label Content="{x:Static p:Resources.lb_backup}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
+
+                                <TextBlock x:Name="tb_out" />
 
                             </StackPanel>
 

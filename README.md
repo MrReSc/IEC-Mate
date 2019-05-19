@@ -58,7 +58,7 @@ IEC-Mate ist auf Deutsch und Englisch lokalisiert. Der Editor hat verschieden Ei
 
 IEC-Mate läuft auf Microsoft Windows.
 
-- Windows 7, 8, 8.1, 10 x86 und x64
+- Windows 7, 8, 8.1, 10 x64
 - .NET Framework 4.7.2
 
 ## Lizenz

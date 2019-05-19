@@ -595,10 +595,9 @@ namespace IECMate
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception) 
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
-                    //await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, ex.Message, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
                 }
 
@@ -1053,8 +1052,6 @@ namespace IECMate
                 var xp = await this.ShowProgressAsync(Properties.Resources.dialogTitelBackup, Properties.Resources.dialogMsgBackup, true, mymessageboxsettings);
                 xp.SetIndeterminate();
 
-                StringBuilder outputBuilder = new StringBuilder();
-
                 //Process
                 
                 ProcessStartInfo p = new ProcessStartInfo();
@@ -1063,12 +1060,20 @@ namespace IECMate
                 //p.WindowStyle = ProcessWindowStyle.Hidden;
                 p.CreateNoWindow = true;
                 p.UseShellExecute = false;
+                //p.RedirectStandardOutput = true;
 
                 Process x = new Process();
+                //x.EnableRaisingEvents = true;
+                //DataReceivedEventHandler output = (o, args) =>
+                //{
+                //    tb_out.Text = args.Data;
+                //};
+                //x.OutputDataReceived += output;
 
                 await Task.Run(() =>
                 {
                     x = Process.Start(p);
+                    //x.BeginOutputReadLine();
 
                     EventHandler canceled = (o, args) =>
                     {
