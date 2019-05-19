@@ -421,7 +421,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Dateine öffnen oder Funktion starten ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Globale Funktionen ähnelt.
         /// </summary>
         public static string gb_datei_funktion {
             get {
@@ -801,7 +801,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Binär 2# ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 2#0 ähnelt.
         /// </summary>
         public static string tb_bitset_bin {
             get {
@@ -810,7 +810,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Dezimal, 16# Hex oder 2# Binär ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 10#, 16# oder 2# Zahl eingeben... ähnelt.
         /// </summary>
         public static string tb_bitset_decode {
             get {
@@ -819,7 +819,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Dezimal 10# ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 0 ähnelt.
         /// </summary>
         public static string tb_bitset_dez {
             get {
@@ -828,7 +828,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Hexadezimal 16# ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 16#0 ähnelt.
         /// </summary>
         public static string tb_bitset_hex {
             get {

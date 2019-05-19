@@ -238,7 +238,7 @@
     <value>Code Template</value>
   </data>
   <data name="gb_datei_funktion" xml:space="preserve">
-    <value>Open date or start function</value>
+    <value>Global Functions</value>
   </data>
   <data name="gb_decoding" xml:space="preserve">
     <value>Decoding</value>
@@ -367,16 +367,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>Copy all to clipboard</value>
   </data>
   <data name="tb_bitset_bin" xml:space="preserve">
-    <value>Binary 2#</value>
+    <value>2#0</value>
   </data>
   <data name="tb_bitset_decode" xml:space="preserve">
-    <value>Decimal, 16# Hex or 2# Binary</value>
+    <value>Enter 10#, 16# oder 2# number...</value>
   </data>
   <data name="tb_bitset_dez" xml:space="preserve">
-    <value>Decimal 10#</value>
+    <value>0</value>
   </data>
   <data name="tb_bitset_hex" xml:space="preserve">
-    <value>Hexadecimal 16#</value>
+    <value>16#0</value>
   </data>
   <data name="tb_ersetzten_druch" xml:space="preserve">
     <value>Replace by:</value>

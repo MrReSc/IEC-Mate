@@ -338,18 +338,19 @@
                                     <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" 
                                              VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}"
                                              Controls:TextBoxHelper.ClearTextButton="True">
-                                        <TextBox.Resources>
+                                        <!--<TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
                                             </Style>
-                                        </TextBox.Resources>
+                                        </TextBox.Resources>-->
                                     </TextBox>
                                     <Label Grid.Row="1" Grid.Column="2" Content="{x:Static p:Resources.tb_ersetzten_druch}" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
 
-                                    <ComboBox x:Name="combo_vars" Controls:ControlsHelper.CornerRadius="3" Grid.Row="1" Grid.Column="3"
+                                    <ComboBox x:Name="combo_vars"  Grid.Row="1" Grid.Column="3"
                                               BorderBrush="LightGray" Width="180" Margin="0,0,20,0" VerticalContentAlignment="Center" 
                                               HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
+                                    <!--Controls:ControlsHelper.CornerRadius="3"-->
 
                                     <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="5" Click="Btn_ersetzten_Click" Margin="0,0,10,0" Width="30" Height="30">
                                         <iconPacks:PackIconMaterial Kind="SwapHorizontal" Width="auto" Height="auto"/>
@@ -375,7 +376,7 @@
 
                         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
                             <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Gray" Stroke="Gray" Width="40" IsHitTestVisible="False"/>
-                            <Rectangle  HorizontalAlignment="Stretch"  Height="3" Fill="Transparent" Stroke="Transparent" Width="40" IsHitTestVisible="False"/>
+                            <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Transparent" Stroke="Transparent" Width="40" IsHitTestVisible="False"/>
                             <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Gray" Stroke="Gray" Width="40" IsHitTestVisible="False"/>
                         </StackPanel>
 
@@ -449,12 +450,11 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="350" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="5" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="auto" />
@@ -463,12 +463,12 @@
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
-                             Width="300" VerticalContentAlignment="Center">
-                        <TextBox.Resources>
+                             Width="300" VerticalContentAlignment="Center" Height="30">
+                        <!--<TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
                             </Style>
-                        </TextBox.Resources>
+                        </TextBox.Resources>-->
                     </TextBox>
 
                     <Button x:Name="btn_pfad_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_auswahlen_Click">
@@ -476,23 +476,23 @@
                     </Button>
 
                     <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0,0,10,0" 
-                             Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True">
-                        <TextBox.Resources>
+                             Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Height="30">
+                        <!--<TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
                             </Style>
-                        </TextBox.Resources>
+                        </TextBox.Resources>-->
                     </TextBox>
 
-                    <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_Click">
+                    <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_Click" VerticalAlignment="Center">
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
                     </Button>
 
                     <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" OnLabel="{x:Static p:Resources.ts_exakte_ein}" OffLabel="{x:Static p:Resources.ts_exakte_aus}" Padding="0,0,5,0" IsChecked="True" ToolTip="{x:Static p:Resources.tt_suche_exakt}" Width="320" HorizontalAlignment="Right"/>
                     <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" OnLabel="{x:Static p:Resources.ts_bin_ein}" OffLabel="{x:Static p:Resources.ts_bin_aus}" Padding="0,0,5,0" IsChecked="False" ToolTip="{x:Static p:Resources.tt_suche_bin}" Width="320" HorizontalAlignment="Right"/>
-                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="4" OnLabel="{x:Static p:Resources.ts_hw_ein}" OffLabel="{x:Static p:Resources.ts_hw_aus}" Padding="0,0,5,0" IsChecked="False"  ToolTip="{x:Static p:Resources.tt_suche_hw}" Width="320" HorizontalAlignment="Right"/>
+                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="0" OnLabel="{x:Static p:Resources.ts_hw_ein}" OffLabel="{x:Static p:Resources.ts_hw_aus}" Padding="0,0,5,0" IsChecked="False"  ToolTip="{x:Static p:Resources.tt_suche_hw}" Width="320" HorizontalAlignment="Right" Margin="0"/>
 
-                    <GroupBox Grid.Column="0" Grid.Row="6" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="4">
+                    <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -554,27 +554,27 @@
 
                                 <StackPanel VerticalAlignment="Top">
                                     <TextBox x:Name="text_encode_dec"  Text="{x:Static p:Resources.tb_bitset_dez}" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
-                                        <TextBox.Resources>
+                                        <!--<TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
                                             </Style>
-                                        </TextBox.Resources>
+                                        </TextBox.Resources>-->
                                     </TextBox>
 
                                     <TextBox x:Name="text_encode_hex"  Text="{x:Static p:Resources.tb_bitset_hex}" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
-                                        <TextBox.Resources>
+                                        <!--<TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
                                             </Style>
-                                        </TextBox.Resources>
+                                        </TextBox.Resources>-->
                                     </TextBox>
 
                                     <TextBox x:Name="text_encode_bin"  Text="{x:Static p:Resources.tb_bitset_bin}" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
-                                        <TextBox.Resources>
+                                        <!--<TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
                                             </Style>
-                                        </TextBox.Resources>
+                                        </TextBox.Resources>-->
                                     </TextBox>
                                 </StackPanel>
 
@@ -758,27 +758,27 @@
                             <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
                                 <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_bitset_decode}" Controls:TextBoxHelper.ClearTextButton="True"
                                          Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" TextChanged="Text_decode_TextChanged">
-                                    <TextBox.Resources>
+                                    <!--<TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
                                         </Style>
-                                    </TextBox.Resources>
+                                    </TextBox.Resources>-->
                                 </TextBox>
 
                                 <TextBox x:Name="text_decode_out1" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" IsReadOnly="True" Background="Gainsboro">
-                                    <TextBox.Resources>
+                                    <!--<TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
                                         </Style>
-                                    </TextBox.Resources>
+                                    </TextBox.Resources>-->
                                 </TextBox>
 
                                 <TextBox x:Name="text_decode_out2" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" IsReadOnly="True" Background="Gainsboro">
-                                    <TextBox.Resources>
+                                    <!--<TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="3"/>
                                         </Style>
-                                    </TextBox.Resources>
+                                    </TextBox.Resources>-->
                                 </TextBox>
                             </StackPanel>
 
@@ -974,12 +974,12 @@
 
             <!--Tab Helfer-->
             <TabItem Header="{x:Static p:Resources.ti_helfer}">
-                <Grid Margin="0,5,0,0">
+                <Grid Margin="0,7,0,0">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
@@ -988,17 +988,19 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="20" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
                              Width="300" VerticalContentAlignment="Center">
-                        <TextBox.Resources>
+                        <!--<TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
                             </Style>
-                        </TextBox.Resources>
+                        </TextBox.Resources>-->
                     </TextBox>
+
+                    <ComboBox  x:Name="cb_select_me" Grid.Column="2" Grid.Row="0" Width="180" Margin="30,0,0,0" DropDownOpened="Cb_select_me_DropDownOpened" Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."/>
 
                     <Button x:Name="btn_pfad_helfer_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_helfer_auswahlen_Click">
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
@@ -1108,7 +1110,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
                         <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
@@ -1127,9 +1129,8 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
-                                    <ComboBox x:Name="cb_select_me" Controls:ControlsHelper.CornerRadius="3" Width="310" Margin="0,0,0,12" 
-                                          Height="40" DropDownOpened="Cb_select_me_DropDownOpened" FontSize="14" Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."/>
-
+                                    <!--<ComboBox x:Name="cb_select_me" Width="310" Margin="0,0,0,12" DropDownOpened="Cb_select_me_DropDownOpened" FontSize="14" Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."/>-->
+                                    <!--Controls:ControlsHelper.CornerRadius="3"-->
                                     <Button x:Name="btn_open_me_folder"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Btn_open_me_folder_Click">
                                         <StackPanel Orientation="Horizontal">
                                             <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
@@ -1152,7 +1153,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
-                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="20" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="5" />
@@ -1165,15 +1166,15 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
-                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Right" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="{x:Static p:Resources.tt_hotkey}"/>
+                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Left" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="{x:Static p:Resources.tt_hotkey}"/>
 
-                                    <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" Margin="0,0,0,12.2" 
-                                         VerticalContentAlignment="Center" Height="40" Controls:TextBoxHelper.ClearTextButton="True">
-                                        <TextBox.Resources>
+                                    <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" Margin="0" 
+                                         VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left">
+                                        <!--<TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
                                             </Style>
-                                        </TextBox.Resources>
+                                        </TextBox.Resources>-->
                                     </TextBox>
 
                                 </StackPanel>
@@ -1181,32 +1182,35 @@
                                 <StackPanel Grid.Column="3" Grid.Row="1">
 
                                     <DockPanel>
-                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotkey_pxComment" FontSize="14" DockPanel.Dock="Right" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotkey_pxComment_SelectionChanged"/>
+                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                        <ComboBox x:Name="cb_hotkey_pxComment" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxComment_SelectionChanged"/>
                                     </DockPanel>
+                                    <!--Controls:ControlsHelper.CornerRadius="3"-->
 
                                     <Label Content="{x:Static p:Resources.lb_px_comment}"/>
-                                    <Label Foreground="ForestGreen" Margin="0" Content="{x:Static p:Resources.lb_px}"/>
+                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px}"/>
 
-                                    <Separator Margin="0,2,0,5"/>
+                                    <!--<Separator Margin="0,2,0,5"/>-->
 
-                                    <DockPanel>
-                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" FontSize="14" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
+                                    <DockPanel Margin="0,5,0,0">
+                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                        <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
                                     </DockPanel>
+                                    <!--Controls:ControlsHelper.CornerRadius="3"-->
                                     <Label Content="{x:Static p:Resources.lb_px_beginend}"/>
-                                    <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}"/>
-                                    <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic"></Label>
-                                    <Label Foreground="ForestGreen" Margin="0" Content="{x:Static p:Resources.lb_px_end}"/>
+                                    <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}" Margin="0,-10,0,0"/>
+                                    <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic" Margin="0,-10,0,0"></Label>
+                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_end}"/>
 
-                                    <Separator Margin="0,2,0,5"/>
+                                    <!--<Separator Margin="0,2,0,5"/>-->
 
-                                    <DockPanel>
-                                        <Label FontWeight="Bold" FontSize="15" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" FontSize="14" Controls:ControlsHelper.CornerRadius="3" Width="80" HorizontalAlignment="Right" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
+                                    <DockPanel Margin="0,5,0,0">
+                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                        <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
                                     </DockPanel>
-                                    <Label Content="{x:Static p:Resources.lb_px_plain}"/>
-                                    <Label Foreground="ForestGreen" Margin="0" Content="{x:Static p:Resources.lb_px}"/>
+                                    <!--Controls:ControlsHelper.CornerRadius="3"-->
+                                    <Label Content="{x:Static p:Resources.lb_px_plain}" Margin="0"/>
+                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px}"/>
 
                                 </StackPanel>
                             </Grid>
