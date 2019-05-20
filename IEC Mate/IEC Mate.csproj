@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>IECMate</RootNamespace>
     <AssemblyName>IECMate</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -39,7 +39,7 @@
     <ProductName>IEC-Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>23</ApplicationRevision>
-    <ApplicationVersion>0.0.230.19139</ApplicationVersion>
+    <ApplicationVersion>0.0.232.19140</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

@@ -280,13 +280,13 @@ namespace IECMate
                                     "Variable_3", text_var3.Text,
                                     text_code_template.Text);
 
-                if (!String.IsNullOrWhiteSpace(code.error))
+                if (code.StartsWith("--> "))
                 {
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.error, MessageDialogStyle.Affirmative);
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.Replace("--> ", ""), MessageDialogStyle.Affirmative);
                 }
                 else
                 {
-                    text_code_output.Text = code.code;
+                    text_code_output.Text = code;
                 }
 
             }
@@ -296,7 +296,7 @@ namespace IECMate
             }
         }
 
-        private (string code, string error) Code_gen(string var_1, string var_1_text,
+        private string Code_gen(string var_1, string var_1_text,
                                 string var_2, string var_2_text,
                                 string var_3, string var_3_text,
                                 string template)
@@ -318,22 +318,22 @@ namespace IECMate
 
                 if (lines == 0)
                 {
-                    return (outtext, error1);
+                    return error1;
                 }
 
                 if ((lines < vars_2.Length) || (lines < vars_3.Length))
                 {
-                    return (outtext, error0);
+                    return error0;
                 }
 
                 if ((template.Contains(var_2)) && (vars_2.Length == 0))
                 {
-                    return (outtext, error2);
+                    return error2;
                 }
 
                 if ((template.Contains(var_3)) && (vars_3.Length == 0))
                 {
-                    return (outtext,  error3);
+                    return error3;
                 }
 
                 for (int i = 0; i < lines; i++)
@@ -362,9 +362,9 @@ namespace IECMate
             }
             catch (Exception)
             {
-                return (outtext, error0);
+                return error0;
             }
-            return (outtext, "");
+            return outtext;
         }
 
         private void Btn_gen_loschen_Click(object sender, RoutedEventArgs e)

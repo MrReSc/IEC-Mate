@@ -133,7 +133,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Die Anzahl Variabeln ist nicht identisch. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die --&gt; Die Anzahl Variabeln ist nicht identisch. ähnelt.
         /// </summary>
         public static string dialogMsgCodeGen00 {
             get {
@@ -142,7 +142,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 1. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die --&gt; Keine Variable in Liste 1. ähnelt.
         /// </summary>
         public static string dialogMsgCodeGen01 {
             get {
@@ -151,7 +151,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 2. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die --&gt; Keine Variable in Liste 2. ähnelt.
         /// </summary>
         public static string dialogMsgCodeGen02 {
             get {
@@ -160,7 +160,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Keine Variable in Liste 3. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die --&gt; Keine Variable in Liste 3. ähnelt.
         /// </summary>
         public static string dialogMsgCodeGen03 {
             get {
