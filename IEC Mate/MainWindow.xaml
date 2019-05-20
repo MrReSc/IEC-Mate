@@ -1113,7 +1113,7 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
+                        <GroupBox x:Name="gb_me_funktionen" Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />

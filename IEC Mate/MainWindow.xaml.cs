@@ -1170,6 +1170,12 @@ namespace IECMate
         {
             string mepfad = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol;
 
+            if (text_projktpfad_helfer.Text == "")
+            {
+                FehlerHelferAsync();
+                return;
+            }
+
             if (Directory.Exists(mepfad))
             {
                 string[] subdirectoryEntries = Directory.GetDirectories(mepfad);
