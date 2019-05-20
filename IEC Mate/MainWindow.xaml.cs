@@ -1009,14 +1009,22 @@ namespace IECMate
 
         private void OpenFileOrFolder(string input)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(input);
-            }
-            catch (Exception)
+            if (text_projktpfad_helfer.Text == "")
             {
                 FehlerHelferAsync();
             }
+            else
+            {
+                try
+                {
+                    Process.Start(input);
+                }
+                catch (Exception)
+                {
+                    FehlerHelferAsync();
+                }
+            }
+            
         }
 
         private void Btn_open_systemoptions_Click(object sender, RoutedEventArgs e)
