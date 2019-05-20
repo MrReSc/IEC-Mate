@@ -190,7 +190,7 @@ namespace IECMate
                             sim.Keyboard.TextEntry(text);
                             break;
                         case "PxPlain":
-                            text = px;
+                            text = "(" + px + ")";
                             sim.Keyboard.TextEntry(text);
                             break;
                     }

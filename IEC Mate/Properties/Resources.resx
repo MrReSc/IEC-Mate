@@ -331,7 +331,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>// PX05010 end</value>
   </data>
   <data name="lb_px_plain" xml:space="preserve">
-    <value>Fügt die PX Nummer ein.</value>
+    <value>Fügt die PX Nummer in Klammern ein.</value>
+  </data>
+  <data name="lb_px_plain_text" xml:space="preserve">
+    <value>(PX05010)</value>
   </data>
   <data name="lb_schrift" xml:space="preserve">
     <value>Schriftgrösse</value>

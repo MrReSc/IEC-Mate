@@ -495,7 +495,7 @@ namespace IECMate.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Copyright (c) 2019 Remo Scheidegger
         ///
-        ///Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permis [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this perm [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string info_lizenztext {
             get {
@@ -693,11 +693,20 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer ein. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer in Klammern ein. ähnelt.
         /// </summary>
         public static string lb_px_plain {
             get {
                 return ResourceManager.GetString("lb_px_plain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die (PX05010) ähnelt.
+        /// </summary>
+        public static string lb_px_plain_text {
+            get {
+                return ResourceManager.GetString("lb_px_plain_text", resourceCulture);
             }
         }
         
