@@ -1021,13 +1021,45 @@ namespace IECMate
         private void Bt_simStarten_Click(object sender, RoutedEventArgs e)
         {
             string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation;
-            OpenFileOrFolder(open);
+            try
+            {
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = open,
+                        WorkingDirectory = Path.GetDirectoryName(open)
+                    }
+                };
+                process.Start();
+            }
+            catch (Exception)
+            {
+
+                FehlerHelferAsync();
+            }
         }
 
         private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
         {
             string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Visualization;
-            OpenFileOrFolder(open);
+            try
+            {
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = open,
+                        WorkingDirectory = Path.GetDirectoryName(open)
+                    }
+                };
+                process.Start();
+            }
+            catch (Exception)
+            {
+
+                FehlerHelferAsync();
+            }
         }
 
         private void Bt_openConfig_Click(object sender, RoutedEventArgs e)
