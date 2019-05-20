@@ -28,6 +28,7 @@ using WindowsInput;
 using System.Text;
 using System.Threading;
 using System.Globalization;
+using WindowsInput.Native;
 
 namespace IECMate
 {
@@ -183,15 +184,21 @@ namespace IECMate
                     {
                         case "PxComment":
                             text = "// " + px;
-                            sim.Keyboard.TextEntry(text);
+                            //sim.Keyboard.TextEntry(text);
+                            Clipboard.SetText(text);
+                            PasteFormClipboard();
                             break;
                         case "PxBeginEnd":
                             text = "// " + px + " begin" + Environment.NewLine + Environment.NewLine + "// " + px + " end";
-                            sim.Keyboard.TextEntry(text);
+                            //sim.Keyboard.TextEntry(text);
+                            Clipboard.SetText(text);
+                            PasteFormClipboard();
                             break;
                         case "PxPlain":
                             text = "(" + px + ")";
-                            sim.Keyboard.TextEntry(text);
+                            //sim.Keyboard.TextEntry(text);  
+                            Clipboard.SetText(text);
+                            PasteFormClipboard();
                             break;
                     }
                     e.Handled = true;
@@ -201,6 +208,24 @@ namespace IECMate
             {
                 ;
             }         
+        }
+
+        private void PasteFormClipboard()
+        {
+            var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+            //var starttime = DateTime.Now;
+            //var runtime = DateTime.Now;
+            //TimeSpan duration = runtime - starttime;
+
+            do
+            {
+                //runtime = DateTime.Now;
+                //duration = runtime - starttime;
+                isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+            } while (isControlKeyDown);
+
+            //} while (isControlKeyDown || duration.Milliseconds > 5000);
+            sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
         }
 
         private async void Ts_hotkey_IsCheckedChanged(object sender, EventArgs e)
@@ -1454,6 +1479,8 @@ namespace IECMate
                 }
             }
         }
+
+
     }
 }
 
