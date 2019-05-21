@@ -19,13 +19,15 @@
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
     <UpdatePackageVersion>False</UpdatePackageVersion>
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>AssemblyVersion</InheritWinAppVersionFrom>
     <AssemblyVersionSettings>None.None.Increment.DateStamp</AssemblyVersionSettings>
     <PrimaryVersionType>AssemblyInfoVersionAttribute</PrimaryVersionType>
+    <AssemblyFileVersionSettings>None.None.Increment.DateStamp</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.None.Increment.DateStamp</AssemblyInfoVersionSettings>
     <PublishUrl>C:\Users\r.scheidegger\Downloads\IEC Mate\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -39,7 +41,7 @@
     <ProductName>IEC-Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>23</ApplicationRevision>
-    <ApplicationVersion>0.0.324.19141</ApplicationVersion>
+    <ApplicationVersion>0.0.330.19141</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
