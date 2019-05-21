@@ -1009,7 +1009,7 @@ namespace IECMate
 
         private void OpenFileOrFolder(string input)
         {
-            if (text_projktpfad_helfer.Text == "")
+            if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
             {
                 FehlerHelferAsync();
             }
@@ -1170,7 +1170,7 @@ namespace IECMate
         {
             string mepfad = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol;
 
-            if (text_projktpfad_helfer.Text == "")
+            if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
             {
                 FehlerHelferAsync();
                 return;
