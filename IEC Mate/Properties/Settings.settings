@@ -74,5 +74,8 @@
     <Setting Name="sprache" Type="System.String" Scope="User">
       <Value Profile="(Default)">de-DE</Value>
     </Setting>
+    <Setting Name="hotkey_brackets" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Q</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -321,6 +321,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <data name="lb_px_beginend" xml:space="preserve">
     <value>Inserts a block with "begin" and "end".</value>
   </data>
+  <data name="lb_px_brackets" xml:space="preserve">
+    <value>Inserts the PX number in brackets.</value>
+  </data>
+  <data name="lb_px_brackets_text" xml:space="preserve">
+    <value>(PX05010)</value>
+  </data>
   <data name="lb_px_code" xml:space="preserve">
     <value>here comes the code;</value>
   </data>
@@ -331,10 +337,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <value>// PX05010 end</value>
   </data>
   <data name="lb_px_plain" xml:space="preserve">
-    <value>Inserts the PX number in brackets.</value>
+    <value>Inserts the PX number.</value>
   </data>
   <data name="lb_px_plain_text" xml:space="preserve">
-    <value>(PX05010)</value>
+    <value>PX05010</value>
   </data>
   <data name="lb_schrift" xml:space="preserve">
     <value>Font size</value>

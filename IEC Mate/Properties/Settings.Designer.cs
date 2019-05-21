@@ -310,5 +310,17 @@ namespace IECMate.Properties {
                 this["sprache"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Q")]
+        public string hotkey_brackets {
+            get {
+                return ((string)(this["hotkey_brackets"]));
+            }
+            set {
+                this["hotkey_brackets"] = value;
+            }
+        }
     }
 }

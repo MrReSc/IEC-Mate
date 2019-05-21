@@ -1187,7 +1187,7 @@
                                     </DockPanel>
                                     <!--Controls:ControlsHelper.CornerRadius="3"-->
 
-                                    <Label Content="{x:Static p:Resources.lb_px_comment}"/>
+                                    <Label Content="{x:Static p:Resources.lb_px_comment}" Margin="0,-5,0,0"/>
                                     <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px}"/>
 
                                     <!--<Separator Margin="0,2,0,5"/>-->
@@ -1197,7 +1197,7 @@
                                         <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
                                     </DockPanel>
                                     <!--Controls:ControlsHelper.CornerRadius="3"-->
-                                    <Label Content="{x:Static p:Resources.lb_px_beginend}"/>
+                                    <Label Content="{x:Static p:Resources.lb_px_beginend}" Margin="0,-5,0,0"/>
                                     <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}" Margin="0,-10,0,0"/>
                                     <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic" Margin="0,-10,0,0"></Label>
                                     <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_end}"/>
@@ -1209,8 +1209,15 @@
                                         <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
                                     </DockPanel>
                                     <!--Controls:ControlsHelper.CornerRadius="3"-->
-                                    <Label Content="{x:Static p:Resources.lb_px_plain}" Margin="0"/>
+                                    <Label Content="{x:Static p:Resources.lb_px_plain}" Margin="0,-5,0,0"/>
                                     <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_plain_text}"/>
+
+                                    <DockPanel Margin="0,5,0,0">
+                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                        <ComboBox x:Name="cb_hotekey_brackets" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_brackets_SelectionChanged"/>
+                                    </DockPanel>
+                                    <Label Content="{x:Static p:Resources.lb_px_brackets}" Margin="0,-5,0,0"/>
+                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_brackets_text}"/>
 
                                 </StackPanel>
                             </Grid>

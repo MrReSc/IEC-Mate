@@ -666,6 +666,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer in Klammern ein. ähnelt.
+        /// </summary>
+        public static string lb_px_brackets {
+            get {
+                return ResourceManager.GetString("lb_px_brackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die (PX05010) ähnelt.
+        /// </summary>
+        public static string lb_px_brackets_text {
+            get {
+                return ResourceManager.GetString("lb_px_brackets_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die hier kommt der Code; ähnelt.
         /// </summary>
         public static string lb_px_code {
@@ -693,7 +711,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer in Klammern ein. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fügt die PX Nummer ein. ähnelt.
         /// </summary>
         public static string lb_px_plain {
             get {
@@ -702,7 +720,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die (PX05010) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die PX05010 ähnelt.
         /// </summary>
         public static string lb_px_plain_text {
             get {

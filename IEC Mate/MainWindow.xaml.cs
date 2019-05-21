@@ -30,6 +30,7 @@ using System.Threading;
 using System.Globalization;
 using WindowsInput.Native;
 
+
 namespace IECMate
 {
 
@@ -44,6 +45,9 @@ namespace IECMate
         public int prevHotComment;
         public int prevHotBeginEnd;
         public int prevHotPlai;
+        public RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion");
+        public string os_version;
+
 
         public MainWindow()
         {
@@ -51,12 +55,14 @@ namespace IECMate
             InitializeComponent();
 
             //Hotkey
-            var key1 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_comment);
-            var key2 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_beginend);
-            var key3 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_plain);
+            Key key1 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_comment);
+            Key key2 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_beginend);
+            Key key3 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_plain);
+            Key key4 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_brackets);
             HotkeyManager.Current.AddOrReplace("PxComment", key1, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
             HotkeyManager.Current.AddOrReplace("PxBeginEnd", key2, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
             HotkeyManager.Current.AddOrReplace("PxPlain", key3, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            HotkeyManager.Current.AddOrReplace("PxBrackets", key4, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
 
             // Editor Setup
             string file = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"resources\st_syntax.xshd");
@@ -89,6 +95,7 @@ namespace IECMate
                 cb_hotkey_pxBeginEnd.Items.Add(le);
                 cb_hotekey_plain.Items.Add(le);
                 cb_hotkey_pxComment.Items.Add(le);
+                cb_hotekey_brackets.Items.Add(le);
             }
 
             string[] Sprachen = new string[] { Properties.Resources.lanDE, Properties.Resources.lanEN };
@@ -149,6 +156,7 @@ namespace IECMate
             cb_hotkey_pxBeginEnd.Text = key2.ToString();
             cb_hotekey_plain.Text = key3.ToString();
             cb_hotkey_pxComment.Text = key1.ToString();
+            cb_hotekey_brackets.Text = key4.ToString();
             prevHotComment = cb_hotkey_pxComment.SelectedIndex;
             prevHotBeginEnd = cb_hotkey_pxBeginEnd.SelectedIndex;
             prevHotPlai = cb_hotekey_plain.SelectedIndex;
@@ -167,6 +175,9 @@ namespace IECMate
             text_var2.Text = Properties.Settings.Default.variable_2;
             text_var3.Text = Properties.Settings.Default.variable_3;
             text_code_template.Text = Properties.Settings.Default.vorlage;
+
+            //OS Version
+            os_version = (string)registryKey.GetValue("productName");
         }
 
         private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
@@ -182,21 +193,19 @@ namespace IECMate
                     {
                         case "PxComment":
                             text = "// " + px;
-                            //sim.Keyboard.TextEntry(text);
-                            Clipboard.SetText(text);
-                            PasteFormClipboard();
+                            PasteTextFromHotkey(text);
                             break;
                         case "PxBeginEnd":
                             text = "// " + px + " begin" + Environment.NewLine + Environment.NewLine + "// " + px + " end";
-                            //sim.Keyboard.TextEntry(text);
-                            Clipboard.SetText(text);
-                            PasteFormClipboard();
+                            PasteTextFromHotkey(text);
                             break;
                         case "PxPlain":
+                            text = px;
+                            PasteTextFromHotkey(text);
+                            break;
+                        case "PxBrackets":
                             text = "(" + px + ")";
-                            //sim.Keyboard.TextEntry(text);  
-                            Clipboard.SetText(text);
-                            PasteFormClipboard();
+                            PasteTextFromHotkey(text);
                             break;
                     }
                     e.Handled = true;
@@ -208,22 +217,29 @@ namespace IECMate
             }         
         }
 
-        private void PasteFormClipboard()
+        private void PasteTextFromHotkey(string text)
         {
-            var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-            //var starttime = DateTime.Now;
-            //var runtime = DateTime.Now;
-            //TimeSpan duration = runtime - starttime;
-
-            do
+            
+            if (os_version.Contains("Windows 10"))
             {
-                //runtime = DateTime.Now;
-                //duration = runtime - starttime;
-                isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-            } while (isControlKeyDown);
+                //Bei Windows 10 kann der Text aus dem Cliboard eingefügt werden
+                //Bei Windows 7 funktioniert es nicht
+                Clipboard.SetText(text);
+                var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+                var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
 
-            //} while (isControlKeyDown || duration.Milliseconds > 5000);
-            sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+                do
+                {
+                    isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
+                    isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+                } while (isControlKeyDown || isShiftKeyDown);
+
+                sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+            }
+            else
+            {
+                sim.Keyboard.TextEntry(text);
+            }           
         }
 
         private async void Ts_hotkey_IsCheckedChanged(object sender, EventArgs e)
@@ -478,6 +494,11 @@ namespace IECMate
             Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
             
             Properties.Settings.Default.Save();
+
+            HotkeyManager.Current.Remove("PxBeginEnd");
+            HotkeyManager.Current.Remove("PxPlain");
+            HotkeyManager.Current.Remove("PxComment");
+            HotkeyManager.Current.Remove("PxBrackets");
         }
 
         private void Btn_template_loschen_Click(object sender, RoutedEventArgs e)
@@ -1372,62 +1393,145 @@ namespace IECMate
 
         private async void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cb_hotekey_plain.SelectedIndex == 0)
-            {
-                HotkeyManager.Current.Remove("PxPlain");
-                return;
-            }
+            //if (cb_hotekey_plain.SelectedIndex == 0)
+            //{
+            //    HotkeyManager.Current.Remove("PxPlain");
+            //    return;
+            //}
 
-            if (cb_hotekey_plain.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex || cb_hotekey_plain.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
-            {
-                cb_hotekey_plain.SelectedIndex = prevHotPlai;
-                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-            }
-            else
-            {
-                var key = (Key)cb_hotekey_plain.SelectedValue;
-                HotkeyManager.Current.AddOrReplace("PxPlain", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            }
+            //if (cb_hotekey_plain.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex || cb_hotekey_plain.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
+            //{
+            //    cb_hotekey_plain.SelectedIndex = prevHotPlai;
+            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+            //}
+            //else
+            //{
+            //    var key = (Key)cb_hotekey_plain.SelectedValue;
+            //    HotkeyManager.Current.AddOrReplace("PxPlain", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            //}
+            RegisterHotKey("PxPlain", (ComboBox)sender);
         }
 
         private async void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cb_hotkey_pxBeginEnd.SelectedIndex == 0)
-            {
-                HotkeyManager.Current.Remove("PxBeginEnd");
-                return;
-            }
+            //if (cb_hotkey_pxBeginEnd.SelectedIndex == 0)
+            //{
+            //    HotkeyManager.Current.Remove("PxBeginEnd");
+            //    return;
+            //}
 
-            if (cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
-            {
-                cb_hotkey_pxBeginEnd.SelectedIndex = prevHotBeginEnd;
-                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-            }
-            else
-            {
-                var key = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                HotkeyManager.Current.AddOrReplace("PxBeginEnd", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            }
+            //if (cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
+            //{
+            //    cb_hotkey_pxBeginEnd.SelectedIndex = prevHotBeginEnd;
+            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+            //}
+            //else
+            //{
+            //    var key = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+            //    HotkeyManager.Current.AddOrReplace("PxBeginEnd", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            //}
+            RegisterHotKey("PxBeginEnd", (ComboBox)sender);
         }
 
-        private async void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cb_hotkey_pxComment.SelectedIndex == 0)
+            //if (cb_hotkey_pxComment.SelectedIndex == 0)
+            //{
+            //    HotkeyManager.Current.Remove("PxComment");
+            //    return;
+            //}
+
+            //if (cb_hotkey_pxComment.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxComment.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
+            //{
+            //    cb_hotkey_pxComment.SelectedIndex = prevHotComment;
+            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+            //}
+            //else
+            //{
+            //    var key = (Key)cb_hotkey_pxComment.SelectedValue;
+            //    HotkeyManager.Current.AddOrReplace("PxComment", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            //}
+            RegisterHotKey("PxComment", (ComboBox)sender);
+        }
+
+        private void Cb_hotekey_brackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (cb_hotekey_brackets.SelectedIndex == 0)
+            //{
+            //    HotkeyManager.Current.Remove("PxBrackets");
+            //    return;
+            //}
+
+            //if (cb_hotekey_brackets.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotekey_brackets.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
+            //{
+            //    cb_hotekey_brackets.SelectedIndex = prevHotComment;
+            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+            //}
+            //else
+            //{
+            //    var key = (Key)cb_hotekey_brackets.SelectedValue;
+            //    HotkeyManager.Current.AddOrReplace("PxBrackets", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+            //}
+            RegisterHotKey("PxBrackets", (ComboBox)sender);
+        }
+
+        private async void RegisterHotKey(string name, ComboBox combobox)
+        {
+            if (combobox.SelectedIndex == 0)
             {
-                HotkeyManager.Current.Remove("PxComment");
+                //Wenn kein Key selected ist, dann wird er abgemeldet
+                HotkeyManager.Current.Remove(name);
                 return;
             }
 
-            if (cb_hotkey_pxComment.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxComment.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
+            try
             {
-                cb_hotkey_pxComment.SelectedIndex = prevHotComment;
-                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+                //Aktuell Selektierter Keys auslesen
+                var key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                var key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                var key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                var key_4 = (Key)cb_hotkey_pxComment.SelectedValue;
+                var key = (Key)combobox.SelectedValue;
+
+                switch (name)
+                {
+                    case "PxComment":
+                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                        break;
+                    case "PxBeginEnd":
+                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxComment.SelectedValue;
+                        break;
+                    case "PxPlain":
+                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                        key_2 = (Key)cb_hotkey_pxComment.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                        break;
+                    case "PxBrackets":
+                        key_1 = (Key)cb_hotkey_pxComment.SelectedValue;
+                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                        break;
+                }
+
+
+                if (key == key_1 || key == key_2 || key == key_3)
+                {
+                    combobox.SelectedIndex = 0;
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+                }
+                else
+                {
+                    HotkeyManager.Current.AddOrReplace(name, key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                }
             }
-            else
+            catch (Exception)
             {
-                var key = (Key)cb_hotkey_pxComment.SelectedValue;
-                HotkeyManager.Current.AddOrReplace("PxComment", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            }
+                return;
+            }              
         }
 
         private async void Cb_sprache_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1482,7 +1586,7 @@ namespace IECMate
             }
         }
 
-
+        
     }
 }
 
