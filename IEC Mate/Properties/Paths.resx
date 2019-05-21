@@ -144,4 +144,7 @@
   <data name="systemOptions" xml:space="preserve">
     <value>\\data_Machine\\machineSetup\\systemOptions.properties</value>
   </data>
+  <data name="machineParameter" xml:space="preserve">
+    <value>\\data_Machine\\machineParameter</value>
+  </data>
 </root>

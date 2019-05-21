@@ -1070,6 +1070,18 @@ namespace IECMate
             OpenFileOrFolder(open);
         }
 
+        private void Bt_openPrjectFolder_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + Properties.Paths.machineParameter;
+            OpenFileOrFolder(open);
+        }
+
+        private void Bt_openMachineParameter_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text;
+            OpenFileOrFolder(open);
+        }
+
         private void Bt_simStarten_Click(object sender, RoutedEventArgs e)
         {
             string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation;
@@ -1391,87 +1403,24 @@ namespace IECMate
             }
         }
 
-        private async void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (cb_hotekey_plain.SelectedIndex == 0)
-            //{
-            //    HotkeyManager.Current.Remove("PxPlain");
-            //    return;
-            //}
-
-            //if (cb_hotekey_plain.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex || cb_hotekey_plain.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
-            //{
-            //    cb_hotekey_plain.SelectedIndex = prevHotPlai;
-            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-            //}
-            //else
-            //{
-            //    var key = (Key)cb_hotekey_plain.SelectedValue;
-            //    HotkeyManager.Current.AddOrReplace("PxPlain", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            //}
             RegisterHotKey("PxPlain", (ComboBox)sender);
         }
 
-        private async void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (cb_hotkey_pxBeginEnd.SelectedIndex == 0)
-            //{
-            //    HotkeyManager.Current.Remove("PxBeginEnd");
-            //    return;
-            //}
 
-            //if (cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxBeginEnd.SelectedIndex == cb_hotkey_pxComment.SelectedIndex)
-            //{
-            //    cb_hotkey_pxBeginEnd.SelectedIndex = prevHotBeginEnd;
-            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-            //}
-            //else
-            //{
-            //    var key = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-            //    HotkeyManager.Current.AddOrReplace("PxBeginEnd", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            //}
             RegisterHotKey("PxBeginEnd", (ComboBox)sender);
         }
 
         private void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (cb_hotkey_pxComment.SelectedIndex == 0)
-            //{
-            //    HotkeyManager.Current.Remove("PxComment");
-            //    return;
-            //}
-
-            //if (cb_hotkey_pxComment.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotkey_pxComment.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
-            //{
-            //    cb_hotkey_pxComment.SelectedIndex = prevHotComment;
-            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-            //}
-            //else
-            //{
-            //    var key = (Key)cb_hotkey_pxComment.SelectedValue;
-            //    HotkeyManager.Current.AddOrReplace("PxComment", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            //}
             RegisterHotKey("PxComment", (ComboBox)sender);
         }
 
         private void Cb_hotekey_brackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (cb_hotekey_brackets.SelectedIndex == 0)
-            //{
-            //    HotkeyManager.Current.Remove("PxBrackets");
-            //    return;
-            //}
-
-            //if (cb_hotekey_brackets.SelectedIndex == cb_hotekey_plain.SelectedIndex || cb_hotekey_brackets.SelectedIndex == cb_hotkey_pxBeginEnd.SelectedIndex)
-            //{
-            //    cb_hotekey_brackets.SelectedIndex = prevHotComment;
-            //    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-            //}
-            //else
-            //{
-            //    var key = (Key)cb_hotekey_brackets.SelectedValue;
-            //    HotkeyManager.Current.AddOrReplace("PxBrackets", key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            //}
             RegisterHotKey("PxBrackets", (ComboBox)sender);
         }
 
@@ -1586,7 +1535,7 @@ namespace IECMate
             }
         }
 
-        
+
     }
 }
 

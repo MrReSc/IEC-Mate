@@ -115,6 +115,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\data_Machine\\machineParameter ähnelt.
+        /// </summary>
+        internal static string machineParameter {
+            get {
+                return ResourceManager.GetString("machineParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\Start_Simulation.bat ähnelt.
         /// </summary>
         internal static string Start_Simulation {

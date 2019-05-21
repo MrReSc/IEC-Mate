@@ -612,6 +612,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die machineParameter ähnelt.
+        /// </summary>
+        public static string lb_machineParameter {
+            get {
+                return ResourceManager.GetString("lb_machineParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ME Ordner ähnelt.
         /// </summary>
         public static string lb_me {
@@ -626,6 +635,15 @@ namespace IECMate.Properties {
         public static string lb_me_xml {
             get {
                 return ResourceManager.GetString("lb_me_xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Projekt Ordner ähnelt.
+        /// </summary>
+        public static string lb_pojectFolder {
+            get {
+                return ResourceManager.GetString("lb_pojectFolder", resourceCulture);
             }
         }
         

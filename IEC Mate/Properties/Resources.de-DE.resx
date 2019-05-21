@@ -303,11 +303,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <data name="lb_lizenz" xml:space="preserve">
     <value>MIT Lizenz:</value>
   </data>
+  <data name="lb_machineParameter" xml:space="preserve">
+    <value>machineParameter</value>
+  </data>
   <data name="lb_me" xml:space="preserve">
     <value>ME Ordner</value>
   </data>
   <data name="lb_me_xml" xml:space="preserve">
     <value>xml der ME</value>
+  </data>
+  <data name="lb_pojectFolder" xml:space="preserve">
+    <value>Projekt Ordner</value>
   </data>
   <data name="lb_puLock" xml:space="preserve">
     <value>puLock Datein löschen</value>

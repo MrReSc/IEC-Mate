@@ -1068,19 +1068,21 @@
 
                             <StackPanel Grid.Column="3" Grid.Row="1">
 
-                                <Button x:Name="bt_lock_loschen"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_lock_loschen_Click">
+                                <Button x:Name="bt_openPrjectFolder"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openPrjectFolder_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_puLock}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.lb_machineParameter}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_BackupProject"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_BackupProject_Click">
+                                <Button x:Name="bt_openMachineParameter"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openMachineParameter_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="ZipBox" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_backup}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.lb_pojectFolder}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
+
+                                
 
                                 <TextBlock x:Name="tb_out" />
 
@@ -1099,6 +1101,23 @@
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Monitor" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
                                         <Label Content="{x:Static p:Resources.lb_visu}" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Rectangle Width="310" Height="43" HorizontalAlignment="Left" Margin="0,0,0,10" />
+
+
+                                <Button x:Name="bt_lock_loschen"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_lock_loschen_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.lb_puLock}" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_BackupProject"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_BackupProject_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="ZipBox" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.lb_backup}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
