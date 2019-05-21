@@ -45,8 +45,6 @@ namespace IECMate
         public int prevHotBeginEnd;
         public int prevHotPlai;
 
-
-
         public MainWindow()
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
@@ -1115,31 +1113,21 @@ namespace IECMate
                 //New Messagbox
                 var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
                 var xp = await this.ShowProgressAsync(Properties.Resources.dialogTitelBackup, Properties.Resources.dialogMsgBackup, true, mymessageboxsettings);
+
                 xp.SetIndeterminate();
 
                 //Process
-                
+                Process x = new Process();
                 ProcessStartInfo p = new ProcessStartInfo();
                 p.FileName = @"resources\7z\7za.exe";
                 p.Arguments = string.Format("a -t7z \"{0}\" \"{1}\" -mx=9", targetArchive, sourceName);
-                //p.WindowStyle = ProcessWindowStyle.Hidden;
                 p.CreateNoWindow = true;
                 p.UseShellExecute = false;
-                //p.RedirectStandardOutput = true;
-
-                Process x = new Process();
-                //x.EnableRaisingEvents = true;
-                //DataReceivedEventHandler output = (o, args) =>
-                //{
-                //    tb_out.Text = args.Data;
-                //};
-                //x.OutputDataReceived += output;
 
                 await Task.Run(() =>
                 {
                     x = Process.Start(p);
-                    //x.BeginOutputReadLine();
-
+                    
                     EventHandler canceled = (o, args) =>
                     {
                         x?.Kill();
@@ -1150,7 +1138,7 @@ namespace IECMate
                 });
 
                 //Wenn abgebrochen wurde, dann datei löschen
-                if(xp.IsCanceled)
+                if (xp.IsCanceled)
                 {
                     File.Delete(targetArchive);
                 }
