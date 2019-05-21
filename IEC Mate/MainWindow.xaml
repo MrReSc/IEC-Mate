@@ -1188,7 +1188,7 @@
                                     <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Left" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="{x:Static p:Resources.tt_hotkey}"/>
 
                                     <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" Margin="0" 
-                                         VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left">
+                                         VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left" TextChanged="Text_px_nummer_TextChanged">
                                         <!--<TextBox.Resources>
                                             <Style TargetType="{x:Type Border}">
                                                 <Setter Property="CornerRadius" Value="3"/>
