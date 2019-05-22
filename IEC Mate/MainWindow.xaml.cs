@@ -587,10 +587,11 @@ namespace IECMate
                     List<string> allFiles = new List<string>();
                     string suchpfad = "";
 
-                    //Wenn der Swicth "Nur HW suche" ein ist, wird der Pfad angepasst
+                    //Wenn der Switch "Nur HW suche" ein ist, wird der Pfad angepasst
                     if ((bool)ts_kbus_suche.IsChecked)
                     {
                         suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+                        suchpfad = suchpfad.Replace("\\\\", "\\");
                         //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
                         Directory.Exists(suchpfad);
                     }
@@ -694,13 +695,43 @@ namespace IECMate
             {
                 try
                 {
-                    System.Diagnostics.Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                    Process.Start(listbox_ergebnis.SelectedItem.ToString());
                 }
                 catch (Exception)
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
                 }
             }          
+        }
+
+        private async void Mi_open_file_Click(object sender, RoutedEventArgs e)
+        {
+            if (listbox_ergebnis.SelectedIndex > -1)
+            {
+                try
+                {
+                    Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                }
+                catch (Exception)
+                {
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
+                }
+            }
+        }
+
+        private async void Mi_open_folder_Click(object sender, RoutedEventArgs e)
+        {
+            if (listbox_ergebnis.SelectedIndex > -1)
+            {
+                try
+                {
+                    Process.Start(Path.GetDirectoryName(listbox_ergebnis.SelectedItem.ToString()));
+                }
+                catch (Exception)
+                {
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
+                }
+            }
         }
 
         private void Encoding_Checked(object sender, RoutedEventArgs args)
@@ -1552,7 +1583,6 @@ namespace IECMate
                 ts_hotkey.IsChecked = false;
             }
         }
-
 
     }
 }

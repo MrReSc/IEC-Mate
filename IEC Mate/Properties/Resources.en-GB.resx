@@ -457,11 +457,17 @@ END OF TERMS AND CONDITIONS</value>
   <data name="lb_visu" xml:space="preserve">
     <value>Start visualization</value>
   </data>
+  <data name="mi_datei_offnen" xml:space="preserve">
+    <value>Open file</value>
+  </data>
   <data name="mi_ers_ruck" xml:space="preserve">
     <value>Replace Undo</value>
   </data>
   <data name="mi_in_clipboard" xml:space="preserve">
     <value>Copy all to clipboard</value>
+  </data>
+  <data name="mi_pfad_offnen" xml:space="preserve">
+    <value>Open folder</value>
   </data>
   <data name="tb_bitset_bin" xml:space="preserve">
     <value>2#0</value>

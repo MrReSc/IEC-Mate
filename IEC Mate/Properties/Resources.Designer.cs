@@ -882,6 +882,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Datei öffnen ähnelt.
+        /// </summary>
+        public static string mi_datei_offnen {
+            get {
+                return ResourceManager.GetString("mi_datei_offnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Ersetzten Rückgängig ähnelt.
         /// </summary>
         public static string mi_ers_ruck {
@@ -896,6 +905,15 @@ namespace IECMate.Properties {
         public static string mi_in_clipboard {
             get {
                 return ResourceManager.GetString("mi_in_clipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ordner öffnen ähnelt.
+        /// </summary>
+        public static string mi_pfad_offnen {
+            get {
+                return ResourceManager.GetString("mi_pfad_offnen", resourceCulture);
             }
         }
         
