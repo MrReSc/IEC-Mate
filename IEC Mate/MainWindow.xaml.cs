@@ -514,7 +514,6 @@ namespace IECMate
             try
             {
                 // get deployment version
-                //lb_version.Content = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
                 lb_version.Content = Assembly.GetExecutingAssembly().GetName().Version;
             }
             catch (InvalidDeploymentException)
