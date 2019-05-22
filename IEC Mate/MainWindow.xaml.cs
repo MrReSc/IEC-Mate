@@ -611,6 +611,10 @@ namespace IECMate
                         {
                             count ++;
                             percent = 100 / filecount * count / 100;
+                            if (percent > 1.0)
+                            {
+                                percent = 1.0;
+                            }
                             x.SetProgress(percent);
 
                             if (x.IsCanceled)
