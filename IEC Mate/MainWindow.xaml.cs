@@ -568,7 +568,7 @@ namespace IECMate
             }
         }
 
-        private async void Btn_suche_Click(object sender, RoutedEventArgs e)
+        private async void Suche()
         {
             //Listebox löschen
             listbox_ergebnis.Items.Clear();
@@ -656,6 +656,20 @@ namespace IECMate
             {
                 await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLeer, MessageDialogStyle.Affirmative);
                 await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+            }
+        }
+
+        private void Btn_suche_Click(object sender, RoutedEventArgs e)
+        {
+            Suche();
+        }
+
+        private void Text_pattern_suche_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Wenn Enter gedrückt wird, wird das Suchen ausgelöst
+            if (e.Key == Key.Enter)
+            {
+                Suche();
             }
         }
 
@@ -1587,6 +1601,7 @@ namespace IECMate
                 ts_hotkey.IsChecked = false;
             }
         }
+
 
     }
 }

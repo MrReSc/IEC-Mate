@@ -480,7 +480,7 @@
                     </Button>
 
                     <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0,0,10,0" 
-                             Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Height="30">
+                             Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Height="30" KeyDown="Text_pattern_suche_KeyDown">
                         <!--<TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="3"/>
