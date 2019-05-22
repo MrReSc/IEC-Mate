@@ -687,16 +687,20 @@ namespace IECMate
             }
         }
 
-        private async void Btn_suche_offnen_Click(object sender, RoutedEventArgs e)
+
+        private async void Listbox_ergebnis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (listbox_ergebnis.SelectedIndex > -1)
             {
-                System.Diagnostics.Process.Start(listbox_ergebnis.SelectedItem.ToString());
-            }
-            catch (Exception)
-            {
-                await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
-            }
+                try
+                {
+                    System.Diagnostics.Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                }
+                catch (Exception)
+                {
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
+                }
+            }          
         }
 
         private void Encoding_Checked(object sender, RoutedEventArgs args)

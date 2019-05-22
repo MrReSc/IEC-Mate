@@ -507,18 +507,18 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="5" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="5" />
-                                <RowDefinition Height="auto" />
+                                <!--<RowDefinition Height="5" />-->
+                                <!--<RowDefinition Height="auto" />-->
                                 <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
 
                             <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
-                                <ListBox x:Name="listbox_ergebnis"/>
+                                <ListBox x:Name="listbox_ergebnis" MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick"/>
                             </Border>
 
-                            <Button x:Name="btn_suche_offnen" Grid.Row="3" Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_offnen_Click" ToolTip="{x:Static p:Resources.tt_suche_offnen}">
+                            <!--<Button x:Name="btn_suche_offnen" Grid.Row="3" Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_offnen_Click" ToolTip="{x:Static p:Resources.tt_suche_offnen}">
                                 <iconPacks:PackIconMaterial Kind="OpenInApp" Width="auto" Height="auto"/>
-                            </Button>
+                            </Button>-->
                         </Grid>
                     </GroupBox>
                 </Grid>
