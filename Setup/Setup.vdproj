@@ -212,6 +212,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -660,15 +668,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IEC-Mate"
-        "ProductCode" = "8:{14E89FFB-E77F-4C4E-A68D-D07466978D2C}"
-        "PackageCode" = "8:{E1415FBC-B421-4C35-BD7D-193692D326A7}"
+        "ProductCode" = "8:{71FB58CD-55A8-4452-8B42-2DC85B82384A}"
+        "PackageCode" = "8:{7A3699E3-3556-48FA-B609-AA5CC8FF1AF8}"
         "UpgradeCode" = "8:{1829CEAB-42C1-4661-80D7-09286BAAC581}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.0.349"
+        "ProductVersion" = "8:0.0.371"
         "Manufacturer" = "8:Remo Scheidegger"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
