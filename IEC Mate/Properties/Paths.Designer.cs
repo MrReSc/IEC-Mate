@@ -124,6 +124,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\data_Customer\\machineSetup\\set_MachSetup.xml ähnelt.
+        /// </summary>
+        internal static string MachSetup {
+            get {
+                return ResourceManager.GetString("MachSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\Start_Simulation.bat ähnelt.
         /// </summary>
         internal static string Start_Simulation {

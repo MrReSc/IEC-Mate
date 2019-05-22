@@ -1038,6 +1038,13 @@
                                     </StackPanel>
                                 </Button>
 
+                                <Button x:Name="btn_open_machinesetup"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Btn_open_machinesetup_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FileOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.lb_machineSetup}" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
                                 <Button x:Name="bt_openFormProgram"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openFormProgram_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
@@ -1059,15 +1066,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openConfig"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openConfig_Click">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_config}" FontSize="14"/>
-                                    </StackPanel>
-                                </Button>
-
-
-
+                                
                             </StackPanel>
 
                             <StackPanel Grid.Column="3" Grid.Row="1">
@@ -1076,6 +1075,13 @@
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
                                         <Label Content="{x:Static p:Resources.lb_machineParameter}" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_openConfig"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openConfig_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static p:Resources.lb_config}" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
 

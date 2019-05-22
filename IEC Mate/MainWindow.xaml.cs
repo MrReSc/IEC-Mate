@@ -1082,6 +1082,12 @@ namespace IECMate
             OpenFileOrFolder(open);
         }
 
+        private void Btn_open_machinesetup_Click(object sender, RoutedEventArgs e)
+        {
+            string open = text_projktpfad_helfer.Text + Properties.Paths.MachSetup;
+            OpenFileOrFolder(open);
+        }
+
         private void Bt_simStarten_Click(object sender, RoutedEventArgs e)
         {
             string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation;
@@ -1542,6 +1548,8 @@ namespace IECMate
                 ts_hotkey.IsChecked = false;
             }
         }
+
+
     }
 }
 

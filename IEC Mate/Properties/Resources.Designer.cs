@@ -621,6 +621,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die set_MachSetup.xml ähnelt.
+        /// </summary>
+        public static string lb_machineSetup {
+            get {
+                return ResourceManager.GetString("lb_machineSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ME Ordner ähnelt.
         /// </summary>
         public static string lb_me {

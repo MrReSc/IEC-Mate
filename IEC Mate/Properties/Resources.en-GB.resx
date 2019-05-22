@@ -306,6 +306,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <data name="lb_machineParameter" xml:space="preserve">
     <value>machineParameter</value>
   </data>
+  <data name="lb_machineSetup" xml:space="preserve">
+    <value>set_MachSetup.xml</value>
+  </data>
   <data name="lb_me" xml:space="preserve">
     <value>ME folder</value>
   </data>
