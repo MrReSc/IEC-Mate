@@ -603,7 +603,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die MIT Lizenz: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die IEC-Mate Lizenz: ähnelt.
         /// </summary>
         public static string lb_lizenz {
             get {
@@ -635,6 +635,51 @@ namespace IECMate.Properties {
         public static string lb_me_xml {
             get {
                 return ResourceManager.GetString("lb_me_xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open Source Lizenzen: ähnelt.
+        /// </summary>
+        public static string lb_oss_lizenz {
+            get {
+                return ResourceManager.GetString("lb_oss_lizenz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AvalonEdit
+        ///*****************
+        ///MIT License
+        ///Copyright (c) AvalonEdit Contributors
+        ///
+        ///Windows Input Simulator Plus
+        ///*****************
+        ///Ms-PL Microsoft Public License (Ms-PL)
+        ///
+        ///MahApps.Metro
+        ///*****************
+        ///MIT License
+        ///Copyright (c) 2019 MahApps
+        ///
+        ///7-Zip
+        ///*****************
+        ///GNU LGPL
+        ///7-Zip Copyright (C) 1999-2019 Igor Pavlov.
+        ///
+        ///NHotkey
+        ///*****************
+        ///Apache License Version 2.0, January 2004 http://www.apache.org/licenses/
+        ///
+        ///TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        ///
+        ///Definitions.
+        ///
+        ///&quot;License&quot; shall mean [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string lb_oss_lizenz_text {
+            get {
+                return ResourceManager.GetString("lb_oss_lizenz_text", resourceCulture);
             }
         }
         

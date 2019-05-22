@@ -129,7 +129,11 @@
                     </Hyperlink>
                 </TextBlock>
                 <Label Content="{x:Static p:Resources.lb_lizenz}" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
-                <TextBlock FontSize="12" TextWrapping="Wrap" MaxWidth="400" MaxHeight="400" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{x:Static p:Resources.info_lizenztext}"/>
+                <TextBox FontSize="12" TextWrapping="Wrap" MaxWidth="400" Height="200" Text="{x:Static p:Resources.info_lizenztext}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+               
+                <Label Content="{x:Static p:Resources.lb_oss_lizenz}" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
+                <TextBox FontSize="12" TextWrapping="Wrap" MaxWidth="400" Height="200" Text="{x:Static p:Resources.lb_oss_lizenz_text}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
             </StackPanel>
         </simpleChildWindow:ChildWindow>
 
