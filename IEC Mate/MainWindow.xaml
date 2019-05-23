@@ -83,9 +83,6 @@
                         <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
                     </Button>
 
-                    <!--<Separator />
-                    <MenuItem x:Name="mi_app_beenden" Header="{x:Static p:Resources.dp_datei_beenden}" Click="Mi_app_beenden_Click" />-->
-
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
