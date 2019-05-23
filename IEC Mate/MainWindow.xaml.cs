@@ -39,7 +39,7 @@ namespace IECMate
         public static BrushConverter bc = new BrushConverter();
         public Brush DarkBackground = (Brush)bc.ConvertFromString("#4A4A4A");
         public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
-        public Stack<string> undoList = new Stack<string>();
+        //public Stack<string> undoList = new Stack<string>();
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         public InputSimulator sim = new InputSimulator();
         public int prevHotComment;
@@ -252,35 +252,35 @@ namespace IECMate
             }
         }
 
-        private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string undoListInhalt = "";
+        //private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        string undoListInhalt = "";
 
-                if (undoList.Count >= 1)
-                {
-                    undoListInhalt = undoList.Peek();
-                }
+        //        if (undoList.Count >= 1)
+        //        {
+        //            undoListInhalt = undoList.Peek();
+        //        }
 
-                if ((!String.Equals(text_code_template.Text, undoListInhalt)))
-                {
-                    undoList.Push(text_code_template.Text);
-                }
+        //        if ((!String.Equals(text_code_template.Text, undoListInhalt)))
+        //        {
+        //            undoList.Push(text_code_template.Text);
+        //        }
 
-                if (undoList.Count >= 1)
-                {
-                    btn_template_undo.IsEnabled = true;
-                    mitem_undo.IsEnabled = true;
-                }
+        //        //if (undoList.Count >= 1)
+        //        //{
+        //        //    btn_template_undo.IsEnabled = true;
+        //        //    mitem_undo.IsEnabled = true;
+        //        //}
 
-                text_code_template.Text = text_code_template.Text.Replace(text_suchen.Text, combo_vars.SelectedItem.ToString());
-            }
-            catch (Exception)
-            {
-                ;
-            }
-        }
+        //        text_code_template.Text = text_code_template.Text.Replace(text_suchen.Text, combo_vars.SelectedItem.ToString());
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ;
+        //    }
+        //}
 
         private void Btn_template_speichern_Click(object sender, RoutedEventArgs e)
         {
@@ -306,6 +306,8 @@ namespace IECMate
             if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 text_suchen.Text = text_code_template.SelectedText;
+                text_suchen.Focus();
+                text_suchen.CaretIndex = text_suchen.Text.Length;
             }
 
         }
@@ -326,6 +328,7 @@ namespace IECMate
                 else
                 {
                     text_code_output.Text = code;
+                    text_code_output.Focus();
                 }
 
             }
@@ -409,6 +412,7 @@ namespace IECMate
         private void Btn_gen_loschen_Click(object sender, RoutedEventArgs e)
         {
             text_code_output.Text = "";
+            text_code_output.Focus();
         }
 
         private void Btn_gen_speichern_Click(object sender, RoutedEventArgs e)
@@ -428,6 +432,7 @@ namespace IECMate
         private void CopyToClipboard_Click_1(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(text_code_output.Text);
+            text_code_output.Focus();
         }
 
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
@@ -505,6 +510,7 @@ namespace IECMate
         {
             text_code_template.Text = "";
             combo_vars.SelectedIndex = -1;
+            text_code_template.Focus();
         }
 
 
@@ -531,21 +537,21 @@ namespace IECMate
             e.Handled = true;
         }
 
-        private void Btn_template_undo_Click(object sender, RoutedEventArgs e)
-        {
-            //Nur wenn es etwas im Stack hat dann wird auch das Undo gemacht
-            if (undoList.Count > 0)
-            {
-                text_code_template.Text = undoList.Pop();
-            }
+        //private void Btn_template_undo_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Nur wenn es etwas im Stack hat dann wird auch das Undo gemacht
+        //    if (undoList.Count > 0)
+        //    {
+        //        text_code_template.Text = undoList.Pop();
+        //    }
 
-            //Wenn Stack leer ist, dann wir der Button deaktiviert
-            if (undoList.Count == 0)
-            {
-                btn_template_undo.IsEnabled = false;
-                mitem_undo.IsEnabled = false;
-            }
-        }
+        //    ////Wenn Stack leer ist, dann wir der Button deaktiviert
+        //    //if (undoList.Count == 0)
+        //    //{
+        //    //    btn_template_undo.IsEnabled = false;
+        //    //    mitem_undo.IsEnabled = false;
+        //    //}
+        //}
 
         private void Btn_pfad_auswahlen_Click(object sender, RoutedEventArgs e)
         {
@@ -1412,6 +1418,7 @@ namespace IECMate
             text_var1.Text = "";
             text_var2.Text = "";
             text_var3.Text = "";
+            text_var1.Focus();
         }
 
         private void Text_encode_dec_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -1602,7 +1609,87 @@ namespace IECMate
             }
         }
 
+        private void Btn_ersetzten_ein_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Find(text_suchen.Text, text_code_template);
+                Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                text_code_template.Focus();
+            }
+            catch (Exception)
+            {
+                ;
+            }
+            
+        }
 
+        private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                do
+                {
+                    Find(text_suchen.Text, text_code_template);
+                    Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                } while (text_code_template.Text.Contains(text_suchen.Text));
+                text_code_template.Focus();
+
+            }
+            catch (Exception)
+            {
+                ;
+            }
+        }
+
+        private int lastUsedIndex = 0;
+
+        public void Find(string searchQuery, ICSharpCode.AvalonEdit.TextEditor editor)
+        {
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                lastUsedIndex = 0;
+                return;
+            }
+
+            string editorText = editor.Text;
+
+            if (string.IsNullOrEmpty(editorText))
+            {
+                lastUsedIndex = 0;
+                return;
+            }
+
+            if (lastUsedIndex >= searchQuery.Count())
+            {
+                lastUsedIndex = 0;
+            }
+
+            int nIndex = editorText.IndexOf(searchQuery, lastUsedIndex);
+            if (nIndex != -1)
+            {
+                var area = editor.TextArea;
+                editor.Select(nIndex, searchQuery.Length);
+                lastUsedIndex = nIndex + searchQuery.Length;
+            }
+            else
+            {
+                lastUsedIndex = 0;
+            }
+        }
+
+        public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor)
+        {
+            int nIndex = -1;
+            nIndex = editor.Text.IndexOf(s);
+
+            if (nIndex != -1)
+            {
+                editor.Document.Replace(nIndex, s.Length, replacement);
+                editor.Select(nIndex, replacement.Length);
+            }
+
+        }
     }
 }
 
