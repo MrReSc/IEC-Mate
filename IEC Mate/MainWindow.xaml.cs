@@ -1613,7 +1613,6 @@ namespace IECMate
         {
             try
             {
-                Find(text_suchen.Text, text_code_template);
                 Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
                 text_code_template.Focus();
             }
@@ -1630,7 +1629,6 @@ namespace IECMate
             {
                 do
                 {
-                    Find(text_suchen.Text, text_code_template);
                     Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
                 } while (text_code_template.Text.Contains(text_suchen.Text));
                 text_code_template.Focus();
@@ -1644,51 +1642,29 @@ namespace IECMate
 
         private int lastUsedIndex = 0;
 
-        public void Find(string searchQuery, ICSharpCode.AvalonEdit.TextEditor editor)
-        {
-            if (string.IsNullOrEmpty(searchQuery))
-            {
-                lastUsedIndex = 0;
-                return;
-            }
-
-            string editorText = editor.Text;
-
-            if (string.IsNullOrEmpty(editorText))
-            {
-                lastUsedIndex = 0;
-                return;
-            }
-
-            if (lastUsedIndex >= searchQuery.Count())
-            {
-                lastUsedIndex = 0;
-            }
-
-            int nIndex = editorText.IndexOf(searchQuery, lastUsedIndex);
-            if (nIndex != -1)
-            {
-                var area = editor.TextArea;
-                editor.Select(nIndex, searchQuery.Length);
-                lastUsedIndex = nIndex + searchQuery.Length;
-            }
-            else
-            {
-                lastUsedIndex = 0;
-            }
-        }
-
         public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor)
         {
             int nIndex = -1;
-            nIndex = editor.Text.IndexOf(s);
+
+            if (editor.SelectedText.Equals(s))
+            {
+                nIndex = editor.SelectionStart;
+            }
+            else
+            {
+                nIndex = editor.Text.IndexOf(s, lastUsedIndex);
+            }
 
             if (nIndex != -1)
             {
                 editor.Document.Replace(nIndex, s.Length, replacement);
                 editor.Select(nIndex, replacement.Length);
+                lastUsedIndex = nIndex + s.Length;
             }
-
+            else
+            {
+                lastUsedIndex = 0;
+            }
         }
     }
 }
