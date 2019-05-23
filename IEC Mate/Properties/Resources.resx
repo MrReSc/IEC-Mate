@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="app_titel" xml:space="preserve">
-    <value>IEC-Mate - BETA</value>
+    <value>IEC-Mate</value>
   </data>
   <data name="cb_var_auswahlen" xml:space="preserve">
     <value>Variable auswählen...</value>
