@@ -1653,6 +1653,10 @@ namespace IECMate
             else
             {
                 nIndex = editor.Text.IndexOf(s, lastUsedIndex);
+                if (nIndex == -1)
+                {
+                    nIndex = editor.Text.IndexOf(s);
+                }
             }
 
             if (nIndex != -1)
