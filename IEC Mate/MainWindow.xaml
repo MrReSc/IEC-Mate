@@ -351,7 +351,7 @@
                                     </Button>
 
                                     <Button Grid.Row="1" x:Name="btn_ersetzten_ein" Grid.Column="5" Margin="0,0,10,0" Width="30" Height="30" Click="Btn_ersetzten_ein_Click">
-                                        <iconPacks:PackIconMaterial Kind="ArrowCollapseRight" Width="auto" Height="auto"/>
+                                        <iconPacks:PackIconMaterial Kind="ArrowCollapseRight" Width="auto" Height="auto" Foreground="Aqua"/>
                                     </Button>
 
                                     <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="7" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Right">
