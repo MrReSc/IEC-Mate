@@ -496,17 +496,14 @@ END OF TERMS AND CONDITIONS</value>
   <data name="tb_var_einfügen" xml:space="preserve">
     <value>Variablen hier einfügen...</value>
   </data>
-  <data name="tg_leer_aus" xml:space="preserve">
-    <value>Leerzeichen Aus</value>
+  <data name="tg_hotkey_ein" xml:space="preserve">
+    <value>Hot Key verwenden</value>
   </data>
   <data name="tg_leer_ein" xml:space="preserve">
-    <value>Leerzeichen Ein</value>
-  </data>
-  <data name="tg_line_aus" xml:space="preserve">
-    <value>Zeilennummern Aus</value>
+    <value>Leerzeichen anzeigen</value>
   </data>
   <data name="tg_line_ein" xml:space="preserve">
-    <value>Zeilennummern Ein</value>
+    <value>Zeilennummern anzeigen</value>
   </data>
   <data name="tg_theme_dunkel" xml:space="preserve">
     <value>Dunkel</value>
@@ -526,23 +523,14 @@ END OF TERMS AND CONDITIONS</value>
   <data name="ti_suche" xml:space="preserve">
     <value>Suche</value>
   </data>
-  <data name="ts_bin_aus" xml:space="preserve">
-    <value>In Binär Dateien suchen aus</value>
-  </data>
   <data name="ts_bin_ein" xml:space="preserve">
-    <value>In Binär Dateien suchen ein</value>
-  </data>
-  <data name="ts_exakte_aus" xml:space="preserve">
-    <value>Exakte Zeichenfolge suchen aus</value>
+    <value>Binär Dateien durchsuchen</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
-    <value>Exakte Zeichenfolge suchen ein</value>
-  </data>
-  <data name="ts_hw_aus" xml:space="preserve">
-    <value>Nur in HW-Konfig suchen aus</value>
+    <value>Nach exakter Zeichenfolge suchen</value>
   </data>
   <data name="ts_hw_ein" xml:space="preserve">
-    <value>Nur in HW-Konfig suchen ein</value>
+    <value>Nur in HW-Konfig suchen</value>
   </data>
   <data name="tt_code_gen_copy" xml:space="preserve">
     <value>Kopiert den kompletten Code in die Zwischenablage.</value>
@@ -554,13 +542,13 @@ END OF TERMS AND CONDITIONS</value>
     <value>Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
-    <value>Such auch nach *.fud, *.ful, *.fu, *.**O Dateien.</value>
+    <value>Es werden auch *.fud, *.ful, *.fu, *.**O Dateien durchsucht.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
     <value>Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive).</value>
   </data>
   <data name="tt_suche_hw" xml:space="preserve">
-    <value>Such nur im Unterverzeichnis \application\control\config\.</value>
+    <value>Sucht nur im Unterverzeichnis \application\control\config\.</value>
   </data>
   <data name="tt_suche_offnen" xml:space="preserve">
     <value>Ausgewählte Datei öffnen.</value>

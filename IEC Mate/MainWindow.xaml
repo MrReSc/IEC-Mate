@@ -11,16 +11,25 @@
                       ResizeMode="CanResizeWithGrip"    
                       Closing="MetroWindow_Closing"
                       GlowBrush="Black"
-                      WindowTransitionsEnabled="False"
+                      WindowTransitionsEnabled="False"                    
+                      NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush}"
+                      TitleCaps="False"
                       >
+    <!--WindowTitleBrush="{DynamicResource AccentColorBrush}"-->
+    <!--OverrideDefaultWindowCommandsBrush="{DynamicResource BlackBrush}"-->
+    <!--TitleForeground="{DynamicResource BlackBrush}"-->
+    <!--WindowTitleBrush="{DynamicResource WindowBackgroundBrush}"-->
     
-    <Window.Resources>
+    <Controls:MetroWindow.Resources>
         <!--Style für alle Buttons-->
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
         </Style>
-    </Window.Resources>
+
+        <Style TargetType="{x:Type Controls:ToggleSwitch}" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"></Style>
+    </Controls:MetroWindow.Resources>
 
     <!--Style für Min Max und Close Button-->
     <Controls:MetroWindow.WindowButtonCommands>
@@ -38,8 +47,10 @@
 
     <!--Einstellung menu-->
     <Controls:MetroWindow.Flyouts>
+        
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="fo_einstellungen" Header="{x:Static p:Resources.fo_einstellungen}" Position="Right" Width="300" IsPinned="False" Theme="Adapt">
+            <Controls:Flyout x:Name="fo_einstellungen" Header="{x:Static p:Resources.fo_einstellungen}" 
+                             Position="Right" Width="300" IsPinned="False" Theme="Dark">
                 
                 <Controls:Flyout.Resources>
                     <Style TargetType="Controls:ToggleSwitch">
@@ -70,24 +81,38 @@
                     </Grid.RowDefinitions>
 
                     <Label Content="{x:Static p:Resources.lb_aussehen}" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
-                    <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" OnLabel="{x:Static p:Resources.tg_theme_dunkel}" OffLabel="{x:Static p:Resources.tg_theme_hell}" IsCheckedChanged="Tg_theme_IsCheckedChanged" Margin="5,0,0,5" />
+                    <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" 
+                                           OnLabel="{x:Static p:Resources.tg_theme_hell}" 
+                                           OffLabel="{x:Static p:Resources.tg_theme_dunkel}" 
+                                           IsCheckedChanged="Tg_theme_IsCheckedChanged" 
+                                           Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
                     <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" SelectionChanged="Cb_akzent_farbe_SelectionChanged" FontSize="15"/>
 
                     <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
-                    <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="4" OnLabel="{x:Static p:Resources.tg_leer_ein}" OffLabel="{x:Static p:Resources.tg_leer_aus}" IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" />
-                    <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="5" OnLabel="{x:Static p:Resources.tg_line_ein}" OffLabel="{x:Static p:Resources.tg_line_aus}" IsCheckedChanged="Tg_line_no_IsCheckedChanged" />
+                    
+                    <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="4" 
+                                           Content="{x:Static p:Resources.tg_leer_ein}" 
+                                           IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" 
+                                           Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+                    
+                    <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="5" 
+                                           Content="{x:Static p:Resources.tg_line_ein}" 
+                                           IsCheckedChanged="Tg_line_no_IsCheckedChanged" 
+                                           Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
 
-                    <Grid Grid.Column="1" Grid.Row="6" Margin="0,3,0,0">
+                    <!--<Grid Grid.Column="1" Grid.Row="6" Margin="0,3,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>-->
 
-                        <Label Content="{x:Static p:Resources.lb_schrift}" FontSize="15" FontWeight="Medium" Margin="0" />
-                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Column="1" Grid.Row="4" Margin="20,0,5,0" 
-                                                HorizontalAlignment="Right" Width="80" ValueChanged="NumericUpDown_ValueChanged" 
-                                                HorizontalContentAlignment="Left" FontSize="15" FontWeight="Medium"/>
-                    </Grid>
+                        <!--<Label Content="{x:Static p:Resources.lb_schrift}" FontSize="15"/>-->
+                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Row="6" Grid.Column="1"
+                                                ValueChanged="NumericUpDown_ValueChanged" 
+                                                FontSize="15" 
+                                                Margin="5,0"
+                                                HorizontalContentAlignment="Left"/>
+                    <!--</Grid>-->
 
                     <Label Content="{x:Static p:Resources.lb_sprache}" Grid.Column="1" Grid.Row="7" FontSize="30" Margin="0,25,0,0"/>
                     <ComboBox x:Name="cb_sprache" Grid.Column="1" Grid.Row="8" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
@@ -106,15 +131,15 @@
     <Grid x:Name="RootGrid">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
         <!--Info Fenster-->
@@ -149,7 +174,9 @@
         </simpleChildWindow:ChildWindow>
 
         <!--Alle Tabs-->
-        <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" SelectionChanged="Tc_root_SelectionChanged" Margin="0,5,0,0">
+        <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" 
+                    SelectionChanged="Tc_root_SelectionChanged" 
+                    Margin="0,5,0,0">
             <!--Code Tab-->
             <TabItem x:Name="ti_code" Header="{x:Static p:Resources.ti_code}">
                 <Grid Margin="0,5,0,0">
@@ -351,7 +378,7 @@
                                     </Button>
 
                                     <Button Grid.Row="1" x:Name="btn_ersetzten_ein" Grid.Column="5" Margin="0,0,10,0" Width="30" Height="30" Click="Btn_ersetzten_ein_Click">
-                                        <iconPacks:PackIconMaterial Kind="ArrowCollapseRight" Width="auto" Height="auto" Foreground="Aqua"/>
+                                        <iconPacks:PackIconMaterial Kind="ArrowCollapseRight" Width="auto" Height="auto"/>
                                     </Button>
 
                                     <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="7" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Right">
@@ -453,7 +480,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
-                             Width="300" VerticalContentAlignment="Center" Height="30">-->
+                             Width="300" VerticalContentAlignment="Center" Height="30">
                     </TextBox>
 
                     <Button x:Name="btn_pfad_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_auswahlen_Click">
@@ -468,9 +495,35 @@
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
                     </Button>
 
-                    <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" OnLabel="{x:Static p:Resources.ts_exakte_ein}" OffLabel="{x:Static p:Resources.ts_exakte_aus}" Padding="0,0,5,0" IsChecked="True" ToolTip="{x:Static p:Resources.tt_suche_exakt}" Width="320" HorizontalAlignment="Right"/>
-                    <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" OnLabel="{x:Static p:Resources.ts_bin_ein}" OffLabel="{x:Static p:Resources.ts_bin_aus}" Padding="0,0,5,0" IsChecked="False" ToolTip="{x:Static p:Resources.tt_suche_bin}" Width="320" HorizontalAlignment="Right"/>
-                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="0" OnLabel="{x:Static p:Resources.ts_hw_ein}" OffLabel="{x:Static p:Resources.ts_hw_aus}" Padding="0,0,5,0" IsChecked="False"  ToolTip="{x:Static p:Resources.tt_suche_hw}" Width="320" HorizontalAlignment="Right" Margin="0"/>
+                    <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" 
+                                           Content="{x:Static p:Resources.ts_exakte_ein}" 
+                                           IsChecked="True" 
+                                           ToolTip="{x:Static p:Resources.tt_suche_exakt}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="30,0,0,0" 
+                                           IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
+
+                    <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" 
+                                           Content="{x:Static p:Resources.ts_bin_ein}" 
+                                           IsChecked="False" 
+                                           ToolTip="{x:Static p:Resources.tt_suche_bin}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="30,0,0,0"
+                                           IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
+                    
+                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="0" 
+                                           Content="{x:Static p:Resources.ts_hw_ein}" 
+                                           IsChecked="False"  
+                                           ToolTip="{x:Static p:Resources.tt_suche_hw}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="30,0,0,0"
+                                           IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
 
                     <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="5">
                         <Grid>
@@ -971,6 +1024,15 @@
 
                     <!--Datein öffnen Allgemein-->
                     <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_datei_funktion}" Grid.ColumnSpan="4">
+                        <GroupBox.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                <!--<Setter Property="Background" Value="{DynamicResource MenuItemSelectFill}"></Setter>-->
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="BorderThickness" Value="1"></Setter>
+                                <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                            </Style>
+                        </GroupBox.Resources>
+                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -1098,6 +1160,15 @@
                         </Grid.ColumnDefinitions>
 
                         <GroupBox x:Name="gb_me_funktionen" Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
+                            <GroupBox.Resources>
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                    <!--<Setter Property="Background" Value="{DynamicResource MenuItemSelectFill}"></Setter>-->
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="BorderThickness" Value="1"></Setter>
+                                    <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                </Style>
+                            </GroupBox.Resources>
+
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -1149,7 +1220,13 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
-                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  OnLabel="Hot Key Eingeschaltet" OffLabel="Hot Key Ausgeschaltet"  Width="250" HorizontalAlignment="Left" Margin="0,0,0,12" Height="40" IsCheckedChanged="Ts_hotkey_IsCheckedChanged" ToolTip="{x:Static p:Resources.tt_hotkey}"/>
+                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  
+                                                           Content="{x:Static p:Resources.tg_hotkey_ein}" 
+                                                           Width="auto" 
+                                                           HorizontalAlignment="Left" 
+                                                           VerticalAlignment="Center"
+                                                           IsCheckedChanged="Ts_hotkey_IsCheckedChanged" 
+                                                           ToolTip="{x:Static p:Resources.tt_hotkey}" Margin="0,3,0,10"/>
 
                                     <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" 
                                              Margin="0" 

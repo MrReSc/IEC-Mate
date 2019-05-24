@@ -682,9 +682,7 @@ namespace IECMate.Properties {
         ///
         ///TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
         ///
-        ///Definitions.
-        ///
-        ///&quot;License&quot; shall mean [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///Definitio [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string lb_oss_lizenz_text {
             get {
@@ -999,16 +997,16 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Leerzeichen Aus ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hot Key verwenden ähnelt.
         /// </summary>
-        public static string tg_leer_aus {
+        public static string tg_hotkey_ein {
             get {
-                return ResourceManager.GetString("tg_leer_aus", resourceCulture);
+                return ResourceManager.GetString("tg_hotkey_ein", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Leerzeichen Ein ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Leerzeichen anzeigen ähnelt.
         /// </summary>
         public static string tg_leer_ein {
             get {
@@ -1017,16 +1015,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Zeilennummern Aus ähnelt.
-        /// </summary>
-        public static string tg_line_aus {
-            get {
-                return ResourceManager.GetString("tg_line_aus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Zeilennummern Ein ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zeilennummern anzeigen ähnelt.
         /// </summary>
         public static string tg_line_ein {
             get {
@@ -1089,16 +1078,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die In Binär Dateien suchen aus ähnelt.
-        /// </summary>
-        public static string ts_bin_aus {
-            get {
-                return ResourceManager.GetString("ts_bin_aus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die In Binär Dateien suchen ein ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Binär Dateien durchsuchen ähnelt.
         /// </summary>
         public static string ts_bin_ein {
             get {
@@ -1107,16 +1087,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Exakte Zeichenfolge suchen aus ähnelt.
-        /// </summary>
-        public static string ts_exakte_aus {
-            get {
-                return ResourceManager.GetString("ts_exakte_aus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Exakte Zeichenfolge suchen ein ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nach exakter Zeichenfolge suchen ähnelt.
         /// </summary>
         public static string ts_exakte_ein {
             get {
@@ -1125,16 +1096,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Nur in HW-Konfig suchen aus ähnelt.
-        /// </summary>
-        public static string ts_hw_aus {
-            get {
-                return ResourceManager.GetString("ts_hw_aus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Nur in HW-Konfig suchen ein ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nur in HW-Konfig suchen ähnelt.
         /// </summary>
         public static string ts_hw_ein {
             get {
@@ -1170,7 +1132,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Such auch nach *.fud, *.ful, *.fu, *.**O Dateien. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden auch *.fud, *.ful, *.fu, *.**O Dateien durchsucht. ähnelt.
         /// </summary>
         public static string tt_suche_bin {
             get {
@@ -1188,7 +1150,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Such nur im Unterverzeichnis \application\control\config\. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sucht nur im Unterverzeichnis \application\control\config\. ähnelt.
         /// </summary>
         public static string tt_suche_hw {
             get {

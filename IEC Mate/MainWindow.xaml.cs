@@ -1672,6 +1672,11 @@ namespace IECMate
                 lastUsedIndex = 0;
             }
         }
+
+        private void Ts_exakte_suche_IsCheckedChanged(object sender, EventArgs e)
+        {
+            text_pattern_suche.Focus();
+        }
     }
 }
 

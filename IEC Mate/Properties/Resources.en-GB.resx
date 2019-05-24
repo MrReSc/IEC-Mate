@@ -496,17 +496,14 @@ END OF TERMS AND CONDITIONS</value>
   <data name="tb_var_einfügen" xml:space="preserve">
     <value>Insert variables here...</value>
   </data>
-  <data name="tg_leer_aus" xml:space="preserve">
-    <value>Show whitespace Off</value>
+  <data name="tg_hotkey_ein" xml:space="preserve">
+    <value>Use Hot Key</value>
   </data>
   <data name="tg_leer_ein" xml:space="preserve">
-    <value>Show whitespace On</value>
-  </data>
-  <data name="tg_line_aus" xml:space="preserve">
-    <value>Line numbers Off</value>
+    <value>Show whitespace</value>
   </data>
   <data name="tg_line_ein" xml:space="preserve">
-    <value>Line numbers On</value>
+    <value>Show line numbers</value>
   </data>
   <data name="tg_theme_dunkel" xml:space="preserve">
     <value>Dark</value>
@@ -526,23 +523,14 @@ END OF TERMS AND CONDITIONS</value>
   <data name="ti_suche" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="ts_bin_aus" xml:space="preserve">
-    <value>Search in binary files off</value>
-  </data>
   <data name="ts_bin_ein" xml:space="preserve">
-    <value>Search in binary files on</value>
-  </data>
-  <data name="ts_exakte_aus" xml:space="preserve">
-    <value>Search exact string off</value>
+    <value>Search binary files</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
-    <value>Search exact string on</value>
-  </data>
-  <data name="ts_hw_aus" xml:space="preserve">
-    <value>Search only in HW-Config off</value>
+    <value>Search for exact string</value>
   </data>
   <data name="ts_hw_ein" xml:space="preserve">
-    <value>Search only in HW-Config on</value>
+    <value>Search only in HW-Config</value>
   </data>
   <data name="tt_code_gen_copy" xml:space="preserve">
     <value>Copies the complete code to the clipboard.</value>
@@ -554,7 +542,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>If the configured key combination is pressed, then the text is inserted automatically.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
-    <value>Search also for *.fud, *.ful, *.fu, *.**O files.</value>
+    <value>It also searches *.fud, *.ful, *.fu, *.**O files.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
     <value>Only the exact string will be searched (Case Sensitive).</value>
