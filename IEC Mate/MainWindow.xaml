@@ -10,16 +10,17 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"    
         Closing="MetroWindow_Closing"
-        WindowCloseButtonStyle="{DynamicResource CleanCloseWindowButtonStyle}"
-        WindowMinButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"
-        WindowMaxButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"  
         GlowBrush="Black"
         WindowTransitionsEnabled="False"
         >
+    
+        <!--WindowCloseButtonStyle="{DynamicResource CleanCloseWindowButtonStyle}"
+        WindowMinButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"
+        WindowMaxButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"-->
 
     <!--BorderBrush="{DynamicResource AccentColorBrush}"-->
-    <Window.Resources>
-        <!--Schliessen Button-->
+    <!--<Window.Resources>
+        --><!--Schliessen Button--><!--
         <Style x:Key="CleanCloseWindowButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroWindowButtonStyle}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -33,12 +34,17 @@
             <Setter Property="Width" Value="45" />
         </Style>
 
-        <!--Min und Max Button-->
+        --><!--Min und Max Button--><!--
         <Style x:Key="CleanMinMaxWindowButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroWindowButtonStyle}">
             <Setter Property="Width" Value="45" />
         </Style>
-    </Window.Resources>
-    
+    </Window.Resources>-->
+
+    <!--Style für Min Max und Close Button-->
+    <Controls:MetroWindow.WindowButtonCommands>
+        <Controls:WindowButtonCommands Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
+    </Controls:MetroWindow.WindowButtonCommands>
+
     <!--Einstellungs Button oben rechts-->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
