@@ -202,9 +202,9 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="5" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="5" />
+                                <!--<RowDefinition Height="5" />-->
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="5" />
+                                <!--<RowDefinition Height="5" />-->
                             </Grid.RowDefinitions>
 
                             <!--Variable 1-->
@@ -287,7 +287,7 @@
                                 </TextBox>
                             </Grid>
 
-                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="7" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" 
+                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="6" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" 
                                     Click="Btn_vaiablenliste_loschen_Click">
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                             </Button>
@@ -354,6 +354,7 @@
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
@@ -369,20 +370,20 @@
                                     <Label Grid.Row="1" Grid.Column="2" Content="{x:Static p:Resources.tb_ersetzten_druch}" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
 
                                     <ComboBox x:Name="combo_vars"  Grid.Row="1" Grid.Column="3"
-                                              BorderBrush="LightGray" Width="180" Margin="0,0,20,0" VerticalContentAlignment="Center" 
+                                              BorderBrush="LightGray" Width="180" Margin="0,0,5,0" VerticalContentAlignment="Center" 
                                               HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
 
-                                    <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="6" Click="Btn_ersetzten_Click" Margin="0,0,10,0" Width="30" Height="30">
-                                        <iconPacks:PackIconMaterial Kind="FindReplace" Width="auto" Height="auto"/>
+                                    <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="6" Click="Btn_ersetzten_Click" Margin="0" Width="30" Height="30">
+                                        <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
                                     </Button>
 
-                                    <Button Grid.Row="1" x:Name="btn_ersetzten_ein" Grid.Column="5" Margin="0,0,10,0" Width="30" Height="30" Click="Btn_ersetzten_ein_Click">
-                                        <iconPacks:PackIconMaterial Kind="ArrowCollapseRight" Width="auto" Height="auto"/>
+                                    <Button Grid.Row="1" x:Name="btn_ersetzten_ein" Grid.Column="5" Margin="0" Width="30" Height="30" Click="Btn_ersetzten_ein_Click">
+                                        <iconPacks:PackIconMaterial Kind="ArrowRightBold" Width="18" Height="auto"/>
                                     </Button>
 
-                                    <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="7" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Right">
+                                    <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="7" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Left">
                                         <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto"/>
                                     </Button>
                                 </Grid>
@@ -412,7 +413,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="5" />
                                     <RowDefinition Height="auto" />
-                                    <RowDefinition Height="5" />
+                                    <!--<RowDefinition Height="5" />-->
                                 </Grid.RowDefinitions>
 
                                 <Border x:Name="border_code_output" Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="Transparent" CornerRadius="3" Background="Gainsboro">
@@ -435,22 +436,22 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Grid.RowDefinitions>
+                                    <!--<Grid.RowDefinitions>
                                         <RowDefinition Height="5" />
                                         <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
+                                    </Grid.RowDefinitions>-->
 
-                                    <Button Grid.Row="1" x:Name="btn_gen" Grid.Column="0" Click="Btn_gen_Click" Margin="0,0,10,0" Width="30" Height="30">
+                                    <Button Grid.Row="0" x:Name="btn_gen" Grid.Column="0" Click="Btn_gen_Click" Margin="0" Width="30" Height="30">
                                         <iconPacks:PackIconMaterial Kind="Play" Width="auto" Height="auto" Foreground="LimeGreen"/>
                                     </Button>
-                                    <Button Grid.Row="1" x:Name="btn_gen_loschen" Grid.Column="3" Click="Btn_gen_loschen_Click" Width="30" Height="30">
+                                    <Button Grid.Row="0" x:Name="btn_gen_loschen" Grid.Column="2" Click="Btn_gen_loschen_Click" Width="30" Height="30">
                                         <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                                     </Button>
-                                    <Button Grid.Row="1" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
+                                    <Button Grid.Row="0" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                                     </Button>
                                 </Grid>
@@ -476,11 +477,11 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="30" />
+                        <RowDefinition Height="15" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
+                    <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
                              Width="300" VerticalContentAlignment="Center" Height="30">
                     </TextBox>
 
@@ -488,7 +489,7 @@
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
-                    <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0,0,10,0" 
+                    <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0" 
                              Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Height="30" KeyDown="Text_pattern_suche_KeyDown">
                     </TextBox>
 
@@ -1013,7 +1014,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0,0,10,0" 
+                    <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
                              Width="300" VerticalContentAlignment="Center">
                     </TextBox>
 

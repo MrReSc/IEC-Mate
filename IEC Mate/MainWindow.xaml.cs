@@ -572,6 +572,7 @@ namespace IECMate
             {
                 text_projktpfad_suche.Text = folderDialog.SelectedPath;
             }
+            text_pattern_suche.Focus();
         }
 
         private async void Suche()
@@ -668,6 +669,7 @@ namespace IECMate
         private void Btn_suche_Click(object sender, RoutedEventArgs e)
         {
             Suche();
+            text_pattern_suche.Focus();
         }
 
         private void Text_pattern_suche_KeyDown(object sender, KeyEventArgs e)
@@ -676,6 +678,7 @@ namespace IECMate
             if (e.Key == Key.Enter)
             {
                 Suche();
+                text_pattern_suche.Focus();
             }
         }
 
