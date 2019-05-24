@@ -8,13 +8,16 @@
         xmlns:p = "clr-namespace:IECMate.Properties"
         Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip"
-        BorderBrush="{DynamicResource AccentColorBrush}"
-        BorderThickness="1" Closing="MetroWindow_Closing"
+        ResizeMode="CanResizeWithGrip"    
+        Closing="MetroWindow_Closing"
         WindowCloseButtonStyle="{DynamicResource CleanCloseWindowButtonStyle}"
         WindowMinButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"
-        WindowMaxButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"                     
+        WindowMaxButtonStyle="{DynamicResource CleanMinMaxWindowButtonStyle}"  
+        GlowBrush="Black"
+        WindowTransitionsEnabled="False"
         >
+
+    <!--BorderBrush="{DynamicResource AccentColorBrush}"-->
     <Window.Resources>
         <!--Schliessen Button-->
         <Style x:Key="CleanCloseWindowButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroWindowButtonStyle}">
