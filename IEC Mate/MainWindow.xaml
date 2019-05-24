@@ -11,8 +11,10 @@
                       ResizeMode="CanResizeWithGrip"    
                       Closing="MetroWindow_Closing"
                       GlowBrush="Black"
-                      WindowTransitionsEnabled="False"                    
-                      NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush}"
+                      BorderBrush="Black"  
+                      WindowTitleBrush="{DynamicResource AccentColorBrush}"
+                      NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush3}"
+                      NonActiveGlowBrush="Transparent"
                       TitleCaps="False"
                       >
     <!--WindowTitleBrush="{DynamicResource AccentColorBrush}"-->
@@ -86,7 +88,9 @@
                                            OffLabel="{x:Static p:Resources.tg_theme_dunkel}" 
                                            IsCheckedChanged="Tg_theme_IsCheckedChanged" 
                                            Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
-                    <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" SelectionChanged="Cb_akzent_farbe_SelectionChanged" FontSize="15"/>
+                    <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" 
+                              SelectionChanged="Cb_akzent_farbe_SelectionChanged" 
+                              FontSize="15"/>
 
                     <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
                     
