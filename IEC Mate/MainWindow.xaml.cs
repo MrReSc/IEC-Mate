@@ -1073,6 +1073,8 @@ namespace IECMate
             {
                 text_projktpfad_helfer.Text = folderDialog.SelectedPath;
             }
+            cb_select_me.Focus();
+
         }
 
         private async void FehlerHelferAsync()

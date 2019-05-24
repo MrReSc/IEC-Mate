@@ -1,19 +1,27 @@
 ﻿<Controls:MetroWindow x:Name="root_window" x:Class="IECMate.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
-        xmlns:p = "clr-namespace:IECMate.Properties"
-        Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip"    
-        Closing="MetroWindow_Closing"
-        GlowBrush="Black"
-        WindowTransitionsEnabled="False"
-        >
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+                      xmlns:p = "clr-namespace:IECMate.Properties"
+                      Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
+                      WindowStartupLocation="CenterScreen"
+                      ResizeMode="CanResizeWithGrip"    
+                      Closing="MetroWindow_Closing"
+                      GlowBrush="Black"
+                      WindowTransitionsEnabled="False"
+                      >
     
+    <Window.Resources>
+        <!--Style für alle Buttons-->
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+    </Window.Resources>
+
     <!--Style für Min Max und Close Button-->
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
@@ -23,7 +31,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <ToggleButton IsChecked="{Binding ElementName=fo_einstellungen, Path=IsOpen}" Cursor="Hand">
-                <iconPacks:PackIconMaterial Kind="Settings" Width="15" Height="15"/>
+                <iconPacks:PackIconMaterial Kind="SettingsOutline" Width="15" Height="15"/>
             </ToggleButton>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
@@ -251,7 +259,8 @@
                                 </TextBox>
                             </Grid>
 
-                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="7" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" Click="Btn_vaiablenliste_loschen_Click">
+                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="7" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" 
+                                    Click="Btn_vaiablenliste_loschen_Click">
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                             </Button>
                         </Grid>
