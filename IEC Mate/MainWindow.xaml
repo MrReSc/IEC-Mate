@@ -111,7 +111,8 @@
                                                 ValueChanged="NumericUpDown_ValueChanged" 
                                                 FontSize="15" 
                                                 Margin="5,0"
-                                                HorizontalContentAlignment="Left"/>
+                                                HorizontalContentAlignment="Left"
+                                                StringFormat=" {0}   pt."/>
                     <!--</Grid>-->
 
                     <Label Content="{x:Static p:Resources.lb_sprache}" Grid.Column="1" Grid.Row="7" FontSize="30" Margin="0,25,0,0"/>
