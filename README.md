@@ -41,7 +41,7 @@ Die Bitset-Funktion bietet die Möglichkeit schnell zwischen Binär-, Hexadezima
 
 ## Helfer
 
-IEC-Mate hat auch einiger Helfer-Funktionen. 
+IEC-Mate hat auch einige Helfer-Funktionen. 
 
 Spezifisch auf IEC Projekte zugeschnitten sind die Ordner- und Datei-Helfer. Sie ermöglichen einen schnellen Zugriff auf häufig genutzt Dateien und Ordner.
 
