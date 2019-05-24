@@ -41,7 +41,7 @@
     <ProductName>IEC-Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>23</ApplicationRevision>
-    <ApplicationVersion>0.0.420.19144</ApplicationVersion>
+    <ApplicationVersion>0.0.422.19144</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -102,13 +102,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks, Version=2.3.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.2.3.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
@@ -127,7 +127,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -216,12 +216,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="resources\Entypo.ttf" />
-    <Resource Include="packages.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -229,7 +229,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\Entypo-license.txt" />
+    <Resource Include="resources\WindowsIcons-license.txt" />
     <Resource Include="code-braces.ico" />
     <Content Include="resources\7z\7za.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -243,11 +243,11 @@
     <Resource Include="resources\oss_lizenzen_iec_mate.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\Entypo-license.txt" />
     <Content Include="resources\st_syntax.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Resource Include="resources\WindowsIcons-license.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
