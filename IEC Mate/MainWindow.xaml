@@ -31,6 +31,10 @@
         </Style>
 
         <Style TargetType="{x:Type Controls:ToggleSwitch}" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"></Style>
+
+        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
+            <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="20"></Setter>
+        </Style>
     </Controls:MetroWindow.Resources>
 
     <!--Style für Min Max und Close Button-->
