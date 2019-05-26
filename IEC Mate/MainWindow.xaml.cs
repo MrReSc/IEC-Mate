@@ -538,26 +538,9 @@ namespace IECMate
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            //Mailprogramm öffnen wenn auf Link geklickt wird
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
-
-        //private void Btn_template_undo_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //Nur wenn es etwas im Stack hat dann wird auch das Undo gemacht
-        //    if (undoList.Count > 0)
-        //    {
-        //        text_code_template.Text = undoList.Pop();
-        //    }
-
-        //    ////Wenn Stack leer ist, dann wir der Button deaktiviert
-        //    //if (undoList.Count == 0)
-        //    //{
-        //    //    btn_template_undo.IsEnabled = false;
-        //    //    mitem_undo.IsEnabled = false;
-        //    //}
-        //}
 
         private void Btn_pfad_auswahlen_Click(object sender, RoutedEventArgs e)
         {
@@ -1436,8 +1419,6 @@ namespace IECMate
                 Directory.GetAccessControl(suchpfad);
 
                 AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
-                //DirectoryInfo directory = new DirectoryInfo(suchpfad);
-                //FileInfo[] files = directory.GetFiles();
 
                 foreach (var file in allFiles)
                 {
