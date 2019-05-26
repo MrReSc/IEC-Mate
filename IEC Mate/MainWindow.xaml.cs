@@ -48,7 +48,6 @@ namespace IECMate
         public RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion");
         public string os_version;
 
-
         public MainWindow()
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
@@ -79,8 +78,9 @@ namespace IECMate
             text_code_output.TextArea.Caret.CaretBrush = Brushes.Transparent;
             text_code_output.TextArea.FontFamily = new FontFamily("Consolas");
 
-            //Bei einem Kopieren Event wird die Methode CopyEvent aufgerufen
-            //DataObject.AddCopyingHandler(this, CopyEvent);
+            //Wenn in einem der beiden Editoren kopiert wird, dann wird die Methode onTextViewSettingDataHandler aufgerufen         
+            DataObject.AddSettingDataHandler(text_code_template, onTextViewSettingDataHandler);
+            DataObject.AddSettingDataHandler(text_code_output, onTextViewSettingDataHandler);
 
             //ComoBoxen
             combo_vars.ItemsSource = variablen_liste;
@@ -192,16 +192,16 @@ namespace IECMate
             os_version = (string)registryKey.GetValue("productName");
         }
 
-        //private void CopyEvent(object sender, DataObjectCopyingEventArgs e)
-        //{
-        //    //string text = (String)e.DataObject.GetData(typeof(String));
-        //    TextEditor editor = e.Source as TextEditor;
-
-        //    if (!String.IsNullOrWhiteSpace(editor.SelectedText))
-        //    {
-        //        Clipboard.SetText(editor.SelectedText);
-        //    }
-        //}
+        public void onTextViewSettingDataHandler(object sender, DataObjectSettingDataEventArgs e)
+        {
+            //hier wird die HTML formatierung vom Text im Editor entfernt
+            //da nie eine Art formatierung mit Kopiert werden soll.
+            var textView = sender as TextEditor;
+            if (textView != null && e.Format == DataFormats.Html)
+            {
+                e.CancelCommand();
+            }
+        }
 
         private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
         {
