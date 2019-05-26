@@ -307,7 +307,7 @@
                                 </TextBox>
                             </Grid>
 
-                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="6" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" 
+                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="6" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" 
                                     Click="Btn_vaiablenliste_loschen_Click">
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
                             </Button>
