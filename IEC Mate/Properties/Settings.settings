@@ -77,5 +77,14 @@
     <Setting Name="hotkey_brackets" Type="System.String" Scope="User">
       <Value Profile="(Default)">Q</Value>
     </Setting>
+    <Setting Name="showtab" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="showendofline" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="converttabtospace" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

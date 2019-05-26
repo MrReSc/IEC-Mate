@@ -505,11 +505,20 @@ END OF TERMS AND CONDITIONS</value>
   <data name="tg_line_ein" xml:space="preserve">
     <value>Zeilennummern anzeigen</value>
   </data>
+  <data name="tg_spaceumwandeln" xml:space="preserve">
+    <value>Tabs in Leerezeichen umwandeln</value>
+  </data>
   <data name="tg_theme_dunkel" xml:space="preserve">
     <value>Dunkel</value>
   </data>
   <data name="tg_theme_hell" xml:space="preserve">
     <value>Hell</value>
+  </data>
+  <data name="tg_zeigetab" xml:space="preserve">
+    <value>Tab anzeigen</value>
+  </data>
+  <data name="tg_zeigezeilenende" xml:space="preserve">
+    <value>Zeilenende anzeigen</value>
   </data>
   <data name="ti_bitset" xml:space="preserve">
     <value>Bitset</value>

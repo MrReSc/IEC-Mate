@@ -322,5 +322,41 @@ namespace IECMate.Properties {
                 this["hotkey_brackets"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool showtab {
+            get {
+                return ((bool)(this["showtab"]));
+            }
+            set {
+                this["showtab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool showendofline {
+            get {
+                return ((bool)(this["showendofline"]));
+            }
+            set {
+                this["showendofline"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool converttabtospace {
+            get {
+                return ((bool)(this["converttabtospace"]));
+            }
+            set {
+                this["converttabtospace"] = value;
+            }
+        }
     }
 }

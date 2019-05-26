@@ -29,7 +29,7 @@ using System.Text;
 using System.Threading;
 using System.Globalization;
 using WindowsInput.Native;
-
+using ICSharpCode.AvalonEdit;
 
 namespace IECMate
 {
@@ -74,12 +74,13 @@ namespace IECMate
             xshd_stream.Close();
 
             text_code_template.TextArea.FontFamily = new FontFamily("Consolas");
-            text_code_template.Options.ConvertTabsToSpaces = true;
 
             text_code_output.IsReadOnly = true;
             text_code_output.TextArea.Caret.CaretBrush = Brushes.Transparent;
             text_code_output.TextArea.FontFamily = new FontFamily("Consolas");
-            text_code_output.Options.ConvertTabsToSpaces = true;
+
+            //Bei einem Kopieren Event wird die Methode CopyEvent aufgerufen
+            //DataObject.AddCopyingHandler(this, CopyEvent);
 
             //ComoBoxen
             combo_vars.ItemsSource = variablen_liste;
@@ -127,11 +128,22 @@ namespace IECMate
                 DecodeText();
             }
 
-            text_code_template.ShowLineNumbers = Properties.Settings.Default.zeilennummern;
-            text_code_output.ShowLineNumbers = Properties.Settings.Default.zeilennummern;
-            tg_line_no.IsChecked = Properties.Settings.Default.zeilennummern;
+            text_code_template.Options.ConvertTabsToSpaces = Properties.Settings.Default.converttabtospace;
+            text_code_output.Options.ConvertTabsToSpaces = Properties.Settings.Default.converttabtospace;
+
+            text_code_template.Options.ShowEndOfLine = Properties.Settings.Default.showendofline;
+            text_code_output.Options.ShowEndOfLine = Properties.Settings.Default.showendofline;
+
+            text_code_template.Options.ShowTabs = Properties.Settings.Default.showtab;
+            text_code_output.Options.ShowTabs = Properties.Settings.Default.showtab;
 
             text_code_template.Options.ShowSpaces = Properties.Settings.Default.leerzeichen;
+            text_code_output.Options.ShowSpaces = Properties.Settings.Default.leerzeichen;
+
+            text_code_template.ShowLineNumbers = Properties.Settings.Default.zeilennummern;
+            text_code_output.ShowLineNumbers = Properties.Settings.Default.zeilennummern;
+
+            tg_line_no.IsChecked = Properties.Settings.Default.zeilennummern;
             tg_leerzeichen.IsChecked = Properties.Settings.Default.leerzeichen;
 
             nc_font_size.Value = Properties.Settings.Default.schriftgrosse;
@@ -179,6 +191,17 @@ namespace IECMate
             //OS Version
             os_version = (string)registryKey.GetValue("productName");
         }
+
+        //private void CopyEvent(object sender, DataObjectCopyingEventArgs e)
+        //{
+        //    //string text = (String)e.DataObject.GetData(typeof(String));
+        //    TextEditor editor = e.Source as TextEditor;
+
+        //    if (!String.IsNullOrWhiteSpace(editor.SelectedText))
+        //    {
+        //        Clipboard.SetText(editor.SelectedText);
+        //    }
+        //}
 
         private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
         {
@@ -251,36 +274,6 @@ namespace IECMate
                 await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_px_nummer.Focus()));
             }
         }
-
-        //private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        string undoListInhalt = "";
-
-        //        if (undoList.Count >= 1)
-        //        {
-        //            undoListInhalt = undoList.Peek();
-        //        }
-
-        //        if ((!String.Equals(text_code_template.Text, undoListInhalt)))
-        //        {
-        //            undoList.Push(text_code_template.Text);
-        //        }
-
-        //        //if (undoList.Count >= 1)
-        //        //{
-        //        //    btn_template_undo.IsEnabled = true;
-        //        //    mitem_undo.IsEnabled = true;
-        //        //}
-
-        //        text_code_template.Text = text_code_template.Text.Replace(text_suchen.Text, combo_vars.SelectedItem.ToString());
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ;
-        //    }
-        //}
 
         private void Btn_template_speichern_Click(object sender, RoutedEventArgs e)
         {
@@ -398,7 +391,7 @@ namespace IECMate
                     }
                     else
                     {
-                        outtext = outtext + Environment.NewLine + Environment.NewLine + temp_text;
+                        outtext = outtext + Environment.NewLine + temp_text;
                     }
                 }
             }
@@ -438,6 +431,7 @@ namespace IECMate
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
         {
             text_code_template.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
+            text_code_output.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
         }
 
         private void NumericUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -450,6 +444,24 @@ namespace IECMate
         {
             text_code_template.ShowLineNumbers = (bool)tg_line_no.IsChecked;
             text_code_output.ShowLineNumbers = (bool)tg_line_no.IsChecked;
+        }
+
+        private void Tg_showtab_IsCheckedChanged(object sender, EventArgs e)
+        {
+            text_code_template.Options.ShowTabs = (bool)tg_showtab.IsChecked;
+            text_code_output.Options.ShowTabs = (bool)tg_showtab.IsChecked;
+        }
+
+        private void Tg_showendofline_IsCheckedChanged(object sender, EventArgs e)
+        {
+            text_code_template.Options.ShowEndOfLine = (bool)tg_showendofline.IsChecked;
+            text_code_output.Options.ShowEndOfLine = (bool)tg_showendofline.IsChecked;
+        }
+
+        private void Tg_converttospace_IsCheckedChanged(object sender, EventArgs e)
+        {
+            text_code_template.Options.ConvertTabsToSpaces = (bool)tg_converttospace.IsChecked;
+            text_code_output.Options.ConvertTabsToSpaces = (bool)tg_converttospace.IsChecked;
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -486,6 +498,9 @@ namespace IECMate
             Properties.Settings.Default.variable_3 = text_var3.Text;
             Properties.Settings.Default.vorlage = text_code_template.Text;
             Properties.Settings.Default.leerzeichen = (bool)tg_leerzeichen.IsChecked;
+            Properties.Settings.Default.converttabtospace = (bool)tg_converttospace.IsChecked;
+            Properties.Settings.Default.showtab = (bool)tg_showtab.IsChecked;
+            Properties.Settings.Default.showendofline = (bool)tg_showendofline.IsChecked;
             Properties.Settings.Default.tabcontrol_index = tc_root.SelectedIndex;
             Properties.Settings.Default.schriftgrosse = (double)nc_font_size.Value;
             Properties.Settings.Default.zeilennummern = (bool)tg_line_no.IsChecked;
@@ -1680,6 +1695,7 @@ namespace IECMate
         {
             text_pattern_suche.Focus();
         }
+
     }
 }
 

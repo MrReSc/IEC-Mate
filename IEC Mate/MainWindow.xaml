@@ -57,19 +57,13 @@
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="fo_einstellungen" Header="{x:Static p:Resources.fo_einstellungen}" 
                              Position="Right" Width="300" IsPinned="False" Theme="Dark">
-                
-                <Controls:Flyout.Resources>
-                    <Style TargetType="Controls:ToggleSwitch">
-                        <Setter Property="Margin" Value="5,0,0,0"/>
-                    </Style>
-                </Controls:Flyout.Resources>
 
                 <Grid>
-
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="10" />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -77,59 +71,77 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="{x:Static p:Resources.lb_aussehen}" Grid.Column="1" Grid.Row="0" FontSize="30" Margin="0,25,0,0"/>
-                    <Controls:ToggleSwitch x:Name="tg_theme" Grid.Column="1" Grid.Row="1" 
+                    <!--Aussehen-->
+                    <StackPanel Grid.Column="1" Grid.Row="0">
+                        <Label Content="{x:Static p:Resources.lb_aussehen}" FontSize="30" Margin="0,25,0,0"/>
+                        
+                        <Controls:ToggleSwitch x:Name="tg_theme"
                                            OnLabel="{x:Static p:Resources.tg_theme_hell}" 
                                            OffLabel="{x:Static p:Resources.tg_theme_dunkel}" 
                                            IsCheckedChanged="Tg_theme_IsCheckedChanged" 
                                            Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
-                    <ComboBox x:Name="cb_akzent_farbe" Grid.Column="1" Grid.Row="2" Margin="5,0" 
-                              SelectionChanged="Cb_akzent_farbe_SelectionChanged" 
-                              FontSize="15"/>
+                        
+                        <ComboBox x:Name="cb_akzent_farbe" Margin="5,0" 
+                                  SelectionChanged="Cb_akzent_farbe_SelectionChanged" 
+                                  FontSize="15"/>
+                    </StackPanel>
 
-                    <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
+                    <!--Editor-->
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                       
+                        <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
+
+                        <Controls:ToggleSwitch x:Name="tg_leerzeichen" 
+                                               Content="{x:Static p:Resources.tg_leer_ein}" 
+                                               IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" 
+                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+
+                        <Controls:ToggleSwitch x:Name="tg_showtab" 
+                                               Content="{x:Static p:Resources.tg_zeigetab}" 
+                                               IsCheckedChanged="Tg_showtab_IsCheckedChanged"
+                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10" />
+
+                        <Controls:ToggleSwitch x:Name="tg_showendofline" 
+                                               Content="{x:Static p:Resources.tg_zeigezeilenende}" 
+                                               IsCheckedChanged="Tg_showendofline_IsCheckedChanged"
+                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10" />
+
+                        <Controls:ToggleSwitch x:Name="tg_converttospace" 
+                                               Content="{x:Static p:Resources.tg_spaceumwandeln}" 
+                                               IsCheckedChanged="Tg_converttospace_IsCheckedChanged" 
+                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10" />
+
+                        <Controls:ToggleSwitch x:Name="tg_line_no" 
+                                               Content="{x:Static p:Resources.tg_line_ein}" 
+                                               IsCheckedChanged="Tg_line_no_IsCheckedChanged" 
+                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+
+
+                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30"
+                                                    ValueChanged="NumericUpDown_ValueChanged" 
+                                                    FontSize="15" 
+                                                    Margin="5,0"
+                                                    HorizontalContentAlignment="Left"
+                                                    StringFormat=" {0}   pt."/>
+
+                    </StackPanel>
+
+                    <!--Sprache-->
+                    <StackPanel Grid.Column="1" Grid.Row="2">
+                        <Label Content="{x:Static p:Resources.lb_sprache}"  FontSize="30" Margin="0,25,0,0"/>
+                        <ComboBox x:Name="cb_sprache" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
+                    </StackPanel>
                     
-                    <Controls:ToggleSwitch x:Name="tg_leerzeichen" Grid.Column="1" Grid.Row="4" 
-                                           Content="{x:Static p:Resources.tg_leer_ein}" 
-                                           IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" 
-                                           Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
-                    
-                    <Controls:ToggleSwitch x:Name="tg_line_no" Grid.Column="1" Grid.Row="5" 
-                                           Content="{x:Static p:Resources.tg_line_ein}" 
-                                           IsCheckedChanged="Tg_line_no_IsCheckedChanged" 
-                                           Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+                    <!--Hilfe-->
+                    <StackPanel Grid.Column="1" Grid.Row="3">
+                        <Label Content="{x:Static p:Resources.dp_hilfe}"  FontSize="30" Margin="0,25,0,0"/>
+                        <Button Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
+                            <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
 
-                    <!--<Grid Grid.Column="1" Grid.Row="6" Margin="0,3,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>-->
-
-                        <!--<Label Content="{x:Static p:Resources.lb_schrift}" FontSize="15"/>-->
-                        <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30" Grid.Row="6" Grid.Column="1"
-                                                ValueChanged="NumericUpDown_ValueChanged" 
-                                                FontSize="15" 
-                                                Margin="5,0"
-                                                HorizontalContentAlignment="Left"
-                                                StringFormat=" {0}   pt."/>
-                    <!--</Grid>-->
-
-                    <Label Content="{x:Static p:Resources.lb_sprache}" Grid.Column="1" Grid.Row="7" FontSize="30" Margin="0,25,0,0"/>
-                    <ComboBox x:Name="cb_sprache" Grid.Column="1" Grid.Row="8" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
-
-                    <Label Content="{x:Static p:Resources.dp_hilfe}" Grid.Column="1" Grid.Row="9" FontSize="30" Margin="0,25,0,0"/>
-                    <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
-                        <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
-                    </Button>
 
                 </Grid>
             </Controls:Flyout>

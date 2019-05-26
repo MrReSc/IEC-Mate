@@ -1024,6 +1024,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tabs in Leerezeichen umwandeln ähnelt.
+        /// </summary>
+        public static string tg_spaceumwandeln {
+            get {
+                return ResourceManager.GetString("tg_spaceumwandeln", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Dunkel ähnelt.
         /// </summary>
         public static string tg_theme_dunkel {
@@ -1038,6 +1047,24 @@ namespace IECMate.Properties {
         public static string tg_theme_hell {
             get {
                 return ResourceManager.GetString("tg_theme_hell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tab anzeigen ähnelt.
+        /// </summary>
+        public static string tg_zeigetab {
+            get {
+                return ResourceManager.GetString("tg_zeigetab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zeilenende anzeigen ähnelt.
+        /// </summary>
+        public static string tg_zeigezeilenende {
+            get {
+                return ResourceManager.GetString("tg_zeigezeilenende", resourceCulture);
             }
         }
         
