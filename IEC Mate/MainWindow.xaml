@@ -35,6 +35,7 @@
         <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
             <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="20"></Setter>
         </Style>
+
     </Controls:MetroWindow.Resources>
 
     <!--Style für Min Max und Close Button-->
@@ -208,6 +209,7 @@
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_variablen}">
+                      
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -240,8 +242,13 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Label Grid.Row="0" Content="{x:Static p:Resources.lb_var1}" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
-
+                                <DockPanel Grid.Column="0" Grid.Row="0">
+                                    <Label Content="{x:Static p:Resources.lb_var1}" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
+                                    <Button x:Name="btn_vaiablenliste_loschen" Width="25" Height="25" DockPanel.Dock="Right" Click="Btn_vaiablenliste_loschen_Click" HorizontalAlignment="Right">
+                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
+                                    </Button>
+                                </DockPanel>
+                             
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
                                          Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
@@ -307,10 +314,10 @@
                                 </TextBox>
                             </Grid>
 
-                            <Button x:Name="btn_vaiablenliste_loschen" Grid.Row="6" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" 
+                            <!--<Button x:Name="btn_vaiablenliste_loschen" Grid.Row="6" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" 
                                     Click="Btn_vaiablenliste_loschen_Click">
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
-                            </Button>
+                            </Button>-->
                         </Grid>
                     </GroupBox>
 
@@ -337,14 +344,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="auto" />
                                     <RowDefinition Height="5" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="5" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
+                                <Border Grid.Column="1" Grid.Row="3"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
                                     <avalonEdit:TextEditor  
                                             x:Name="text_code_template" 
                                             Width="auto" Height="auto" IsTabStop="False"
@@ -366,48 +373,31 @@
                                     </avalonEdit:TextEditor>
                                 </Border>
 
-                                <Grid Grid.Column="1" Grid.Row="3">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <TextBox Grid.Row="1" x:Name="text_suchen" Grid.Column="1" Width="160" Margin="0,0,20,0" 
+                                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                    <TextBox x:Name="text_suchen" Width="200" Margin="0,0,20,0" 
                                              VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}"
                                              Controls:TextBoxHelper.ClearTextButton="True">
                                     </TextBox>
-                                    <Label Grid.Row="1" Grid.Column="2" Content="{x:Static p:Resources.tb_ersetzten_druch}" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>
+                                    
+                                    <!--<Label Content="{x:Static p:Resources.tb_ersetzten_druch}" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>-->
 
-                                    <ComboBox x:Name="combo_vars"  Grid.Row="1" Grid.Column="3"
-                                              BorderBrush="LightGray" Width="180" Margin="0,0,5,0" VerticalContentAlignment="Center" 
+                                    <ComboBox x:Name="combo_vars" 
+                                              BorderBrush="LightGray" Width="135" Margin="0,0,5,0" VerticalContentAlignment="Center" 
                                               HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
-
-                                    <Button Grid.Row="1" x:Name="btn_ersetzten" Grid.Column="6" Click="Btn_ersetzten_Click" Margin="0" Width="30" Height="30">
-                                        <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
-                                    </Button>
-
-                                    <Button Grid.Row="1" x:Name="btn_ersetzten_ein" Grid.Column="5" Margin="0" Width="30" Height="30" Click="Btn_ersetzten_ein_Click">
+                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Width="25" Height="25" Click="Btn_ersetzten_ein_Click">
                                         <iconPacks:PackIconMaterial Kind="ArrowRightBold" Width="18" Height="auto"/>
                                     </Button>
 
-                                    <Button Grid.Row="1" x:Name="btn_template_loschen" Grid.Column="7" Click="Btn_template_loschen_Click" Width="30" Height="30" HorizontalAlignment="Left">
+                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click" Margin="0" Width="25" Height="25">
+                                        <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
+                                    </Button>
+
+                                    <Button x:Name="btn_template_loschen" Click="Btn_template_loschen_Click" Width="25" Height="25" HorizontalAlignment="Left">
                                         <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto"/>
                                     </Button>
-                                </Grid>
+                                </StackPanel>
                             </Grid>
                         </GroupBox>
 
@@ -430,15 +420,15 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="0" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="3" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="5" />
-                                    <RowDefinition Height="auto" />
-                                    <!--<RowDefinition Height="5" />-->
                                 </Grid.RowDefinitions>
 
-                                <Border x:Name="border_code_output" Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" 
-                                        BorderBrush="Transparent" CornerRadius="3" Background="{DynamicResource GrayBrush8}">
+                                <Border x:Name="border_code_output" Grid.Column="1" Grid.Row="3"  BorderThickness="1" Padding="4" 
+                                        CornerRadius="3" Background="{DynamicResource GrayBrush8}" BorderBrush="{DynamicResource GrayBrush8}">
                                     <avalonEdit:TextEditor  
                                             x:Name="text_code_output" 
                                             Width="auto" Height="auto"
@@ -455,29 +445,46 @@
                                     </avalonEdit:TextEditor>
                                 </Border>
 
-                                <Grid Grid.Column="1" Grid.Row="3">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
 
-                                    <!--<Grid.RowDefinitions>
-                                        <RowDefinition Height="5" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>-->
-
-                                    <Button Grid.Row="0" x:Name="btn_gen" Grid.Column="0" Click="Btn_gen_Click" Margin="0" Width="30" Height="30">
+                                    <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Width="25" Height="25">
                                         <iconPacks:PackIconMaterial Kind="Play" Width="auto" Height="auto" Foreground="LimeGreen"/>
                                     </Button>
-                                    <Button Grid.Row="0" x:Name="btn_gen_loschen" Grid.Column="2" Click="Btn_gen_loschen_Click" Width="30" Height="30">
-                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
-                                    </Button>
-                                    <Button Grid.Row="0" Grid.Column="1" Click="CopyToClipboard_Click_1" Width="30" Height="30" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
+
+                                    <Button Click="CopyToClipboard_Click_1" Width="25" Height="25" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                                     </Button>
-                                </Grid>
+
+                                    <Button x:Name="btn_gen_loschen" Click="Btn_gen_loschen_Click" Width="25" Height="25">
+                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
+                                    </Button>
+                                                                   
+                                </StackPanel>
+
+                                <!--<ToolBarTray Grid.Column="1" Grid.Row="3" IsLocked="True">
+                                    <ToolBar Grid.Column="1" Grid.Row="3">
+                                        <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Width="25" Height="25">
+                                            <iconPacks:PackIconMaterial Kind="Play" Width="auto" Height="auto" Foreground="LimeGreen"/>
+                                        </Button>
+                                        
+                                        <Separator/>
+
+                                        <Button Click="CopyToClipboard_Click_1" Width="25" Height="25" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
+                                            <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
+                                        </Button>
+
+                                        <Button Click="Btn_gen_speichern_Click" Width="25" Height="25">
+                                            <iconPacks:PackIconMaterial Kind="ContentSaveOutline" Width="auto" Height="auto"/>
+                                        </Button>
+
+                                        <Separator/>
+
+                                        <Button x:Name="btn_gen_loschen" Click="Btn_gen_loschen_Click" Width="25" Height="25">
+                                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
+                                        </Button>
+                                    </ToolBar>
+                                </ToolBarTray>-->
+                                
                             </Grid>
                         </GroupBox>
                     </Grid>

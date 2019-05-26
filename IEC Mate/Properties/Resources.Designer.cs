@@ -70,7 +70,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Variable auswählen... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ersetzten durch... ähnelt.
         /// </summary>
         public static string cb_var_auswahlen {
             get {
