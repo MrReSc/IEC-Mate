@@ -348,7 +348,8 @@
                                     <avalonEdit:TextEditor  
                                             x:Name="text_code_template" 
                                             Width="auto" Height="auto" IsTabStop="False"
-                                            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                            Foreground="{DynamicResource TextBrush}">
                                         <avalonEdit:TextEditor.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="{x:Static p:Resources.dp_datei_import}" Click="Btn_template_offnen_Click"/>
@@ -436,11 +437,13 @@
                                     <!--<RowDefinition Height="5" />-->
                                 </Grid.RowDefinitions>
 
-                                <Border x:Name="border_code_output" Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="Transparent" CornerRadius="3" Background="Gainsboro">
+                                <Border x:Name="border_code_output" Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" 
+                                        BorderBrush="Transparent" CornerRadius="3" Background="{DynamicResource GrayBrush8}">
                                     <avalonEdit:TextEditor  
                                             x:Name="text_code_output" 
                                             Width="auto" Height="auto"
-                                            Background="Gainsboro"
+                                            Background="{DynamicResource GrayBrush8}"
+                                            Foreground="{DynamicResource TextBrush}"
                                             ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsTabStop="False">
                                         <avalonEdit:TextEditor.ContextMenu>
                                             <ContextMenu>
@@ -619,17 +622,17 @@
 
                                 <StackPanel VerticalAlignment="Top">
                                     <TextBox x:Name="text_encode_dec"  Text="{x:Static p:Resources.tb_bitset_dez}" Width="400" VerticalContentAlignment="Center" 
-                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" 
+                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="{DynamicResource GrayBrush8}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
 
                                     <TextBox x:Name="text_encode_hex"  Text="{x:Static p:Resources.tb_bitset_hex}" Width="400" VerticalContentAlignment="Center" 
-                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" 
+                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="{DynamicResource GrayBrush8}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
 
                                     <TextBox x:Name="text_encode_bin"  Text="{x:Static p:Resources.tb_bitset_bin}" Width="400" VerticalContentAlignment="Center" 
-                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="Gainsboro" 
+                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="{DynamicResource GrayBrush8}"
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
                                 </StackPanel>
@@ -817,11 +820,11 @@
                                 </TextBox>
 
                                 <TextBox x:Name="text_decode_out1" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
-                                         IsReadOnly="True" Background="Gainsboro">
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
                                 </TextBox>
 
                                 <TextBox x:Name="text_decode_out2" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
-                                         IsReadOnly="True" Background="Gainsboro">
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
                                 </TextBox>
                             </StackPanel>
 

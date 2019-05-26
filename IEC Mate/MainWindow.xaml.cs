@@ -109,19 +109,6 @@ namespace IECMate
 
             if (Properties.Settings.Default.theme == "BaseDark")
             {
-                text_code_template.TextArea.Foreground = Brushes.White;
-                text_code_output.TextArea.Foreground = Brushes.White;
-
-                text_code_output.Background = DarkBackground;
-                border_code_output.Background = DarkBackground;
-
-                text_decode_out1.Background = DarkBackground;
-                text_decode_out2.Background = DarkBackground;
-
-                text_encode_bin.Background = DarkBackground;
-                text_encode_dec.Background = DarkBackground;
-                text_encode_hex.Background = DarkBackground;
-
                 tg_theme.IsChecked = true;
 
                 //Decode Matrix von Bitset neu Aufbauen
@@ -145,6 +132,9 @@ namespace IECMate
 
             tg_line_no.IsChecked = Properties.Settings.Default.zeilennummern;
             tg_leerzeichen.IsChecked = Properties.Settings.Default.leerzeichen;
+            tg_showendofline.IsChecked = Properties.Settings.Default.showendofline;
+            tg_showtab.IsChecked = Properties.Settings.Default.showtab;
+            tg_converttospace.IsChecked = Properties.Settings.Default.converttabtospace;
 
             nc_font_size.Value = Properties.Settings.Default.schriftgrosse;
             text_code_output.TextArea.FontSize = Properties.Settings.Default.schriftgrosse;
@@ -535,7 +525,8 @@ namespace IECMate
             try
             {
                 // get deployment version
-                lb_version.Content = Assembly.GetExecutingAssembly().GetName().Version;
+                string[] assemblyversion = Assembly.GetExecutingAssembly().GetName().Version.ToString().Split('.');
+                lb_version.Content = assemblyversion[0] + "." + assemblyversion[1] + "." + assemblyversion[2] + " (" + assemblyversion[3] + ")";
             }
             catch (InvalidDeploymentException)
             {
@@ -1374,35 +1365,12 @@ namespace IECMate
                 ThemeManager.ChangeAppStyle(Application.Current,
                                             ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
                                             ThemeManager.GetAppTheme("BaseDark"));
-
-                text_code_template.TextArea.Foreground = Brushes.White;
-                text_code_output.TextArea.Foreground = Brushes.White;
-                text_code_output.Background = DarkBackground;
-                border_code_output.Background = DarkBackground;
-
-                text_decode_out1.Background = DarkBackground;
-                text_decode_out2.Background = DarkBackground;
-                text_encode_bin.Background = DarkBackground;
-                text_encode_dec.Background = DarkBackground;
-                text_encode_hex.Background = DarkBackground;
             }
             else
             {
                 ThemeManager.ChangeAppStyle(Application.Current,
                                             ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
                                             ThemeManager.GetAppTheme("BaseLight"));
-
-                text_code_template.TextArea.Foreground = Brushes.Black;
-                text_code_output.TextArea.Foreground = Brushes.Black;
-
-                text_code_output.Background = Brushes.Gainsboro;
-                border_code_output.Background = Brushes.Gainsboro;
-
-                text_decode_out1.Background = Brushes.Gainsboro;
-                text_decode_out2.Background = Brushes.Gainsboro;
-                text_encode_bin.Background = Brushes.Gainsboro;
-                text_encode_dec.Background = Brushes.Gainsboro;
-                text_encode_hex.Background = Brushes.Gainsboro;
             }
 
             //Decode Matrix von Bitset neu Aufbauen
