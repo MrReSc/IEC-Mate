@@ -272,6 +272,8 @@ namespace IECMate
 
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, text_code_template.Text);
+
+            text_code_template.Focus();
         }
 
         private void Btn_template_offnen_Click(object sender, RoutedEventArgs e)
@@ -281,6 +283,8 @@ namespace IECMate
 
             if (openFileDialog.ShowDialog() == true)
                 text_code_template.Text = File.ReadAllText(openFileDialog.FileName);
+
+            text_code_template.Focus();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

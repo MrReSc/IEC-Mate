@@ -300,6 +300,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <data name="lb_formProgram" xml:space="preserve">
     <value>formProgram</value>
   </data>
+  <data name="lb_genereieren" xml:space="preserve">
+    <value>Generate</value>
+  </data>
   <data name="lb_lizenz" xml:space="preserve">
     <value>IEC-Mate license:</value>
   </data>

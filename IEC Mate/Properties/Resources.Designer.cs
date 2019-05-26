@@ -603,6 +603,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generieren ähnelt.
+        /// </summary>
+        public static string lb_genereieren {
+            get {
+                return ResourceManager.GetString("lb_genereieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die IEC-Mate Lizenz: ähnelt.
         /// </summary>
         public static string lb_lizenz {
