@@ -358,5 +358,17 @@ namespace IECMate.Properties {
                 this["converttabtospace"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool updatesettings {
+            get {
+                return ((bool)(this["updatesettings"]));
+            }
+            set {
+                this["updatesettings"] = value;
+            }
+        }
     }
 }

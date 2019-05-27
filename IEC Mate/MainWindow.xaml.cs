@@ -50,6 +50,14 @@ namespace IECMate
 
         public MainWindow()
         {
+            //Wenn es eine neue Version gibt, dann werden die Einstellungen von der schon installierten Version übernommen
+            if (Properties.Settings.Default.updatesettings)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.updatesettings = false;
+                Properties.Settings.Default.Save();
+            }
+
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
             InitializeComponent();
 
