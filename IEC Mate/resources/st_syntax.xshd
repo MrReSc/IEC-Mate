@@ -55,10 +55,10 @@
       <Word>AND</Word>
       <Word>NOT</Word>
       <Word>XOR</Word>
-      <Word>+</Word>
+      <!--<Word>+</Word>
       <Word>-</Word>
       <Word>/</Word>
-      <Word>*</Word>
+      <Word>*</Word>-->
       <Word>MOD</Word>
       <Word>TRUE</Word>
       <Word>FALSE</Word>
