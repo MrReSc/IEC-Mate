@@ -50,6 +50,7 @@ namespace IECMate
 
         public MainWindow()
         {
+            #region Initialisierung
             //Wenn es eine neue Version gibt, dann werden die Einstellungen von der schon installierten Version übernommen
             if (Properties.Settings.Default.updatesettings)
             {
@@ -188,8 +189,10 @@ namespace IECMate
 
             //OS Version
             os_version = (string)registryKey.GetValue("productName");
+            #endregion
         }
 
+        #region Allgemein
         public void onTextViewSettingDataHandler(object sender, DataObjectSettingDataEventArgs e)
         {
             //hier wird die HTML formatierung vom Text im Editor entfernt
@@ -201,6 +204,72 @@ namespace IECMate
             }
         }
 
+        private void Mi_app_beenden_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void CopyToClipboard_Click_1(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(text_code_output.Text);
+            text_code_output.Focus();
+        }
+
+        private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Wenn ein Tab gewechselt wird, dann wird der Fokus entsprechend ins richtige Feld gesetzt
+            //Dsipachter wird benötigt da das Fenster noch nicht fertig geladen aber der Event schon abgesetzt wird
+            if (ti_suche.IsSelected)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+            }
+
+            if (ti_bitset.IsSelected)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
+            }
+
+            if (ti_code.IsSelected)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_code_template.Focus()));
+            }
+        }
+
+        private void Btn_vaiablenliste_loschen_Click(object sender, RoutedEventArgs e)
+        {
+            text_var1.Text = "";
+            text_var2.Text = "";
+            text_var3.Text = "";
+            text_var1.Focus();
+        }
+        #endregion
+
+        #region About Fenster
+        private void MenuItem_Click_About(object sender, RoutedEventArgs e)
+        {
+            child_Infos.IsOpen = true;
+            try
+            {
+                // get deployment version
+                string[] assemblyversion = Assembly.GetExecutingAssembly().GetName().Version.ToString().Split('.');
+                lb_version.Content = assemblyversion[0] + "." + assemblyversion[1] + "." + assemblyversion[2] + " (" + assemblyversion[3] + ")";
+            }
+            catch (InvalidDeploymentException)
+            {
+                // you cannot read publish version when app isn't installed 
+                // (e.g. during debug)
+                lb_version.Content = Properties.Resources.lb_version;
+            }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
+        }
+        #endregion
+
+        #region Hot Key
         private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
         {
             try
@@ -273,6 +342,96 @@ namespace IECMate
             }
         }
 
+        private void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RegisterHotKey("PxPlain", (ComboBox)sender);
+        }
+
+        private void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            RegisterHotKey("PxBeginEnd", (ComboBox)sender);
+        }
+
+        private void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RegisterHotKey("PxComment", (ComboBox)sender);
+        }
+
+        private void Cb_hotekey_brackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RegisterHotKey("PxBrackets", (ComboBox)sender);
+        }
+
+        private async void RegisterHotKey(string name, ComboBox combobox)
+        {
+            if (combobox.SelectedIndex == 0)
+            {
+                //Wenn kein Key selected ist, dann wird er abgemeldet
+                HotkeyManager.Current.Remove(name);
+                return;
+            }
+
+            try
+            {
+                //Aktuell Selektierter Keys auslesen
+                var key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                var key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                var key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                var key_4 = (Key)cb_hotkey_pxComment.SelectedValue;
+                var key = (Key)combobox.SelectedValue;
+
+                switch (name)
+                {
+                    case "PxComment":
+                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                        break;
+                    case "PxBeginEnd":
+                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxComment.SelectedValue;
+                        break;
+                    case "PxPlain":
+                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
+                        key_2 = (Key)cb_hotkey_pxComment.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                        break;
+                    case "PxBrackets":
+                        key_1 = (Key)cb_hotkey_pxComment.SelectedValue;
+                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
+                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
+                        break;
+                }
+
+
+                if (key == key_1 || key == key_2 || key == key_3)
+                {
+                    combobox.SelectedIndex = 0;
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+                }
+                else
+                {
+                    HotkeyManager.Current.AddOrReplace(name, key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void Text_px_nummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(text_px_nummer.Text))
+            {
+                ts_hotkey.IsChecked = false;
+            }
+        }
+        #endregion
+
+        #region Code Vorlage
         private void Btn_template_speichern_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -304,8 +463,79 @@ namespace IECMate
                 text_suchen.Focus();
                 text_suchen.CaretIndex = text_suchen.Text.Length;
             }
+        }
+
+        private void Btn_template_loschen_Click(object sender, RoutedEventArgs e)
+        {
+            text_code_template.Text = "";
+            combo_vars.SelectedIndex = -1;
+            text_code_template.Focus();
+        }
+
+        private void Btn_ersetzten_ein_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                text_code_template.Focus();
+            }
+            catch (Exception)
+            {
+                ;
+            }
 
         }
+
+        private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                do
+                {
+                    Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                } while (text_code_template.Text.Contains(text_suchen.Text));
+                text_code_template.Focus();
+
+            }
+            catch (Exception)
+            {
+                ;
+            }
+        }
+
+        private int lastUsedIndex = 0;
+
+        public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor)
+        {
+            int nIndex = -1;
+
+            if (editor.SelectedText.Equals(s))
+            {
+                nIndex = editor.SelectionStart;
+            }
+            else
+            {
+                nIndex = editor.Text.IndexOf(s, lastUsedIndex);
+                if (nIndex == -1)
+                {
+                    nIndex = editor.Text.IndexOf(s);
+                }
+            }
+
+            if (nIndex != -1)
+            {
+                editor.Document.Replace(nIndex, s.Length, replacement);
+                editor.Select(nIndex, replacement.Length);
+                lastUsedIndex = nIndex + s.Length;
+            }
+            else
+            {
+                lastUsedIndex = 0;
+            }
+        }
+        #endregion
+
+        #region Code generieren
 
         private async void Btn_gen_Click(object sender, RoutedEventArgs e)
         {
@@ -418,17 +648,9 @@ namespace IECMate
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, text_code_output.Text);
         }
+        #endregion
 
-        private void Mi_app_beenden_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void CopyToClipboard_Click_1(object sender, RoutedEventArgs e)
-        {
-            Clipboard.SetText(text_code_output.Text);
-            text_code_output.Focus();
-        }
+        #region Einstellungen
 
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
         {
@@ -523,37 +745,99 @@ namespace IECMate
             HotkeyManager.Current.Remove("PxBrackets");
         }
 
-        private void Btn_template_loschen_Click(object sender, RoutedEventArgs e)
+        private void Cb_akzent_farbe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            text_code_template.Text = "";
-            combo_vars.SelectedIndex = -1;
-            text_code_template.Focus();
-        }
-
-
-        private void MenuItem_Click_About(object sender, RoutedEventArgs e)
-        {
-            child_Infos.IsOpen = true;
-            try
+            string theme;
+            if ((bool)tg_theme.IsChecked)
             {
-                // get deployment version
-                string[] assemblyversion = Assembly.GetExecutingAssembly().GetName().Version.ToString().Split('.');
-                lb_version.Content = assemblyversion[0] + "." + assemblyversion[1] + "." + assemblyversion[2] + " (" + assemblyversion[3] + ")";
+                theme = "BaseDark";
             }
-            catch (InvalidDeploymentException)
+            else
             {
-                // you cannot read publish version when app isn't installed 
-                // (e.g. during debug)
-                lb_version.Content = Properties.Resources.lb_version;
+                theme = "BaseLight";
+            }
+
+            ThemeManager.ChangeAppStyle(Application.Current,
+                                        ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                        ThemeManager.GetAppTheme(theme));
+
+            //Decode Matrix von Bitset neu Aufbauen damit die Farben stimmen
+            DecodeText();
+        }
+
+        private void Tg_theme_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if ((bool)tg_theme.IsChecked)
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                            ThemeManager.GetAppTheme("BaseDark"));
+            }
+            else
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                            ThemeManager.GetAppTheme("BaseLight"));
+            }
+
+            //Decode Matrix von Bitset neu Aufbauen
+            DecodeText();
+        }
+
+        private async void Cb_sprache_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string setting = "";
+
+            if (Properties.Settings.Default.sprache == "de-DE")
+            {
+                setting = Properties.Resources.lanDE;
+            }
+
+            if (Properties.Settings.Default.sprache == "en-GB")
+            {
+                setting = Properties.Resources.lanEN;
+            }
+
+            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanDE && cb_sprache.SelectedValue.ToString() != setting)
+            {
+                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+                if (!(result == MessageDialogResult.Affirmative))
+                {
+                    cb_sprache.Text = setting;
+                    return;
+                }
+                else
+                {
+                    Properties.Settings.Default.sprache = "de-DE";
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+
+            }
+
+            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanEN && cb_sprache.SelectedValue.ToString() != setting)
+            {
+                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+                if (!(result == MessageDialogResult.Affirmative))
+                {
+                    cb_sprache.Text = setting;
+                    return;
+                }
+                else
+                {
+                    Properties.Settings.Default.sprache = "en-GB";
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
             }
         }
+        #endregion
 
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(e.Uri.AbsoluteUri);
-            e.Handled = true;
-        }
-
+        #region Suchfunktion
         private void Btn_pfad_auswahlen_Click(object sender, RoutedEventArgs e)
         {
             WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
@@ -716,7 +1000,6 @@ namespace IECMate
             }
         }
 
-
         private async void Listbox_ergebnis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (listbox_ergebnis.SelectedIndex > -1)
@@ -762,6 +1045,13 @@ namespace IECMate
             }
         }
 
+        private void Ts_exakte_suche_IsCheckedChanged(object sender, EventArgs e)
+        {
+            text_pattern_suche.Focus();
+        }
+        #endregion
+
+        #region Bitset
         private void Encoding_Checked(object sender, RoutedEventArgs args)
         {
             long ResulateDezimal = 0;
@@ -1057,6 +1347,40 @@ namespace IECMate
             }
         }
 
+        private void Btn_encoding_loschen_Click(object sender, RoutedEventArgs e)
+        {
+            var objects = grid_encoding.GetChildObjects();
+            foreach (object child in objects)
+            {
+                if (child.GetType() == typeof(StackPanel))
+                {
+                    StackPanel ch = child as StackPanel;
+                    var obj = ch.GetChildObjects();
+                    foreach (object item in obj)
+                    {
+                        if (item.GetType() == typeof(ToggleButton))
+                        {
+                            ToggleButton tb = item as ToggleButton;
+                            if ((bool)tb.IsChecked)
+                            {
+                                tb.IsChecked = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Text_encode_dec_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Set the event as handled
+            e.Handled = true;
+            // Select the Text
+            (sender as TextBox).SelectAll();
+        }
+        #endregion
+
+        #region Helferfunktionen
         private void Btn_pfad_helfer_auswahlen_Click(object sender, RoutedEventArgs e)
         {
             WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
@@ -1313,108 +1637,9 @@ namespace IECMate
             }
         }
 
-        private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Wenn ein Tab gewechselt wird, dann wird der Fokus entsprechend ins richtige Feld gesetzt
-            //Dsipachter wird benötigt da das Fenster noch nicht fertig geladen aber der Event schon abgesetzt wird
-            if (ti_suche.IsSelected)
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
-            }
-
-            if (ti_bitset.IsSelected)
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
-            }
-
-            if (ti_code.IsSelected)
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_code_template.Focus()));
-            }
-        }
-
-        private void Cb_akzent_farbe_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string theme;
-            if ((bool)tg_theme.IsChecked)
-            {
-                theme = "BaseDark";
-            }
-            else
-            {
-                theme = "BaseLight";
-            }
-
-            ThemeManager.ChangeAppStyle(Application.Current,
-                                        ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
-                                        ThemeManager.GetAppTheme(theme));
-
-            //Decode Matrix von Bitset neu Aufbauen damit die Farben stimmen
-            DecodeText();
-        }
-
-        private void Tg_theme_IsCheckedChanged(object sender, EventArgs e)
-        {
-            if ((bool)tg_theme.IsChecked)
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
-                                            ThemeManager.GetAppTheme("BaseDark"));
-            }
-            else
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
-                                            ThemeManager.GetAppTheme("BaseLight"));
-            }
-
-            //Decode Matrix von Bitset neu Aufbauen
-            DecodeText();
-        }
-
-        private void Btn_encoding_loschen_Click(object sender, RoutedEventArgs e)
-        {
-            var objects = grid_encoding.GetChildObjects();
-            foreach (object child in objects)
-            {
-                if (child.GetType() == typeof(StackPanel))
-                {
-                    StackPanel ch = child as StackPanel;
-                    var obj = ch.GetChildObjects();
-                    foreach (object item in obj)
-                    {
-                        if (item.GetType() == typeof(ToggleButton))
-                        {
-                            ToggleButton tb = item as ToggleButton;
-                            if ((bool)tb.IsChecked)
-                            {
-                                tb.IsChecked = false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void Btn_vaiablenliste_loschen_Click(object sender, RoutedEventArgs e)
-        {
-            text_var1.Text = "";
-            text_var2.Text = "";
-            text_var3.Text = "";
-            text_var1.Focus();
-        }
-
-        private void Text_encode_dec_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            // Set the event as handled
-            e.Handled = true;
-            // Select the Text
-            (sender as TextBox).SelectAll();
-        }
-
         private async void Bt_lock_loschen_Click(object sender, RoutedEventArgs e)
         {
-            var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton};
+            var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
             MessageDialogResult result = await this.ShowMessageAsync(Properties.Resources.dialogTitelHelferLock, Properties.Resources.dialogMsgHelferLock, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
 
             if (!(result == MessageDialogResult.Affirmative))
@@ -1449,213 +1674,7 @@ namespace IECMate
                 FehlerHelferAsync();
             }
         }
-
-        private void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RegisterHotKey("PxPlain", (ComboBox)sender);
-        }
-
-        private void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            RegisterHotKey("PxBeginEnd", (ComboBox)sender);
-        }
-
-        private void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RegisterHotKey("PxComment", (ComboBox)sender);
-        }
-
-        private void Cb_hotekey_brackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RegisterHotKey("PxBrackets", (ComboBox)sender);
-        }
-
-        private async void RegisterHotKey(string name, ComboBox combobox)
-        {
-            if (combobox.SelectedIndex == 0)
-            {
-                //Wenn kein Key selected ist, dann wird er abgemeldet
-                HotkeyManager.Current.Remove(name);
-                return;
-            }
-
-            try
-            {
-                //Aktuell Selektierter Keys auslesen
-                var key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                var key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                var key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                var key_4 = (Key)cb_hotkey_pxComment.SelectedValue;
-                var key = (Key)combobox.SelectedValue;
-
-                switch (name)
-                {
-                    case "PxComment":
-                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                        break;
-                    case "PxBeginEnd":
-                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxComment.SelectedValue;
-                        break;
-                    case "PxPlain":
-                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                        key_2 = (Key)cb_hotkey_pxComment.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                        break;
-                    case "PxBrackets":
-                        key_1 = (Key)cb_hotkey_pxComment.SelectedValue;
-                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                        break;
-                }
-
-
-                if (key == key_1 || key == key_2 || key == key_3)
-                {
-                    combobox.SelectedIndex = 0;
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-                }
-                else
-                {
-                    HotkeyManager.Current.AddOrReplace(name, key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-                }
-            }
-            catch (Exception)
-            {
-                return;
-            }              
-        }
-
-        private async void Cb_sprache_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string setting = "";
-
-            if (Properties.Settings.Default.sprache == "de-DE")
-            {
-                setting = Properties.Resources.lanDE;
-            }
-
-            if (Properties.Settings.Default.sprache == "en-GB")
-            {
-                setting = Properties.Resources.lanEN;
-            }
-
-            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanDE && cb_sprache.SelectedValue.ToString() != setting) 
-            {
-                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
-                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
-
-                if (!(result == MessageDialogResult.Affirmative))
-                {
-                    cb_sprache.Text = setting;
-                    return;
-                }
-                else
-                {
-                    Properties.Settings.Default.sprache = "de-DE";
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                    Application.Current.Shutdown();
-                }
-               
-            }
-
-            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanEN && cb_sprache.SelectedValue.ToString() != setting)
-            {
-                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
-                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
-
-                if (!(result == MessageDialogResult.Affirmative))
-                {
-                    cb_sprache.Text = setting;
-                    return;
-                }
-                else
-                {
-                    Properties.Settings.Default.sprache = "en-GB";
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                    Application.Current.Shutdown();
-                }
-            }
-        }
-
-        private void Text_px_nummer_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(text_px_nummer.Text))
-            {
-                ts_hotkey.IsChecked = false;
-            }
-        }
-
-        private void Btn_ersetzten_ein_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
-                text_code_template.Focus();
-            }
-            catch (Exception)
-            {
-                ;
-            }
-            
-        }
-
-        private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                do
-                {
-                    Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
-                } while (text_code_template.Text.Contains(text_suchen.Text));
-                text_code_template.Focus();
-
-            }
-            catch (Exception)
-            {
-                ;
-            }
-        }
-
-        private int lastUsedIndex = 0;
-
-        public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor)
-        {
-            int nIndex = -1;
-
-            if (editor.SelectedText.Equals(s))
-            {
-                nIndex = editor.SelectionStart;
-            }
-            else
-            {
-                nIndex = editor.Text.IndexOf(s, lastUsedIndex);
-                if (nIndex == -1)
-                {
-                    nIndex = editor.Text.IndexOf(s);
-                }
-            }
-
-            if (nIndex != -1)
-            {
-                editor.Document.Replace(nIndex, s.Length, replacement);
-                editor.Select(nIndex, replacement.Length);
-                lastUsedIndex = nIndex + s.Length;
-            }
-            else
-            {
-                lastUsedIndex = 0;
-            }
-        }
-
-        private void Ts_exakte_suche_IsCheckedChanged(object sender, EventArgs e)
-        {
-            text_pattern_suche.Focus();
-        }
+        #endregion
 
     }
 }

@@ -17,11 +17,8 @@
                       NonActiveGlowBrush="Transparent"
                       TitleCaps="False"
                       >
-    <!--WindowTitleBrush="{DynamicResource AccentColorBrush}"-->
-    <!--OverrideDefaultWindowCommandsBrush="{DynamicResource BlackBrush}"-->
-    <!--TitleForeground="{DynamicResource BlackBrush}"-->
-    <!--WindowTitleBrush="{DynamicResource WindowBackgroundBrush}"-->
-    
+
+    <!--#region Allgemein-->
     <Controls:MetroWindow.Resources>
         <!--Style für alle Buttons-->
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
@@ -52,7 +49,9 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
-    <!--Einstellung menu-->
+    <!--#endregion-->
+    
+    <!--#region Einstellungs Menu-->
     <Controls:MetroWindow.Flyouts>
         
         <Controls:FlyoutsControl>
@@ -148,6 +147,7 @@
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
+    <!--#endregion-->
 
     <!--Haupt Grid-->
     <Grid x:Name="RootGrid">
@@ -164,7 +164,7 @@
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
-        <!--Info Fenster-->
+        <!--#region Info Fenster-->
         <simpleChildWindow:ChildWindow Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3"
                                  x:Name="child_Infos"
                                  Title="{x:Static p:Resources.info_titel}"
@@ -194,12 +194,14 @@
 
             </StackPanel>
         </simpleChildWindow:ChildWindow>
+        <!--#endregion-->
 
         <!--Alle Tabs-->
         <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" 
                     SelectionChanged="Tc_root_SelectionChanged" 
                     Margin="0,5,0,0">
-            <!--Code Tab-->
+            
+            <!--#region Code Tab-->
             <TabItem x:Name="ti_code" Header="{x:Static p:Resources.ti_code}">
                 <Grid Margin="0,5,0,0">
 
@@ -207,7 +209,8 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
+                    
+                    <!--#region Variablenlisten-->
                     <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_variablen}">
                       
                         <Grid>
@@ -313,13 +316,9 @@
                                     </TextBox.Resources>
                                 </TextBox>
                             </Grid>
-
-                            <!--<Button x:Name="btn_vaiablenliste_loschen" Grid.Row="6" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" 
-                                    Click="Btn_vaiablenliste_loschen_Click">
-                                <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
-                            </Button>-->
                         </Grid>
                     </GroupBox>
+                    <!--#endregion-->
 
                     <!--Grid für Vorlage und Code-->
                     <Grid  Grid.Column="1">
@@ -334,7 +333,7 @@
                             <RowDefinition Height="*" MinHeight="150"/>
                         </Grid.RowDefinitions>
 
-                        <!--Code Vorlage-->
+                        <!--#region Code Vorlage-->
                         <GroupBox Grid.Column="1" Grid.Row="0" Header="{x:Static p:Resources.gb_code_vorlage}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -421,6 +420,7 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
+                        <!--#endregion-->
 
                         <!--Gridsplitter mit Textbox für das Zeichen-->
                         <GridSplitter Grid.Column="1" Grid.Row="1" Height="15" HorizontalAlignment="Stretch" Background="Transparent"/>
@@ -431,7 +431,7 @@
                             <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Gray" Stroke="Gray" Width="40" IsHitTestVisible="False"/>
                         </StackPanel>
 
-                        <!--Code-->
+                        <!--#region Code gen-->
                         <GroupBox Grid.Column="1" Grid.Row="3" Header="{x:Static p:Resources.ti_code}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -481,40 +481,17 @@
                                     <Button x:Name="btn_gen_loschen" Click="Btn_gen_loschen_Click" Width="25" Height="25">
                                         <iconPacks:PackIconMaterial Kind="close" Width="auto" Height="auto" />
                                     </Button>
-                                                                   
+
                                 </StackPanel>
-
-                                <!--<ToolBarTray Grid.Column="1" Grid.Row="3" IsLocked="True">
-                                    <ToolBar Grid.Column="1" Grid.Row="3">
-                                        <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Width="25" Height="25">
-                                            <iconPacks:PackIconMaterial Kind="Play" Width="auto" Height="auto" Foreground="LimeGreen"/>
-                                        </Button>
-                                        
-                                        <Separator/>
-
-                                        <Button Click="CopyToClipboard_Click_1" Width="25" Height="25" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
-                                            <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
-                                        </Button>
-
-                                        <Button Click="Btn_gen_speichern_Click" Width="25" Height="25">
-                                            <iconPacks:PackIconMaterial Kind="ContentSaveOutline" Width="auto" Height="auto"/>
-                                        </Button>
-
-                                        <Separator/>
-
-                                        <Button x:Name="btn_gen_loschen" Click="Btn_gen_loschen_Click" Width="25" Height="25">
-                                            <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
-                                        </Button>
-                                    </ToolBar>
-                                </ToolBarTray>-->
-                                
                             </Grid>
                         </GroupBox>
+                        <!--#endregion-->
                     </Grid>
                 </Grid>
             </TabItem>
-
-            <!--Tab Suche-->
+            <!--#endregion-->
+            
+            <!--#region Suche Tab-->
             <TabItem x:Name="ti_suche" Header="{x:Static p:Resources.ti_suche}">
                 <Grid Margin="0,5,0,0">
 
@@ -617,8 +594,9 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-
-            <!--Tab Bitset-->
+            <!--#endregion-->
+            
+            <!--#region Bitset Tab-->
             <TabItem x:Name="ti_bitset" Header="{x:Static p:Resources.ti_bitset}">
                 <Grid Margin="0,5,0,0">
 
@@ -628,7 +606,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <!--Encoding-->
+                    <!--#region Encoding-->
                     <GroupBox x:Name="gb_encoding" Grid.Row="0" Header="{x:Static p:Resources.gb_encoding}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -687,7 +665,8 @@
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-
+                                
+                                <!--#region Bits-->
                                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
 
                                     <ToggleButton x:Name="tb_bit0" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
@@ -824,11 +803,14 @@
                                         31
                                     </ToggleButton>
                                 </StackPanel>
+                                <!--#endregion-->
+                                
                             </Grid>
                         </Grid>
                     </GroupBox>
-
-                    <!--Decoding-->
+                    <!--#endregion-->
+                    
+                    <!--#region Decoding-->
                     <GroupBox Grid.Row="2" Header="{x:Static p:Resources.gb_decoding}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -874,6 +856,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
+                                <!--#region  Bits-->
                                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
 
                                     <Grid Width="52" Height="52" Margin="8,0,23,0" >
@@ -1042,13 +1025,18 @@
                                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="31" FontSize="18" FontWeight="Bold"/>
                                     </Grid>
                                 </StackPanel>
+                                <!--#endregion-->
+                                
                             </Grid>
                         </Grid>
                     </GroupBox>
+                    <!--#endregion-->
+                    
                 </Grid>
             </TabItem>
+            <!--#endregion-->
 
-            <!--Tab Helfer-->
+            <!--#region Helfer Tab-->
             <TabItem Header="{x:Static p:Resources.ti_helfer}">
                 <Grid Margin="0,7,0,0">
 
@@ -1077,7 +1065,7 @@
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
-                    <!--Datein öffnen Allgemein-->
+                    <!--#region Dateien öffnen Allgemein-->
                     <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_datei_funktion}" Grid.ColumnSpan="4">
                         <GroupBox.Resources>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
@@ -1205,6 +1193,7 @@
                             </StackPanel>
                         </Grid>
                     </GroupBox>
+                    <!--#endregion-->
 
                     <!--Datein öffnen und Hot Keys-->
                     <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
@@ -1214,6 +1203,7 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
+                        <!--#region Datein ME öffnen-->
                         <GroupBox x:Name="gb_me_funktionen" Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
                             <GroupBox.Resources>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
@@ -1256,8 +1246,9 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
+                        <!--#endregion-->
 
-                        <!--Hot Keys-->
+                        <!--#region Hot Keys-->
                         <GroupBox Grid.Column="2" Header="{x:Static p:Resources.gb_hotkeys}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -1329,9 +1320,13 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
+                        <!--#endregion-->
+                        
                     </Grid>
                 </Grid>
             </TabItem>
+            <!--#endregion-->
+            
         </TabControl>
     </Grid>
 </Controls:MetroWindow>
