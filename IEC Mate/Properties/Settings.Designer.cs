@@ -370,5 +370,17 @@ namespace IECMate.Properties {
                 this["updatesettings"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string me_auswahl {
+            get {
+                return ((string)(this["me_auswahl"]));
+            }
+            set {
+                this["me_auswahl"] = value;
+            }
+        }
     }
 }

@@ -179,8 +179,12 @@ namespace IECMate
             {
                 cb_sprache.Text = Properties.Resources.lanEN;
             }
-
-
+            if (!String.IsNullOrWhiteSpace(Properties.Settings.Default.me_auswahl))
+            {
+                cb_select_me.Items.Add(Properties.Settings.Default.me_auswahl);
+                cb_select_me.SelectedIndex = 0;
+            }
+            
             //Inhalt laden
             text_var1.Text = Properties.Settings.Default.variable_1;
             text_var2.Text = Properties.Settings.Default.variable_2;
@@ -736,7 +740,8 @@ namespace IECMate
             Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
             Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
             Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
-            
+            Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
+
             Properties.Settings.Default.Save();
 
             HotkeyManager.Current.Remove("PxBeginEnd");
@@ -1584,6 +1589,7 @@ namespace IECMate
 
         private void Cb_select_me_DropDownOpened(object sender, EventArgs e)
         {
+            cb_select_me.Items.Clear();
             string mepfad = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol;
 
             if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
