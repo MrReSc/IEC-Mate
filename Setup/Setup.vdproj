@@ -289,6 +289,11 @@
             "AssemblyAsmDisplayName" = "8:ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_1062504ED74689BE0E1A1C84B43B02D0"
+                    {
+                    "Name" = "8:ICSharpCode.AvalonEdit.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ICSharpCode.AvalonEdit.dll"
             "TargetName" = "8:"
@@ -315,6 +320,11 @@
             "AssemblyAsmDisplayName" = "8:MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_1318671B8725218C24FCCC6A3C9FD307"
+                    {
+                    "Name" = "8:MahApps.Metro.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:MahApps.Metro.dll"
             "TargetName" = "8:"
@@ -341,6 +351,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_1BD744B19FB7385302F2F6CEBB932668"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -367,6 +382,11 @@
             "AssemblyAsmDisplayName" = "8:MahApps.Metro.IconPacks, Version=2.3.0.4, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_257BCFE3C7E10C612A563BFABC9019C6"
+                    {
+                    "Name" = "8:MahApps.Metro.IconPacks.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:MahApps.Metro.IconPacks.dll"
             "TargetName" = "8:"
@@ -393,6 +413,11 @@
             "AssemblyAsmDisplayName" = "8:NHotkey, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_3829768A0243782580C56466F66DBD29"
+                    {
+                    "Name" = "8:NHotkey.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:NHotkey.dll"
             "TargetName" = "8:"
@@ -419,6 +444,11 @@
             "AssemblyAsmDisplayName" = "8:System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_6F47986220E3A71644CCDA0EE95954FC"
+                    {
+                    "Name" = "8:System.Windows.Interactivity.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Windows.Interactivity.dll"
             "TargetName" = "8:"
@@ -445,6 +475,11 @@
             "AssemblyAsmDisplayName" = "8:MahApps.Metro.SimpleChildWindow, Version=1.5.0.16, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_79DC533F7B6590177833C8E87EDFCF98"
+                    {
+                    "Name" = "8:MahApps.Metro.SimpleChildWindow.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:MahApps.Metro.SimpleChildWindow.dll"
             "TargetName" = "8:"
@@ -471,6 +506,11 @@
             "AssemblyAsmDisplayName" = "8:ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_C9B9184BADFA479BEA7CF34836696D0E"
+                    {
+                    "Name" = "8:ControlzEx.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ControlzEx.dll"
             "TargetName" = "8:"
@@ -517,6 +557,11 @@
             "AssemblyAsmDisplayName" = "8:WindowsInput, Version=1.0.6.0, Culture=neutral, PublicKeyToken=de2685b4776e9c2e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_DB28C9B902FD20B94A11E2A901EBC407"
+                    {
+                    "Name" = "8:WindowsInput.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:WindowsInput.dll"
             "TargetName" = "8:"
@@ -543,6 +588,11 @@
             "AssemblyAsmDisplayName" = "8:NHotkey.Wpf, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_FDFEDF02298415CAC30D3BB9389657D6"
+                    {
+                    "Name" = "8:NHotkey.Wpf.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:NHotkey.Wpf.dll"
             "TargetName" = "8:"
@@ -618,15 +668,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IEC-Mate"
-        "ProductCode" = "8:{FEA19999-0AFA-4D18-A7B5-18FE52D4CCC8}"
-        "PackageCode" = "8:{3F4D0A87-8F48-4FFA-A65B-033A2372A00B}"
+        "ProductCode" = "8:{A055133E-6E8E-4774-808B-761C8222D9CF}"
+        "PackageCode" = "8:{237B2C52-DA3C-454C-AEC4-EBDA7E45B953}"
         "UpgradeCode" = "8:{1829CEAB-42C1-4661-80D7-09286BAAC581}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.0.669"
+        "ProductVersion" = "8:0.0.671"
         "Manufacturer" = "8:Remo Scheidegger"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
