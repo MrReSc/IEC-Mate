@@ -42,9 +42,6 @@ namespace IECMate
         //public Stack<string> undoList = new Stack<string>();
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         public InputSimulator sim = new InputSimulator();
-        public int prevHotComment;
-        public int prevHotBeginEnd;
-        public int prevHotPlai;
         public RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion");
         public string os_version;
 
@@ -58,6 +55,10 @@ namespace IECMate
                 Properties.Settings.Default.updatesettings = false;
                 Properties.Settings.Default.Save();
             }
+
+            DataContext = this;
+            //var liste = new List<string>() { "svDO", "Mark", "Doe" };
+            //vorhandeneIO = liste;
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
             InitializeComponent();
@@ -168,9 +169,7 @@ namespace IECMate
             cb_hotekey_plain.Text = key3.ToString();
             cb_hotkey_pxComment.Text = key1.ToString();
             cb_hotekey_brackets.Text = key4.ToString();
-            prevHotComment = cb_hotkey_pxComment.SelectedIndex;
-            prevHotBeginEnd = cb_hotkey_pxBeginEnd.SelectedIndex;
-            prevHotPlai = cb_hotekey_plain.SelectedIndex;
+
             if (Properties.Settings.Default.sprache == "de-DE")
             {
                 cb_sprache.Text = Properties.Resources.lanDE;
@@ -184,7 +183,7 @@ namespace IECMate
                 cb_select_me.Items.Add(Properties.Settings.Default.me_auswahl);
                 cb_select_me.SelectedIndex = 0;
             }
-            
+
             //Inhalt laden
             text_var1.Text = Properties.Settings.Default.variable_1;
             text_var2.Text = Properties.Settings.Default.variable_2;
@@ -740,8 +739,15 @@ namespace IECMate
             Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
             Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
             Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
-            Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
-
+            if (cb_select_me.SelectedIndex == -1)
+            {
+                Properties.Settings.Default.me_auswahl = "";
+            }
+            else
+            {
+                Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
+            }
+           
             Properties.Settings.Default.Save();
 
             HotkeyManager.Current.Remove("PxBeginEnd");
@@ -1053,6 +1059,68 @@ namespace IECMate
         private void Ts_exakte_suche_IsCheckedChanged(object sender, EventArgs e)
         {
             text_pattern_suche.Focus();
+        }
+
+        private void Text_projktpfad_suche_TextChanged(object sender, TextChangedEventArgs e)
+        { 
+            text_pattern_suche.ItemsSource = FilterIO(); 
+        }
+       
+        private List<string> FilterIO()
+        {
+            //Hier wird versucht die IO's auf den Konfig File zu Indexieren
+            //Dies geschieht allerdings nur wenn auch ein IEC Projekt ausgewählt ist
+            var suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+            suchpfad = suchpfad.Replace("\\\\", "\\");
+            var ids = new List<string>();
+
+            //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
+            if (Directory.Exists(suchpfad))
+            {
+                try
+                {
+                    List<string> allFilesTemp = new List<string>();
+                    List<string> allFiles = new List<string>();
+                    
+                    AddFileNamesToList(suchpfad, allFilesTemp, false);
+
+                    foreach (var file in allFilesTemp)
+                    {
+                        if (file.EndsWith(".cfg") || file.EndsWith(".CFG"))
+                        {
+                            allFiles.Add(file);
+                        }
+                    }
+
+                    foreach (var file in allFiles)
+                    {
+                        using (var sr = new StreamReader(file, true))
+                        {
+                            var s = "";
+                            while ((s = sr.ReadLine()) != null)
+                            {
+                                if (s.StartsWith("name"))
+                                {
+                                    if (s.Contains("svDI") || s.Contains("svDO") || s.Contains("svAI") || s.Contains("svAO"))
+                                    {
+                                        string[] tokens = s.Split('.');
+                                        string[] tok = tokens[1].Split('"');
+                                        string io = tok[0].Replace("\"", "");
+                                        ids.Add(io);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    return ids;
+                }
+                catch (Exception)
+                {
+                    return ids;
+                }
+            }
+            return ids;
         }
         #endregion
 
@@ -1680,7 +1748,9 @@ namespace IECMate
                 FehlerHelferAsync();
             }
         }
+
         #endregion
+
 
     }
 }

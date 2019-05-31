@@ -6,6 +6,7 @@
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                       xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
                       xmlns:p = "clr-namespace:IECMate.Properties"
+                      xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
                       Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
                       WindowStartupLocation="CenterScreen"
                       ResizeMode="CanResizeWithGrip"    
@@ -31,6 +32,11 @@
 
         <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
             <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="20"></Setter>
+        </Style>
+
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MetroTextBox}">
+            <Setter Property="Controls:TextBoxHelper.Watermark" Value="{x:Static p:Resources.tb_suchen_nach}" />
+            <Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True" />
         </Style>
 
     </Controls:MetroWindow.Resources>
@@ -511,17 +517,30 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
-                             Width="300" VerticalContentAlignment="Center" Height="30">
+                    <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" 
+                             Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
+                             Width="300" VerticalContentAlignment="Center" Height="30" TextChanged="Text_projktpfad_suche_TextChanged">
                     </TextBox>
 
                     <Button x:Name="btn_pfad_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_auswahlen_Click">
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
-                    <TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0" 
-                             Width="300" VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Height="30" KeyDown="Text_pattern_suche_KeyDown">
-                    </TextBox>
+                    <!--<TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" 
+                             Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0" 
+                             Width="300" VerticalContentAlignment="Center" 
+                             Controls:TextBoxHelper.ClearTextButton="True" 
+                             Height="30" KeyDown="Text_pattern_suche_KeyDown">
+                    </TextBox>-->
+
+                    <toolkit:AutoCompleteBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center"
+                                             Height="30" KeyDown="Text_pattern_suche_KeyDown"
+                                             MinimumPrefixLength="4"
+                                             TextBoxStyle="{StaticResource SearchTextBoxStyle}"
+                                             Background="{DynamicResource ControlBackgroundBrush}"
+                                             Foreground="{DynamicResource TextBrush}"
+                                             BorderBrush="{DynamicResource ControlBorderBrush}">
+                    </toolkit:AutoCompleteBox>
 
                     <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_Click" VerticalAlignment="Center">
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
