@@ -1062,10 +1062,25 @@ namespace IECMate
         }
 
         private void Text_projktpfad_suche_TextChanged(object sender, TextChangedEventArgs e)
-        { 
-            text_pattern_suche.ItemsSource = FilterIO(); 
+        {
+            if ((bool)ts_hw_suchvorschalg.IsChecked)
+            {
+                text_pattern_suche.ItemsSource = FilterIO();
+            }
         }
-       
+
+        private void Ts_hw_suchvorschalg_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if (!(bool)ts_hw_suchvorschalg.IsChecked)
+            {
+                text_pattern_suche.ItemsSource = new List<string>();
+            }
+            else
+            {
+                text_pattern_suche.ItemsSource = FilterIO();
+            }
+        }
+
         private List<string> FilterIO()
         {
             //Hier wird versucht die IO's auf den Konfig File zu Indexieren
@@ -1749,8 +1764,8 @@ namespace IECMate
             }
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

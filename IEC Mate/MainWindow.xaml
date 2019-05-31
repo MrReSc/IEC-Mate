@@ -28,15 +28,27 @@
             <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
         </Style>
 
+        <!--Fenster Buttons oben Links Style-->
         <Style TargetType="{x:Type Controls:ToggleSwitch}" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"></Style>
 
+        <!--TabControl Style-->
         <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
             <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="20"></Setter>
         </Style>
 
+        <!--Textbox der Autocompletebox Style mit Mahapps-->
         <Style x:Key="SearchTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MetroTextBox}">
             <Setter Property="Controls:TextBoxHelper.Watermark" Value="{x:Static p:Resources.tb_suchen_nach}" />
             <Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True" />
+        </Style>
+
+        <!--Hier wird die grösse des Dropdown der Autocomletebox beschränk. Dies erhöht die Performance erheblich-->
+        <Style x:Key="AutoCompleteBoxStyle" TargetType="{x:Type toolkit:AutoCompleteBox}">
+            <Style.Resources>
+                <Style TargetType="{x:Type ListBox}">
+                    <Setter Property="MaxHeight" Value="200" />
+                </Style>
+            </Style.Resources>
         </Style>
 
     </Controls:MetroWindow.Resources>
@@ -537,6 +549,7 @@
                                              Height="30" KeyDown="Text_pattern_suche_KeyDown"
                                              MinimumPrefixLength="4"
                                              TextBoxStyle="{StaticResource SearchTextBoxStyle}"
+                                             Style="{StaticResource AutoCompleteBoxStyle}"
                                              Background="{DynamicResource ControlBackgroundBrush}"
                                              Foreground="{DynamicResource TextBrush}"
                                              BorderBrush="{DynamicResource ControlBorderBrush}">
@@ -575,6 +588,15 @@
                                            VerticalAlignment="Center"
                                            Margin="30,0,0,0"
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
+
+                    <Controls:ToggleSwitch x:Name="ts_hw_suchvorschalg" Grid.Column="3" Grid.Row="2" 
+                                           Content="{x:Static p:Resources.ts_hw_vorschalg}" 
+                                           IsChecked="True"  
+                                           ToolTip="{x:Static p:Resources.tt_hw_vorschlag}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="30,0,0,0" IsCheckedChanged="Ts_hw_suchvorschalg_IsCheckedChanged"/>
 
                     <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="5">
                         <Grid>

@@ -544,6 +544,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="ts_hw_ein" xml:space="preserve">
     <value>Nur in HW-Konfig suchen</value>
   </data>
+  <data name="ts_hw_vorschalg" xml:space="preserve">
+    <value>Suchvorschlag für HW Endpunkte</value>
+  </data>
   <data name="tt_code_gen_copy" xml:space="preserve">
     <value>Kopiert den kompletten Code in die Zwischenablage.</value>
   </data>
@@ -552,6 +555,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="tt_hotkey" xml:space="preserve">
     <value>Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt.</value>
+  </data>
+  <data name="tt_hw_vorschlag" xml:space="preserve">
+    <value>Es wird ein Suchvorschlag für alle HW Endpunkte im Verzeichnis .\application\control\config angezeigt.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
     <value>Es werden auch *.fud, *.ful, *.fu, *.**O Dateien durchsucht.</value>

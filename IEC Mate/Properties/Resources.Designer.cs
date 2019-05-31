@@ -1141,6 +1141,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchvorschlag für HW Endpunkte ähnelt.
+        /// </summary>
+        public static string ts_hw_vorschalg {
+            get {
+                return ResourceManager.GetString("ts_hw_vorschalg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Kopiert den kompletten Code in die Zwischenablage. ähnelt.
         /// </summary>
         public static string tt_code_gen_copy {
@@ -1164,6 +1173,15 @@ namespace IECMate.Properties {
         public static string tt_hotkey {
             get {
                 return ResourceManager.GetString("tt_hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es wird ein Suchvorschlag für alle HW Endpunkte im Verzeichnis .\application\control\config angezeigt. ähnelt.
+        /// </summary>
+        public static string tt_hw_vorschlag {
+            get {
+                return ResourceManager.GetString("tt_hw_vorschlag", resourceCulture);
             }
         }
         
