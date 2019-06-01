@@ -472,6 +472,15 @@ END OF TERMS AND CONDITIONS</value>
   <data name="mi_pfad_offnen" xml:space="preserve">
     <value>Open folder</value>
   </data>
+  <data name="suche_dateien" xml:space="preserve">
+    <value>Scanned files: </value>
+  </data>
+  <data name="suche_gefunden" xml:space="preserve">
+    <value>Found files: </value>
+  </data>
+  <data name="suche_zeit" xml:space="preserve">
+    <value>Processing time: </value>
+  </data>
   <data name="tb_bitset_bin" xml:space="preserve">
     <value>2#0</value>
   </data>

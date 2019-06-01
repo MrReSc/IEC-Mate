@@ -925,6 +925,33 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Durchsuchte Dateien:  ähnelt.
+        /// </summary>
+        public static string suche_dateien {
+            get {
+                return ResourceManager.GetString("suche_dateien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Gefundene Dateien:  ähnelt.
+        /// </summary>
+        public static string suche_gefunden {
+            get {
+                return ResourceManager.GetString("suche_gefunden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Verarbeitungszeit:  ähnelt.
+        /// </summary>
+        public static string suche_zeit {
+            get {
+                return ResourceManager.GetString("suche_zeit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die 2#0 ähnelt.
         /// </summary>
         public static string tb_bitset_bin {

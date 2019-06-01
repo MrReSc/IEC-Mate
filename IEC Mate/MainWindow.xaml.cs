@@ -145,6 +145,7 @@ namespace IECMate
             tg_showendofline.IsChecked = Properties.Settings.Default.showendofline;
             tg_showtab.IsChecked = Properties.Settings.Default.showtab;
             tg_converttospace.IsChecked = Properties.Settings.Default.converttabtospace;
+            ts_exakte_suche.IsChecked = Properties.Settings.Default.exakte_suche;
 
             nc_font_size.Value = Properties.Settings.Default.schriftgrosse;
             text_code_output.TextArea.FontSize = Properties.Settings.Default.schriftgrosse;
@@ -750,6 +751,7 @@ namespace IECMate
                 Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
             }
             Properties.Settings.Default.file_ext_user = text_file_ext.Text;
+            Properties.Settings.Default.exakte_suche = (bool)ts_exakte_suche.IsChecked;
 
             Properties.Settings.Default.Save();
 
@@ -853,6 +855,8 @@ namespace IECMate
         private void Btn_default_ext_Click(object sender, RoutedEventArgs e)
         {
             text_file_ext.Text = Properties.Settings.Default.file_ext_default;
+            text_file_ext.Focus();
+            text_file_ext.CaretIndex = text_file_ext.Text.Length;
         }
         #endregion
 
@@ -893,6 +897,8 @@ namespace IECMate
                 double percent = 0;
                 double filecount =0;
                 double count = 0;
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
                 x.SetProgress(percent);
 
                 try
@@ -929,11 +935,9 @@ namespace IECMate
                                 percent = 1.0;
                             }
                             x.SetProgress(percent);
-                            text_suche_count.Text = count.ToString() + " / " + filecount.ToString();
 
                             if (x.IsCanceled)
                             {
-                                //text_suche_count.Text = "";
                                 break;
                             }
 
@@ -956,6 +960,14 @@ namespace IECMate
                                     }
                                 }
                             }
+
+                            TimeSpan timeSpan = stopWatch.Elapsed;
+                            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
+                            text_suche_count.Text = Properties.Resources.suche_dateien + count.ToString() + "/" + filecount.ToString() +
+                                                    "   " + Properties.Resources.suche_gefunden + listbox_ergebnis.Items.Count.ToString() +
+                                                    "   " + Properties.Resources.suche_zeit + elapsedTime;
+                                                    
+
                         }
                     }
                 }
@@ -963,11 +975,12 @@ namespace IECMate
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
-                    //text_suche_count.Text = "";
+                    stopWatch.Stop();
 
                 }
 
                 await x.CloseAsync();
+                stopWatch.Stop();
             }
             else
             {

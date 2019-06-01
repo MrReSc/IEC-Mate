@@ -408,5 +408,17 @@ namespace IECMate.Properties {
                 this["file_ext_user"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool exakte_suche {
+            get {
+                return ((bool)(this["exakte_suche"]));
+            }
+            set {
+                this["exakte_suche"] = value;
+            }
+        }
     }
 }
