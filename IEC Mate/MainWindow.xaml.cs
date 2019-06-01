@@ -1024,16 +1024,16 @@ namespace IECMate
                 allFiles.Add(fileName);
             }
 
-            //Recursion    
-            string[] subdirectoryEntries = Directory.GetDirectories(sourceDir);
-            foreach (string item in subdirectoryEntries)
-            {
-                // Avoid "reparse points"
-                if ((File.GetAttributes(item) & FileAttributes.ReparsePoint) != FileAttributes.ReparsePoint)
-                {
-                    AddFileNamesToList(item, allFiles, bin);
-                }
-            }
+            ////Recursion    
+            //string[] subdirectoryEntries = Directory.GetDirectories(sourceDir);
+            //foreach (string item in subdirectoryEntries)
+            //{
+            //    // Avoid "reparse points"
+            //    if ((File.GetAttributes(item) & FileAttributes.ReparsePoint) != FileAttributes.ReparsePoint)
+            //    {
+            //        AddFileNamesToList(item, allFiles, bin);
+            //    }
+            //}
         }
 
         private async void Listbox_ergebnis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
