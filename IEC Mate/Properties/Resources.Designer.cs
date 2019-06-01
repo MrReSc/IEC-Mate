@@ -1114,7 +1114,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Binär Dateien durchsuchen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dateitypen durchsuchen ähnelt.
         /// </summary>
         public static string ts_bin_ein {
             get {
@@ -1168,6 +1168,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dateiendungen die bei der Suche ausgeschlossen werden. ähnelt.
+        /// </summary>
+        public static string tt_file_ext {
+            get {
+                return ResourceManager.GetString("tt_file_ext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Standardwerte wiederherstellen. ähnelt.
+        /// </summary>
+        public static string tt_file_ext_default {
+            get {
+                return ResourceManager.GetString("tt_file_ext_default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt. ähnelt.
         /// </summary>
         public static string tt_hotkey {
@@ -1186,7 +1204,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden auch *.fud, *.ful, *.fu, *.**O Dateien durchsucht. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden auch die ausgeschlossenen Dateitypen durchsucht. ähnelt.
         /// </summary>
         public static string tt_suche_bin {
             get {
@@ -1218,6 +1236,15 @@ namespace IECMate.Properties {
         public static string tt_suche_offnen {
             get {
                 return ResourceManager.GetString("tt_suche_offnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dateiendungen eintragen... ähnelt.
+        /// </summary>
+        public static string wm_file_ext {
+            get {
+                return ResourceManager.GetString("wm_file_ext", resourceCulture);
             }
         }
     }

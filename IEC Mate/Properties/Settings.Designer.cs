@@ -382,5 +382,29 @@ namespace IECMate.Properties {
                 this["me_auswahl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain")]
+        public string file_ext_default {
+            get {
+                return ((string)(this["file_ext_default"]));
+            }
+            set {
+                this["file_ext_default"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain")]
+        public string file_ext_user {
+            get {
+                return ((string)(this["file_ext_user"]));
+            }
+            set {
+                this["file_ext_user"] = value;
+            }
+        }
     }
 }

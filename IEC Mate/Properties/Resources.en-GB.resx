@@ -536,7 +536,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Search</value>
   </data>
   <data name="ts_bin_ein" xml:space="preserve">
-    <value>Search binary files</value>
+    <value>Search file types</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
     <value>Search for exact string</value>
@@ -553,6 +553,12 @@ END OF TERMS AND CONDITIONS</value>
   <data name="tt_ers_ruck" xml:space="preserve">
     <value>Makes the replaced code recede.</value>
   </data>
+  <data name="tt_file_ext" xml:space="preserve">
+    <value>File extensions that are excluded from the search.</value>
+  </data>
+  <data name="tt_file_ext_default" xml:space="preserve">
+    <value>Restore default values.</value>
+  </data>
   <data name="tt_hotkey" xml:space="preserve">
     <value>If the configured key combination is pressed, then the text is inserted automatically.</value>
   </data>
@@ -560,7 +566,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>A search suggestion is displayed for all HW endpoints in the directory .\application\control\config.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
-    <value>It also searches *.fud, *.ful, *.fu, *.**O files.</value>
+    <value>The excluded file types are also searched.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
     <value>Only the exact string will be searched (Case Sensitive).</value>
@@ -570,5 +576,8 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="tt_suche_offnen" xml:space="preserve">
     <value>Open selected file.</value>
+  </data>
+  <data name="wm_file_ext" xml:space="preserve">
+    <value>Enter file extensions...</value>
   </data>
 </root>

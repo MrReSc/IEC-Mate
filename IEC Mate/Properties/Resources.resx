@@ -536,7 +536,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Suche</value>
   </data>
   <data name="ts_bin_ein" xml:space="preserve">
-    <value>Binär Dateien durchsuchen</value>
+    <value>Dateitypen durchsuchen</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
     <value>Nach exakter Zeichenfolge suchen</value>
@@ -553,6 +553,12 @@ END OF TERMS AND CONDITIONS</value>
   <data name="tt_ers_ruck" xml:space="preserve">
     <value>Macht das ersetzten wieder Rückgangig.</value>
   </data>
+  <data name="tt_file_ext" xml:space="preserve">
+    <value>Dateiendungen die bei der Suche ausgeschlossen werden.</value>
+  </data>
+  <data name="tt_file_ext_default" xml:space="preserve">
+    <value>Standardwerte wiederherstellen.</value>
+  </data>
   <data name="tt_hotkey" xml:space="preserve">
     <value>Wenn die konfigurierte Tastenkombination gedrückt wird, dann wird automatisch der Text eingefügt.</value>
   </data>
@@ -560,7 +566,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Es wird ein Suchvorschlag für alle HW Endpunkte im Verzeichnis .\application\control\config angezeigt.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
-    <value>Es werden auch *.fud, *.ful, *.fu, *.**O Dateien durchsucht.</value>
+    <value>Es werden auch die ausgeschlossenen Dateitypen durchsucht.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
     <value>Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive).</value>
@@ -570,5 +576,8 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="tt_suche_offnen" xml:space="preserve">
     <value>Ausgewählte Datei öffnen.</value>
+  </data>
+  <data name="wm_file_ext" xml:space="preserve">
+    <value>Dateiendungen eintragen...</value>
   </data>
 </root>

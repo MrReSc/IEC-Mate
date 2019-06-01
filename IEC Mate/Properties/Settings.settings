@@ -92,5 +92,11 @@
     <Setting Name="me_auswahl" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="file_ext_default" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain</Value>
+    </Setting>
+    <Setting Name="file_ext_user" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

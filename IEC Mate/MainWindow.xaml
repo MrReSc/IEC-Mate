@@ -89,6 +89,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <!--Aussehen-->
@@ -138,11 +139,11 @@
 
 
                         <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30"
-                                                    ValueChanged="NumericUpDown_ValueChanged" 
-                                                    FontSize="15" 
-                                                    Margin="5,0"
-                                                    HorizontalContentAlignment="Left"
-                                                    StringFormat=" {0}   pt."/>
+                                                ValueChanged="NumericUpDown_ValueChanged" 
+                                                FontSize="15" 
+                                                Margin="5,0"
+                                                HorizontalContentAlignment="Left"
+                                                StringFormat=" {0}   pt."/>
 
                     </StackPanel>
 
@@ -151,9 +152,48 @@
                         <Label Content="{x:Static p:Resources.lb_sprache}"  FontSize="30" Margin="0,25,0,0"/>
                         <ComboBox x:Name="cb_sprache" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
                     </StackPanel>
-                    
-                    <!--Hilfe-->
+
+                    <!--Suche-->
                     <StackPanel Grid.Column="1" Grid.Row="3">
+                        <DockPanel Margin="0,25,0,10">
+                            <Label Content="{x:Static p:Resources.ti_suche}" FontSize="30" DockPanel.Dock="Left" HorizontalAlignment="Left"/>
+                            <Button x:Name="btn_default_ext" Width="30" Height="30" DockPanel.Dock="Right" 
+                                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" 
+                                    ToolTip="{x:Static p:Resources.tt_file_ext_default}" Click="Btn_default_ext_Click">
+                                <iconPacks:PackIconMaterial Kind="BackupRestore" Width="auto" Height="auto" />
+                            </Button>
+                        </DockPanel>
+
+                        <Controls:ToggleSwitch x:Name="ts_binar_suche"
+                                           Content="{x:Static p:Resources.ts_bin_ein}" 
+                                           IsChecked="False" 
+                                           ToolTip="{x:Static p:Resources.tt_suche_bin}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="5,0,5,10"
+                                           IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
+                        
+                        <TextBox x:Name="text_file_ext" TextWrapping="Wrap" FontSize="14"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                 Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_file_ext}" 
+                                 Margin="5,0,5,10" Height="60"
+                                 ToolTip="{x:Static p:Resources.tt_file_ext}">
+                        </TextBox>
+
+                        <Controls:ToggleSwitch x:Name="ts_hw_suchvorschalg"
+                                           Content="{x:Static p:Resources.ts_hw_vorschalg}" 
+                                           IsChecked="True"  
+                                           ToolTip="{x:Static p:Resources.tt_hw_vorschlag}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="5,0" IsCheckedChanged="Ts_hw_suchvorschalg_IsCheckedChanged"/>
+                    </StackPanel>
+
+                    <!--Hilfe-->
+                    <StackPanel Grid.Column="1" Grid.Row="4">
                         <Label Content="{x:Static p:Resources.dp_hilfe}"  FontSize="30" Margin="0,25,0,0"/>
                         <Button Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
                             <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
@@ -568,18 +608,8 @@
                                            VerticalAlignment="Center"
                                            Margin="30,0,0,0" 
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
-
-                    <Controls:ToggleSwitch x:Name="ts_binar_suche" Grid.Column="2" Grid.Row="2" 
-                                           Content="{x:Static p:Resources.ts_bin_ein}" 
-                                           IsChecked="False" 
-                                           ToolTip="{x:Static p:Resources.tt_suche_bin}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
-                                           Margin="30,0,0,0"
-                                           IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
-                    
-                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="0" 
+                  
+                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="2" 
                                            Content="{x:Static p:Resources.ts_hw_ein}" 
                                            IsChecked="False"  
                                            ToolTip="{x:Static p:Resources.tt_suche_hw}" 
@@ -588,15 +618,6 @@
                                            VerticalAlignment="Center"
                                            Margin="30,0,0,0"
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
-
-                    <Controls:ToggleSwitch x:Name="ts_hw_suchvorschalg" Grid.Column="3" Grid.Row="2" 
-                                           Content="{x:Static p:Resources.ts_hw_vorschalg}" 
-                                           IsChecked="True"  
-                                           ToolTip="{x:Static p:Resources.tt_hw_vorschlag}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
-                                           Margin="30,0,0,0" IsCheckedChanged="Ts_hw_suchvorschalg_IsCheckedChanged"/>
 
                     <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="5">
                         <Grid>

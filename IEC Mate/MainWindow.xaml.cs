@@ -170,6 +170,8 @@ namespace IECMate
             cb_hotkey_pxComment.Text = key1.ToString();
             cb_hotekey_brackets.Text = key4.ToString();
 
+            text_file_ext.Text = Properties.Settings.Default.file_ext_user;
+
             if (Properties.Settings.Default.sprache == "de-DE")
             {
                 cb_sprache.Text = Properties.Resources.lanDE;
@@ -747,7 +749,8 @@ namespace IECMate
             {
                 Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
             }
-           
+            Properties.Settings.Default.file_ext_user = text_file_ext.Text;
+
             Properties.Settings.Default.Save();
 
             HotkeyManager.Current.Remove("PxBeginEnd");
@@ -845,6 +848,11 @@ namespace IECMate
                     Application.Current.Shutdown();
                 }
             }
+        }
+
+        private void Btn_default_ext_Click(object sender, RoutedEventArgs e)
+        {
+            text_file_ext.Text = Properties.Settings.Default.file_ext_default;
         }
         #endregion
 
@@ -947,7 +955,7 @@ namespace IECMate
                         }
                     }
                 }
-                catch (Exception) 
+                catch (Exception ex) 
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
@@ -978,7 +986,7 @@ namespace IECMate
             }
         }
 
-        public static void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin)
+        public void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin)
         {
             IEnumerable<string> fileEntries = Enumerable.Empty<string>();
             if (bin)
@@ -987,11 +995,21 @@ namespace IECMate
             }
             else
             {
-                //Hier werden die Binär Files aus dem IEC Projekt ausgeschlossen
-                fileEntries = Directory.GetFiles(sourceDir).Where(name => !name.EndsWith(".fu") &&
-                                                                          !name.EndsWith(".fud") &&
-                                                                          !name.EndsWith(".ful") &&
-                                                                          !name.EndsWith("O"));
+                var exttemp = text_file_ext.Text.Split(' ').ToList();
+                var ext = new List<string>();
+                foreach (var item in exttemp)
+                {
+                    if (!item.StartsWith("."))
+                    {
+                        ext.Add("." + item);
+                    }
+                    else
+                    {
+                        ext.Add(item);
+                    }
+                }
+
+                fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories).Where(name => !ext.Contains(Path.GetExtension(name)));
             }
 
             foreach (string fileName in fileEntries)
@@ -1766,6 +1784,7 @@ namespace IECMate
 
 
         #endregion
+
 
     }
 }
