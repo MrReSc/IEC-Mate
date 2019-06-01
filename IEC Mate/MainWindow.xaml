@@ -619,6 +619,10 @@
                                            Margin="30,0,0,0"
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
 
+                    <TextBox x:Name="text_suche_count" Grid.Column="0" Grid.Row="3" BorderThickness="0" FontSize="8" 
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center" Margin="-5,0,0,0"/>
+
                     <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="5">
                         <Grid>
                             <Grid.ColumnDefinitions>

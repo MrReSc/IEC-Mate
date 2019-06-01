@@ -891,6 +891,8 @@ namespace IECMate
                 var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = Properties.Resources.dialogNegButton};
                 var x = await this.ShowProgressAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLauft, true, mymessageboxsettings) as ProgressDialogController;
                 double percent = 0;
+                double filecount =0;
+                double count = 0;
                 x.SetProgress(percent);
 
                 try
@@ -912,8 +914,8 @@ namespace IECMate
                     }
 
                     AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
-                    double filecount = allFiles.Count();
-                    double count = 0;
+                    filecount = allFiles.Count();
+                    count = 0;
 
                     //Sobald der Dialog offen ist wird mit der suche gestartet
                     if (x.IsOpen)
@@ -927,9 +929,11 @@ namespace IECMate
                                 percent = 1.0;
                             }
                             x.SetProgress(percent);
+                            text_suche_count.Text = count.ToString() + " / " + filecount.ToString();
 
                             if (x.IsCanceled)
                             {
+                                text_suche_count.Text = "";
                                 break;
                             }
 
@@ -955,10 +959,12 @@ namespace IECMate
                         }
                     }
                 }
-                catch (Exception ex) 
+                catch (Exception) 
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+                    text_suche_count.Text = "";
+
                 }
 
                 await x.CloseAsync();
@@ -967,6 +973,7 @@ namespace IECMate
             {
                 await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLeer, MessageDialogStyle.Affirmative);
                 await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+                text_suche_count.Text = "";
             }
         }
 
