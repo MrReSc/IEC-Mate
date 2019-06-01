@@ -569,7 +569,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>The excluded file types are also searched.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
-    <value>Only the exact string will be searched (Case Sensitive).</value>
+    <value>Only the exact string will be searched.</value>
   </data>
   <data name="tt_suche_hw" xml:space="preserve">
     <value>Search only in subdirectory \application\control\config\.</value>

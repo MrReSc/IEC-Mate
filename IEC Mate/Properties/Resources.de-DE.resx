@@ -569,7 +569,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Es werden auch die ausgeschlossenen Dateitypen durchsucht.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
-    <value>Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive).</value>
+    <value>Es wird nur nach der exakten Zeichenfolge gesucht.</value>
   </data>
   <data name="tt_suche_hw" xml:space="preserve">
     <value>Sucht nur im Unterverzeichnis \application\control\config\.</value>

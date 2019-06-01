@@ -1213,7 +1213,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Es wird nur nach der exakten Zeichenfolge gesucht (Case Sensitive). ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es wird nur nach der exakten Zeichenfolge gesucht. ähnelt.
         /// </summary>
         public static string tt_suche_exakt {
             get {

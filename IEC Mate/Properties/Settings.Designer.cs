@@ -385,7 +385,8 @@ namespace IECMate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain .bat .bin .bak .fws ." +
+            "svl .svd .gif .java .class")]
         public string file_ext_default {
             get {
                 return ((string)(this["file_ext_default"]));
@@ -397,7 +398,8 @@ namespace IECMate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".fu .fud .ful .fuO .tuO .puO .svd .it .scc .dat .gz .retain .bat .bin .bak .fws ." +
+            "svl .svd .gif .java .class")]
         public string file_ext_user {
             get {
                 return ((string)(this["file_ext_user"]));

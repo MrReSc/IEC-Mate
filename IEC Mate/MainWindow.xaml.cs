@@ -933,7 +933,7 @@ namespace IECMate
 
                             if (x.IsCanceled)
                             {
-                                text_suche_count.Text = "";
+                                //text_suche_count.Text = "";
                                 break;
                             }
 
@@ -942,7 +942,7 @@ namespace IECMate
                                 var fileText = await reader.ReadToEndAsync();
                                 if ((bool)ts_exakte_suche.IsChecked)
                                 {
-                                    if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text))))
+                                    if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                     {
                                         listbox_ergebnis.Items.Add(fileName);
                                     }
@@ -963,7 +963,7 @@ namespace IECMate
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
-                    text_suche_count.Text = "";
+                    //text_suche_count.Text = "";
 
                 }
 
