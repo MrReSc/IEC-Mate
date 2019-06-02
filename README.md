@@ -1,6 +1,8 @@
 # IEC-Mate
 
-IEC-Mate ist noch in der Beta Phase. Die neuste Version kann [hier](https://github.com/MrReSc/IEC-Mate/releases) heruntergeladen werden.
+IEC-Mate ist noch in der Beta Phase. 
+
+Die neuste Version kann [hier](https://github.com/MrReSc/IEC-Mate/releases) heruntergeladen werden. Bei jedem Start von IEC-Mate wird automatisch auf Updates überprüft.
 
 IEC-Mate soll die Entwicklung von Software unterstützen. Dazu gibt es die folgenden Kernfunktionen:
 
