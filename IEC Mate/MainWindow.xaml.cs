@@ -299,6 +299,8 @@ namespace IECMate
         {
             child_Infos.IsOpen = true;
             lb_version.Content = AssemblyVersion(true);
+            text_lizenzen.Text = File.ReadAllText(@"resources\oss_lizenzen_iec_mate.txt");
+            text_iecmate_lizenz.Text = File.ReadAllText(@"resources\iec_mate_lizenz.txt");
         }
 
         public string AssemblyVersion(bool wDay)

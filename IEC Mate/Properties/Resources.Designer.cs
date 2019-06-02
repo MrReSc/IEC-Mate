@@ -529,17 +529,6 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Copyright (c) 2019 Remo Scheidegger
-        ///
-        ///Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this perm [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        public static string info_lizenztext {
-            get {
-                return ResourceManager.GetString("info_lizenztext", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Info ähnelt.
         /// </summary>
         public static string info_titel {
@@ -698,40 +687,6 @@ namespace IECMate.Properties {
         public static string lb_oss_lizenz {
             get {
                 return ResourceManager.GetString("lb_oss_lizenz", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die AvalonEdit
-        ///*****************
-        ///MIT License
-        ///Copyright (c) AvalonEdit Contributors
-        ///
-        ///Windows Input Simulator Plus
-        ///*****************
-        ///Ms-PL Microsoft Public License (Ms-PL)
-        ///
-        ///MahApps.Metro
-        ///*****************
-        ///MIT License
-        ///Copyright (c) 2019 MahApps
-        ///
-        ///7-Zip
-        ///*****************
-        ///GNU LGPL
-        ///7-Zip Copyright (C) 1999-2019 Igor Pavlov.
-        ///
-        ///NHotkey
-        ///*****************
-        ///Apache License Version 2.0, January 2004 http://www.apache.org/licenses/
-        ///
-        ///TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
-        ///
-        ///Definitio [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        public static string lb_oss_lizenz_text {
-            get {
-                return ResourceManager.GetString("lb_oss_lizenz_text", resourceCulture);
             }
         }
         

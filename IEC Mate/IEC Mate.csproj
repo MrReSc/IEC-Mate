@@ -41,7 +41,7 @@
     <ProductName>IEC-Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>23</ApplicationRevision>
-    <ApplicationVersion>0.0.841.19153</ApplicationVersion>
+    <ApplicationVersion>0.0.845.19153</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -255,9 +255,12 @@
     <Content Include="resources\7z\7zxa.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="resources\oss_lizenzen_iec_mate.txt">
+    <Content Include="resources\iec_mate_lizenz.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
+    <Content Include="resources\oss_lizenzen_iec_mate.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="resources\Entypo-license.txt" />
     <Content Include="resources\st_syntax.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
