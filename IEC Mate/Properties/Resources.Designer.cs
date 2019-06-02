@@ -79,6 +79,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Download Update ähnelt.
+        /// </summary>
+        public static string dialogDownloadUpdateButton {
+            get {
+                return ResourceManager.GetString("dialogDownloadUpdateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Backup läuft, bitte warte... ähnelt.
         /// </summary>
         public static string dialogMsgBackup {
@@ -259,6 +268,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es ist eine neue Version verfügbar. ähnelt.
+        /// </summary>
+        public static string dialogMsgUpdate {
+            get {
+                return ResourceManager.GetString("dialogMsgUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Abbrechen ähnelt.
         /// </summary>
         public static string dialogNegButton {
@@ -336,6 +354,24 @@ namespace IECMate.Properties {
         public static string dialogTitelSuche {
             get {
                 return ResourceManager.GetString("dialogTitelSuche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update ähnelt.
+        /// </summary>
+        public static string dialogTitleUpdate {
+            get {
+                return ResourceManager.GetString("dialogTitleUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update Seite öffnen ähnelt.
+        /// </summary>
+        public static string dialogUpdateOffnenButton {
+            get {
+                return ResourceManager.GetString("dialogUpdateOffnenButton", resourceCulture);
             }
         }
         

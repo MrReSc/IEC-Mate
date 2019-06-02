@@ -123,6 +123,9 @@
   <data name="cb_var_auswahlen" xml:space="preserve">
     <value>Replace by...</value>
   </data>
+  <data name="dialogDownloadUpdateButton" xml:space="preserve">
+    <value>Download Update</value>
+  </data>
   <data name="dialogMsgBackup" xml:space="preserve">
     <value>The backup is running, please wait...</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="dialogMsgSucheVerzeichnisFehler" xml:space="preserve">
     <value>The directory is not an IEC project.</value>
   </data>
+  <data name="dialogMsgUpdate" xml:space="preserve">
+    <value>A new version is available.</value>
+  </data>
   <data name="dialogNegButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -209,6 +215,12 @@
   </data>
   <data name="dialogTitelSuche" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="dialogTitleUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="dialogUpdateOffnenButton" xml:space="preserve">
+    <value>Open update page</value>
   </data>
   <data name="dp_datei" xml:space="preserve">
     <value>File</value>

@@ -212,15 +212,28 @@ namespace IECMate
                 var relVersion = latest.TagName.Split('.');
                 var aseVersion = AssemblyVersion(false).Split('.');
 
-                if (Convert.ToInt32(relVersion[0]) > Convert.ToInt32(relVersion[0]) ||
-                    Convert.ToInt32(relVersion[1]) > Convert.ToInt32(relVersion[1]) ||
-                    Convert.ToInt32(relVersion[2]) > Convert.ToInt32(relVersion[2]))
+                if (Convert.ToInt32(relVersion[0]) > Convert.ToInt32(aseVersion[0]) ||
+                    Convert.ToInt32(relVersion[1]) > Convert.ToInt32(aseVersion[1]) ||
+                    Convert.ToInt32(relVersion[2]) > Convert.ToInt32(aseVersion[2]))
                 {
-                    var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen", AffirmativeButtonText = "Seite öffnen" };
-                    MessageDialogResult x = await this.ShowMessageAsync("Neue Version Verfügbar", "Blabla", MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+                    var mymessageboxsettings = new MetroDialogSettings()
+                    { 
+                        AffirmativeButtonText = Properties.Resources.dialogDownloadUpdateButton,
+                        FirstAuxiliaryButtonText = Properties.Resources.dialogUpdateOffnenButton,
+                        NegativeButtonText = Properties.Resources.dialogNegButton,
+                    };
+
+                    var updateMsg = Properties.Resources.dialogMsgUpdate + Environment.NewLine + latest.Body;
+
+                    MessageDialogResult x = await this.ShowMessageAsync(Properties.Resources.dialogTitleUpdate, updateMsg, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mymessageboxsettings);
                     if (x == MessageDialogResult.Affirmative)
                     {
-                        Process.Start("https://github.com/MrReSc/IEC-Mate/releases");
+                        Process.Start(latest.Assets[0].BrowserDownloadUrl);
+                    }
+
+                    if (x == MessageDialogResult.FirstAuxiliary)
+                    {
+                        Process.Start(latest.HtmlUrl);
                     }
                 }
             }
