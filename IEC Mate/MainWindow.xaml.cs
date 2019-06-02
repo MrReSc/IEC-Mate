@@ -888,8 +888,8 @@ namespace IECMate
             //Listebox löschen
             listbox_ergebnis.Items.Clear();
 
-            //Wennn etwas im Suchfeld steht und das Verzeichnis existiert dann wird gesucht
-            if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)))
+            //Wennn etwas im Suchfeld steht und das Verzeichnis existiert und es nicht zwei Wörter sind dann wird gesucht
+            if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)) && !text_pattern_suche.Text.Contains(" "))
             {
                 //Dialog öffnen
                 var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = Properties.Resources.dialogNegButton};
@@ -1165,14 +1165,16 @@ namespace IECMate
                             }
                         }
                     }
-
+                    ids.Sort();
                     return ids;
                 }
                 catch (Exception)
                 {
+                    ids.Clear();
                     return ids;
                 }
             }
+            ids.Clear();
             return ids;
         }
         #endregion

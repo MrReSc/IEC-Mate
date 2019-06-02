@@ -178,7 +178,7 @@
     <value>Die Suche läuft. Bite warten...</value>
   </data>
   <data name="dialogMsgSucheLeer" xml:space="preserve">
-    <value>Suchfeld ist leer oder das Verzeichnis existiert nicht.</value>
+    <value>Suchfeld ist leer, es sind mehrere Wörter im Suchfeld oder das Verzeichnis existiert nicht.</value>
   </data>
   <data name="dialogMsgSucheVerzeichnisFehler" xml:space="preserve">
     <value>Das Verzeichnis ist kein IEC Projekt.</value>
@@ -548,7 +548,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Dateitypen durchsuchen</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
-    <value>Nach exakter Zeichenfolge suchen</value>
+    <value>Ganzes Wort suchen</value>
   </data>
   <data name="ts_hw_ein" xml:space="preserve">
     <value>Nur in HW-Konfig suchen</value>
@@ -578,7 +578,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Es werden auch die ausgeschlossenen Dateitypen durchsucht.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
-    <value>Es wird nur nach der exakten Zeichenfolge gesucht.</value>
+    <value>Es wird nach dem ganzen Wort gesucht.</value>
   </data>
   <data name="tt_suche_hw" xml:space="preserve">
     <value>Sucht nur im Unterverzeichnis \application\control\config\.</value>

@@ -178,7 +178,7 @@
     <value>The search is running. Please wait...</value>
   </data>
   <data name="dialogMsgSucheLeer" xml:space="preserve">
-    <value>Search field is empty or the directory does not exist.</value>
+    <value>Search field is empty, there are several words in the search field or the directory does not exist.</value>
   </data>
   <data name="dialogMsgSucheVerzeichnisFehler" xml:space="preserve">
     <value>The directory is not an IEC project.</value>
@@ -548,7 +548,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>Search file types</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
-    <value>Search for exact string</value>
+    <value>Search whole word</value>
   </data>
   <data name="ts_hw_ein" xml:space="preserve">
     <value>Search only in HW-Config</value>
@@ -578,7 +578,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>The excluded file types are also searched.</value>
   </data>
   <data name="tt_suche_exakt" xml:space="preserve">
-    <value>Only the exact string will be searched.</value>
+    <value>It's searching for the whole word.</value>
   </data>
   <data name="tt_suche_hw" xml:space="preserve">
     <value>Search only in subdirectory \application\control\config\.</value>

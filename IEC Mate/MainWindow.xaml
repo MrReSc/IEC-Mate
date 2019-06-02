@@ -178,7 +178,7 @@
                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
                                  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_file_ext}" 
-                                 Margin="5,0,5,10" Height="80"
+                                 Margin="5,0,5,10" Height="70"
                                  ToolTip="{x:Static p:Resources.tt_file_ext}">
                         </TextBox>
 

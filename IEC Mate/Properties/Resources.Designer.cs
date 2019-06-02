@@ -241,7 +241,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Suchfeld ist leer oder das Verzeichnis existiert nicht. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchfeld ist leer, es sind mehrere Wörter im Suchfeld oder das Verzeichnis existiert nicht. ähnelt.
         /// </summary>
         public static string dialogMsgSucheLeer {
             get {
@@ -1150,7 +1150,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Nach exakter Zeichenfolge suchen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ganzes Wort suchen ähnelt.
         /// </summary>
         public static string ts_exakte_ein {
             get {
@@ -1240,7 +1240,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Es wird nur nach der exakten Zeichenfolge gesucht. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es wird nach dem ganzen Wort gesucht. ähnelt.
         /// </summary>
         public static string tt_suche_exakt {
             get {
