@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_021C8924B5A4206A24BC03A00800E2DB"
+        "OwnerKey" = "8:_B26C5ED3A10D8A8EFA6BC1922C56CE09"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1062504ED74689BE0E1A1C84B43B02D0"
         "OwnerKey" = "8:_F6CE81356E3943DDB10040C9C969CE3B"
         "MsmSig" = "8:_UNDEFINED"
@@ -99,6 +105,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B26C5ED3A10D8A8EFA6BC1922C56CE09"
+        "OwnerKey" = "8:_F6CE81356E3943DDB10040C9C969CE3B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C9B9184BADFA479BEA7CF34836696D0E"
         "OwnerKey" = "8:_F6CE81356E3943DDB10040C9C969CE3B"
         "MsmSig" = "8:_UNDEFINED"
@@ -149,6 +161,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F6CE81356E3943DDB10040C9C969CE3B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B26C5ED3A10D8A8EFA6BC1922C56CE09"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_021C8924B5A4206A24BC03A00800E2DB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -330,6 +354,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_021C8924B5A4206A24BC03A00800E2DB"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_021C8924B5A4206A24BC03A00800E2DB"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_1FC5898A4B644E94A2E5767F435E036C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1062504ED74689BE0E1A1C84B43B02D0"
             {
             "AssemblyRegister" = "3:1"
@@ -671,6 +726,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B26C5ED3A10D8A8EFA6BC1922C56CE09"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Octokit, Version=0.32.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B26C5ED3A10D8A8EFA6BC1922C56CE09"
+                    {
+                    "Name" = "8:Octokit.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Octokit.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_1FC5898A4B644E94A2E5767F435E036C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C9B9184BADFA479BEA7CF34836696D0E"
             {
             "AssemblyRegister" = "3:1"
@@ -840,15 +926,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IEC-Mate"
-        "ProductCode" = "8:{DD1B5935-B829-4873-BA5D-52FAB873EE9A}"
-        "PackageCode" = "8:{DCB68A32-F2EB-4525-BB7E-BBFF15B77164}"
+        "ProductCode" = "8:{B6AFB367-06C6-41BC-87B9-6F47AD7B3B1B}"
+        "PackageCode" = "8:{DFD22B59-B2F7-4175-AC3E-B0B95A479116}"
         "UpgradeCode" = "8:{1829CEAB-42C1-4661-80D7-09286BAAC581}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.0.842"
+        "ProductVersion" = "8:0.0.843"
         "Manufacturer" = "8:Remo Scheidegger"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
