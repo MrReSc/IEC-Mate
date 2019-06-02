@@ -30,6 +30,7 @@ using System.Threading;
 using System.Globalization;
 using WindowsInput.Native;
 using ICSharpCode.AvalonEdit;
+using octokit = Octokit;
 
 namespace IECMate
 {
@@ -57,10 +58,9 @@ namespace IECMate
             }
 
             DataContext = this;
-            //var liste = new List<string>() { "svDO", "Mark", "Doe" };
-            //vorhandeneIO = liste;
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
+           
             InitializeComponent();
 
             //Hotkey
@@ -195,10 +195,41 @@ namespace IECMate
 
             //OS Version
             os_version = (string)registryKey.GetValue("productName");
+
+            //Release überprüfen
+            ReleaseCheck();
             #endregion
         }
 
         #region Allgemein
+        public async void ReleaseCheck()
+        {
+            try
+            {
+                var client = new octokit.GitHubClient(new octokit.ProductHeaderValue("IEC-Mate"));
+                var releases = await client.Repository.Release.GetAll("MrReSc", "IEC-Mate");
+                var latest = releases[0];
+                var relVersion = latest.TagName.Split('.');
+                var aseVersion = AssemblyVersion(false).Split('.');
+
+                if (Convert.ToInt32(relVersion[0]) > Convert.ToInt32(relVersion[0]) ||
+                    Convert.ToInt32(relVersion[1]) > Convert.ToInt32(relVersion[1]) ||
+                    Convert.ToInt32(relVersion[2]) > Convert.ToInt32(relVersion[2]))
+                {
+                    var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = "Abbrechen", AffirmativeButtonText = "Seite öffnen" };
+                    MessageDialogResult x = await this.ShowMessageAsync("Neue Version Verfügbar", "Blabla", MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+                    if (x == MessageDialogResult.Affirmative)
+                    {
+                        Process.Start("https://github.com/MrReSc/IEC-Mate/releases");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                ;
+            }
+        }
+
         public void onTextViewSettingDataHandler(object sender, DataObjectSettingDataEventArgs e)
         {
             //hier wird die HTML formatierung vom Text im Editor entfernt
@@ -254,17 +285,30 @@ namespace IECMate
         private void MenuItem_Click_About(object sender, RoutedEventArgs e)
         {
             child_Infos.IsOpen = true;
+            lb_version.Content = AssemblyVersion(true);
+        }
+
+        public string AssemblyVersion(bool wDay)
+        {
             try
             {
                 // get deployment version
                 string[] assemblyversion = Assembly.GetExecutingAssembly().GetName().Version.ToString().Split('.');
-                lb_version.Content = assemblyversion[0] + "." + assemblyversion[1] + "." + assemblyversion[2] + " (" + assemblyversion[3] + ")";
+                if (wDay)
+                {
+                    return assemblyversion[0] + "." + assemblyversion[1] + "." + assemblyversion[2] + " (" + assemblyversion[3] + ")";
+                }
+                else
+                {
+                    return assemblyversion[0] + "." + assemblyversion[1] + "." + assemblyversion[2];
+                }
+                
             }
             catch (InvalidDeploymentException)
             {
                 // you cannot read publish version when app isn't installed 
                 // (e.g. during debug)
-                lb_version.Content = Properties.Resources.lb_version;
+                return Properties.Resources.lb_version;
             }
         }
 
