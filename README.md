@@ -21,17 +21,18 @@ Die Code Vorlagen können auch als ``*.txt`` Datei gespeichert und bei Bedarf wi
 
 ## Suche
 
-Mit der Suchfunktion können Wörter innerhalb von Dateien gesucht werden.
+Mit der Suchfunktion können Wörter innerhalb von Dateien gesucht werden. Als Suchvorschlag werden die im ausgewählten IEC Projekt konfigurierten IO Variablen (``Projektname\application\control\config``) angezeigt.
 
-Es gibt drei Verschiedene Schalter:
+Es gibt verschiedene Einstellungen:
 
-- Exakte Zeichenfolge: Es werden nur Dateien angezeigt die einen exakten Treffer enthalten
-- Binär Dateien: Die Suche in Binärdateien kann aktiviert werden
+- Ganzes Wort suchen: Es werden nur Dateien angezeigt die einen exakten Treffer enthalten (Case-Insensitiv)
 - HW-Konfig: Es wird nur im Unterverzeichnis  `Projektname\application\control\config\` gesucht
+- Im Einstellungsmenu können Dateitypen von der Suche ausgeschlossen werden (Standardmässig sind alle Binärdateien und Java Dateien ausgeschlossen)
+- Im Einstellungsmenu kann der Suchvorschlag deaktiviert werden
 
 ![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/suche.gif?raw=true)
 
-Die Dateien können mit einem Doppelklick oder der Ordner in dem die Datei liegt mit einem Rechtsklick  geöffnet werden.
+Die Dateien können mit einem Doppelklick geöffnet werden. Der Ordner in dem die Datei liegt kann mit einem Rechtsklick  über das Menu geöffnet werden.
 
 ## Bitset
 

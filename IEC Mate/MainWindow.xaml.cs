@@ -1011,7 +1011,7 @@ namespace IECMate
             IEnumerable<string> fileEntries = Enumerable.Empty<string>();
             if (bin)
             {
-                fileEntries = Directory.GetFiles(sourceDir);
+                fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
             }
             else
             {
