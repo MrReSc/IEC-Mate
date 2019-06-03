@@ -608,15 +608,35 @@
                                            Margin="30,0,0,0" 
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
                   
-                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="2" Grid.Row="2" 
+                    <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="2" 
                                            Content="{x:Static p:Resources.ts_hw_ein}" 
                                            IsChecked="False"  
                                            ToolTip="{x:Static p:Resources.tt_suche_hw}" 
                                            Width="auto" 
                                            HorizontalAlignment="left" 
                                            VerticalAlignment="Center"
-                                           Margin="30,0,0,0"
-                                           IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
+                                           Margin="30,0,0,0" 
+                                           IsCheckedChanged="Ts_kbus_suche_IsCheckedChanged"/>
+
+                    <Controls:ToggleSwitch x:Name="ts_xml_suche" Grid.Column="3" Grid.Row="0" 
+                                           Content="{x:Static p:Resources.ts_xml_suche}" 
+                                           IsChecked="False"  
+                                           ToolTip="{x:Static p:Resources.tt_xml_suche}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="30,0,0,0" 
+                                           IsCheckedChanged="Ts_xml_suche_IsCheckedChanged"/>
+
+                    <Controls:ToggleSwitch x:Name="ts_java_suche" Grid.Column="2" Grid.Row="2" 
+                                           Content="{x:Static p:Resources.ts_java_suche}" 
+                                           IsChecked="False"  
+                                           ToolTip="{x:Static p:Resources.tt_java_suche}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="30,0,0,0" IsCheckedChanged="Ts_java_suche_IsCheckedChanged" 
+                                           />
 
                     <TextBox x:Name="text_suche_count" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BorderThickness="0" FontSize="9" 
                              VerticalAlignment="Center"

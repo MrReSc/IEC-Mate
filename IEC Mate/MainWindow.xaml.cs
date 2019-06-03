@@ -964,11 +964,19 @@ namespace IECMate
                 {
                     List<string> allFiles = new List<string>();
                     string suchpfad = "";
-
-                    //Wenn der Switch "Nur HW suche" ein ist, wird der Pfad angepasst
+                  
                     if ((bool)ts_kbus_suche.IsChecked)
                     {
+                        //Wenn der Switch "Nur HW suche" ein ist, wird der Pfad angepasst
                         suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+                        suchpfad = suchpfad.Replace("\\\\", "\\");
+                        //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
+                        Directory.Exists(suchpfad);
+                    }
+                    else if ((bool)ts_xml_suche.IsChecked)
+                    {
+                        //Wenn der Switch "Nur HMI xml Datein durchsuchen" ein ist, wird der Pfad angepasst
+                        suchpfad = text_projktpfad_suche.Text + Properties.Paths.view;
                         suchpfad = suchpfad.Replace("\\\\", "\\");
                         //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
                         Directory.Exists(suchpfad);
@@ -978,7 +986,7 @@ namespace IECMate
                         suchpfad = text_projktpfad_suche.Text;
                     }
 
-                    AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
+                    AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked, (bool)ts_java_suche.IsChecked, (bool)ts_xml_suche.IsChecked);
                     filecount = allFiles.Count();
                     count = 0;
 
@@ -1065,15 +1073,30 @@ namespace IECMate
             }
         }
 
-        public void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin)
+        public void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin, bool java, bool xml)
         {
             IEnumerable<string> fileEntries = Enumerable.Empty<string>();
             if (bin)
             {
+                //Alle Dateien werden zurückgegeben
                 fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
             }
-            else
+
+            if (java)
             {
+                //Nur *.java Dateien werden zurückgegeben
+                fileEntries = Directory.GetFiles(sourceDir, "*.java", SearchOption.AllDirectories);
+            }
+
+            if (xml)
+            {
+                //Nur *.xml Dateien aus den Verzeichnisen application\view\me\hmi\text werden zurückgegeben
+                fileEntries = Directory.GetFiles(sourceDir, "*.xml", SearchOption.AllDirectories);
+            }
+
+            if (!bin && !java && !xml)
+            {
+                //Alle Dateien ausser die ausgeschlossenen werden zurückgegeben
                 var exttemp = text_file_ext.Text.Split(' ').ToList();
                 var ext = new List<string>();
                 foreach (var item in exttemp)
@@ -1194,7 +1217,7 @@ namespace IECMate
                     List<string> allFilesTemp = new List<string>();
                     List<string> allFiles = new List<string>();
                     
-                    AddFileNamesToList(suchpfad, allFilesTemp, false);
+                    AddFileNamesToList(suchpfad, allFilesTemp, false, false, false);
 
                     foreach (var file in allFilesTemp)
                     {
@@ -1235,6 +1258,33 @@ namespace IECMate
             }
             ids.Clear();
             return ids;
+        }
+
+        private void Ts_kbus_suche_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if ((bool)ts_kbus_suche.IsChecked)
+            {
+                ts_xml_suche.IsChecked = false;
+                ts_java_suche.IsChecked = false;
+            }
+        }
+
+        private void Ts_xml_suche_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if ((bool)ts_xml_suche.IsChecked)
+            {
+                ts_kbus_suche.IsChecked = false;
+                ts_java_suche.IsChecked = false;
+            }
+        }
+
+        private void Ts_java_suche_IsCheckedChanged(object sender, EventArgs e)
+        {
+            if ((bool)ts_java_suche.IsChecked)
+            {
+                ts_kbus_suche.IsChecked = false;
+                ts_xml_suche.IsChecked = false;
+            }
         }
         #endregion
 
@@ -1843,7 +1893,7 @@ namespace IECMate
                 //Check if Path exists
                 Directory.GetAccessControl(suchpfad);
 
-                AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
+                AddFileNamesToList(suchpfad, allFiles, false, false, false);
                 int counter = 0;
 
                 foreach (var file in allFiles)
@@ -1867,6 +1917,8 @@ namespace IECMate
                 FehlerHelferAsync();
             }
         }
+
+
 
 
         #endregion

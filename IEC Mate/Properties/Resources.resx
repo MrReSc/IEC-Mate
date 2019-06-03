@@ -484,10 +484,16 @@
     <value>Ganzes Wort suchen</value>
   </data>
   <data name="ts_hw_ein" xml:space="preserve">
-    <value>Nur in HW-Konfig suchen</value>
+    <value>Nur Verzeichnis \config durchsuchen</value>
   </data>
   <data name="ts_hw_vorschalg" xml:space="preserve">
     <value>Suchvorschlag für HW Endpunkte</value>
+  </data>
+  <data name="ts_java_suche" xml:space="preserve">
+    <value>Nur *.java Dateien durchsuchen</value>
+  </data>
+  <data name="ts_xml_suche" xml:space="preserve">
+    <value>Nur Mask *.xml Dateien durchsuchen</value>
   </data>
   <data name="tt_code_gen_copy" xml:space="preserve">
     <value>Kopiert den kompletten Code in die Zwischenablage.</value>
@@ -507,6 +513,9 @@
   <data name="tt_hw_vorschlag" xml:space="preserve">
     <value>Es wird ein Suchvorschlag für alle HW Endpunkte im Verzeichnis .\application\control\config angezeigt.</value>
   </data>
+  <data name="tt_java_suche" xml:space="preserve">
+    <value>Es werden nur *.java Dateien durchsucht auch wenn diese ausgeschlossen wurden.</value>
+  </data>
   <data name="tt_suche_bin" xml:space="preserve">
     <value>Es werden auch die ausgeschlossenen Dateitypen durchsucht.</value>
   </data>
@@ -518,6 +527,9 @@
   </data>
   <data name="tt_suche_offnen" xml:space="preserve">
     <value>Ausgewählte Datei öffnen.</value>
+  </data>
+  <data name="tt_xml_suche" xml:space="preserve">
+    <value>Es werden nur *.xml Datein im Verzeichnis application\view\me\hmi\text durchsucht.</value>
   </data>
   <data name="wm_file_ext" xml:space="preserve">
     <value>Dateiendungen eintragen...</value>

@@ -150,4 +150,7 @@
   <data name="MachSetup" xml:space="preserve">
     <value>\\data_Customer\\machineSetup\\set_MachSetup.xml</value>
   </data>
+  <data name="view" xml:space="preserve">
+    <value>\\application\\view</value>
+  </data>
 </root>

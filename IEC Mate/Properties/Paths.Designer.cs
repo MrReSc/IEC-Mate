@@ -158,5 +158,14 @@ namespace IECMate.Properties {
                 return ResourceManager.GetString("systemOptions", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\application\\view ähnelt.
+        /// </summary>
+        internal static string view {
+            get {
+                return ResourceManager.GetString("view", resourceCulture);
+            }
+        }
     }
 }

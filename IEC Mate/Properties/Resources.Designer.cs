@@ -1159,7 +1159,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Nur in HW-Konfig suchen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nur Verzeichnis \config durchsuchen ähnelt.
         /// </summary>
         public static string ts_hw_ein {
             get {
@@ -1173,6 +1173,24 @@ namespace IECMate.Properties {
         public static string ts_hw_vorschalg {
             get {
                 return ResourceManager.GetString("ts_hw_vorschalg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nur *.java Dateien durchsuchen ähnelt.
+        /// </summary>
+        public static string ts_java_suche {
+            get {
+                return ResourceManager.GetString("ts_java_suche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nur Mask *.xml Dateien durchsuchen ähnelt.
+        /// </summary>
+        public static string ts_xml_suche {
+            get {
+                return ResourceManager.GetString("ts_xml_suche", resourceCulture);
             }
         }
         
@@ -1231,6 +1249,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden nur *.java Dateien durchsucht auch wenn diese ausgeschlossen wurden. ähnelt.
+        /// </summary>
+        public static string tt_java_suche {
+            get {
+                return ResourceManager.GetString("tt_java_suche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Es werden auch die ausgeschlossenen Dateitypen durchsucht. ähnelt.
         /// </summary>
         public static string tt_suche_bin {
@@ -1263,6 +1290,15 @@ namespace IECMate.Properties {
         public static string tt_suche_offnen {
             get {
                 return ResourceManager.GetString("tt_suche_offnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden nur *.xml Datein im Verzeichnis application\view\me\hmi\text durchsucht. ähnelt.
+        /// </summary>
+        public static string tt_xml_suche {
+            get {
+                return ResourceManager.GetString("tt_xml_suche", resourceCulture);
             }
         }
         
