@@ -916,6 +916,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die puLock Datein wurden gelöscht. ähnelt.
+        /// </summary>
+        public static string puLockDateien {
+            get {
+                return ResourceManager.GetString("puLockDateien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Durchsuchte Dateien:  ähnelt.
         /// </summary>
         public static string suche_dateien {

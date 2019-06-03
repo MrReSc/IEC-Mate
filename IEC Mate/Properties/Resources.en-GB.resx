@@ -402,6 +402,9 @@
   <data name="mi_pfad_offnen" xml:space="preserve">
     <value>Open folder</value>
   </data>
+  <data name="puLockDateien" xml:space="preserve">
+    <value>puLock files were deleted.</value>
+  </data>
   <data name="suche_dateien" xml:space="preserve">
     <value>Scanned files: </value>
   </data>

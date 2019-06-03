@@ -402,6 +402,9 @@
   <data name="mi_pfad_offnen" xml:space="preserve">
     <value>Ordner öffnen</value>
   </data>
+  <data name="puLockDateien" xml:space="preserve">
+    <value>puLock Datein wurden gelöscht.</value>
+  </data>
   <data name="suche_dateien" xml:space="preserve">
     <value>Durchsuchte Dateien: </value>
   </data>

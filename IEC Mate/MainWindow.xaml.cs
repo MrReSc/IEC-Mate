@@ -1095,17 +1095,6 @@ namespace IECMate
             {
                 allFiles.Add(fileName);
             }
-
-            ////Recursion    
-            //string[] subdirectoryEntries = Directory.GetDirectories(sourceDir);
-            //foreach (string item in subdirectoryEntries)
-            //{
-            //    // Avoid "reparse points"
-            //    if ((File.GetAttributes(item) & FileAttributes.ReparsePoint) != FileAttributes.ReparsePoint)
-            //    {
-            //        AddFileNamesToList(item, allFiles, bin);
-            //    }
-            //}
         }
 
         private async void Listbox_ergebnis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -1855,6 +1844,7 @@ namespace IECMate
                 Directory.GetAccessControl(suchpfad);
 
                 AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked);
+                int counter = 0;
 
                 foreach (var file in allFiles)
                 {
@@ -1864,8 +1854,12 @@ namespace IECMate
                     if (actual.Equals(".puLock"))
                     {
                         File.Delete(file);
+                        counter++;
                     }
                 }
+
+                var message = counter.ToString() + " " + Properties.Resources.puLockDateien;
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHelferLock, message, MessageDialogStyle.Affirmative);
 
             }
             catch (Exception)
