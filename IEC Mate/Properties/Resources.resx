@@ -475,7 +475,7 @@
     <value>Suche</value>
   </data>
   <data name="ts_bin_ein" xml:space="preserve">
-    <value>Dateitypen durchsuchen</value>
+    <value>Alle Dateitypen durchsuchen</value>
   </data>
   <data name="ts_exakte_ein" xml:space="preserve">
     <value>Ganzes Wort suchen</value>

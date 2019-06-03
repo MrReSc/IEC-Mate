@@ -1155,7 +1155,18 @@ namespace IECMate
 
         private void Ts_exakte_suche_IsCheckedChanged(object sender, EventArgs e)
         {
-            text_pattern_suche.Focus();
+            if ((bool)ts_binar_suche.IsChecked)
+            {
+                text_file_ext.IsEnabled = false;
+                text_file_ext.IsReadOnly = true;
+                btn_default_ext.IsEnabled = false;
+            }
+            else
+            {
+                text_file_ext.IsEnabled = true;
+                text_file_ext.IsReadOnly = false;
+                btn_default_ext.IsEnabled = true;
+            }
         }
 
         private void Text_projktpfad_suche_TextChanged(object sender, TextChangedEventArgs e)

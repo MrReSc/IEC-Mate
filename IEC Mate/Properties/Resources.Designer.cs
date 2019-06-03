@@ -1132,7 +1132,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Dateitypen durchsuchen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alle Dateitypen durchsuchen ähnelt.
         /// </summary>
         public static string ts_bin_ein {
             get {
