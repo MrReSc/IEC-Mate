@@ -2,6 +2,8 @@
 
 IEC-Mate ist noch in der Beta Phase. 
 
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)(https://github.com/MrReSc/IEC-Mate/pulse)
+
 Die neuste Version kann [hier](https://github.com/MrReSc/IEC-Mate/releases) heruntergeladen werden. Bei jedem Start von IEC-Mate wird automatisch auf Updates überprüft.
 
 IEC-Mate soll die Entwicklung von Software unterstützen. Dazu gibt es die folgenden Kernfunktionen:
