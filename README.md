@@ -4,13 +4,7 @@ IEC-Mate ist noch in der Beta Phase.
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/MrReSc/IEC-Mate/pulse) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/MrReSc/IEC-Mate/blob/master/LICENSE) 
 
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/MrReSc/IEC-Mate/releases) 
-
-[![Github all releases](https://img.shields.io/github/downloads/Naereen/StrapDown.js/total.svg)](https://github.com/MrReSc/IEC-Mate/releases) [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/MrReSc/IEC-Mate/graphs/contributors) [![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://github.com/MrReSc/IEC-Mate/issues) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/Naereen/StrapDown.js.svg)](https://github.com/MrReSc/IEC-Mate/issues?q=is%3Aissue+is%3Aclosed)
-
 [![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
-
-
 
 Die neuste Version kann [hier](https://github.com/MrReSc/IEC-Mate/releases) heruntergeladen werden. Bei jedem Start von IEC-Mate wird automatisch auf Updates überprüft.
 
