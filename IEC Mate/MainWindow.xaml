@@ -656,25 +656,40 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
-
+                           
                             <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
-                                <ListBox x:Name="listbox_ergebnis" MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
+                                <!--<ListBox x:Name="listbox_ergebnis" MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
                                     <ListBox.Resources>
-
-                                        <!--Defines a context menu-->
+                                        --><!--Defines a context menu--><!--
                                         <ContextMenu x:Key="MyElementMenu">
                                             <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
                                             <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
                                         </ContextMenu>
 
-                                        <!--Sets a context menu for each ListBoxItem in the current ListBox-->
+                                        --><!--Sets a context menu for each ListBoxItem in the current ListBox--><!--
                                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MetroListBoxItem}">
                                             <Setter Property="ContextMenu" Value="{StaticResource MyElementMenu}"/>
                                         </Style>
-
                                     </ListBox.Resources>
+                                </ListBox>-->
 
-                                </ListBox>
+                                <DataGrid x:Name="listbox_ergebnis" 
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True" 
+                                          MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" MinWidth="600" />
+                                        <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}" />
+                                    </DataGrid.Columns>
+
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
+                                            <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
                             </Border>
                         </Grid>
                     </GroupBox>

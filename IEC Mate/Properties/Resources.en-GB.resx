@@ -270,6 +270,9 @@
   <data name="gb_variablen" xml:space="preserve">
     <value>variables</value>
   </data>
+  <data name="header_typ" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="info_link_text" xml:space="preserve">
     <value>IEC-Mate on GitHub</value>
   </data>

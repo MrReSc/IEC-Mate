@@ -31,6 +31,8 @@ using System.Globalization;
 using WindowsInput.Native;
 using ICSharpCode.AvalonEdit;
 using octokit = Octokit;
+using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace IECMate
 {
@@ -269,9 +271,13 @@ namespace IECMate
         {
             //Wenn ein Tab gewechselt wird, dann wird der Fokus entsprechend ins richtige Feld gesetzt
             //Dsipachter wird benötigt da das Fenster noch nicht fertig geladen aber der Event schon abgesetzt wird
-            if (ti_suche.IsSelected)
+            if (ti_suche.IsSelected && listbox_ergebnis.SelectedIndex == -1)
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+            }
+            else
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.listbox_ergebnis.Focus()));
             }
 
             if (ti_bitset.IsSelected)
@@ -942,10 +948,22 @@ namespace IECMate
             text_pattern_suche.Focus();
         }
 
+        public class SucheDatei
+        {
+            public string Pfad { get; set; }
+
+            public string Typ { get; set; }
+
+        }
+
+        public ObservableCollection<SucheDatei> suchdatei = new ObservableCollection<SucheDatei>();
+
         private async void Suche()
         {
             //Listebox löschen
-            listbox_ergebnis.Items.Clear();
+            //listbox_ergebnis.Items.Clear();
+            suchdatei.Clear();
+            listbox_ergebnis.ItemsSource = suchdatei;
 
             //Wennn etwas im Suchfeld steht und das Verzeichnis existiert und es nicht zwei Wörter sind dann wird gesucht
             if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)) && !text_pattern_suche.Text.Contains(" "))
@@ -1008,6 +1026,10 @@ namespace IECMate
                                 break;
                             }
 
+                            //List<SucheDatei> suchdateien = new List<SucheDatei>();
+                            //listbox_ergebnis.ItemsSource = suchdateien;
+                            
+
                             using (var reader = File.OpenText(fileName))
                             {
                                 var fileText = await reader.ReadToEndAsync();
@@ -1015,7 +1037,8 @@ namespace IECMate
                                 {
                                     if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                     {
-                                        listbox_ergebnis.Items.Add(fileName);
+                                        //listbox_ergebnis.Items.Add(fileName);
+                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName) });
                                     }
                                 }
                                 else
@@ -1023,7 +1046,8 @@ namespace IECMate
                                     //Nicht Case Sensitive
                                     if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                                     {
-                                        listbox_ergebnis.Items.Add(fileName);
+                                        //listbox_ergebnis.Items.Add(fileName);
+                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName) });
                                     }
                                 }
                             }
@@ -1031,14 +1055,15 @@ namespace IECMate
                             TimeSpan timeSpan = stopWatch.Elapsed;
                             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
                             text_suche_count.Text = Properties.Resources.suche_dateien + count.ToString() + "/" + filecount.ToString() +
-                                                    "   " + Properties.Resources.suche_gefunden + listbox_ergebnis.Items.Count.ToString() +
+                                                   /* "   " + Properties.Resources.suche_gefunden + listbox_ergebnis.Items.Count.ToString() +*/
+                                                    "   " + Properties.Resources.suche_gefunden + suchdatei.Count.ToString() +
                                                     "   " + Properties.Resources.suche_zeit + elapsedTime;
                                                     
 
                         }
                     }
                 }
-                catch (Exception) 
+                catch (Exception ex) 
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
@@ -1126,7 +1151,10 @@ namespace IECMate
             {
                 try
                 {
-                    Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                    //Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                    DataGrid dg = sender as DataGrid;
+                    SucheDatei row = (SucheDatei)dg.SelectedItems[0];
+                    Process.Start(row.Pfad);
                 }
                 catch (Exception)
                 {
@@ -1141,7 +1169,9 @@ namespace IECMate
             {
                 try
                 {
-                    Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                    //Process.Start(listbox_ergebnis.SelectedItem.ToString());
+                    SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
+                    Process.Start(row.Pfad);
                 }
                 catch (Exception)
                 {
@@ -1156,7 +1186,9 @@ namespace IECMate
             {
                 try
                 {
-                    Process.Start(Path.GetDirectoryName(listbox_ergebnis.SelectedItem.ToString()));
+                    //Process.Start(Path.GetDirectoryName(listbox_ergebnis.SelectedItem.ToString()));
+                    SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
+                    Process.Start(Path.GetDirectoryName(row.Pfad));
                 }
                 catch (Exception)
                 {
@@ -1921,9 +1953,12 @@ namespace IECMate
 
 
 
+
+
+
         #endregion
 
-
+        
     }
 }
 

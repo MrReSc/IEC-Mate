@@ -520,6 +520,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Typ ähnelt.
+        /// </summary>
+        public static string header_typ {
+            get {
+                return ResourceManager.GetString("header_typ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die IEC-Mate auf GitHub ähnelt.
         /// </summary>
         public static string info_link_text {
