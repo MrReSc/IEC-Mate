@@ -74,7 +74,7 @@
         
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="fo_einstellungen" Header="{x:Static p:Resources.fo_einstellungen}" 
-                             Position="Right" Width="300" IsPinned="False" Theme="Adapt">
+                             Position="Right" Width="350" IsPinned="False" Theme="Adapt">
 
                 <Grid>
                     
@@ -110,7 +110,7 @@
                     <!--Editor-->
                     <StackPanel Grid.Column="1" Grid.Row="1">
                        
-                        <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,25,0,0"/>
+                        <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,15,0,0"/>
 
                         <Controls:ToggleSwitch x:Name="tg_leerzeichen" 
                                                Content="{x:Static p:Resources.tg_leer_ein}" 
@@ -147,15 +147,9 @@
 
                     </StackPanel>
 
-                    <!--Sprache-->
-                    <StackPanel Grid.Column="1" Grid.Row="2">
-                        <Label Content="{x:Static p:Resources.lb_sprache}"  FontSize="30" Margin="0,25,0,0"/>
-                        <ComboBox x:Name="cb_sprache" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
-                    </StackPanel>
-
                     <!--Suche-->
-                    <StackPanel Grid.Column="1" Grid.Row="3">
-                        <DockPanel Margin="0,25,0,10">
+                    <StackPanel Grid.Column="1" Grid.Row="2">
+                        <DockPanel Margin="0,15,0,0">
                             <Label Content="{x:Static p:Resources.ti_suche}" FontSize="30" DockPanel.Dock="Left" HorizontalAlignment="Left"/>
                             <Button x:Name="btn_default_ext" Width="30" Height="30" DockPanel.Dock="Right" 
                                     HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" 
@@ -198,12 +192,18 @@
                                            Width="auto" 
                                            HorizontalAlignment="left" 
                                            VerticalAlignment="Center"
-                                           Margin="5,0,5,10"/>
+                                           Margin="5,0"/>
+                    </StackPanel>
+
+                    <!--Sprache-->
+                    <StackPanel Grid.Column="1" Grid.Row="3">
+                        <Label Content="{x:Static p:Resources.lb_sprache}"  FontSize="30" Margin="0,15,0,0"/>
+                        <ComboBox x:Name="cb_sprache" Margin="5,0" SelectionChanged="Cb_sprache_SelectionChanged" FontSize="15"/>
                     </StackPanel>
 
                     <!--Hilfe-->
                     <StackPanel Grid.Column="1" Grid.Row="4">
-                        <Label Content="{x:Static p:Resources.dp_hilfe}"  FontSize="30" Margin="0,25,0,0"/>
+                        <Label Content="{x:Static p:Resources.dp_hilfe}"  FontSize="30" Margin="0,15,0,0"/>
                         <Button Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
                             <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
                         </Button>
@@ -652,8 +652,9 @@
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True" 
                                   Style="{StaticResource AzureDataGrid}"
+                                  SelectionMode="Single"
                                   MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
-
+                            
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" MinWidth="200"/>
                                 <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}" />
