@@ -33,12 +33,14 @@ using ICSharpCode.AvalonEdit;
 using octokit = Octokit;
 using System.Collections.ObjectModel;
 using System.Collections;
+using System.ComponentModel;
 
 namespace IECMate
 {
 
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
+        #region Globale Variablen
         public static BrushConverter bc = new BrushConverter();
         public Brush DarkBackground = (Brush)bc.ConvertFromString("#4A4A4A");
         public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
@@ -47,6 +49,39 @@ namespace IECMate
         public InputSimulator sim = new InputSimulator();
         public RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion");
         public string os_version;
+        #endregion
+
+        #region Benachrichtigung der DataBinding Variablen
+        private bool _SucheIstIecProjekt;
+        public bool SucheIstIecProjekt
+        {
+            get { return _SucheIstIecProjekt; }
+            set
+            {
+                _SucheIstIecProjekt = value;
+                OnPropertyChanged("SucheIstIecProjekt");
+            }
+        }
+        private bool _HelferIstIecProjekt;
+        public bool HelferIstIecProjekt
+        {
+            get { return _HelferIstIecProjekt; }
+            set
+            {
+                _HelferIstIecProjekt = value;
+                OnPropertyChanged("HelferIstIecProjekt");
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        #endregion
 
         public MainWindow()
         {
@@ -59,11 +94,10 @@ namespace IECMate
                 Properties.Settings.Default.Save();
             }
 
-            DataContext = this;
-
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
            
             InitializeComponent();
+            DataContext = this;
 
             //Hotkey
             Key key1 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_comment);
@@ -1025,21 +1059,18 @@ namespace IECMate
                             {
                                 break;
                             }
-
-                            //List<SucheDatei> suchdateien = new List<SucheDatei>();
-                            //listbox_ergebnis.ItemsSource = suchdateien;
-                            
-
+                       
                             using (var reader = File.OpenText(fileName))
                             {
                                 var fileText = await reader.ReadToEndAsync();
                                 if ((bool)ts_exakte_suche.IsChecked)
                                 {
+                                    //Der \b ist ein Wortgrenzen-Check, {0} ist die Variable --> Format \bsvDI_BlaFo\b
                                     if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                     {
                                         //listbox_ergebnis.Items.Add(fileName);
                                         suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName) });
-                                    }
+                                    }                                 
                                 }
                                 else
                                 {
@@ -1063,7 +1094,7 @@ namespace IECMate
                         }
                     }
                 }
-                catch (Exception ex) 
+                catch (Exception) 
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
                     await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
@@ -1218,6 +1249,19 @@ namespace IECMate
             if ((bool)ts_hw_suchvorschalg.IsChecked)
             {
                 text_pattern_suche.ItemsSource = FilterIO();
+            }
+
+            //Hier wird einfach überprüft ob der Dateipfad zu \config vorhanden ist
+            //Wenn ja, wird davon ausgegangen das es sich um ein IEC Projekt handelt
+            var suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+            suchpfad = suchpfad.Replace("\\\\", "\\");
+            if (Directory.Exists(suchpfad))
+            {
+                SucheIstIecProjekt = true;
+            }
+            else
+            {
+                SucheIstIecProjekt = false;
             }
         }
 
@@ -1950,15 +1994,24 @@ namespace IECMate
             }
         }
 
-
-
-
-
-
-
+        private void Text_projktpfad_helfer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //Hier wird einfach überprüft ob der Dateipfad zu \config vorhanden ist
+            //Wenn ja, wird davon ausgegangen das es sich um ein IEC Projekt handelt
+            var suchpfad = text_projktpfad_helfer.Text + Properties.Paths.config;
+            suchpfad = suchpfad.Replace("\\\\", "\\");
+            if (Directory.Exists(suchpfad))
+            {
+                HelferIstIecProjekt = true;
+            }
+            else
+            {
+                HelferIstIecProjekt = false;
+            }
+        }
         #endregion
 
-        
+
     }
 }
 

@@ -616,6 +616,7 @@
                                            HorizontalAlignment="left" 
                                            VerticalAlignment="Center"
                                            Margin="30,0,0,0" 
+                                           IsEnabled="{Binding SucheIstIecProjekt}"
                                            IsCheckedChanged="Ts_kbus_suche_IsCheckedChanged"/>
 
                     <Controls:ToggleSwitch x:Name="ts_xml_suche" Grid.Column="3" Grid.Row="0" 
@@ -626,6 +627,7 @@
                                            HorizontalAlignment="left" 
                                            VerticalAlignment="Center"
                                            Margin="30,0,0,0" 
+                                           IsEnabled="{Binding SucheIstIecProjekt}"
                                            IsCheckedChanged="Ts_xml_suche_IsCheckedChanged"/>
 
                     <Controls:ToggleSwitch x:Name="ts_java_suche" Grid.Column="2" Grid.Row="2" 
@@ -1157,10 +1159,13 @@
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
-                             Width="300" VerticalContentAlignment="Center">
+                             Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_helfer_TextChanged">
                     </TextBox>
 
-                    <ComboBox  x:Name="cb_select_me" Grid.Column="2" Grid.Row="0" Width="180" Margin="30,0,0,0" DropDownOpened="Cb_select_me_DropDownOpened" Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."/>
+                    <ComboBox  x:Name="cb_select_me" Grid.Column="2" Grid.Row="0" Width="180" Margin="30,0,0,0" 
+                               DropDownOpened="Cb_select_me_DropDownOpened" 
+                               Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."
+                               />
 
                     <Button x:Name="btn_pfad_helfer_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_helfer_auswahlen_Click">
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
