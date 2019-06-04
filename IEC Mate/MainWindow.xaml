@@ -683,6 +683,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" MinWidth="600" />
                                         <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}" />
+                                        <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="100" Binding="{Binding LinieInt}" />
                                     </DataGrid.Columns>
 
                                     <DataGrid.ContextMenu>

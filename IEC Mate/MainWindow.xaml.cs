@@ -988,6 +988,10 @@ namespace IECMate
 
             public string Typ { get; set; }
 
+            public string Linie { get; set; }
+
+            public int LinieInt { get; set; }
+
         }
 
         public ObservableCollection<SucheDatei> suchdatei = new ObservableCollection<SucheDatei>();
@@ -1069,7 +1073,24 @@ namespace IECMate
                                     if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                     {
                                         //listbox_ergebnis.Items.Add(fileName);
-                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName) });
+
+                                        //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
+                                        //Sobald der Erste treffer da ist, wird der Loop beendet
+                                        int _count = 0;
+                                        using (StringReader _reader = new StringReader(fileText))
+                                        {
+                                            string line;
+                                            while ((line = _reader.ReadLine()) != null)
+                                            {
+                                                _count++;
+                                                if (Regex.IsMatch(line, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
+                                                {
+                                                    break;
+                                                }   
+                                            }
+                                        }
+                                        string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
+                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                     }                                 
                                 }
                                 else
@@ -1078,7 +1099,24 @@ namespace IECMate
                                     if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                                     {
                                         //listbox_ergebnis.Items.Add(fileName);
-                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName) });
+
+                                        //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
+                                        //Sobald der Erste treffer da ist, wird der Loop beendet
+                                        int _count = 0;
+                                        using (StringReader _reader = new StringReader(fileText))
+                                        {
+                                            string line;
+                                            while ((line = _reader.ReadLine()) != null)
+                                            {
+                                                _count++;
+                                                if (line.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
+                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                     }
                                 }
                             }
@@ -1185,13 +1223,37 @@ namespace IECMate
                     //Process.Start(listbox_ergebnis.SelectedItem.ToString());
                     DataGrid dg = sender as DataGrid;
                     SucheDatei row = (SucheDatei)dg.SelectedItems[0];
-                    Process.Start(row.Pfad);
+                    var pfad = row.Pfad;
+                    var zeile = row.LinieInt;
+
+                    //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
+                    try
+                    {
+                        OpenFileNotepadPp(pfad, zeile);
+                    }
+                    catch (Exception)
+                    {
+                        Process.Start(pfad);
+                    }
+                    
                 }
                 catch (Exception)
                 {
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
                 }
             }          
+        }
+
+        private void OpenFileNotepadPp(string pfad, int zeile)
+        {
+            Process process = new Process();
+            ProcessStartInfo procInfo = new ProcessStartInfo()
+            {
+                FileName = "notepad++.exe",
+                Arguments = string.Format("-n\"{0}\" \"{1}\"", zeile, pfad)
+            };
+            process.StartInfo = procInfo;
+            process.Start();
         }
 
         private async void Mi_open_file_Click(object sender, RoutedEventArgs e)
@@ -1202,7 +1264,18 @@ namespace IECMate
                 {
                     //Process.Start(listbox_ergebnis.SelectedItem.ToString());
                     SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
-                    Process.Start(row.Pfad);
+                    var pfad = row.Pfad;
+                    var zeile = row.LinieInt;
+
+                    //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
+                    try
+                    {
+                        OpenFileNotepadPp(pfad, zeile);
+                    }
+                    catch (Exception)
+                    {
+                        Process.Start(pfad);
+                    }
                 }
                 catch (Exception)
                 {

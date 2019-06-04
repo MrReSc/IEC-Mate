@@ -270,6 +270,9 @@
   <data name="gb_variablen" xml:space="preserve">
     <value>variables</value>
   </data>
+  <data name="header_linie" xml:space="preserve">
+    <value>First Line</value>
+  </data>
   <data name="header_typ" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -410,6 +413,9 @@
   </data>
   <data name="suche_dateien" xml:space="preserve">
     <value>Scanned files: </value>
+  </data>
+  <data name="suche_erster_treffer" xml:space="preserve">
+    <value>Line</value>
   </data>
   <data name="suche_gefunden" xml:space="preserve">
     <value>Found files: </value>

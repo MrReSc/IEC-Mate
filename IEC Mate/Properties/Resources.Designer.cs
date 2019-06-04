@@ -520,6 +520,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Erste Zeile ähnelt.
+        /// </summary>
+        public static string header_linie {
+            get {
+                return ResourceManager.GetString("header_linie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Typ ähnelt.
         /// </summary>
         public static string header_typ {
@@ -939,6 +948,15 @@ namespace IECMate.Properties {
         public static string suche_dateien {
             get {
                 return ResourceManager.GetString("suche_dateien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zeile ähnelt.
+        /// </summary>
+        public static string suche_erster_treffer {
+            get {
+                return ResourceManager.GetString("suche_erster_treffer", resourceCulture);
             }
         }
         
