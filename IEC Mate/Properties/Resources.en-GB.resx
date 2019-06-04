@@ -501,6 +501,9 @@
   <data name="ts_java_suche" xml:space="preserve">
     <value>Search only *.java files</value>
   </data>
+  <data name="ts_offnen_nppp" xml:space="preserve">
+    <value>Open files with Notepad++</value>
+  </data>
   <data name="ts_xml_suche" xml:space="preserve">
     <value>Search Mask *.xml files only</value>
   </data>
@@ -524,6 +527,9 @@
   </data>
   <data name="tt_java_suche" xml:space="preserve">
     <value>Only *.java files are searched even if they have been excluded.</value>
+  </data>
+  <data name="tt_offnen_nppp" xml:space="preserve">
+    <value>The document is automatically opened at the right line with Notepad++.</value>
   </data>
   <data name="tt_suche_bin" xml:space="preserve">
     <value>The excluded file types are also searched.</value>

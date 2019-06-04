@@ -420,5 +420,17 @@ namespace IECMate.Properties {
                 this["exakte_suche"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool offnen_mit_nppp {
+            get {
+                return ((bool)(this["offnen_mit_nppp"]));
+            }
+            set {
+                this["offnen_mit_nppp"] = value;
+            }
+        }
     }
 }

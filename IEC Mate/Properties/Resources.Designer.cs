@@ -1213,6 +1213,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dateien mit Notepad++ öffnen ähnelt.
+        /// </summary>
+        public static string ts_offnen_nppp {
+            get {
+                return ResourceManager.GetString("ts_offnen_nppp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Nur Mask *.xml Dateien durchsuchen ähnelt.
         /// </summary>
         public static string ts_xml_suche {
@@ -1281,6 +1290,15 @@ namespace IECMate.Properties {
         public static string tt_java_suche {
             get {
                 return ResourceManager.GetString("tt_java_suche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Das Dokument wird automatisch bei der richtigen Zeile mit Notepad++ geöffnet. ähnelt.
+        /// </summary>
+        public static string tt_offnen_nppp {
+            get {
+                return ResourceManager.GetString("tt_offnen_nppp", resourceCulture);
             }
         }
         

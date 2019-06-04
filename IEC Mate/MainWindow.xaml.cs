@@ -201,6 +201,7 @@ namespace IECMate
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
             ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
+            ts_offnen_nppp.IsChecked = Properties.Settings.Default.offnen_mit_nppp;
 
             cb_hotkey_pxBeginEnd.Text = key2.ToString();
             cb_hotekey_plain.Text = key3.ToString();
@@ -851,6 +852,7 @@ namespace IECMate
             }
             Properties.Settings.Default.file_ext_user = text_file_ext.Text;
             Properties.Settings.Default.exakte_suche = (bool)ts_exakte_suche.IsChecked;
+            Properties.Settings.Default.offnen_mit_nppp = (bool)ts_offnen_nppp.IsChecked;
 
             Properties.Settings.Default.Save();
 
@@ -999,7 +1001,6 @@ namespace IECMate
         private async void Suche()
         {
             //Listebox löschen
-            //listbox_ergebnis.Items.Clear();
             suchdatei.Clear();
             listbox_ergebnis.ItemsSource = suchdatei;
 
@@ -1072,8 +1073,6 @@ namespace IECMate
                                     //Der \b ist ein Wortgrenzen-Check, {0} ist die Variable --> Format \bsvDI_BlaFo\b
                                     if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                     {
-                                        //listbox_ergebnis.Items.Add(fileName);
-
                                         //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
                                         //Sobald der Erste treffer da ist, wird der Loop beendet
                                         int _count = 0;
@@ -1098,8 +1097,6 @@ namespace IECMate
                                     //Nicht Case Sensitive
                                     if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                                     {
-                                        //listbox_ergebnis.Items.Add(fileName);
-
                                         //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
                                         //Sobald der Erste treffer da ist, wird der Loop beendet
                                         int _count = 0;
@@ -1124,7 +1121,6 @@ namespace IECMate
                             TimeSpan timeSpan = stopWatch.Elapsed;
                             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
                             text_suche_count.Text = Properties.Resources.suche_dateien + count.ToString() + "/" + filecount.ToString() +
-                                                   /* "   " + Properties.Resources.suche_gefunden + listbox_ergebnis.Items.Count.ToString() +*/
                                                     "   " + Properties.Resources.suche_gefunden + suchdatei.Count.ToString() +
                                                     "   " + Properties.Resources.suche_zeit + elapsedTime;
                                                     
@@ -1220,22 +1216,28 @@ namespace IECMate
             {
                 try
                 {
-                    //Process.Start(listbox_ergebnis.SelectedItem.ToString());
                     DataGrid dg = sender as DataGrid;
                     SucheDatei row = (SucheDatei)dg.SelectedItems[0];
                     var pfad = row.Pfad;
                     var zeile = row.LinieInt;
 
-                    //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
-                    try
+                    if ((bool)ts_offnen_nppp.IsChecked)
                     {
-                        OpenFileNotepadPp(pfad, zeile);
+                        //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
+                        try
+                        {
+                            OpenFileNotepadPp(pfad, zeile);
+                        }
+                        catch (Exception)
+                        {
+                            Process.Start(pfad);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
                         Process.Start(pfad);
                     }
-                    
+
                 }
                 catch (Exception)
                 {
@@ -1262,20 +1264,27 @@ namespace IECMate
             {
                 try
                 {
-                    //Process.Start(listbox_ergebnis.SelectedItem.ToString());
                     SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
                     var pfad = row.Pfad;
                     var zeile = row.LinieInt;
 
-                    //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
-                    try
+                    if ((bool)ts_offnen_nppp.IsChecked)
                     {
-                        OpenFileNotepadPp(pfad, zeile);
+                        //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
+                        try
+                        {
+                            OpenFileNotepadPp(pfad, zeile);
+                        }
+                        catch (Exception)
+                        {
+                            Process.Start(pfad);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
                         Process.Start(pfad);
                     }
+                    
                 }
                 catch (Exception)
                 {
@@ -1290,7 +1299,6 @@ namespace IECMate
             {
                 try
                 {
-                    //Process.Start(Path.GetDirectoryName(listbox_ergebnis.SelectedItem.ToString()));
                     SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
                     Process.Start(Path.GetDirectoryName(row.Pfad));
                 }

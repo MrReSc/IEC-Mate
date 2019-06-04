@@ -94,7 +94,7 @@
 
                     <!--Aussehen-->
                     <StackPanel Grid.Column="1" Grid.Row="0">
-                        <Label Content="{x:Static p:Resources.lb_aussehen}" FontSize="30" Margin="0,25,0,0"/>
+                        <Label Content="{x:Static p:Resources.lb_aussehen}" FontSize="30" Margin="0"/>
                         
                         <Controls:ToggleSwitch x:Name="tg_theme"
                                            OnLabel="{x:Static p:Resources.tg_theme_hell}" 
@@ -189,7 +189,16 @@
                                            Width="auto" 
                                            HorizontalAlignment="left" 
                                            VerticalAlignment="Center"
-                                           Margin="5,0" IsCheckedChanged="Ts_hw_suchvorschalg_IsCheckedChanged"/>
+                                           Margin="5,0,5,10" IsCheckedChanged="Ts_hw_suchvorschalg_IsCheckedChanged"/>
+
+                        <Controls:ToggleSwitch x:Name="ts_offnen_nppp"
+                                           Content="{x:Static p:Resources.ts_offnen_nppp}" 
+                                           IsChecked="True" 
+                                           ToolTip="{x:Static p:Resources.tt_offnen_nppp}" 
+                                           Width="auto" 
+                                           HorizontalAlignment="left" 
+                                           VerticalAlignment="Center"
+                                           Margin="5,0,5,10"/>
                     </StackPanel>
 
                     <!--Hilfe-->
@@ -578,13 +587,6 @@
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
-                    <!--<TextBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" 
-                             Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}" Margin="0" 
-                             Width="300" VerticalContentAlignment="Center" 
-                             Controls:TextBoxHelper.ClearTextButton="True" 
-                             Height="30" KeyDown="Text_pattern_suche_KeyDown">
-                    </TextBox>-->
-
                     <toolkit:AutoCompleteBox x:Name="text_pattern_suche" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center"
                                              Height="30" KeyDown="Text_pattern_suche_KeyDown"
                                              MinimumPrefixLength="2"
@@ -645,57 +647,27 @@
                              VerticalContentAlignment="Center" Margin="-5,0,0,0"
                              IsReadOnly="True" IsHitTestVisible="False" IsTabStop="False"/>
 
-                    <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ergebnis}" Grid.ColumnSpan="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5" />
-                            </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="5"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" >
+                        <DataGrid x:Name="listbox_ergebnis"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True" 
+                                  Style="{StaticResource AzureDataGrid}"
+                                  MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="5" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="5" />
-                            </Grid.RowDefinitions>
-                           
-                            <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1" Padding="4" BorderBrush="DarkGray" CornerRadius="3">
-                                <!--<ListBox x:Name="listbox_ergebnis" MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
-                                    <ListBox.Resources>
-                                        --><!--Defines a context menu--><!--
-                                        <ContextMenu x:Key="MyElementMenu">
-                                            <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
-                                            <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
-                                        </ContextMenu>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" MinWidth="200"/>
+                                <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}" />
+                                <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="100" Binding="{Binding LinieInt}" CanUserSort="False"/>
+                            </DataGrid.Columns>
 
-                                        --><!--Sets a context menu for each ListBoxItem in the current ListBox--><!--
-                                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MetroListBoxItem}">
-                                            <Setter Property="ContextMenu" Value="{StaticResource MyElementMenu}"/>
-                                        </Style>
-                                    </ListBox.Resources>
-                                </ListBox>-->
-
-                                <DataGrid x:Name="listbox_ergebnis" 
-                                          AutoGenerateColumns="False"
-                                          IsReadOnly="True" 
-                                          MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
-
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" MinWidth="600" />
-                                        <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}" />
-                                        <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="100" Binding="{Binding LinieInt}" />
-                                    </DataGrid.Columns>
-
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
-                                            <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                            </Border>
-                        </Grid>
-                    </GroupBox>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
+                                    <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+                    </Border>
                 </Grid>
             </TabItem>
             <!--#endregion-->
