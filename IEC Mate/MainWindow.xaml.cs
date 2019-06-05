@@ -1230,14 +1230,30 @@ namespace IECMate
                         }
                         catch (Exception)
                         {
-                            Process.Start(pfad);
+                            try
+                            {
+                                //Wenn es einen Fehler gibt, dann ohne Zeile mit n++ öffen
+                                Process.Start("notepad++", pfad);
+                            }
+                            catch (Exception)
+                            {
+                                //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
+                                Process.Start("notepad", pfad);
+                            }
                         }
                     }
                     else
                     {
-                        Process.Start(pfad);
+                        try
+                        {
+                            Process.Start("notepad++", pfad);
+                        }
+                        catch (Exception)
+                        {
+                            //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
+                            Process.Start("notepad", pfad);
+                        }
                     }
-
                 }
                 catch (Exception)
                 {
