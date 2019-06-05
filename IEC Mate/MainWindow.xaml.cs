@@ -1252,7 +1252,7 @@ namespace IECMate
             ProcessStartInfo procInfo = new ProcessStartInfo()
             {
                 FileName = "notepad++.exe",
-                Arguments = string.Format("-n\"{0}\" \"{1}\"", zeile, pfad)
+                Arguments = "-n" + zeile + " " + pfad
             };
             process.StartInfo = procInfo;
             process.Start();
