@@ -1213,12 +1213,16 @@ namespace IECMate
 
         private async void Listbox_ergebnis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (e.OriginalSource is DataGridRowHeader)
+            {
+                return;
+            }
             if (listbox_ergebnis.SelectedIndex > -1)
             {
                 try
                 {
-                    DataGrid dg = sender as DataGrid;
-                    SucheDatei row = (SucheDatei)dg.SelectedItems[0];
+                    DataGridRow dg = sender as DataGridRow;
+                    SucheDatei row = (SucheDatei)dg.Item;
                     var pfad = row.Pfad;
                     var zeile = row.LinieInt;
 

@@ -654,13 +654,18 @@
                         <DataGrid x:Name="listbox_ergebnis"
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True" 
-                                  SelectionMode="Single"
-                                  MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick"
+                                  SelectionMode="Single"                                 
                                   Style="{StaticResource AzureDataGrid}"
                                   GridLinesVisibility="Vertical">
 
+                            <DataGrid.RowStyle>
+                                <Style>
+                                    <EventSetter Event="DataGridRow.MouseDoubleClick" Handler="Listbox_ergebnis_MouseDoubleClick"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+
                             <DataGrid.Resources>
-                                <Style x:Key="CellCenterStyle" TargetType="DataGridCell">
+                                <Style x:Key="CellCenterStyle" TargetType="DataGridCell" BasedOn="{StaticResource AzureDataGridCell}">
                                     <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
                                 </Style>
                             </DataGrid.Resources>
