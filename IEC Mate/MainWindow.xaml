@@ -656,7 +656,8 @@
                                   IsReadOnly="True" 
                                   SelectionMode="Single"                                 
                                   Style="{StaticResource AzureDataGrid}"
-                                  GridLinesVisibility="Vertical">
+                                  GridLinesVisibility="Vertical"
+                                  HorizontalScrollBarVisibility="Auto">
 
                             <DataGrid.RowStyle>
                                 <Style>
@@ -671,7 +672,7 @@
                             </DataGrid.Resources>
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" Width="*"/>
+                                <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" Width="*" MinWidth="200"/>
                                 <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}"/>
                                 <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="90" Binding="{Binding LinieInt}" CanUserSort="False"
                                                     CellStyle="{StaticResource CellCenterStyle}"/>
