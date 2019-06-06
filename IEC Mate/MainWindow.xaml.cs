@@ -304,26 +304,27 @@ namespace IECMate
 
         private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Wenn ein Tab gewechselt wird, dann wird der Fokus entsprechend ins richtige Feld gesetzt
-            //Dsipachter wird benötigt da das Fenster noch nicht fertig geladen aber der Event schon abgesetzt wird
-            if (ti_suche.IsSelected && listbox_ergebnis.SelectedIndex == -1)
+            if (e.Source is TabControl)
             {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
-            }
-            else
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.listbox_ergebnis.Focus()));
-            }
+                //Wenn ein Tab gewechselt wird, dann wird der Fokus entsprechend ins richtige Feld gesetzt
+                //Dsipachter wird benötigt da das Fenster noch nicht fertig geladen aber der Event schon abgesetzt wird
 
-            if (ti_bitset.IsSelected)
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
-            }
+                if (ti_suche.IsSelected)
+                {
+                    Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+                }
 
-            if (ti_code.IsSelected)
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_code_template.Focus()));
+                if (ti_bitset.IsSelected)
+                {
+                    Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
+                }
+
+                if (ti_code.IsSelected)
+                {
+                    Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_code_template.Focus()));
+                }
             }
+            
         }
 
         private void Btn_vaiablenliste_loschen_Click(object sender, RoutedEventArgs e)
