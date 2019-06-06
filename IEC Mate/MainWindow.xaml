@@ -651,14 +651,22 @@
                         <DataGrid x:Name="listbox_ergebnis"
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True" 
-                                  Style="{StaticResource AzureDataGrid}"
                                   SelectionMode="Single"
-                                  MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick">
-                            
+                                  MouseDoubleClick="Listbox_ergebnis_MouseDoubleClick"
+                                  Style="{StaticResource AzureDataGrid}"
+                                  GridLinesVisibility="Vertical">
+
+                            <DataGrid.Resources>
+                                <Style x:Key="CellCenterStyle" TargetType="DataGridCell">
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGrid.Resources>
+
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" MinWidth="200"/>
-                                <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}" />
-                                <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="100" Binding="{Binding LinieInt}" CanUserSort="False"/>
+                                <DataGridTextColumn Header="{x:Static p:Resources.dp_datei}" Binding="{Binding Pfad}" Width="*"/>
+                                <DataGridTextColumn Header="{x:Static p:Resources.header_typ}" MinWidth="100" Binding="{Binding Typ}"/>
+                                <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="100" Binding="{Binding LinieInt}" CanUserSort="False"
+                                                    CellStyle="{StaticResource CellCenterStyle}"/>
                             </DataGrid.Columns>
 
                             <DataGrid.ContextMenu>
