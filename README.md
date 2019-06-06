@@ -32,9 +32,12 @@ Mit der Suchfunktion können Wörter innerhalb von Dateien gesucht werden. Als S
 Es gibt verschiedene Einstellungen:
 
 - Ganzes Wort suchen: Es werden nur Dateien angezeigt die einen exakten Treffer enthalten (Case-Insensitiv)
-- HW-Konfig: Es wird nur im Unterverzeichnis  `Projektname\application\control\config\` gesucht
-- Im Einstellungsmenu können Dateitypen von der Suche ausgeschlossen werden (Standardmässig sind alle Binärdateien und Java Dateien ausgeschlossen)
-- Im Einstellungsmenu kann der Suchvorschlag deaktiviert werden
+- Nur Verzeichnis \config durchsuchen: Es wird nur im Unterverzeichnis  `Projektname\application\control\config\` gesucht. Dies verkürzt die Suchzeit wenn nur nach einem Hardware-Endpunkt gesucht wird.
+- Nur Mask *.xml Dateien durchsuchen: Es werden nur die `.xml` Dateien die für das HMI relevant sind durchsucht. 
+- Nur *.java Dateien durchsuchen: Es werden nur Dateien mit dem Dateityp `.java` durchsucht auch wenn dieser Dateityp ausgeschlossen wurde.
+- Im Einstellungsmenu können Dateitypen von der Suche ausgeschlossen werden (Standardmässig sind alle Binärdateien und Java Dateien ausgeschlossen).
+- Im Einstellungsmenu kann der Suchvorschlag deaktiviert werden.
+- Im Einstellungsmenu kann das Standardmässige öffnen mit `Notepad ++` ausgewählt werden. Dies bringt den Vorteil, dass die Datei direkt beim ersten Treffer geöffnet wird.
 
 ![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/suche.gif?raw=true)
 
