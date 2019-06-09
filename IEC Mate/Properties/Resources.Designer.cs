@@ -1348,6 +1348,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine ME auswählen... ähnelt.
+        /// </summary>
+        public static string wm_cb_me_auswahlen {
+            get {
+                return ResourceManager.GetString("wm_cb_me_auswahlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Dateiendungen eintragen... ähnelt.
         /// </summary>
         public static string wm_file_ext {

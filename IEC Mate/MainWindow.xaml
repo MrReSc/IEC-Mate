@@ -28,7 +28,7 @@
             <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
         </Style>
 
-        <!--Fenster Buttons oben Links Style-->
+        <!--Win10 ToggleSwitch Style-->
         <Style TargetType="{x:Type Controls:ToggleSwitch}" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"></Style>
 
         <!--TabControl Style-->
@@ -97,10 +97,10 @@
                         <Label Content="{x:Static p:Resources.lb_aussehen}" FontSize="30" Margin="0"/>
                         
                         <Controls:ToggleSwitch x:Name="tg_theme"
-                                           OnLabel="{x:Static p:Resources.tg_theme_hell}" 
-                                           OffLabel="{x:Static p:Resources.tg_theme_dunkel}" 
-                                           IsCheckedChanged="Tg_theme_IsCheckedChanged" 
-                                           Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+                                               OnLabel="{x:Static p:Resources.tg_theme_hell}" 
+                                               OffLabel="{x:Static p:Resources.tg_theme_dunkel}" 
+                                               IsCheckedChanged="Tg_theme_IsCheckedChanged" 
+                                               Margin="5,0,0,10"/>
                         
                         <ComboBox x:Name="cb_akzent_farbe" Margin="5,0" 
                                   SelectionChanged="Cb_akzent_farbe_SelectionChanged" 
@@ -115,27 +115,27 @@
                         <Controls:ToggleSwitch x:Name="tg_leerzeichen" 
                                                Content="{x:Static p:Resources.tg_leer_ein}" 
                                                IsCheckedChanged="Tg_leerzeichen_IsCheckedChanged" 
-                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+                                               Margin="5,0,0,10"/>
 
                         <Controls:ToggleSwitch x:Name="tg_showtab" 
                                                Content="{x:Static p:Resources.tg_zeigetab}" 
                                                IsCheckedChanged="Tg_showtab_IsCheckedChanged"
-                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10" />
+                                               Margin="5,0,0,10" />
 
                         <Controls:ToggleSwitch x:Name="tg_showendofline" 
                                                Content="{x:Static p:Resources.tg_zeigezeilenende}" 
                                                IsCheckedChanged="Tg_showendofline_IsCheckedChanged"
-                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10" />
+                                               Margin="5,0,0,10" />
 
                         <Controls:ToggleSwitch x:Name="tg_converttospace" 
                                                Content="{x:Static p:Resources.tg_spaceumwandeln}" 
                                                IsCheckedChanged="Tg_converttospace_IsCheckedChanged" 
-                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10" />
+                                               Margin="5,0,0,10" />
 
                         <Controls:ToggleSwitch x:Name="tg_line_no" 
                                                Content="{x:Static p:Resources.tg_line_ein}" 
                                                IsCheckedChanged="Tg_line_no_IsCheckedChanged" 
-                                               Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" Margin="5,0,0,10"/>
+                                               Margin="5,0,0,10"/>
 
 
                         <Controls:NumericUpDown x:Name="nc_font_size" Minimum="8" Maximum="30"
@@ -162,9 +162,6 @@
                                            Content="{x:Static p:Resources.ts_bin_ein}" 
                                            IsChecked="False" 
                                            ToolTip="{x:Static p:Resources.tt_suche_bin}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
                                            Margin="5,0,5,10"
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
                         
@@ -180,18 +177,12 @@
                                            Content="{x:Static p:Resources.ts_hw_vorschalg}" 
                                            IsChecked="True"  
                                            ToolTip="{x:Static p:Resources.tt_hw_vorschlag}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
                                            Margin="5,0,5,10" IsCheckedChanged="Ts_hw_suchvorschalg_IsCheckedChanged"/>
 
                         <Controls:ToggleSwitch x:Name="ts_offnen_nppp"
                                            Content="{x:Static p:Resources.ts_offnen_nppp}" 
                                            IsChecked="True" 
                                            ToolTip="{x:Static p:Resources.tt_offnen_nppp}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
                                            Margin="5,0"/>
                     </StackPanel>
 
@@ -208,8 +199,6 @@
                             <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
                         </Button>
                     </StackPanel>
-
-
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
@@ -294,10 +283,32 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="5" />
                                 <RowDefinition Height="*" />
-                                <!--<RowDefinition Height="5" />-->
                                 <RowDefinition Height="auto" />
-                                <!--<RowDefinition Height="5" />-->
                             </Grid.RowDefinitions>
+
+                            <Grid.Resources>
+                                <!--Style für Textboxen-->
+                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}">
+                                    <Style.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </Style.Resources>
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                    <Setter Property="AcceptsReturn" Value="True"/>
+                                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                                    <Setter Property="Width" Value="200"/>
+                                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                                    <Setter Property="AcceptsTab" Value="True"/>
+                                    <Setter Property="Padding" Value="2"/>
+                                    <Setter Property="IsTabStop" Value="False"/>
+                                </Style>
+                                <!--Style für Label-->
+                                <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                </Style>
+                            </Grid.Resources>
 
                             <!--Variable 1-->
                             <Grid Grid.Column="1" Grid.Row="1">
@@ -311,22 +322,18 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
-
+                               
                                 <DockPanel Grid.Column="0" Grid.Row="0">
-                                    <Label Content="{x:Static p:Resources.lb_var1}" VerticalContentAlignment="Center" FontWeight="Medium" DockPanel.Dock="left"/>
-                                    <Button x:Name="btn_vaiablenliste_loschen" Width="25" Height="25" DockPanel.Dock="Right" Click="Btn_vaiablenliste_loschen_Click" HorizontalAlignment="Right">
+                                    <Label Content="{x:Static p:Resources.lb_var1}" DockPanel.Dock="left"/>
+                                    <Button x:Name="btn_vaiablenliste_loschen" Width="25" Height="25" 
+                                            DockPanel.Dock="Right" Click="Btn_vaiablenliste_loschen_Click" 
+                                            HorizontalAlignment="Right">
                                         <iconPacks:PackIconMaterial Kind="close" Width="auto" Height="auto" />
                                     </Button>
                                 </DockPanel>
-                             
-                                <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
-                                    <TextBox.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="3"/>
-                                        </Style>
-                                    </TextBox.Resources>
+
+                                <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" 
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" >
                                 </TextBox>
                             </Grid>
 
@@ -344,16 +351,10 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Label Content="{x:Static p:Resources.lb_var2}" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                <Label Content="{x:Static p:Resources.lb_var2}" Grid.Row="0"/>
 
-                                <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
-                                    <TextBox.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="3"/>
-                                        </Style>
-                                    </TextBox.Resources>
+                                <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" 
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}">
                                 </TextBox>
                             </Grid>
 
@@ -371,16 +372,10 @@
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <Label Content="{x:Static p:Resources.lb_var3}" Grid.Row="0" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                <Label Content="{x:Static p:Resources.lb_var3}" Grid.Row="0"/>
 
-                                <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" TextWrapping="Wrap" AcceptsReturn="True" Width="200" 
-                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsTab="True" Padding="2"
-                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" IsTabStop="False">
-                                    <TextBox.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="3"/>
-                                        </Style>
-                                    </TextBox.Resources>
+                                <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" 
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}">
                                 </TextBox>
                             </Grid>
                         </Grid>
@@ -440,30 +435,41 @@
                                 </Border>
 
                                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+
+                                    <StackPanel.Resources>
+                                        <!--Style für Button-->
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                            <Setter Property="Width" Value="25"></Setter>
+                                            <Setter Property="Height" Value="25"></Setter>
+                                            <Setter Property="BorderThickness" Value="0"></Setter>
+                                            <Setter Property="Background" Value="Transparent"></Setter>
+                                            <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    
                                     <TextBox x:Name="text_suchen" Width="200" Margin="0,0,20,0" 
                                              VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}"
                                              Controls:TextBoxHelper.ClearTextButton="True">
                                     </TextBox>
                                     
-                                    <!--<Label Content="{x:Static p:Resources.tb_ersetzten_druch}" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Margin="0,0,10,0"/>-->
-
                                     <ComboBox x:Name="combo_vars" 
                                               BorderBrush="LightGray" Width="135" Margin="0,0,5,0" VerticalContentAlignment="Center" 
-                                              HorizontalContentAlignment="Left" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
+                                              HorizontalContentAlignment="Left" 
+                                              Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
-                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Width="25" Height="25" Click="Btn_ersetzten_ein_Click">
+                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click">
                                         <iconPacks:PackIconMaterial Kind="ArrowRightBold" Width="18" Height="auto"/>
                                     </Button>
 
-                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click" Margin="0" Width="25" Height="25">
+                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click">
                                         <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
                                     </Button>
 
                                     <Border Width="2" BorderBrush="{DynamicResource GrayBrush9}" BorderThickness="1" CornerRadius="1" Height="22" Margin="2,0"/>
 
-                                    <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Height="25" >
-                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Height="auto">
+                                    <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Width="auto" >
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Height="auto" Width="auto">
                                             <iconPacks:PackIconMaterial Kind="Play" Foreground="LimeGreen" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="0"/>
                                             <Label Height="25" VerticalAlignment="Center" Content="{x:Static p:Resources.lb_genereieren}"/>
                                         </StackPanel>
@@ -471,17 +477,17 @@
 
                                     <Border Width="2" BorderBrush="{DynamicResource GrayBrush9}" BorderThickness="1" CornerRadius="1" Height="22" Margin="2,0"/>
 
-                                    <Button Click="Btn_template_offnen_Click" Width="25" Height="25" HorizontalAlignment="Left">
+                                    <Button Click="Btn_template_offnen_Click">
                                         <iconPacks:PackIconMaterial Kind="Import" Width="auto" Height="auto" Foreground="Chocolate"/>
                                     </Button>
 
-                                    <Button Click="Btn_template_speichern_Click" Width="25" Height="25" HorizontalAlignment="Left">
+                                    <Button Click="Btn_template_speichern_Click">
                                         <iconPacks:PackIconMaterial Kind="ContentSave" Width="auto" Height="auto" Foreground="DodgerBlue"/>
                                     </Button>
 
                                     <Border Width="2" BorderBrush="{DynamicResource GrayBrush9}" BorderThickness="1" CornerRadius="1" Height="22" Margin="2,0"/>
 
-                                    <Button x:Name="btn_template_loschen" Click="Btn_template_loschen_Click" Width="25" Height="25" HorizontalAlignment="Left">
+                                    <Button x:Name="btn_template_loschen" Click="Btn_template_loschen_Click">
                                         <iconPacks:PackIconMaterial Kind="close" Width="auto" Height="auto"/>
                                     </Button>
                                 </StackPanel>
@@ -496,9 +502,19 @@
                                       Background="{DynamicResource GrayBrush9}"/>
 
                         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
-                            <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="{DynamicResource GrayBrush4}" Stroke="{DynamicResource GrayBrush4}" Width="40" IsHitTestVisible="False"/>
-                            <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="Transparent" Stroke="Transparent" Width="40" IsHitTestVisible="False"/>
-                            <Rectangle  HorizontalAlignment="Stretch"  Height="1" Fill="{DynamicResource GrayBrush4}" Stroke="{DynamicResource GrayBrush4}" Width="40" IsHitTestVisible="False"/>
+
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Rectangle}">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                    <Setter Property="Height" Value="1"></Setter>
+                                    <Setter Property="Width" Value="40"></Setter>
+                                    <Setter Property="IsHitTestVisible" Value="False"></Setter>
+                                </Style>
+                            </StackPanel.Resources>
+                            
+                            <Rectangle Fill="{DynamicResource GrayBrush4}" Stroke="{DynamicResource GrayBrush4}"/>
+                            <Rectangle Fill="Transparent" Stroke="Transparent"/>
+                            <Rectangle Fill="{DynamicResource GrayBrush4}" Stroke="{DynamicResource GrayBrush4}"/>
                         </StackPanel>
 
                         <!--#region Code gen-->
@@ -538,17 +554,28 @@
 
                                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
 
-                                    <Button Click="CopyToClipboard_Click_1" Width="25" Height="25" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
+                                    <StackPanel.Resources>
+                                        <!--Style für Button-->
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                            <Setter Property="Width" Value="25"></Setter>
+                                            <Setter Property="Height" Value="25"></Setter>
+                                            <Setter Property="BorderThickness" Value="0"></Setter>
+                                            <Setter Property="Background" Value="Transparent"></Setter>
+                                            <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
+                                        </Style>
+                                    </StackPanel.Resources>
+
+                                    <Button Click="CopyToClipboard_Click_1" ToolTip="{x:Static p:Resources.tt_code_gen_copy}">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                                     </Button>
 
-                                    <Button Click="Btn_gen_speichern_Click" Width="25" Height="25" HorizontalAlignment="Left">
+                                    <Button Click="Btn_gen_speichern_Click" >
                                         <iconPacks:PackIconMaterial Kind="ContentSave" Width="auto" Height="auto" Foreground="DodgerBlue"/>
                                     </Button>
 
                                     <Border Width="2" BorderBrush="{DynamicResource GrayBrush9}" BorderThickness="1" CornerRadius="1" Height="22" Margin="2,0"/>
 
-                                    <Button x:Name="btn_gen_loschen" Click="Btn_gen_loschen_Click" Width="25" Height="25">
+                                    <Button x:Name="btn_gen_loschen" Click="Btn_gen_loschen_Click">
                                         <iconPacks:PackIconMaterial Kind="close" Width="auto" Height="auto" />
                                     </Button>
 
@@ -581,12 +608,31 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
+                    <Grid.Resources>
+                        <!--Style für Button-->
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                            <Setter Property="Width" Value="30"></Setter>
+                            <Setter Property="Height" Value="30"></Setter>
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
+                        </Style>
+
+                        <!--Style ToggleSwitch-->
+                        <Style TargetType="Controls:ToggleSwitch" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="30,0,0,0"/>
+                        </Style>
+
+                    </Grid.Resources>
+
                     <TextBox x:Name="text_projktpfad_suche" Grid.Column="0" Grid.Row="0" 
                              Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
                              Width="300" VerticalContentAlignment="Center" Height="30" TextChanged="Text_projktpfad_suche_TextChanged">
                     </TextBox>
 
-                    <Button x:Name="btn_pfad_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_auswahlen_Click">
+                    <Button x:Name="btn_pfad_auswahlen" Grid.Row="0" Grid.Column="1" Click="Btn_pfad_auswahlen_Click">
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
 
@@ -600,27 +646,19 @@
                                              BorderBrush="{DynamicResource ControlBorderBrush}">
                     </toolkit:AutoCompleteBox>
 
-                    <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_suche_Click" VerticalAlignment="Center">
+                    <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" Click="Btn_suche_Click" VerticalAlignment="Center">
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
                     </Button>
 
                     <Controls:ToggleSwitch x:Name="ts_exakte_suche" Grid.Column="2" Grid.Row="0" 
                                            Content="{x:Static p:Resources.ts_exakte_ein}" 
                                            ToolTip="{x:Static p:Resources.tt_suche_exakt}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
-                                           Margin="30,0,0,0" 
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
                   
                     <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="2" 
                                            Content="{x:Static p:Resources.ts_hw_ein}" 
                                            IsChecked="False"  
                                            ToolTip="{x:Static p:Resources.tt_suche_hw}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
-                                           Margin="30,0,0,0" 
                                            IsEnabled="{Binding SucheIstIecProjekt}"
                                            IsCheckedChanged="Ts_kbus_suche_IsCheckedChanged"/>
 
@@ -628,10 +666,6 @@
                                            Content="{x:Static p:Resources.ts_xml_suche}" 
                                            IsChecked="False"  
                                            ToolTip="{x:Static p:Resources.tt_xml_suche}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
-                                           Margin="30,0,0,0" 
                                            IsEnabled="{Binding SucheIstIecProjekt}"
                                            IsCheckedChanged="Ts_xml_suche_IsCheckedChanged"/>
 
@@ -639,10 +673,7 @@
                                            Content="{x:Static p:Resources.ts_java_suche}" 
                                            IsChecked="False"  
                                            ToolTip="{x:Static p:Resources.tt_java_suche}" 
-                                           Width="auto" 
-                                           HorizontalAlignment="left" 
-                                           VerticalAlignment="Center"
-                                           Margin="30,0,0,0" IsCheckedChanged="Ts_java_suche_IsCheckedChanged" 
+                                           IsCheckedChanged="Ts_java_suche_IsCheckedChanged" 
                                            />
 
                     <TextBox x:Name="text_suche_count" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BorderThickness="0" FontSize="9" 
@@ -723,18 +754,28 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel VerticalAlignment="Top">
-                                    <TextBox x:Name="text_encode_dec"  Text="{x:Static p:Resources.tb_bitset_dez}" Width="400" VerticalContentAlignment="Center" 
-                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="{DynamicResource GrayBrush8}" 
+
+                                    <StackPanel.Resources>
+                                        <!--Style für Button-->
+                                        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}">
+                                            <Setter Property="Width" Value="400"></Setter>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                                            <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                            <Setter Property="IsReadOnly" Value="True"></Setter>
+                                            <Setter Property="FontSize" Value="20"></Setter>
+                                            <Setter Property="Background" Value="{DynamicResource GrayBrush8}"></Setter>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    
+                                    <TextBox x:Name="text_encode_dec"  Text="{x:Static p:Resources.tb_bitset_dez}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
 
-                                    <TextBox x:Name="text_encode_hex"  Text="{x:Static p:Resources.tb_bitset_hex}" Width="400" VerticalContentAlignment="Center" 
-                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="{DynamicResource GrayBrush8}" 
+                                    <TextBox x:Name="text_encode_hex"  Text="{x:Static p:Resources.tb_bitset_hex}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
 
-                                    <TextBox x:Name="text_encode_bin"  Text="{x:Static p:Resources.tb_bitset_bin}" Width="400" VerticalContentAlignment="Center" 
-                                             Margin="0,0,0,10" IsReadOnly="True" FontSize="20" Background="{DynamicResource GrayBrush8}"
+                                    <TextBox x:Name="text_encode_bin"  Text="{x:Static p:Resources.tb_bitset_bin}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
                                 </StackPanel>
@@ -759,143 +800,62 @@
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                
+
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}">
+                                        <Setter Property="Width" Value="60"/>
+                                        <Setter Property="Height" Value="60"/>
+                                        <Setter Property="Grid.Column" Value="2"/>
+                                        <Setter Property="Grid.Row" Value="1"/>
+                                        <Setter Property="FontSize" Value="18"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                        <Setter Property="Margin" Value="0,0,15,0"/>
+                                    </Style>
+                                </Grid.Resources>
+
                                 <!--#region Bits-->
                                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-
-                                    <ToggleButton x:Name="tb_bit0" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        0
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit1" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        1
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit2" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        2
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit3" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,50,0">
-                                        3
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit4" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        4
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit5" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        5
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit6" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        6
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit7" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        7
-                                    </ToggleButton>
+                                    <ToggleButton x:Name="tb_bit0">0</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit1">1</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit2">2</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit3" Margin="0,0,50,0">3</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit4">4</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit5">5</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit6">6</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit7">7</ToggleButton>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ToggleButton x:Name="tb_bit8" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        8
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit9" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        9
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit10" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        10
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit11" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,50,-1">
-                                        11
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit12" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        12
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit13" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        13
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit14" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        14
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit15" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        15
-                                    </ToggleButton>
+                                    <ToggleButton x:Name="tb_bit8">8</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit9">9</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit10">10</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit11" Margin="0,0,50,0">11</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit12">12</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit13">13</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit14">14</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit15">15</ToggleButton>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ToggleButton x:Name="tb_bit16" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        16
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit17" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        17
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit18" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        18
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit19" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,50,0">
-                                        19
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit20" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        20
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit21" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        21
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit22" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        22
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit23" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        23
-                                    </ToggleButton>
+                                    <ToggleButton x:Name="tb_bit16">16</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit17">17</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit18">18</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit19" Margin="0,0,50,0">19</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit20">20</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit21">21</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit22">22</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit23">23</ToggleButton>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ToggleButton x:Name="tb_bit24" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        24
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit25" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        25
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit26" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        26
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit27" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,50,0">
-                                        27
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit28" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        28
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit29" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        29
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit30" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        30
-                                    </ToggleButton>
-
-                                    <ToggleButton x:Name="tb_bit31" Width="60" Grid.Column="2" Grid.Row="1" Height="60" Style="{DynamicResource MetroCircleToggleButtonStyle}" FontSize="18" FontWeight="Bold" Margin="0,0,15,0">
-                                        31
-                                    </ToggleButton>
+                                    <ToggleButton x:Name="tb_bit24">24</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit25">25</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit26">26</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit27" Margin="0,0,50,0">27</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit28">28</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit29">29</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit30">30</ToggleButton>
+                                    <ToggleButton x:Name="tb_bit31">31</ToggleButton>
                                 </StackPanel>
                                 <!--#endregion-->
                                 
@@ -950,173 +910,222 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type Ellipse}">
+                                        <Setter Property="Stroke" Value="Silver"/>
+                                        <Setter Property="StrokeThickness" Value="2"/>
+                                    </Style>
+
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MetroTextBlock}">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="TextAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FontSize" Value="18"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Style>
+                                </Grid.Resources>
+
                                 <!--#region  Bits-->
-                                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-
-                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
-                                        <Ellipse x:Name="el_bit0" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="0" FontSize="18" FontWeight="Bold"/>
+                                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-6,0,0,0">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="Width" Value="52"/>
+                                            <Setter Property="Height" Value="52"/>
+                                            <Setter Property="Margin" Value="8,0,15,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit0"/>
+                                        <TextBlock Text="0"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit1" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="1" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit1"/>
+                                        <TextBlock Text="1"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit2" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="2" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit2"/>
+                                        <TextBlock Text="2"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
-                                        <Ellipse x:Name="el_bit3" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="3" FontSize="18" FontWeight="Bold"/>
+                                    <Grid Margin="8,0,50,0">
+                                        <Ellipse x:Name="el_bit3"/>
+                                        <TextBlock Text="3"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit4" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="4" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit4"/>
+                                        <TextBlock Text="4"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit5" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="5" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit5"/>
+                                        <TextBlock Text="5"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit6" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="6" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit6"/>
+                                        <TextBlock Text="6"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit7" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="7" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
-                                        <Ellipse x:Name="el_bit8" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="8" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit9" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="9" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit10" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="10" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
-                                        <Ellipse x:Name="el_bit11" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="11" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit12" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="12" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit13" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="13" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit14" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="14" FontSize="18" FontWeight="Bold"/>
-                                    </Grid>
-
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit15" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="15" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit7"/>
+                                        <TextBlock Text="7"/>
                                     </Grid>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
-                                        <Ellipse x:Name="el_bit16" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="16" FontSize="18" FontWeight="Bold"/>
+                                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-6,0,0,0">
+
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="Width" Value="52"/>
+                                            <Setter Property="Height" Value="52"/>
+                                            <Setter Property="Margin" Value="8,0,15,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit8"/>
+                                        <TextBlock Text="8"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit17" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="17" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit9"/>
+                                        <TextBlock Text="9"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit18" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="18" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit10"/>
+                                        <TextBlock Text="10"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
-                                        <Ellipse x:Name="el_bit19" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="19" FontSize="18" FontWeight="Bold"/>
+                                    <Grid Margin="8,0,50,0">
+                                        <Ellipse x:Name="el_bit11"/>
+                                        <TextBlock Text="11"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit20" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="20" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit12"/>
+                                        <TextBlock Text="12"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit21" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="21" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit13"/>
+                                        <TextBlock Text="13"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit22" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="22" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit14"/>
+                                        <TextBlock Text="14"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit23" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="23" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit15"/>
+                                        <TextBlock Text="15"/>
                                     </Grid>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Grid Width="52" Height="52" Margin="8,0,23,0" >
-                                        <Ellipse x:Name="el_bit24" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="24" FontSize="18" FontWeight="Bold"/>
+                                <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-6,0,0,0">
+
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="Width" Value="52"/>
+                                            <Setter Property="Height" Value="52"/>
+                                            <Setter Property="Margin" Value="8,0,15,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit16"/>
+                                        <TextBlock Text="16"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit25" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="25" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit17"/>
+                                        <TextBlock Text="17"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit26" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="26" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit18"/>
+                                        <TextBlock Text="18"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,58,0" >
-                                        <Ellipse x:Name="el_bit27" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="27" FontSize="18" FontWeight="Bold"/>
+                                    <Grid Margin="8,0,50,0">
+                                        <Ellipse x:Name="el_bit19"/>
+                                        <TextBlock Text="19"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit28" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="28" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit20"/>
+                                        <TextBlock Text="20"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit29" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="29" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit21"/>
+                                        <TextBlock Text="21"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit30" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="30" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit22"/>
+                                        <TextBlock Text="22"/>
                                     </Grid>
 
-                                    <Grid Width="52" Height="52" Margin="0,0,23,0" >
-                                        <Ellipse x:Name="el_bit31" Stroke="Silver" StrokeThickness="2"/>
-                                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="31" FontSize="18" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit23"/>
+                                        <TextBlock Text="23"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="-6,0,0,0">
+
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="Width" Value="52"/>
+                                            <Setter Property="Height" Value="52"/>
+                                            <Setter Property="Margin" Value="8,0,15,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit24"/>
+                                        <TextBlock Text="24"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit25"/>
+                                        <TextBlock Text="25"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit26"/>
+                                        <TextBlock Text="26"/>
+                                    </Grid>
+
+                                    <Grid Margin="8,0,50,0">
+                                        <Ellipse x:Name="el_bit27"/>
+                                        <TextBlock Text="27"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit28"/>
+                                        <TextBlock Text="28"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit29"/>
+                                        <TextBlock Text="29"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit30"/>
+                                        <TextBlock Text="30"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Ellipse x:Name="el_bit31"/>
+                                        <TextBlock Text="31"/>
                                     </Grid>
                                 </StackPanel>
                                 <!--#endregion-->
@@ -1155,7 +1164,7 @@
 
                     <ComboBox  x:Name="cb_select_me" Grid.Column="2" Grid.Row="0" Width="180" Margin="30,0,0,0" 
                                DropDownOpened="Cb_select_me_DropDownOpened" 
-                               Controls:TextBoxHelper.Watermark="Bitte ME auswählen..."
+                               Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_cb_me_auswahlen}" 
                                />
 
                     <Button x:Name="btn_pfad_helfer_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_helfer_auswahlen_Click">
@@ -1166,13 +1175,28 @@
                     <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_datei_funktion}" Grid.ColumnSpan="4">
                         <GroupBox.Resources>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
-                                <!--<Setter Property="Background" Value="{DynamicResource MenuItemSelectFill}"></Setter>-->
                                 <Setter Property="Background" Value="Transparent"></Setter>
                                 <Setter Property="BorderThickness" Value="1"></Setter>
                                 <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                <Setter Property="Width" Value="310"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
                             </Style>
+
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                <Setter Property="FontSize" Value="14"></Setter>
+                            </Style>
+
+                            <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+                                <Setter Property="Width" Value="auto"></Setter>
+                                <Setter Property="Height" Value="auto"></Setter>
+                                <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            </Style>
+
                         </GroupBox.Resources>
-                        
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -1192,38 +1216,38 @@
 
                             <StackPanel Grid.Column="1" Grid.Row="1">
 
-                                <Button x:Name="btn_open_systemoptions"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Btn_open_systemoptions_Click">
+                                <Button x:Name="btn_open_systemoptions" Click="Btn_open_systemoptions_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FileOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_systemOptions}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FileOutline"/>
+                                        <Label Content="{x:Static p:Resources.lb_systemOptions}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="btn_open_machinesetup"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Btn_open_machinesetup_Click">
+                                <Button x:Name="btn_open_machinesetup" Click="Btn_open_machinesetup_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FileOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_machineSetup}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FileOutline"/>
+                                        <Label Content="{x:Static p:Resources.lb_machineSetup}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openFormProgram"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openFormProgram_Click">
+                                <Button x:Name="bt_openFormProgram" Click="Bt_openFormProgram_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_formProgram}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_formProgram}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openDiagnoseData"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openDiagnoseData_Click">
+                                <Button x:Name="bt_openDiagnoseData" Click="Bt_openDiagnoseData_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_diagnoseData}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_diagnoseData}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openDiagramSetup"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openDiagramSetup_Click">
+                                <Button x:Name="bt_openDiagramSetup" Click="Bt_openDiagramSetup_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_diagramSetup}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_diagramSetup}"/>
                                     </StackPanel>
                                 </Button>
 
@@ -1232,24 +1256,24 @@
 
                             <StackPanel Grid.Column="3" Grid.Row="1">
 
-                                <Button x:Name="bt_openPrjectFolder"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openPrjectFolder_Click">
+                                <Button x:Name="bt_openPrjectFolder" Click="Bt_openPrjectFolder_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_machineParameter}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_machineParameter}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openConfig"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openConfig_Click">
+                                <Button x:Name="bt_openConfig" Click="Bt_openConfig_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_config}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_config}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openMachineParameter"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_openMachineParameter_Click">
+                                <Button x:Name="bt_openMachineParameter" Click="Bt_openMachineParameter_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_pojectFolder}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
                                     </StackPanel>
                                 </Button>
 
@@ -1257,34 +1281,33 @@
 
                             <StackPanel Grid.Column="5" Grid.Row="1">
 
-                                <Button x:Name="bt_simStarten"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_simStarten_Click">
+                                <Button x:Name="bt_simStarten" Click="Bt_simStarten_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_sim}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline"/>
+                                        <Label Content="{x:Static p:Resources.lb_sim}" />
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_visuStarten"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_visuStarten_Click">
+                                <Button x:Name="bt_visuStarten" Click="Bt_visuStarten_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_visu}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="Monitor"/>
+                                        <Label Content="{x:Static p:Resources.lb_visu}"/>
                                     </StackPanel>
                                 </Button>
 
                                 <Rectangle Width="310" Height="43" HorizontalAlignment="Left" Margin="0,0,0,10" />
 
-
-                                <Button x:Name="bt_lock_loschen"  Width="310" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,10" HorizontalContentAlignment="Left" Click="Bt_lock_loschen_Click">
+                                <Button x:Name="bt_lock_loschen" Click="Bt_lock_loschen_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_puLock}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="Delete"/>
+                                        <Label Content="{x:Static p:Resources.lb_puLock}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_BackupProject"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Bt_BackupProject_Click">
+                                <Button x:Name="bt_BackupProject" Click="Bt_BackupProject_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="ZipBox" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                        <Label Content="{x:Static p:Resources.lb_backup}" FontSize="14"/>
+                                        <iconPacks:PackIconMaterial Kind="ZipBox"/>
+                                        <Label Content="{x:Static p:Resources.lb_backup}"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -1304,11 +1327,26 @@
                         <GroupBox x:Name="gb_me_funktionen" Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
                             <GroupBox.Resources>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
-                                    <!--<Setter Property="Background" Value="{DynamicResource MenuItemSelectFill}"></Setter>-->
                                     <Setter Property="Background" Value="Transparent"></Setter>
                                     <Setter Property="BorderThickness" Value="1"></Setter>
                                     <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                    <Setter Property="Width" Value="310"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                    <Setter Property="Margin" Value="0,0,0,10"></Setter>
                                 </Style>
+
+                                <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                    <Setter Property="FontSize" Value="14"></Setter>
+                                </Style>
+
+                                <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+                                    <Setter Property="Width" Value="auto"></Setter>
+                                    <Setter Property="Height" Value="auto"></Setter>
+                                    <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+
                             </GroupBox.Resources>
 
                             <Grid>
@@ -1327,17 +1365,17 @@
 
                                 <StackPanel Grid.Column="1" Grid.Row="1">
 
-                                    <Button x:Name="btn_open_me_folder"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Btn_open_me_folder_Click">
+                                    <Button x:Name="btn_open_me_folder" Click="Btn_open_me_folder_Click">
                                         <StackPanel Orientation="Horizontal">
-                                            <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                            <Label Content="{x:Static p:Resources.lb_me}" FontSize="14"/>
+                                            <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                            <Label Content="{x:Static p:Resources.lb_me}" />
                                         </StackPanel>
                                     </Button>
 
-                                    <Button x:Name="btn_open_xml_hmi"  Width="310" Height="auto" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0,0,0,10" Click="Btn_open_xml_hmi_Click">
+                                    <Button x:Name="btn_open_xml_hmi" Click="Btn_open_xml_hmi_Click">
                                         <StackPanel Orientation="Horizontal">
-                                            <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0,0,20,0" VerticalAlignment="Center"/>
-                                            <Label Content="{x:Static p:Resources.lb_me_xml}" FontSize="14"/>
+                                            <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                            <Label Content="{x:Static p:Resources.lb_me_xml}"/>
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>

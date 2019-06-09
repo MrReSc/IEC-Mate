@@ -546,6 +546,9 @@
   <data name="tt_xml_suche" xml:space="preserve">
     <value>Es werden nur *.xml Datein im Verzeichnis application\view\me\hmi\text durchsucht.</value>
   </data>
+  <data name="wm_cb_me_auswahlen" xml:space="preserve">
+    <value>Bitte eine ME auswählen...</value>
+  </data>
   <data name="wm_file_ext" xml:space="preserve">
     <value>Dateiendungen eintragen...</value>
   </data>
