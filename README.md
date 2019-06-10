@@ -84,7 +84,7 @@ Falls das .NET Framework 4.7.2 nicht vorhanden sein sollte, bitte der Installati
 
 ## Lizenz
 
-IEC-Mate steht unter der MIT Lizenz.
+IEC-Mate steht unter der [MIT Lizenz](https://raw.githubusercontent.com/MrReSc/IEC-Mate/master/LICENSE).
 
 ## Verwendetet Bibliotheken
 
