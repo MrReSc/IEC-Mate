@@ -145,16 +145,16 @@
     <value>The hex input contains characters other than 0-9, a-f, or A-F.</value>
   </data>
   <data name="dialogMsgCodeGen00" xml:space="preserve">
-    <value>--&gt; The number of variables is not identical.</value>
+    <value>The number of variables is not identical.</value>
   </data>
   <data name="dialogMsgCodeGen01" xml:space="preserve">
-    <value>--&gt; No variable in list 1.</value>
+    <value>No variable in list</value>
   </data>
   <data name="dialogMsgCodeGen02" xml:space="preserve">
-    <value>--&gt; No variable in list 2.</value>
+    <value>The template does not contain the variable</value>
   </data>
   <data name="dialogMsgCodeGen03" xml:space="preserve">
-    <value>--&gt; No variable in list 3.</value>
+    <value>Error generating code. Check variables and template.</value>
   </data>
   <data name="dialogMsgDateiOffnenFehler" xml:space="preserve">
     <value>Please select a file.</value>

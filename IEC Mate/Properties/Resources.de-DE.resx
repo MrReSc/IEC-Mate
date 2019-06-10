@@ -145,16 +145,16 @@
     <value>Die Hex - Eingabe enthält andere Zeichen als 0-9, a-f oder A-F.</value>
   </data>
   <data name="dialogMsgCodeGen00" xml:space="preserve">
-    <value>--&gt; Die Anzahl Variabeln ist nicht identisch.</value>
+    <value>Die Anzahl Variabeln ist nicht identisch.</value>
   </data>
   <data name="dialogMsgCodeGen01" xml:space="preserve">
-    <value>--&gt; Keine Variable in Liste 1.</value>
+    <value>Keine Variable in Liste</value>
   </data>
   <data name="dialogMsgCodeGen02" xml:space="preserve">
-    <value>--&gt; Keine Variable in Liste 2.</value>
+    <value>In der Vorlage fehlt die Variable</value>
   </data>
   <data name="dialogMsgCodeGen03" xml:space="preserve">
-    <value>--&gt; Keine Variable in Liste 3.</value>
+    <value>Fehler beim generieren vom Code. Variablen und Vorlage überprüfen.</value>
   </data>
   <data name="dialogMsgDateiOffnenFehler" xml:space="preserve">
     <value>Bitte eine Datei auswählen.</value>

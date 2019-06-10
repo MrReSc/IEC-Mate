@@ -653,13 +653,13 @@ namespace IECMate
                                     "Variable_3", text_var3.Text,
                                     text_code_template.Text);
 
-                if (code.StartsWith("--> "))
+                if (!String.IsNullOrWhiteSpace(code.error))
                 {
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.Replace("--> ", ""), MessageDialogStyle.Affirmative);
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.error, MessageDialogStyle.Affirmative);
                 }
                 else
                 {
-                    text_code_output.Text = code;
+                    text_code_output.Text = code.outtext;
                     text_code_output.Focus();
                 }
 
@@ -670,10 +670,10 @@ namespace IECMate
             }
         }
 
-        private string Code_gen(string var_1, string var_1_text,
-                                string var_2, string var_2_text,
-                                string var_3, string var_3_text,
-                                string template)
+        private (string outtext, string error) Code_gen(string var_1, string var_1_text,
+                                                        string var_2, string var_2_text,
+                                                        string var_3, string var_3_text,
+                                                        string template)
         {
             string[] split = new string[] { "\r\n" };
             string[] vars_1 = var_1_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
@@ -681,45 +681,80 @@ namespace IECMate
             string[] vars_3 = var_3_text.Split(split, StringSplitOptions.RemoveEmptyEntries);
 
             string outtext = "";
-            string error0 = Properties.Resources.dialogMsgCodeGen00;
-            string error1 = Properties.Resources.dialogMsgCodeGen01;
-            string error2 = Properties.Resources.dialogMsgCodeGen02;
-            string error3 = Properties.Resources.dialogMsgCodeGen03;
 
             try
             {
-                int lines = vars_1.Length;
+                var lines1 = vars_1.Length;
+                var lines2 = vars_2.Length;
+                var lines3 = vars_3.Length;
 
-                if (lines == 0)
+                var var1_vorhanden = !String.IsNullOrWhiteSpace(var_1_text);
+                var var2_vorhanden = !String.IsNullOrWhiteSpace(var_2_text);
+                var var3_vorhanden = !String.IsNullOrWhiteSpace(var_3_text);
+
+                
+                //Keine Variable in Liste 1 aber "Varibale_1" in Template
+                if (lines1 == 0 && template.Contains(var_1))
                 {
-                    return error1;
+                    return (outtext, Properties.Resources.dialogMsgCodeGen01 + " 1");
                 }
 
-                if ((lines < vars_2.Length) || (lines < vars_3.Length))
+                //Keine Variable in Liste 2 aber "Varibale_2" in Template
+                if (lines2 == 0 && template.Contains(var_2))
                 {
-                    return error0;
+                    return (outtext, Properties.Resources.dialogMsgCodeGen01 + " 2");
                 }
 
-                if ((template.Contains(var_2)) && (vars_2.Length == 0))
+                //Keine Variable in Liste 3 aber "Varibale_3" in Template
+                if (lines3 == 0 && template.Contains(var_3))
                 {
-                    return error2;
+                    return (outtext, Properties.Resources.dialogMsgCodeGen01 + " 3");
                 }
 
-                if ((template.Contains(var_3)) && (vars_3.Length == 0))
+                //Keine "Varibale_1" in Template aber in Liste
+                if (lines1 > 0 && !template.Contains(var_1))
                 {
-                    return error3;
+                    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 1");
                 }
+
+                //Keine "Varibale_2" in Template aber in Liste
+                if (lines2 > 0 && !template.Contains(var_2))
+                {
+                    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 2");
+                }
+
+                //Keine "Varibale_3" in Template aber in Liste
+                if (lines3 > 0 && !template.Contains(var_3))
+                {
+                    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 3");
+                }
+
+                //Die Anzahl Variablen in den Listen ist unterschiedlich und enthalten auch Text
+                if ((var1_vorhanden && var2_vorhanden && lines1 != lines2) ||
+                     (var1_vorhanden && var3_vorhanden && lines1 != lines3) ||
+                     (var2_vorhanden && var3_vorhanden && lines2 != lines3)
+                   )
+                {
+                    return (outtext, Properties.Resources.dialogMsgCodeGen00);
+                }
+
+                var lines = Math.Max(Math.Max(lines1, lines2), lines3);
 
                 for (int i = 0; i < lines; i++)
                 {
-                    string temp_text = template.Replace(var_1, vars_1[i]);
+                    string temp_text = template;
 
-                    if (!string.IsNullOrEmpty(var_2_text))
+                    if (!String.IsNullOrWhiteSpace(var_1_text))
+                    {
+                        temp_text = temp_text.Replace(var_1, vars_1[i]);
+                    }
+
+                    if (!String.IsNullOrWhiteSpace(var_2_text))
                     {
                         temp_text = temp_text.Replace(var_2, vars_2[i]);
                     }
 
-                    if (!string.IsNullOrEmpty(var_3_text))
+                    if (!String.IsNullOrWhiteSpace(var_3_text))
                     {
                         temp_text = temp_text.Replace(var_3, vars_3[i]);
                     }
@@ -736,9 +771,9 @@ namespace IECMate
             }
             catch (Exception)
             {
-                return error0;
+                return (outtext, Properties.Resources.dialogMsgCodeGen03);
             }
-            return outtext;
+            return (outtext, String.Empty);
         }
 
         private void Btn_gen_loschen_Click(object sender, RoutedEventArgs e)
