@@ -153,7 +153,7 @@
                             <Label Content="{x:Static p:Resources.ti_suche}" FontSize="30" DockPanel.Dock="Left" HorizontalAlignment="Left"/>
                             <Button x:Name="btn_default_ext" Width="30" Height="30" DockPanel.Dock="Right" 
                                     HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" 
-                                    ToolTip="{x:Static p:Resources.tt_file_ext_default}" Click="Btn_default_ext_Click">
+                                    ToolTip="{x:Static p:Resources.tt_file_ext_default}" Click="Btn_default_ext_Click" Focusable="False">
                                 <iconPacks:PackIconMaterial Kind="BackupRestore" Width="auto" Height="auto" />
                             </Button>
                         </DockPanel>
@@ -444,6 +444,7 @@
                                             <Setter Property="BorderThickness" Value="0"></Setter>
                                             <Setter Property="Background" Value="Transparent"></Setter>
                                             <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
+                                            <Setter Property="Focusable" Value="False"></Setter>
                                         </Style>
                                     </StackPanel.Resources>
                                     
@@ -458,11 +459,11 @@
                                               Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
-                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click" Focusable="False">
+                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click">
                                         <iconPacks:PackIconMaterial Kind="ArrowRightBold" Width="18" Height="auto"/>
                                     </Button>
 
-                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click" Focusable="False">
+                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click">
                                         <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
                                     </Button>
 
@@ -562,6 +563,7 @@
                                             <Setter Property="BorderThickness" Value="0"></Setter>
                                             <Setter Property="Background" Value="Transparent"></Setter>
                                             <Setter Property="Controls:ButtonHelper.CornerRadius" Value="0"></Setter>
+                                            <Setter Property="Focusable" Value="False"></Setter>
                                         </Style>
                                     </StackPanel.Resources>
 
@@ -1182,6 +1184,7 @@
                                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                                 <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
                                 <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                <Setter Property="Focusable" Value="False"></Setter>
                             </Style>
 
                             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
@@ -1334,6 +1337,7 @@
                                     <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                                     <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
                                     <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                    <Setter Property="Focusable" Value="False"></Setter>
                                 </Style>
 
                                 <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">

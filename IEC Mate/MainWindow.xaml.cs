@@ -324,7 +324,6 @@ namespace IECMate
         private void CopyToClipboard_Click_1(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(text_code_output.Text);
-            text_code_output.Focus();
         }
 
         private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -562,8 +561,6 @@ namespace IECMate
 
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, text_code_template.Text);
-
-            text_code_template.Focus();
         }
 
         private void Btn_template_offnen_Click(object sender, RoutedEventArgs e)
@@ -573,8 +570,6 @@ namespace IECMate
 
             if (openFileDialog.ShowDialog() == true)
                 text_code_template.Text = File.ReadAllText(openFileDialog.FileName);
-
-            text_code_template.Focus();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -677,7 +672,6 @@ namespace IECMate
                 else
                 {
                     text_code_output.Text = code.outtext;
-                    text_code_output.Focus();
                 }
 
             }
@@ -796,7 +790,6 @@ namespace IECMate
         private void Btn_gen_loschen_Click(object sender, RoutedEventArgs e)
         {
             text_code_output.Text = "";
-            text_code_output.Focus();
         }
 
         private void Btn_gen_speichern_Click(object sender, RoutedEventArgs e)
