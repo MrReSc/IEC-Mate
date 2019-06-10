@@ -124,7 +124,7 @@
     <value>Ersetzten durch...</value>
   </data>
   <data name="dialogDownloadUpdateButton" xml:space="preserve">
-    <value>Download Update</value>
+    <value>Download</value>
   </data>
   <data name="dialogMsgBackup" xml:space="preserve">
     <value>Das Backup läuft, bitte warte...</value>
@@ -158,6 +158,9 @@
   </data>
   <data name="dialogMsgDateiOffnenFehler" xml:space="preserve">
     <value>Bitte eine Datei auswählen.</value>
+  </data>
+  <data name="dialogMsgDownloadUpdateFehler" xml:space="preserve">
+    <value>Der Download ist Fehlgeschlagen.</value>
   </data>
   <data name="dialogMsgHelferFehler" xml:space="preserve">
     <value>Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.</value>
@@ -204,6 +207,9 @@
   <data name="dialogTitelDateiOffnen" xml:space="preserve">
     <value>Datei öffnen</value>
   </data>
+  <data name="dialogTitelDownloadUpdateFehler" xml:space="preserve">
+    <value>Download Fehler</value>
+  </data>
   <data name="dialogTitelHelfer" xml:space="preserve">
     <value>Fehler beim öffnen</value>
   </data>
@@ -220,7 +226,7 @@
     <value>Update</value>
   </data>
   <data name="dialogUpdateOffnenButton" xml:space="preserve">
-    <value>Update Seite öffnen</value>
+    <value>Release Seite öffnen</value>
   </data>
   <data name="dp_datei" xml:space="preserve">
     <value>Datei</value>

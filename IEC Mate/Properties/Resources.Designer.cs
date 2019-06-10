@@ -79,7 +79,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Download Update ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Download ähnelt.
         /// </summary>
         public static string dialogDownloadUpdateButton {
             get {
@@ -183,6 +183,15 @@ namespace IECMate.Properties {
         public static string dialogMsgDateiOffnenFehler {
             get {
                 return ResourceManager.GetString("dialogMsgDateiOffnenFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Der Download ist Fehlgeschlagen. ähnelt.
+        /// </summary>
+        public static string dialogMsgDownloadUpdateFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgDownloadUpdateFehler", resourceCulture);
             }
         }
         
@@ -322,6 +331,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Download Fehler ähnelt.
+        /// </summary>
+        public static string dialogTitelDownloadUpdateFehler {
+            get {
+                return ResourceManager.GetString("dialogTitelDownloadUpdateFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Fehler beim öffnen ähnelt.
         /// </summary>
         public static string dialogTitelHelfer {
@@ -367,7 +385,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Update Seite öffnen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Release Seite öffnen ähnelt.
         /// </summary>
         public static string dialogUpdateOffnenButton {
             get {

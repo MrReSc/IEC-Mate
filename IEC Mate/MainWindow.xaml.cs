@@ -34,6 +34,7 @@ using octokit = Octokit;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.ComponentModel;
+using System.Net;
 
 namespace IECMate
 {
@@ -44,6 +45,7 @@ namespace IECMate
         public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         public InputSimulator sim = new InputSimulator();
+        public string filename;
         #endregion
 
         #region Benachrichtigung der DataBinding Variablen
@@ -257,7 +259,24 @@ namespace IECMate
                     MessageDialogResult x = await this.ShowMessageAsync(Properties.Resources.dialogTitleUpdate, updateMsg, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mymessageboxsettings);
                     if (x == MessageDialogResult.Affirmative)
                     {
-                        Process.Start(latest.Assets[0].BrowserDownloadUrl);
+                        Uri uri = new Uri(latest.Assets[0].BrowserDownloadUrl);
+                        filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp/" + latest.Assets[0].Name);
+
+                        try
+                        {
+                            if (File.Exists(filename))
+                            {
+                                File.Delete(filename);
+                            }
+
+                            WebClient wc = new WebClient();
+                            wc.DownloadFileAsync(uri, filename);
+                            wc.DownloadFileCompleted += new AsyncCompletedEventHandler(wc_DownloadFileCompleted);
+                        }
+                        catch (Exception ex)
+                        {
+                            await this.ShowMessageAsync("Download", ex.Message.ToString(), MessageDialogStyle.Affirmative);
+                        }
                     }
 
                     if (x == MessageDialogResult.FirstAuxiliary)
@@ -269,6 +288,20 @@ namespace IECMate
             catch (Exception)
             {
                 ;
+            }
+        }
+
+        private async void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                Process.Start(filename);
+                Close();
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelDownloadUpdateFehler, Properties.Resources.dialogMsgDownloadUpdateFehler, MessageDialogStyle.Affirmative);
             }
         }
 
@@ -412,6 +445,7 @@ namespace IECMate
             var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
             var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
 
+            //Erst wenn CTRL und SHIFT wieder losgelassen werden, wird der Text eingefügt
             do
             {
                 isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
