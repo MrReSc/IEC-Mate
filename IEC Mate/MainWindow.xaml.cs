@@ -600,7 +600,6 @@ namespace IECMate
             try
             {
                 Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
-                text_code_template.Focus();
             }
             catch (Exception)
             {
@@ -613,12 +612,14 @@ namespace IECMate
         {
             try
             {
-                do
+                if (!String.IsNullOrWhiteSpace(combo_vars.SelectedValue.ToString()) && !String.IsNullOrWhiteSpace(text_suchen.Text))
                 {
-                    Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
-                } while (text_code_template.Text.Contains(text_suchen.Text));
-                text_code_template.Focus();
-
+                    do
+                    {
+                        Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                    } while (text_code_template.Text.Contains(text_suchen.Text));
+                }
+               
             }
             catch (Exception)
             {

@@ -458,11 +458,11 @@
                                               Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
-                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click">
+                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click" Focusable="False">
                                         <iconPacks:PackIconMaterial Kind="ArrowRightBold" Width="18" Height="auto"/>
                                     </Button>
 
-                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click">
+                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click" Focusable="False">
                                         <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
                                     </Button>
 
