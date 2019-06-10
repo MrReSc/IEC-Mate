@@ -41,14 +41,9 @@ namespace IECMate
     public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
         #region Globale Variablen
-        public static BrushConverter bc = new BrushConverter();
-        public Brush DarkBackground = (Brush)bc.ConvertFromString("#4A4A4A");
         public string[] variablen_liste = new string[] { "Variable_1", "Variable_2", "Variable_3" };
-        //public Stack<string> undoList = new Stack<string>();
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         public InputSimulator sim = new InputSimulator();
-        public RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\Microsoft\\Windows NT\\CurrentVersion");
-        public string os_version;
         #endregion
 
         #region Benachrichtigung der DataBinding Variablen
@@ -229,9 +224,6 @@ namespace IECMate
             text_var2.Text = Properties.Settings.Default.variable_2;
             text_var3.Text = Properties.Settings.Default.variable_3;
             text_code_template.Text = Properties.Settings.Default.vorlage;
-
-            //OS Version
-            os_version = (string)registryKey.GetValue("productName");
 
             //Release überprüfen
             ReleaseCheck();
@@ -416,27 +408,17 @@ namespace IECMate
 
         private void PasteTextFromHotkey(string text)
         {
-            
-            if (os_version.Contains("Windows 10"))
-            {
-                //Bei Windows 10 kann der Text aus dem Cliboard eingefügt werden
-                //Bei Windows 7 funktioniert es nicht
-                Clipboard.SetText(text);
-                var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-                var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
+            Clipboard.SetText(text);
+            var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+            var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
 
-                do
-                {
-                    isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
-                    isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-                } while (isControlKeyDown || isShiftKeyDown);
-
-                sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
-            }
-            else
+            do
             {
-                sim.Keyboard.TextEntry(text);
-            }           
+                isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
+                isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+            } while (isControlKeyDown || isShiftKeyDown);
+
+            sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
         }
 
         private async void Ts_hotkey_IsCheckedChanged(object sender, EventArgs e)
@@ -648,9 +630,9 @@ namespace IECMate
         {
             try
             {
-                var code = Code_gen("Variable_1", text_var1.Text,
-                                    "Variable_2", text_var2.Text,
-                                    "Variable_3", text_var3.Text,
+                var code = Code_gen(variablen_liste[0], text_var1.Text,
+                                    variablen_liste[1], text_var2.Text,
+                                    variablen_liste[2], text_var3.Text,
                                     text_code_template.Text);
 
                 if (!String.IsNullOrWhiteSpace(code.error))

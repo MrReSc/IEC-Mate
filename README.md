@@ -75,9 +75,9 @@ IEC-Mate ist auf Deutsch und Englisch lokalisiert. Der Editor hat verschieden Ei
 
 ## Anforderungen
 
-IEC-Mate wurde auf MS Windows 7 und Windows 10 getestet.
+IEC-Mate wurde auf MS Windows 10 getestet.
 
-- Windows 7, 10 x86/x64
+- Windows 10 x86/x64
 - .NET Framework 4.7.2
 
 Falls das .NET Framework 4.7.2 nicht vorhanden sein sollte, bitte der Installationsaufforderung folgen.
