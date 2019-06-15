@@ -255,6 +255,9 @@
   <data name="dp_hilfe_info" xml:space="preserve">
     <value>Infos</value>
   </data>
+  <data name="dp_hilfe_log" xml:space="preserve">
+    <value>Log Datei öffnen</value>
+  </data>
   <data name="fo_einstellungen" xml:space="preserve">
     <value>Einstellungen</value>
   </data>

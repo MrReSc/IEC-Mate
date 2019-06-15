@@ -194,9 +194,18 @@
 
                     <!--Hilfe-->
                     <StackPanel Grid.Column="1" Grid.Row="4">
-                        <Label Content="{x:Static p:Resources.dp_hilfe}"  FontSize="30" Margin="0,15,0,0"/>
-                        <Button Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="40" Background="Transparent">
+                        <Label Content="{x:Static p:Resources.dp_hilfe}"  FontSize="30" Margin="0,15,0,-5"/>
+                        <Button Click="MenuItem_Click_About" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="42" 
+                                Background="Transparent"
+                                VerticalContentAlignment="Center">
                             <Label Content="{x:Static p:Resources.dp_hilfe_info}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
+                        </Button>
+
+                        <Button x:Name="btn_logfile_offnen" Margin="5,0" BorderThickness="0" HorizontalContentAlignment="Left" Height="42" 
+                                Background="Transparent"
+                                VerticalContentAlignment="Center" Click="Btn_logfile_offnen_Click"
+                                Focusable="False">
+                            <Label Content="{x:Static p:Resources.dp_hilfe_log}" FontSize="15" FontWeight="Medium" VerticalContentAlignment="Center"/>
                         </Button>
                     </StackPanel>
                 </Grid>
@@ -648,7 +657,7 @@
                                              BorderBrush="{DynamicResource ControlBorderBrush}">
                     </toolkit:AutoCompleteBox>
 
-                    <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" Click="Btn_suche_Click" VerticalAlignment="Center">
+                    <Button x:Name="btn_suche" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Click="Btn_suche_Click">
                         <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
                     </Button>
 

@@ -475,6 +475,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Log Datei öffnen ähnelt.
+        /// </summary>
+        public static string dp_hilfe_log {
+            get {
+                return ResourceManager.GetString("dp_hilfe_log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Einstellungen ähnelt.
         /// </summary>
         public static string fo_einstellungen {

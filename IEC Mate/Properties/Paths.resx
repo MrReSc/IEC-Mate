@@ -153,4 +153,7 @@
   <data name="view" xml:space="preserve">
     <value>\\application\\view</value>
   </data>
+  <data name="LogFile" xml:space="preserve">
+    <value>\\Log\\IEC_Mate.log</value>
+  </data>
 </root>

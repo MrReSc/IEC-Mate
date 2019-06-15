@@ -25,16 +25,15 @@ using System.Windows.Threading;
 using NHotkey.Wpf;
 using NHotkey;
 using WindowsInput;
-using System.Text;
 using System.Threading;
 using System.Globalization;
 using WindowsInput.Native;
 using ICSharpCode.AvalonEdit;
 using octokit = Octokit;
 using System.Collections.ObjectModel;
-using System.Collections;
 using System.ComponentModel;
 using System.Net;
+using Serilog;
 
 namespace IECMate
 {
@@ -46,6 +45,8 @@ namespace IECMate
         private string[] AccentColor = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         public InputSimulator sim = new InputSimulator();
         public string filename;
+        public string TempFolder;
+        public string logfile;
         #endregion
 
         #region Benachrichtigung der DataBinding Variablen
@@ -83,12 +84,28 @@ namespace IECMate
         public MainWindow()
         {
             #region Initialisierung
+            //Ordner in LocalApplicationData/Temp für IEC Mate erstellen
+            //Wenn Ordner schon existier, dann passiert nichts
+            TempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp\\IECMate\\");
+            Directory.CreateDirectory(TempFolder);
+
+            //Log
+            logfile = TempFolder + Properties.Paths.LogFile;
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File(logfile, rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            Log.Information("IEC Mate wurde gestartet.");
+
             //Wenn es eine neue Version gibt, dann werden die Einstellungen von der schon installierten Version übernommen
             if (Properties.Settings.Default.updatesettings)
             {
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.updatesettings = false;
                 Properties.Settings.Default.Save();
+                Log.Information("Einstellungen von älterer Version übernommen.");
             }
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
@@ -229,6 +246,8 @@ namespace IECMate
 
             //Release überprüfen
             ReleaseCheck();
+
+            Log.Information("Einstellungen geladen und Init fertig.");
             #endregion
         }
 
@@ -247,6 +266,7 @@ namespace IECMate
                     Convert.ToInt32(relVersion[1]) > Convert.ToInt32(aseVersion[1]) ||
                     Convert.ToInt32(relVersion[2]) > Convert.ToInt32(aseVersion[2]))
                 {
+                    Log.Information("Neues Release {Rel} verfügbar.", relVersion);
                     var mymessageboxsettings = new MetroDialogSettings()
                     { 
                         AffirmativeButtonText = Properties.Resources.dialogDownloadUpdateButton,
@@ -259,8 +279,9 @@ namespace IECMate
                     MessageDialogResult x = await this.ShowMessageAsync(Properties.Resources.dialogTitleUpdate, updateMsg, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mymessageboxsettings);
                     if (x == MessageDialogResult.Affirmative)
                     {
+                        Log.Information("Udapte wurde gestartet.");
                         Uri uri = new Uri(latest.Assets[0].BrowserDownloadUrl);
-                        filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp/" + latest.Assets[0].Name);
+                        filename = TempFolder + latest.Assets[0].Name;
 
                         try
                         {
@@ -277,6 +298,7 @@ namespace IECMate
                         catch (Exception ex)
                         {
                             await this.ShowMessageAsync(Properties.Resources.dialogTitelDownlaod, ex.Message.ToString(), MessageDialogStyle.Affirmative);
+                            Log.Error(ex, "Error Update");
                         }
                     }
 
@@ -284,11 +306,16 @@ namespace IECMate
                     {
                         Process.Start(latest.HtmlUrl);
                     }
+
+                    if (x == MessageDialogResult.Negative)
+                    {
+                        Log.Information("Udapte wurde abgebrochen.");
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                Log.Error(ex, "Error Update");
             }
         }
 
@@ -296,12 +323,14 @@ namespace IECMate
         {
             if (e.Error == null)
             {
+                Log.Information("Update Download fertig. IEC Mate wird geschlossen und neu gestartet.");
                 Process.Start(filename);
                 Close();
                 Application.Current.Shutdown();
             }
             else
             {
+                Log.Error(e.Error, "Error beim Download von Update");
                 await this.ShowMessageAsync(Properties.Resources.dialogTitelDownloadUpdateFehler, Properties.Resources.dialogMsgDownloadUpdateFehler, MessageDialogStyle.Affirmative);
             }
         }
@@ -317,14 +346,16 @@ namespace IECMate
             }
         }
 
-        private void Mi_app_beenden_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void CopyToClipboard_Click_1(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText(text_code_output.Text);
+            try
+            {
+                Clipboard.SetText(text_code_output.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Tc_root_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -354,20 +385,36 @@ namespace IECMate
 
         private void Btn_vaiablenliste_loschen_Click(object sender, RoutedEventArgs e)
         {
-            text_var1.Text = "";
-            text_var2.Text = "";
-            text_var3.Text = "";
-            text_var1.Focus();
+            try
+            {
+                text_var1.Text = String.Empty;
+                text_var2.Text = String.Empty;
+                text_var3.Text = String.Empty;
+                text_var1.Focus();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+            
         }
         #endregion
 
         #region About Fenster
         private void MenuItem_Click_About(object sender, RoutedEventArgs e)
         {
-            child_Infos.IsOpen = true;
-            lb_version.Content = AssemblyVersion(true);
-            text_lizenzen.Text = File.ReadAllText(@"resources\oss_lizenzen_iec_mate.txt");
-            text_iecmate_lizenz.Text = File.ReadAllText(@"resources\iec_mate_lizenz.txt");
+            try
+            {
+                Log.Information("About Fenster wurde geöffnet.");
+                child_Infos.IsOpen = true;
+                lb_version.Content = AssemblyVersion(true);
+                text_lizenzen.Text = File.ReadAllText(@"resources\oss_lizenzen_iec_mate.txt");
+                text_iecmate_lizenz.Text = File.ReadAllText(@"resources\iec_mate_lizenz.txt");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }  
         }
 
         public string AssemblyVersion(bool wDay)
@@ -392,18 +439,32 @@ namespace IECMate
                 // (e.g. during debug)
                 return Properties.Resources.lb_version;
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+                return String.Empty;
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
-            e.Handled = true;
+            try
+            {
+                Process.Start(e.Uri.AbsoluteUri);
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+            
         }
         #endregion
 
         #region Hot Key
         private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
         {
+            Log.Information("Hotkey {hk} wurde gedrückt.", e.Name);
             try
             {
                 string px = text_px_nummer.Text;
@@ -433,57 +494,107 @@ namespace IECMate
                     e.Handled = true;
                 }  
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                Log.Error(ex, "Error");
             }         
         }
 
         private void PasteTextFromHotkey(string text)
         {
-            Clipboard.SetText(text);
-            var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-            var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
-
-            //Erst wenn CTRL und SHIFT wieder losgelassen werden, wird der Text eingefügt
-            do
+            try
             {
-                isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
-                isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-            } while (isControlKeyDown || isShiftKeyDown);
+                Log.Debug("Hotkey: Text wird kopiert. --> {hk}", text);
+                Clipboard.SetText(text);
+                var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+                var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
 
-            sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+                //Erst wenn CTRL und SHIFT wieder losgelassen werden, wird der Text eingefügt
+                if (!root_window.IsActive)
+                {
+                    Log.Debug("Hotkey: Loop zum warten bis CTRL und SHIFT losgelassen werden wird gestartet.");
+                    do
+                    {
+                        isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
+                        isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+                    } while (isControlKeyDown || isShiftKeyDown);
+                }
+                
+                Log.Debug("Hotkey: Virtuell CTRL + V drücken.");
+                sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+            
         }
 
         private async void Ts_hotkey_IsCheckedChanged(object sender, EventArgs e)
         {
-            if (((bool)ts_hotkey.IsChecked) && (String.IsNullOrWhiteSpace(text_px_nummer.Text)))
+            try
             {
-                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkey, MessageDialogStyle.Affirmative);
-                ts_hotkey.IsChecked = false;
-                await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_px_nummer.Focus()));
+                if (((bool)ts_hotkey.IsChecked) && (String.IsNullOrWhiteSpace(text_px_nummer.Text)))
+                {
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkey, MessageDialogStyle.Affirmative);
+                    ts_hotkey.IsChecked = false;
+                    await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_px_nummer.Focus()));
+                }
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+            
         }
 
         private void Cb_hotekey_plain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RegisterHotKey("PxPlain", (ComboBox)sender);
+            try
+            {
+                RegisterHotKey("PxPlain", (ComboBox)sender);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+            
         }
 
         private void Cb_hotkey_pxBeginEnd_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            RegisterHotKey("PxBeginEnd", (ComboBox)sender);
+            try
+            {
+                RegisterHotKey("PxBeginEnd", (ComboBox)sender);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Cb_hotkey_pxComment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RegisterHotKey("PxComment", (ComboBox)sender);
+            try
+            {
+                RegisterHotKey("PxComment", (ComboBox)sender);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Cb_hotekey_brackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RegisterHotKey("PxBrackets", (ComboBox)sender);
+            try
+            {
+                RegisterHotKey("PxBrackets", (ComboBox)sender);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private async void RegisterHotKey(string name, ComboBox combobox)
@@ -492,6 +603,14 @@ namespace IECMate
             {
                 //Wenn kein Key selected ist, dann wird er abgemeldet
                 HotkeyManager.Current.Remove(name);
+                Log.Debug("HotKey: {name} wurde abgemeldet.", name);
+                return;
+            }
+
+            //Beim Aufstarten kann es sonst zu null reference exeptions kommen
+            if (cb_hotekey_brackets.SelectedValue == null || cb_hotekey_plain.SelectedValue == null ||
+                cb_hotkey_pxBeginEnd.SelectedValue == null || cb_hotkey_pxComment.SelectedValue == null)
+            {
                 return;
             }
 
@@ -536,12 +655,13 @@ namespace IECMate
                 }
                 else
                 {
+                    Log.Debug("HotKey: {name} wurde mit dem Zeichen {z} registriert.", name, key);
                     HotkeyManager.Current.AddOrReplace(name, key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return;
+                Log.Error(ex, "Error");
             }
         }
 
@@ -557,51 +677,87 @@ namespace IECMate
         #region Code Vorlage
         private void Btn_template_speichern_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text File (*.txt)|*.txt";
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text File (*.txt)|*.txt";
 
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllText(saveFileDialog.FileName, text_code_template.Text);
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    File.WriteAllText(saveFileDialog.FileName, text_code_template.Text);
+                    Log.Information("Code Vorlage wurde gespeichert unter dem Pfad: {p}.", saveFileDialog.FileName);
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Btn_template_offnen_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text File (*.txt)|*.txt";
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Text File (*.txt)|*.txt";
 
-            if (openFileDialog.ShowDialog() == true)
-                text_code_template.Text = File.ReadAllText(openFileDialog.FileName);
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    text_code_template.Text = File.ReadAllText(openFileDialog.FileName);
+                    Log.Information("Code Vorlage wurde geöffnet: {p}.", openFileDialog.FileName);
+                }    
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            //Wenn ctrl + F gedrückt wird, wird das ausgewählte Wort in das Suchfeld kopiert
-            if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            try
             {
-                text_suchen.Text = text_code_template.SelectedText;
-                text_suchen.Focus();
-                text_suchen.CaretIndex = text_suchen.Text.Length;
+                //Wenn ctrl + F gedrückt wird, wird das ausgewählte Wort in das Suchfeld kopiert
+                if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+                {
+                    text_suchen.Text = text_code_template.SelectedText;
+                    text_suchen.Focus();
+                    text_suchen.CaretIndex = text_suchen.Text.Length;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private void Btn_template_loschen_Click(object sender, RoutedEventArgs e)
         {
-            text_code_template.Text = "";
-            combo_vars.SelectedIndex = -1;
-            text_code_template.Focus();
+            try
+            {
+                Log.Information("Code Vorlage wurde gelöscht.");
+                text_code_template.Text = String.Empty;
+                combo_vars.SelectedIndex = -1;
+                text_code_template.Focus();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Btn_ersetzten_ein_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                Log.Debug("Code Vorlage: Ersetzten einzel wurde gedrückt.");
                 Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                Log.Error(ex, "Error");
             }
-
         }
 
         private void Btn_ersetzten_Click(object sender, RoutedEventArgs e)
@@ -610,6 +766,7 @@ namespace IECMate
             {
                 if (!String.IsNullOrWhiteSpace(combo_vars.SelectedValue.ToString()) && !String.IsNullOrWhiteSpace(text_suchen.Text))
                 {
+                    Log.Debug("Code Vorlage: Alle ersetzten wurde gedrückt.");
                     do
                     {
                         Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
@@ -617,9 +774,9 @@ namespace IECMate
                 }
                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                Log.Error(ex, "Error");
             }
         }
 
@@ -627,30 +784,37 @@ namespace IECMate
 
         public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor)
         {
-            int nIndex = -1;
+            try
+            {
+                int nIndex = -1;
 
-            if (editor.SelectedText.Equals(s))
-            {
-                nIndex = editor.SelectionStart;
-            }
-            else
-            {
-                nIndex = editor.Text.IndexOf(s, lastUsedIndex);
-                if (nIndex == -1)
+                if (editor.SelectedText.Equals(s))
                 {
-                    nIndex = editor.Text.IndexOf(s);
+                    nIndex = editor.SelectionStart;
+                }
+                else
+                {
+                    nIndex = editor.Text.IndexOf(s, lastUsedIndex);
+                    if (nIndex == -1)
+                    {
+                        nIndex = editor.Text.IndexOf(s);
+                    }
+                }
+
+                if (nIndex != -1)
+                {
+                    editor.Document.Replace(nIndex, s.Length, replacement);
+                    editor.Select(nIndex, replacement.Length);
+                    lastUsedIndex = nIndex + s.Length;
+                }
+                else
+                {
+                    lastUsedIndex = 0;
                 }
             }
-
-            if (nIndex != -1)
+            catch (Exception ex)
             {
-                editor.Document.Replace(nIndex, s.Length, replacement);
-                editor.Select(nIndex, replacement.Length);
-                lastUsedIndex = nIndex + s.Length;
-            }
-            else
-            {
-                lastUsedIndex = 0;
+                Log.Error(ex, "Error");
             }
         }
         #endregion
@@ -661,6 +825,7 @@ namespace IECMate
         {
             try
             {
+                Log.Debug("Code Gen: Generieren wurde gedrückt.");
                 var code = Code_gen(variablen_liste[0], text_var1.Text,
                                     variablen_liste[1], text_var2.Text,
                                     variablen_liste[2], text_var3.Text,
@@ -668,6 +833,7 @@ namespace IECMate
 
                 if (!String.IsNullOrWhiteSpace(code.error))
                 {
+                    Log.Warning("Code Generieren Fehler: {F}", code.error);
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.error, MessageDialogStyle.Affirmative);
                 }
                 else
@@ -676,9 +842,9 @@ namespace IECMate
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ;
+                Log.Error(ex, "Error");
             }
         }
 
@@ -781,8 +947,9 @@ namespace IECMate
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return (outtext, Properties.Resources.dialogMsgCodeGen03);
             }
             return (outtext, String.Empty);
@@ -790,16 +957,34 @@ namespace IECMate
 
         private void Btn_gen_loschen_Click(object sender, RoutedEventArgs e)
         {
-            text_code_output.Text = "";
+            try
+            {
+                text_code_output.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Btn_gen_speichern_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text File (*.txt)|*.txt";
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Text File (*.txt)|*.txt";
 
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllText(saveFileDialog.FileName, text_code_output.Text);
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    File.WriteAllText(saveFileDialog.FileName, text_code_output.Text);
+                    Log.Information("Generierter Code wurde gespeichter unter {p}", saveFileDialog.FileName);
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
         #endregion
 
@@ -807,228 +992,330 @@ namespace IECMate
 
         private void Tg_leerzeichen_IsCheckedChanged(object sender, EventArgs e)
         {
-            text_code_template.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
-            text_code_output.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
+            try
+            {
+                text_code_template.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
+                text_code_output.Options.ShowSpaces = (bool)tg_leerzeichen.IsChecked;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void NumericUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            text_code_template.TextArea.FontSize = (double)nc_font_size.Value;
-            text_code_output.TextArea.FontSize = (double)nc_font_size.Value;
+            try
+            {
+                text_code_template.TextArea.FontSize = (double)nc_font_size.Value;
+                text_code_output.TextArea.FontSize = (double)nc_font_size.Value;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Tg_line_no_IsCheckedChanged(object sender, EventArgs e)
         {
-            text_code_template.ShowLineNumbers = (bool)tg_line_no.IsChecked;
-            text_code_output.ShowLineNumbers = (bool)tg_line_no.IsChecked;
+            try
+            {
+                text_code_template.ShowLineNumbers = (bool)tg_line_no.IsChecked;
+                text_code_output.ShowLineNumbers = (bool)tg_line_no.IsChecked;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Tg_showtab_IsCheckedChanged(object sender, EventArgs e)
         {
-            text_code_template.Options.ShowTabs = (bool)tg_showtab.IsChecked;
-            text_code_output.Options.ShowTabs = (bool)tg_showtab.IsChecked;
+            try
+            {
+                text_code_template.Options.ShowTabs = (bool)tg_showtab.IsChecked;
+                text_code_output.Options.ShowTabs = (bool)tg_showtab.IsChecked;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Tg_showendofline_IsCheckedChanged(object sender, EventArgs e)
         {
-            text_code_template.Options.ShowEndOfLine = (bool)tg_showendofline.IsChecked;
-            text_code_output.Options.ShowEndOfLine = (bool)tg_showendofline.IsChecked;
+            try
+            {
+                text_code_template.Options.ShowEndOfLine = (bool)tg_showendofline.IsChecked;
+                text_code_output.Options.ShowEndOfLine = (bool)tg_showendofline.IsChecked;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }          
         }
 
         private void Tg_converttospace_IsCheckedChanged(object sender, EventArgs e)
         {
-            text_code_template.Options.ConvertTabsToSpaces = (bool)tg_converttospace.IsChecked;
-            text_code_output.Options.ConvertTabsToSpaces = (bool)tg_converttospace.IsChecked;
+            try
+            {
+                text_code_template.Options.ConvertTabsToSpaces = (bool)tg_converttospace.IsChecked;
+                text_code_output.Options.ConvertTabsToSpaces = (bool)tg_converttospace.IsChecked;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }            
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
+            
+            try
             {
-                // Use the RestoreBounds as the current values will be 0, 0 and the size of the screen
-                Properties.Settings.Default.fentser_top = RestoreBounds.Top;
-                Properties.Settings.Default.fenster_left = RestoreBounds.Left;
-                Properties.Settings.Default.fenster_hohe = RestoreBounds.Height;
-                Properties.Settings.Default.fenster_breite = RestoreBounds.Width;
-                Properties.Settings.Default.fenster_max = true;
-            }
-            else
-            {
-                Properties.Settings.Default.fentser_top = this.Top;
-                Properties.Settings.Default.fenster_left = this.Left;
-                Properties.Settings.Default.fenster_hohe = this.Height;
-                Properties.Settings.Default.fenster_breite = this.Width;
-                Properties.Settings.Default.fenster_max = false;
-            }
+                if (WindowState == WindowState.Maximized)
+                {
+                    // Use the RestoreBounds as the current values will be 0, 0 and the size of the screen
+                    Properties.Settings.Default.fentser_top = RestoreBounds.Top;
+                    Properties.Settings.Default.fenster_left = RestoreBounds.Left;
+                    Properties.Settings.Default.fenster_hohe = RestoreBounds.Height;
+                    Properties.Settings.Default.fenster_breite = RestoreBounds.Width;
+                    Properties.Settings.Default.fenster_max = true;
+                }
+                else
+                {
+                    Properties.Settings.Default.fentser_top = this.Top;
+                    Properties.Settings.Default.fenster_left = this.Left;
+                    Properties.Settings.Default.fenster_hohe = this.Height;
+                    Properties.Settings.Default.fenster_breite = this.Width;
+                    Properties.Settings.Default.fenster_max = false;
+                }
 
-            if ((bool)tg_theme.IsChecked)
-            {
-                Properties.Settings.Default.theme = "BaseDark";
-            }
-            else
-            {
-                Properties.Settings.Default.theme = "BaseLight";
-            }
+                if ((bool)tg_theme.IsChecked)
+                {
+                    Properties.Settings.Default.theme = "BaseDark";
+                }
+                else
+                {
+                    Properties.Settings.Default.theme = "BaseLight";
+                }
 
-            Properties.Settings.Default.variable_1 = text_var1.Text;
-            Properties.Settings.Default.variable_2 = text_var2.Text;
-            Properties.Settings.Default.variable_3 = text_var3.Text;
-            Properties.Settings.Default.vorlage = text_code_template.Text;
-            Properties.Settings.Default.leerzeichen = (bool)tg_leerzeichen.IsChecked;
-            Properties.Settings.Default.converttabtospace = (bool)tg_converttospace.IsChecked;
-            Properties.Settings.Default.showtab = (bool)tg_showtab.IsChecked;
-            Properties.Settings.Default.showendofline = (bool)tg_showendofline.IsChecked;
-            Properties.Settings.Default.tabcontrol_index = tc_root.SelectedIndex;
-            Properties.Settings.Default.schriftgrosse = (double)nc_font_size.Value;
-            Properties.Settings.Default.zeilennummern = (bool)tg_line_no.IsChecked;
-            Properties.Settings.Default.projekt_pfad_suche = text_projktpfad_suche.Text;
-            Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
-            Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
-            Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
-            Properties.Settings.Default.pxnummer = text_px_nummer.Text;
-            Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
-            Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
-            Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
-            if (cb_select_me.SelectedIndex == -1)
-            {
-                Properties.Settings.Default.me_auswahl = "";
-            }
-            else
-            {
-                Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
-            }
-            Properties.Settings.Default.file_ext_user = text_file_ext.Text;
-            Properties.Settings.Default.exakte_suche = (bool)ts_exakte_suche.IsChecked;
-            Properties.Settings.Default.offnen_mit_nppp = (bool)ts_offnen_nppp.IsChecked;
+                Properties.Settings.Default.variable_1 = text_var1.Text;
+                Properties.Settings.Default.variable_2 = text_var2.Text;
+                Properties.Settings.Default.variable_3 = text_var3.Text;
+                Properties.Settings.Default.vorlage = text_code_template.Text;
+                Properties.Settings.Default.leerzeichen = (bool)tg_leerzeichen.IsChecked;
+                Properties.Settings.Default.converttabtospace = (bool)tg_converttospace.IsChecked;
+                Properties.Settings.Default.showtab = (bool)tg_showtab.IsChecked;
+                Properties.Settings.Default.showendofline = (bool)tg_showendofline.IsChecked;
+                Properties.Settings.Default.tabcontrol_index = tc_root.SelectedIndex;
+                Properties.Settings.Default.schriftgrosse = (double)nc_font_size.Value;
+                Properties.Settings.Default.zeilennummern = (bool)tg_line_no.IsChecked;
+                Properties.Settings.Default.projekt_pfad_suche = text_projktpfad_suche.Text;
+                Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
+                Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
+                Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
+                Properties.Settings.Default.pxnummer = text_px_nummer.Text;
+                Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
+                Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
+                Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
+                if (cb_select_me.SelectedIndex == -1)
+                {
+                    Properties.Settings.Default.me_auswahl = "";
+                }
+                else
+                {
+                    Properties.Settings.Default.me_auswahl = cb_select_me.SelectedValue.ToString();
+                }
+                Properties.Settings.Default.file_ext_user = text_file_ext.Text;
+                Properties.Settings.Default.exakte_suche = (bool)ts_exakte_suche.IsChecked;
+                Properties.Settings.Default.offnen_mit_nppp = (bool)ts_offnen_nppp.IsChecked;
 
-            Properties.Settings.Default.Save();
+                Properties.Settings.Default.Save();
 
-            HotkeyManager.Current.Remove("PxBeginEnd");
-            HotkeyManager.Current.Remove("PxPlain");
-            HotkeyManager.Current.Remove("PxComment");
-            HotkeyManager.Current.Remove("PxBrackets");
+                HotkeyManager.Current.Remove("PxBeginEnd");
+                HotkeyManager.Current.Remove("PxPlain");
+                HotkeyManager.Current.Remove("PxComment");
+                HotkeyManager.Current.Remove("PxBrackets");
+
+                Log.Information("IEC Mate wurde durch Anwender beendet.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Cb_akzent_farbe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string theme;
-            if ((bool)tg_theme.IsChecked)
+            try
             {
-                theme = "BaseDark";
+                string theme;
+                if ((bool)tg_theme.IsChecked)
+                {
+                    theme = "BaseDark";
+                }
+                else
+                {
+                    theme = "BaseLight";
+                }
+
+                ThemeManager.ChangeAppStyle(Application.Current,
+                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                            ThemeManager.GetAppTheme(theme));
+
+                //Decode Matrix von Bitset neu Aufbauen damit die Farben stimmen
+                DecodeText();
             }
-            else
+            catch (Exception ex)
             {
-                theme = "BaseLight";
+                Log.Error(ex, "Error");
             }
-
-            ThemeManager.ChangeAppStyle(Application.Current,
-                                        ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
-                                        ThemeManager.GetAppTheme(theme));
-
-            //Decode Matrix von Bitset neu Aufbauen damit die Farben stimmen
-            DecodeText();
         }
 
         private void Tg_theme_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)tg_theme.IsChecked)
+            try
             {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
-                                            ThemeManager.GetAppTheme("BaseDark"));
-            }
-            else
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                            ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
-                                            ThemeManager.GetAppTheme("BaseLight"));
-            }
+                if ((bool)tg_theme.IsChecked)
+                {
+                    ThemeManager.ChangeAppStyle(Application.Current,
+                                                ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                                ThemeManager.GetAppTheme("BaseDark"));
+                }
+                else
+                {
+                    ThemeManager.ChangeAppStyle(Application.Current,
+                                                ThemeManager.GetAccent(cb_akzent_farbe.SelectedValue.ToString()),
+                                                ThemeManager.GetAppTheme("BaseLight"));
+                }
 
-            //Decode Matrix von Bitset neu Aufbauen
-            DecodeText();
+                //Decode Matrix von Bitset neu Aufbauen
+                DecodeText();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private async void Cb_sprache_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string setting = "";
-
-            if (Properties.Settings.Default.sprache == "de-DE")
+            try
             {
-                setting = Properties.Resources.lanDE;
+                string setting = String.Empty;
+
+                if (Properties.Settings.Default.sprache == "de-DE")
+                {
+                    setting = Properties.Resources.lanDE;
+                }
+
+                if (Properties.Settings.Default.sprache == "en-GB")
+                {
+                    setting = Properties.Resources.lanEN;
+                }
+
+                if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanDE && cb_sprache.SelectedValue.ToString() != setting)
+                {
+                    var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                    var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+                    if (!(result == MessageDialogResult.Affirmative))
+                    {
+                        cb_sprache.Text = setting;
+                        return;
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.sprache = "de-DE";
+                        System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                        Log.Debug("Spache wird umgeschaltet nach {l}.", Properties.Settings.Default.sprache);
+                        Application.Current.Shutdown();
+                    }
+
+                }
+
+                if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanEN && cb_sprache.SelectedValue.ToString() != setting)
+                {
+                    var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                    var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
+
+                    if (!(result == MessageDialogResult.Affirmative))
+                    {
+                        cb_sprache.Text = setting;
+                        return;
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.sprache = "en-GB";
+                        System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                        Log.Debug("Spache wird umgeschaltet nach {l}.", Properties.Settings.Default.sprache);
+                        Application.Current.Shutdown();
+                    }
+                }
             }
-
-            if (Properties.Settings.Default.sprache == "en-GB")
+            catch (Exception ex)
             {
-                setting = Properties.Resources.lanEN;
-            }
-
-            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanDE && cb_sprache.SelectedValue.ToString() != setting)
-            {
-                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
-                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
-
-                if (!(result == MessageDialogResult.Affirmative))
-                {
-                    cb_sprache.Text = setting;
-                    return;
-                }
-                else
-                {
-                    Properties.Settings.Default.sprache = "de-DE";
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                    Application.Current.Shutdown();
-                }
-
-            }
-
-            if (cb_sprache.SelectedValue.ToString() == Properties.Resources.lanEN && cb_sprache.SelectedValue.ToString() != setting)
-            {
-                var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
-                var result = await this.ShowMessageAsync(Properties.Resources.lb_sprache, Properties.Resources.dialogMsgSpracheUmschalten, MessageDialogStyle.AffirmativeAndNegative, mymessageboxsettings);
-
-                if (!(result == MessageDialogResult.Affirmative))
-                {
-                    cb_sprache.Text = setting;
-                    return;
-                }
-                else
-                {
-                    Properties.Settings.Default.sprache = "en-GB";
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                    Application.Current.Shutdown();
-                }
+                Log.Error(ex, "Error");
             }
         }
 
         private void Btn_default_ext_Click(object sender, RoutedEventArgs e)
         {
-            text_file_ext.Text = Properties.Settings.Default.file_ext_default;
-            text_file_ext.Focus();
-            text_file_ext.CaretIndex = text_file_ext.Text.Length;
+            try
+            {
+                text_file_ext.Text = Properties.Settings.Default.file_ext_default;
+                text_file_ext.Focus();
+                text_file_ext.CaretIndex = text_file_ext.Text.Length;
+                Log.Information("Suche: Default Dateiendungen wurden geladen.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+        private void Btn_logfile_offnen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(TempFolder + "\\Log");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
         #endregion
 
         #region Suchfunktion
         private void Btn_pfad_auswahlen_Click(object sender, RoutedEventArgs e)
         {
-            WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
-            folderDialog.ShowNewFolderButton = false;
-            if (Directory.Exists(text_projktpfad_suche.Text))
+            try
             {
-                folderDialog.SelectedPath = text_projktpfad_suche.Text;
-            }
-            else
-            {
-                folderDialog.SelectedPath = Properties.Paths.drive_c;
-            }
-           
-            WinForms.DialogResult result = folderDialog.ShowDialog();
+                WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+                folderDialog.ShowNewFolderButton = false;
+                if (Directory.Exists(text_projktpfad_suche.Text))
+                {
+                    folderDialog.SelectedPath = text_projktpfad_suche.Text;
+                }
+                else
+                {
+                    folderDialog.SelectedPath = Properties.Paths.drive_c;
+                }
 
-            if (result == WinForms.DialogResult.OK)
-            {
-                text_projktpfad_suche.Text = folderDialog.SelectedPath;
+                WinForms.DialogResult result = folderDialog.ShowDialog();
+
+                if (result == WinForms.DialogResult.OK)
+                {
+                    text_projktpfad_suche.Text = folderDialog.SelectedPath;
+                    Log.Information("Suche: Suchpfad wurde auf {p} festgelegt.", folderDialog.SelectedPath);
+                }
+                text_pattern_suche.Focus();
             }
-            text_pattern_suche.Focus();
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         public class SucheDatei
@@ -1047,588 +1334,788 @@ namespace IECMate
 
         private async void Suche()
         {
-            //Listebox löschen
-            suchdatei.Clear();
-            listbox_ergebnis.ItemsSource = suchdatei;
-
-            //Wennn etwas im Suchfeld steht und das Verzeichnis existiert und es nicht zwei Wörter sind dann wird gesucht
-            if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)) && !text_pattern_suche.Text.Contains(" "))
+            try
             {
-                //Dialog öffnen
-                var mymessageboxsettings = new MetroDialogSettings(){NegativeButtonText = Properties.Resources.dialogNegButton};
-                var x = await this.ShowProgressAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLauft, true, mymessageboxsettings) as ProgressDialogController;
-                double percent = 0;
-                double filecount =0;
-                double count = 0;
-                Stopwatch stopWatch = new Stopwatch();
-                stopWatch.Start();
-                x.SetProgress(percent);
+                //Listebox löschen
+                suchdatei.Clear();
+                listbox_ergebnis.ItemsSource = suchdatei;
 
-                try
+                //Wennn etwas im Suchfeld steht und das Verzeichnis existiert und es nicht zwei Wörter sind dann wird gesucht
+                if ((!String.IsNullOrWhiteSpace(text_pattern_suche.Text)) && (Directory.Exists(text_projktpfad_suche.Text)) && !text_pattern_suche.Text.Contains(" "))
                 {
-                    List<string> allFiles = new List<string>();
-                    string suchpfad = "";
-                  
-                    if ((bool)ts_kbus_suche.IsChecked)
-                    {
-                        //Wenn der Switch "Nur HW suche" ein ist, wird der Pfad angepasst
-                        suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
-                        suchpfad = suchpfad.Replace("\\\\", "\\");
-                        //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
-                        Directory.Exists(suchpfad);
-                    }
-                    else if ((bool)ts_xml_suche.IsChecked)
-                    {
-                        //Wenn der Switch "Nur HMI xml Datein durchsuchen" ein ist, wird der Pfad angepasst
-                        suchpfad = text_projktpfad_suche.Text + Properties.Paths.view;
-                        suchpfad = suchpfad.Replace("\\\\", "\\");
-                        //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
-                        Directory.Exists(suchpfad);
-                    }
-                    else
-                    {
-                        suchpfad = text_projktpfad_suche.Text;
-                    }
+                    //Dialog öffnen
+                    var mymessageboxsettings = new MetroDialogSettings() { NegativeButtonText = Properties.Resources.dialogNegButton };
+                    var x = await this.ShowProgressAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLauft, true, mymessageboxsettings) as ProgressDialogController;
+                    double percent = 0;
+                    double filecount = 0;
+                    double count = 0;
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
+                    x.SetProgress(percent);
 
-                    AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked, (bool)ts_java_suche.IsChecked, (bool)ts_xml_suche.IsChecked);
-                    filecount = allFiles.Count();
-                    count = 0;
-
-                    //Sobald der Dialog offen ist wird mit der suche gestartet
-                    if (x.IsOpen)
+                    try
                     {
-                        foreach (string fileName in allFiles)
+                        List<string> allFiles = new List<string>();
+                        string suchpfad = "";
+
+                        if ((bool)ts_kbus_suche.IsChecked)
                         {
-                            count ++;
-                            percent = 100 / filecount * count / 100;
-                            if (percent > 1.0)
-                            {
-                                percent = 1.0;
-                            }
-                            x.SetProgress(percent);
-
-                            if (x.IsCanceled)
-                            {
-                                break;
-                            }
+                            //Wenn der Switch "Nur HW suche" ein ist, wird der Pfad angepasst
+                            suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+                            suchpfad = suchpfad.Replace("\\\\", "\\");
+                            //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
+                            Directory.Exists(suchpfad);
+                        }
+                        else if ((bool)ts_xml_suche.IsChecked)
+                        {
+                            //Wenn der Switch "Nur HMI xml Datein durchsuchen" ein ist, wird der Pfad angepasst
+                            suchpfad = text_projktpfad_suche.Text + Properties.Paths.view;
+                            suchpfad = suchpfad.Replace("\\\\", "\\");
+                            //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
+                            Directory.Exists(suchpfad);
+                        }
+                        else
+                        {
+                            suchpfad = text_projktpfad_suche.Text;
+                        }
                        
-                            using (var reader = File.OpenText(fileName))
+                        AddFileNamesToList(suchpfad, allFiles, (bool)ts_binar_suche.IsChecked, (bool)ts_java_suche.IsChecked, (bool)ts_xml_suche.IsChecked);
+                        filecount = allFiles.Count();
+                        count = 0;
+
+                        //Sobald der Dialog offen ist wird mit der suche gestartet
+                        if (x.IsOpen)
+                        {
+                            Log.Debug("Suche: Suche gestartet im Pfad {p} mit den Optionen HW: {kb}, JAVA: {j} und XML: {xml} Wort: {w}", 
+                                suchpfad, ts_kbus_suche.IsChecked, ts_java_suche.IsChecked, ts_xml_suche.IsChecked, ts_exakte_suche.IsChecked);
+
+                            foreach (string fileName in allFiles)
                             {
-                                var fileText = await reader.ReadToEndAsync();
-                                if ((bool)ts_exakte_suche.IsChecked)
+                                count++;
+                                percent = 100 / filecount * count / 100;
+                                if (percent > 1.0)
                                 {
-                                    //Der \b ist ein Wortgrenzen-Check, {0} ist die Variable --> Format \bsvDI_BlaFo\b
-                                    if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
-                                    {
-                                        //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
-                                        //Sobald der Erste treffer da ist, wird der Loop beendet
-                                        int _count = 0;
-                                        using (StringReader _reader = new StringReader(fileText))
-                                        {
-                                            string line;
-                                            while ((line = _reader.ReadLine()) != null)
-                                            {
-                                                _count++;
-                                                if (Regex.IsMatch(line, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
-                                                {
-                                                    break;
-                                                }   
-                                            }
-                                        }
-                                        string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
-                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
-                                    }                                 
+                                    percent = 1.0;
                                 }
-                                else
+                                x.SetProgress(percent);
+
+                                if (x.IsCanceled)
                                 {
-                                    //Nicht Case Sensitive
-                                    if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                    Log.Debug("Suche: Suche wurde abgebrochen.");
+                                    break;
+                                }
+
+                                using (var reader = File.OpenText(fileName))
+                                {
+                                    var fileText = await reader.ReadToEndAsync();
+                                    if ((bool)ts_exakte_suche.IsChecked)
                                     {
-                                        //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
-                                        //Sobald der Erste treffer da ist, wird der Loop beendet
-                                        int _count = 0;
-                                        using (StringReader _reader = new StringReader(fileText))
+                                        //Der \b ist ein Wortgrenzen-Check, {0} ist die Variable --> Format \bsvDI_BlaFo\b
+                                        if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                         {
-                                            string line;
-                                            while ((line = _reader.ReadLine()) != null)
+                                            //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
+                                            //Sobald der Erste treffer da ist, wird der Loop beendet
+                                            int _count = 0;
+                                            using (StringReader _reader = new StringReader(fileText))
                                             {
-                                                _count++;
-                                                if (line.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                                string line;
+                                                while ((line = _reader.ReadLine()) != null)
                                                 {
-                                                    break;
+                                                    _count++;
+                                                    if (Regex.IsMatch(line, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
+                                                    {
+                                                        break;
+                                                    }
                                                 }
                                             }
+                                            string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
+                                            suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                         }
-                                        string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
-                                        suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
+                                    }
+                                    else
+                                    {
+                                        //Nicht Case Sensitive
+                                        if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                        {
+                                            //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
+                                            //Sobald der Erste treffer da ist, wird der Loop beendet
+                                            int _count = 0;
+                                            using (StringReader _reader = new StringReader(fileText))
+                                            {
+                                                string line;
+                                                while ((line = _reader.ReadLine()) != null)
+                                                {
+                                                    _count++;
+                                                    if (line.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                                    {
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
+                                            suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
+                                        }
                                     }
                                 }
+
+                                TimeSpan timeSpan = stopWatch.Elapsed;
+                                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
+                                text_suche_count.Text = Properties.Resources.suche_dateien + count.ToString() + "/" + filecount.ToString() +
+                                                        "   " + Properties.Resources.suche_gefunden + suchdatei.Count.ToString() +
+                                                        "   " + Properties.Resources.suche_zeit + elapsedTime;
+
+
                             }
-
-                            TimeSpan timeSpan = stopWatch.Elapsed;
-                            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
-                            text_suche_count.Text = Properties.Resources.suche_dateien + count.ToString() + "/" + filecount.ToString() +
-                                                    "   " + Properties.Resources.suche_gefunden + suchdatei.Count.ToString() +
-                                                    "   " + Properties.Resources.suche_zeit + elapsedTime;
-                                                    
-
                         }
                     }
-                }
-                catch (Exception) 
-                {
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
-                    await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+                    catch (Exception exs)
+                    {
+                        await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheVerzeichnisFehler, MessageDialogStyle.Affirmative);
+                        await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+                        stopWatch.Stop();
+                        Log.Error(exs, "Error");
+
+                    }
+
+                    await x.CloseAsync();
                     stopWatch.Stop();
-
                 }
-
-                await x.CloseAsync();
-                stopWatch.Stop();
+                else
+                {
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLeer, MessageDialogStyle.Affirmative);
+                    await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
+                    text_suche_count.Text = String.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await this.ShowMessageAsync(Properties.Resources.dialogTitelSuche, Properties.Resources.dialogMsgSucheLeer, MessageDialogStyle.Affirmative);
-                await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
-                text_suche_count.Text = "";
+                Log.Error(ex, "Error");
             }
+            
         }
 
         private void Btn_suche_Click(object sender, RoutedEventArgs e)
         {
-            Suche();
-            text_pattern_suche.Focus();
-        }
-
-        private void Text_pattern_suche_KeyDown(object sender, KeyEventArgs e)
-        {
-            //Wenn Enter gedrückt wird, wird das Suchen ausgelöst
-            if (e.Key == Key.Enter)
+            try
             {
                 Suche();
                 text_pattern_suche.Focus();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         public void AddFileNamesToList(string sourceDir, List<string> allFiles, bool bin, bool java, bool xml)
         {
-            IEnumerable<string> fileEntries = Enumerable.Empty<string>();
-            if (bin)
+            try
             {
-                //Alle Dateien werden zurückgegeben
-                fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
-            }
-
-            if (java)
-            {
-                //Nur *.java Dateien werden zurückgegeben
-                fileEntries = Directory.GetFiles(sourceDir, "*.java", SearchOption.AllDirectories);
-            }
-
-            if (xml)
-            {
-                //Nur *.xml Dateien aus den Verzeichnisen application\view\me\hmi\text werden zurückgegeben
-                fileEntries = Directory.GetFiles(sourceDir, "*.xml", SearchOption.AllDirectories);
-            }
-
-            if (!bin && !java && !xml)
-            {
-                //Alle Dateien ausser die ausgeschlossenen werden zurückgegeben
-                var exttemp = text_file_ext.Text.Split(' ').ToList();
-                var ext = new List<string>();
-                foreach (var item in exttemp)
+                IEnumerable<string> fileEntries = Enumerable.Empty<string>();
+                if (bin)
                 {
-                    if (!item.StartsWith("."))
-                    {
-                        ext.Add("." + item);
-                    }
-                    else
-                    {
-                        ext.Add(item);
-                    }
+                    //Alle Dateien werden zurückgegeben
+                    fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
                 }
 
-                fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories).Where(name => !ext.Contains(Path.GetExtension(name)));
-            }
+                if (java)
+                {
+                    //Nur *.java Dateien werden zurückgegeben
+                    fileEntries = Directory.GetFiles(sourceDir, "*.java", SearchOption.AllDirectories);
+                }
 
-            foreach (string fileName in fileEntries)
+                if (xml)
+                {
+                    //Nur *.xml Dateien aus den Verzeichnisen application\view\me\hmi\text werden zurückgegeben
+                    fileEntries = Directory.GetFiles(sourceDir, "*.xml", SearchOption.AllDirectories);
+                }
+
+                if (!bin && !java && !xml)
+                {
+                    //Alle Dateien ausser die ausgeschlossenen werden zurückgegeben
+                    var exttemp = text_file_ext.Text.Split(' ').ToList();
+                    var ext = new List<string>();
+                    foreach (var item in exttemp)
+                    {
+                        if (!item.StartsWith("."))
+                        {
+                            ext.Add("." + item);
+                        }
+                        else
+                        {
+                            ext.Add(item);
+                        }
+                    }
+
+                    fileEntries = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories).Where(name => !ext.Contains(Path.GetExtension(name)));
+                }
+
+                foreach (string fileName in fileEntries)
+                {
+                    allFiles.Add(fileName);
+                }
+            }
+            catch (Exception ex)
             {
-                allFiles.Add(fileName);
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Text_pattern_suche_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                //Wenn Enter gedrückt wird, wird das Suchen ausgelöst
+                if (e.Key == Key.Enter)
+                {
+                    Suche();
+                    text_pattern_suche.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private async void Listbox_ergebnis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource is DataGridRowHeader)
+            try
             {
-                return;
-            }
-            if (listbox_ergebnis.SelectedIndex > -1)
-            {
-                try
+                if (e.OriginalSource is DataGridRowHeader)
                 {
-                    DataGridRow dg = sender as DataGridRow;
-                    SucheDatei row = (SucheDatei)dg.Item;
-                    var pfad = row.Pfad;
-                    var zeile = row.LinieInt;
-
-                    if ((bool)ts_offnen_nppp.IsChecked)
+                    return;
+                }
+                if (listbox_ergebnis.SelectedIndex > -1)
+                {
+                    try
                     {
-                        //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
-                        try
+                        DataGridRow dg = sender as DataGridRow;
+                        SucheDatei row = (SucheDatei)dg.Item;
+                        var pfad = row.Pfad;
+                        var zeile = row.LinieInt;
+
+                        if ((bool)ts_offnen_nppp.IsChecked)
                         {
-                            OpenFileNotepadPp(pfad, zeile);
+                            //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
+                            try
+                            {
+                                OpenFileNotepadPp(pfad, zeile);
+                                Log.Information("Suche: Datei {d} wird mit Notepad++ bei Zeile {z} geöffnet.", pfad, zeile);
+                            }
+                            catch (Exception)
+                            {
+                                try
+                                {
+                                    //Wenn es einen Fehler gibt, dann ohne Zeile mit n++ öffen
+                                    Process.Start("notepad++", pfad);
+                                    Log.Information("Suche: Datei {d} wird mit Notepad++ geöffnet.", pfad);
+                                }
+                                catch (Exception)
+                                {
+                                    //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
+                                    Process.Start("notepad", pfad);
+                                    Log.Information("Suche: Datei {d} wird mit Notepad geöffnet.", pfad);
+                                }
+                            }
                         }
-                        catch (Exception)
+                        else
                         {
                             try
                             {
-                                //Wenn es einen Fehler gibt, dann ohne Zeile mit n++ öffen
                                 Process.Start("notepad++", pfad);
+                                Log.Information("Suche: Datei {d} wird mit Notepad++ geöffnet.", pfad);
                             }
                             catch (Exception)
                             {
                                 //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
                                 Process.Start("notepad", pfad);
+                                Log.Information("Suche: Datei {d} wird mit Notepad geöffnet.", pfad);
                             }
                         }
                     }
-                    else
+                    catch (Exception exo)
                     {
-                        try
-                        {
-                            Process.Start("notepad++", pfad);
-                        }
-                        catch (Exception)
-                        {
-                            //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
-                            Process.Start("notepad", pfad);
-                        }
+                        await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
+                        Log.Error(exo, "Error");
                     }
                 }
-                catch (Exception)
-                {
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
-                }
-            }          
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void OpenFileNotepadPp(string pfad, int zeile)
         {
-            Process process = new Process();
-            ProcessStartInfo procInfo = new ProcessStartInfo()
+            try
             {
-                FileName = "notepad++.exe",
-                Arguments = "-n" + zeile + " " + pfad
-            };
-            process.StartInfo = procInfo;
-            process.Start();
+                Process process = new Process();
+                ProcessStartInfo procInfo = new ProcessStartInfo()
+                {
+                    FileName = "notepad++.exe",
+                    Arguments = "-n" + zeile + " " + pfad
+                };
+                process.StartInfo = procInfo;
+                process.Start();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private async void Mi_open_file_Click(object sender, RoutedEventArgs e)
         {
-            if (listbox_ergebnis.SelectedIndex > -1)
+            try
             {
-                try
+                if (listbox_ergebnis.SelectedIndex > -1)
                 {
-                    SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
-                    var pfad = row.Pfad;
-                    var zeile = row.LinieInt;
+                    try
+                    {
+                        SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
+                        var pfad = row.Pfad;
+                        var zeile = row.LinieInt;
 
-                    if ((bool)ts_offnen_nppp.IsChecked)
-                    {
-                        //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
-                        try
+                        if ((bool)ts_offnen_nppp.IsChecked)
                         {
-                            OpenFileNotepadPp(pfad, zeile);
+                            //Wenn Notepad++ vorhanden ist dann wird bei Doppelklick die korrekte Zeile geöffnet
+                            try
+                            {
+                                OpenFileNotepadPp(pfad, zeile);
+                                Log.Information("Suche: Datei {d} wird mit Notepad++ bei Zeile {z} geöffnet.", pfad, zeile);
+                            }
+                            catch (Exception)
+                            {
+                                try
+                                {
+                                    //Wenn es einen Fehler gibt, dann ohne Zeile mit n++ öffen
+                                    Process.Start("notepad++", pfad);
+                                    Log.Information("Suche: Datei {d} wird mit Notepad++ geöffnet.", pfad);
+                                }
+                                catch (Exception)
+                                {
+                                    //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
+                                    Process.Start("notepad", pfad);
+                                    Log.Information("Suche: Datei {d} wird mit Notepad geöffnet.", pfad);
+                                }
+                            }
                         }
-                        catch (Exception)
+                        else
                         {
-                            Process.Start(pfad);
+                            try
+                            {
+                                Process.Start("notepad++", pfad);
+                                Log.Information("Suche: Datei {d} wird mit Notepad++ geöffnet.", pfad);
+                            }
+                            catch (Exception)
+                            {
+                                //Wenn n++ nicht vorhanden dann mit notepad öffnen, nicht mit IEC edit
+                                Process.Start("notepad", pfad);
+                                Log.Information("Suche: Datei {d} wird mit Notepad geöffnet.", pfad);
+                            }
                         }
                     }
-                    else
+                    catch (Exception exo)
                     {
-                        Process.Start(pfad);
+                        await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
+                        Log.Error(exo, "Error");
                     }
-                    
                 }
-                catch (Exception)
-                {
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
-                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private async void Mi_open_folder_Click(object sender, RoutedEventArgs e)
         {
-            if (listbox_ergebnis.SelectedIndex > -1)
+            try
             {
-                try
+                if (listbox_ergebnis.SelectedIndex > -1)
                 {
-                    SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
-                    Process.Start(Path.GetDirectoryName(row.Pfad));
+                    try
+                    {
+                        SucheDatei row = (SucheDatei)listbox_ergebnis.SelectedItems[0];
+                        Process.Start(Path.GetDirectoryName(row.Pfad));
+                        Log.Information("Suche: Ordner {p} wurde geöffnet.", Path.GetDirectoryName(row.Pfad));
+                    }
+                    catch (Exception exo)
+                    {
+                        await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
+                        Log.Error(exo, "Error");
+                    }
                 }
-                catch (Exception)
-                {
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDateiOffnen, Properties.Resources.dialogMsgDateiOffnenFehler, MessageDialogStyle.Affirmative);
-                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private void Ts_exakte_suche_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)ts_binar_suche.IsChecked)
+            try
             {
-                text_file_ext.IsEnabled = false;
-                text_file_ext.IsReadOnly = true;
-                btn_default_ext.IsEnabled = false;
+                if ((bool)ts_binar_suche.IsChecked)
+                {
+                    text_file_ext.IsEnabled = false;
+                    text_file_ext.IsReadOnly = true;
+                    btn_default_ext.IsEnabled = false;
+                }
+                else
+                {
+                    text_file_ext.IsEnabled = true;
+                    text_file_ext.IsReadOnly = false;
+                    btn_default_ext.IsEnabled = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                text_file_ext.IsEnabled = true;
-                text_file_ext.IsReadOnly = false;
-                btn_default_ext.IsEnabled = true;
+                Log.Error(ex, "Error");
             }
         }
 
         private void Text_projktpfad_suche_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((bool)ts_hw_suchvorschalg.IsChecked)
+            try
             {
-                text_pattern_suche.ItemsSource = FilterIO();
-            }
+                if ((bool)ts_hw_suchvorschalg.IsChecked)
+                {
+                    text_pattern_suche.ItemsSource = FilterIO();
+                }
 
-            //Hier wird einfach überprüft ob der Dateipfad zu \config vorhanden ist
-            //Wenn ja, wird davon ausgegangen das es sich um ein IEC Projekt handelt
-            var suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
-            suchpfad = suchpfad.Replace("\\\\", "\\");
-            if (Directory.Exists(suchpfad))
-            {
-                SucheIstIecProjekt = true;
+                //Hier wird einfach überprüft ob der Dateipfad zu \config vorhanden ist
+                //Wenn ja, wird davon ausgegangen das es sich um ein IEC Projekt handelt
+                var suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+                suchpfad = suchpfad.Replace("\\\\", "\\");
+                if (Directory.Exists(suchpfad))
+                {
+                    SucheIstIecProjekt = true;
+                }
+                else
+                {
+                    SucheIstIecProjekt = false;
+                }
+
+                Log.Information("Suche: IEC Projekt Pfad ausgewählt {v}.", SucheIstIecProjekt);
             }
-            else
+            catch (Exception ex)
             {
-                SucheIstIecProjekt = false;
+                Log.Error(ex, "Error");
             }
         }
 
         private void Ts_hw_suchvorschalg_IsCheckedChanged(object sender, EventArgs e)
         {
-            if (!(bool)ts_hw_suchvorschalg.IsChecked)
+            try
             {
-                text_pattern_suche.ItemsSource = new List<string>();
+                if (!(bool)ts_hw_suchvorschalg.IsChecked)
+                {
+                    text_pattern_suche.ItemsSource = new List<string>();
+                }
+                else
+                {
+                    text_pattern_suche.ItemsSource = FilterIO();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                text_pattern_suche.ItemsSource = FilterIO();
+                Log.Error(ex, "Error");
             }
         }
 
         private List<string> FilterIO()
         {
-            //Hier wird versucht die IO's auf den Konfig File zu Indexieren
-            //Dies geschieht allerdings nur wenn auch ein IEC Projekt ausgewählt ist
-            var suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
-            suchpfad = suchpfad.Replace("\\\\", "\\");
             var ids = new List<string>();
-
-            //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
-            if (Directory.Exists(suchpfad))
+            try
             {
-                try
+                //Hier wird versucht die IO's auf den Konfig File zu Indexieren
+                //Dies geschieht allerdings nur wenn auch ein IEC Projekt ausgewählt ist
+                var suchpfad = text_projktpfad_suche.Text + Properties.Paths.config;
+                suchpfad = suchpfad.Replace("\\\\", "\\");
+
+                //Überprüfen ob Pfad existiert, wenn nicht, gibt es eine exeption
+                if (Directory.Exists(suchpfad))
                 {
-                    List<string> allFilesTemp = new List<string>();
-                    List<string> allFiles = new List<string>();
-                    
-                    AddFileNamesToList(suchpfad, allFilesTemp, false, false, false);
-
-                    foreach (var file in allFilesTemp)
+                    try
                     {
-                        if (file.EndsWith(".cfg") || file.EndsWith(".CFG"))
-                        {
-                            allFiles.Add(file);
-                        }
-                    }
+                        List<string> allFilesTemp = new List<string>();
+                        List<string> allFiles = new List<string>();
 
-                    foreach (var file in allFiles)
-                    {
-                        using (var sr = new StreamReader(file, true))
+                        AddFileNamesToList(suchpfad, allFilesTemp, false, false, false);
+
+                        foreach (var file in allFilesTemp)
                         {
-                            var s = "";
-                            while ((s = sr.ReadLine()) != null)
+                            if (file.EndsWith(".cfg") || file.EndsWith(".CFG"))
                             {
-                                if (s.StartsWith("name"))
+                                allFiles.Add(file);
+                            }
+                        }
+
+                        foreach (var file in allFiles)
+                        {
+                            using (var sr = new StreamReader(file, true))
+                            {
+                                var s = "";
+                                while ((s = sr.ReadLine()) != null)
                                 {
-                                    if (s.Contains("svDI") || s.Contains("svDO") || s.Contains("svAI") || s.Contains("svAO"))
+                                    if (s.StartsWith("name"))
                                     {
-                                        string[] tokens = s.Split('.');
-                                        string[] tok = tokens[1].Split('"');
-                                        string io = tok[0].Replace("\"", "");
-                                        ids.Add(io);
+                                        if (s.Contains("svDI") || s.Contains("svDO") || s.Contains("svAI") || s.Contains("svAO"))
+                                        {
+                                            string[] tokens = s.Split('.');
+                                            string[] tok = tokens[1].Split('"');
+                                            string io = tok[0].Replace("\"", "");
+                                            ids.Add(io);
+                                        }
                                     }
                                 }
                             }
                         }
+                        ids.Sort();
+                        return ids;
                     }
-                    ids.Sort();
-                    return ids;
+                    catch (Exception)
+                    {
+                        ids.Clear();
+                        return ids;
+                    }
                 }
-                catch (Exception)
-                {
-                    ids.Clear();
-                    return ids;
-                }
+                ids.Clear();
+                return ids;
             }
-            ids.Clear();
-            return ids;
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+                return ids;
+            }
         }
 
         private void Ts_kbus_suche_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)ts_kbus_suche.IsChecked)
+            try
             {
-                ts_xml_suche.IsChecked = false;
-                ts_java_suche.IsChecked = false;
+                if ((bool)ts_kbus_suche.IsChecked)
+                {
+                    ts_xml_suche.IsChecked = false;
+                    ts_java_suche.IsChecked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private void Ts_xml_suche_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)ts_xml_suche.IsChecked)
+            try
             {
-                ts_kbus_suche.IsChecked = false;
-                ts_java_suche.IsChecked = false;
+                if ((bool)ts_xml_suche.IsChecked)
+                {
+                    ts_kbus_suche.IsChecked = false;
+                    ts_java_suche.IsChecked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private void Ts_java_suche_IsCheckedChanged(object sender, EventArgs e)
         {
-            if ((bool)ts_java_suche.IsChecked)
+            try
             {
-                ts_kbus_suche.IsChecked = false;
-                ts_xml_suche.IsChecked = false;
+                if ((bool)ts_java_suche.IsChecked)
+                {
+                    ts_kbus_suche.IsChecked = false;
+                    ts_xml_suche.IsChecked = false;
+                }
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }         
         }
         #endregion
 
         #region Bitset
         private void Encoding_Checked(object sender, RoutedEventArgs args)
         {
-            long ResulateDezimal = 0;
-            //Alle Objekte vom Grid holen
-            var objects = grid_encoding.GetChildObjects();
-            foreach (object child in objects)
+            try
             {
-                if (child.GetType() == typeof(StackPanel))
+                long ResulateDezimal = 0;
+                //Alle Objekte vom Grid holen
+                var objects = grid_encoding.GetChildObjects();
+                foreach (object child in objects)
                 {
-                    StackPanel ch = child as StackPanel;
-                    var obj = ch.GetChildObjects();
-                    foreach (object item in obj)
+                    if (child.GetType() == typeof(StackPanel))
                     {
-                        if (item.GetType() == typeof(ToggleButton))
+                        StackPanel ch = child as StackPanel;
+                        var obj = ch.GetChildObjects();
+                        foreach (object item in obj)
                         {
-                            ToggleButton tb = item as ToggleButton;
-                            if ((bool)tb.IsChecked)
+                            if (item.GetType() == typeof(ToggleButton))
                             {
-                                int bit = Int32.Parse(tb.Content.ToString());
-                                ResulateDezimal = ResulateDezimal + Convert.ToInt64(Math.Pow(2, bit));
+                                ToggleButton tb = item as ToggleButton;
+                                if ((bool)tb.IsChecked)
+                                {
+                                    int bit = Int32.Parse(tb.Content.ToString());
+                                    ResulateDezimal = ResulateDezimal + Convert.ToInt64(Math.Pow(2, bit));
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            string binary = Convert.ToString(ResulateDezimal, 2);
-            text_encode_dec.Text = ResulateDezimal.ToString();
-            text_encode_hex.Text = "16#" + ResulateDezimal.ToString("X");
-            text_encode_bin.Text = "2#" + binary;
+                string binary = Convert.ToString(ResulateDezimal, 2);
+                text_encode_dec.Text = ResulateDezimal.ToString();
+                text_encode_hex.Text = "16#" + ResulateDezimal.ToString("X");
+                text_encode_bin.Text = "2#" + binary;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         public void DecodeText()
         {
-            //Wenn alles gelöscht wird
-            if (String.IsNullOrWhiteSpace(text_decode.Text))
+            try
             {
-                List<char> BinList = new List<char>();
-                BinList.Insert(0, '0');
-                ShowDecodeResult(BinList);
-
-                text_decode_out1.Text = "";
-                text_decode_out2.Text = "";
-                return;
-            }
-
-            //Hex Zahl wurde eingegeben
-            if (text_decode.Text.StartsWith("16#"))
-            {
-                var hex = text_decode.Text.Split('#')[1];
-
-                if (!String.IsNullOrWhiteSpace(hex))
-                {
-
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(hex, @"\A\b[0-9a-fA-F]+\b\Z"))
-                    {
-                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetHexFehler);
-                        return;
-                    }
-
-                    if (Convert.ToInt64(hex, 16) > 4294967295)
-                    {
-                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetGrosseFehler);
-                        return;
-                    }
-
-                    List<char> BinList = new List<char>();
-                    foreach (var bit in Convert.ToString(Convert.ToInt64(Convert.ToInt64(hex, 16)), 2))
-                    {
-                        BinList.Insert(0, bit);
-                    }
-                    ShowDecodeResult(BinList);
-
-                    text_decode_out1.Text = "2#" + Convert.ToString(Convert.ToInt64(hex, 16), 2);
-                    text_decode_out2.Text = "10#" + Convert.ToString(Convert.ToInt64(hex, 16), 10);
-                }
-                else
+                //Wenn alles gelöscht wird
+                if (String.IsNullOrWhiteSpace(text_decode.Text))
                 {
                     List<char> BinList = new List<char>();
                     BinList.Insert(0, '0');
                     ShowDecodeResult(BinList);
 
-                    text_decode_out1.Text = "";
-                    text_decode_out2.Text = "";
+                    text_decode_out1.Text = String.Empty;
+                    text_decode_out2.Text = String.Empty;
+                    return;
                 }
-                return;
-            }
 
-            //Binärzahl wurde eingegeben
-            if (text_decode.Text.StartsWith("2#"))
-            {
-                var bin = text_decode.Text.Split('#')[1];
-
-                if (!String.IsNullOrWhiteSpace(bin))
+                //Hex Zahl wurde eingegeben
+                if (text_decode.Text.StartsWith("16#"))
                 {
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(bin, @"\A\b[0-1]+\b\Z"))
+                    var hex = text_decode.Text.Split('#')[1];
+
+                    if (!String.IsNullOrWhiteSpace(hex))
+                    {
+
+                        if (!System.Text.RegularExpressions.Regex.IsMatch(hex, @"\A\b[0-9a-fA-F]+\b\Z"))
+                        {
+                            ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetHexFehler);
+                            return;
+                        }
+
+                        if (Convert.ToInt64(hex, 16) > 4294967295)
+                        {
+                            ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetGrosseFehler);
+                            return;
+                        }
+
+                        List<char> BinList = new List<char>();
+                        foreach (var bit in Convert.ToString(Convert.ToInt64(Convert.ToInt64(hex, 16)), 2))
+                        {
+                            BinList.Insert(0, bit);
+                        }
+                        ShowDecodeResult(BinList);
+
+                        text_decode_out1.Text = "2#" + Convert.ToString(Convert.ToInt64(hex, 16), 2);
+                        text_decode_out2.Text = "10#" + Convert.ToString(Convert.ToInt64(hex, 16), 10);
+                    }
+                    else
+                    {
+                        List<char> BinList = new List<char>();
+                        BinList.Insert(0, '0');
+                        ShowDecodeResult(BinList);
+
+                        text_decode_out1.Text = String.Empty;
+                        text_decode_out2.Text = String.Empty;
+                    }
+                    return;
+                }
+
+                //Binärzahl wurde eingegeben
+                if (text_decode.Text.StartsWith("2#"))
+                {
+                    var bin = text_decode.Text.Split('#')[1];
+
+                    if (!String.IsNullOrWhiteSpace(bin))
+                    {
+                        if (!System.Text.RegularExpressions.Regex.IsMatch(bin, @"\A\b[0-1]+\b\Z"))
+                        {
+                            ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetBinFehler);
+                            return;
+                        }
+
+                        if (Convert.ToInt64(bin, 2) > 4294967295)
+                        {
+                            ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetGrosseFehler);
+                            return;
+                        }
+
+                        List<char> BinList = new List<char>();
+                        foreach (var bit in bin)
+                        {
+                            BinList.Insert(0, bit);
+                        }
+                        ShowDecodeResult(BinList);
+
+                        text_decode_out1.Text = "10#" + Convert.ToInt64(bin, 2).ToString();
+                        text_decode_out2.Text = "16#" + Convert.ToInt64(bin, 2).ToString("X");
+                    }
+                    else
+                    {
+                        List<char> BinList = new List<char>();
+                        BinList.Insert(0, '0');
+                        ShowDecodeResult(BinList);
+
+                        text_decode_out1.Text = String.Empty;
+                        text_decode_out2.Text = String.Empty;
+                    }
+                    return;
+                }
+
+                //Dezimal Zahl
+                string dez = "";
+                if (text_decode.Text.StartsWith("10#"))
+                {
+                    dez = text_decode.Text.Split('#')[1];
+                }
+                else
+                {
+                    dez = text_decode.Text;
+                }
+
+                if (!String.IsNullOrWhiteSpace(dez))
+                {
+                    if (!dez.All(Char.IsDigit))
                     {
                         ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetBinFehler);
                         return;
                     }
 
-                    if (Convert.ToInt64(bin, 2) > 4294967295)
+                    if (Convert.ToInt64(dez) > 4294967295)
                     {
-                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetGrosseFehler);
+                        ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetDezFehler);
                         return;
                     }
 
                     List<char> BinList = new List<char>();
-                    foreach (var bit in bin)
+                    foreach (var bit in Convert.ToString(Convert.ToInt64(dez), 2))
                     {
                         BinList.Insert(0, bit);
                     }
                     ShowDecodeResult(BinList);
-
-                    text_decode_out1.Text = "10#" + Convert.ToInt64(bin, 2).ToString();
-                    text_decode_out2.Text = "16#" + Convert.ToInt64(bin, 2).ToString("X");
+                    text_decode_out1.Text = "2#" + Convert.ToString(Convert.ToInt64(dez, 10), 2);
+                    text_decode_out2.Text = "16#" + Convert.ToInt64(dez, 10).ToString("X");
+                    return;
                 }
                 else
                 {
@@ -1636,167 +2123,143 @@ namespace IECMate
                     BinList.Insert(0, '0');
                     ShowDecodeResult(BinList);
 
-                    text_decode_out1.Text = "";
-                    text_decode_out2.Text = "";
+                    text_decode_out1.Text = String.Empty;
+                    text_decode_out2.Text = String.Empty;
                 }
-                return;
             }
-
-            //Dezimal Zahl
-            string dez = "";
-            if (text_decode.Text.StartsWith("10#"))
+            catch (Exception ex)
             {
-                dez = text_decode.Text.Split('#')[1];
-            }
-            else
-            {
-                dez = text_decode.Text;
-            }
-
-            if (!String.IsNullOrWhiteSpace(dez))
-            {
-                if (!dez.All(Char.IsDigit))
-                {
-                    ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetBinFehler);
-                    return;
-                }
-
-                if (Convert.ToInt64(dez) > 4294967295)
-                {
-                    ShowFehlerBitsetAsync(Properties.Resources.dialogMsgBitsetDezFehler);
-                    return;
-                }
-
-                List<char> BinList = new List<char>();
-                foreach (var bit in Convert.ToString(Convert.ToInt64(dez), 2))
-                {
-                    BinList.Insert(0, bit);
-                }
-                ShowDecodeResult(BinList);
-                text_decode_out1.Text = "2#" + Convert.ToString(Convert.ToInt64(dez, 10), 2);
-                text_decode_out2.Text = "16#" + Convert.ToInt64(dez, 10).ToString("X");
-                return;
-            }
-            else
-            {
-                List<char> BinList = new List<char>();
-                BinList.Insert(0, '0');
-                ShowDecodeResult(BinList);
-
-                text_decode_out1.Text = "";
-                text_decode_out2.Text = "";
+                Log.Error(ex, "Error");
             }
         }
 
         private void Text_decode_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DecodeText();   
+            try
+            {
+                DecodeText();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private async void ShowFehlerBitsetAsync(string message)
         {
-            text_decode.IsEnabled = false;
-            MessageDialogResult result = await this.ShowMessageAsync(Properties.Resources.dialogTitelBitset, message, MessageDialogStyle.Affirmative);
-
-            if (result == MessageDialogResult.Affirmative)
+            try
             {
-                text_decode.IsEnabled = true;
-                await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
+                Log.Debug("Bitset: Fehler \"{f}\" aufgetreten.", message);
+                text_decode.IsEnabled = false;
+                MessageDialogResult result = await this.ShowMessageAsync(Properties.Resources.dialogTitelBitset, message, MessageDialogStyle.Affirmative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    text_decode.IsEnabled = true;
+                    await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_decode.Focus()));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private void ShowDecodeResult(List<char> list)
         {
-            var converter = new System.Windows.Media.BrushConverter();
-            //Akzentfarbe von Theme
-            var accentColor = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor").ToString());
-            var accentColor2 = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor2").ToString());
-            //Alle Objekte von Grid
-            var objects = grid_decoding.GetChildObjects();
-
-            foreach (object child in objects)
+            try
             {
-                if (child.GetType() == typeof(StackPanel))
+                var converter = new System.Windows.Media.BrushConverter();
+                //Akzentfarbe von Theme
+                var accentColor = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor").ToString());
+                var accentColor2 = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor2").ToString());
+                //Alle Objekte von Grid
+                var objects = grid_decoding.GetChildObjects();
+
+                foreach (object child in objects)
                 {
-                    StackPanel ch = child as StackPanel;
-                    var obj = ch.GetChildObjects();
-                    foreach (object item in obj)
+                    if (child.GetType() == typeof(StackPanel))
                     {
-                        if (item.GetType() == typeof(Grid))
+                        StackPanel ch = child as StackPanel;
+                        var obj = ch.GetChildObjects();
+                        foreach (object item in obj)
                         {
-                            Grid grid = item as Grid;
-                            var gr = grid.GetChildObjects();
-
-                            foreach (object it in gr)
+                            if (item.GetType() == typeof(Grid))
                             {
-                                //Wennn die Eingabe gelöscht wird dann zurücksetzten
-                                if (it.GetType() == typeof(Ellipse))
-                                {
-                                    Ellipse el = it as Ellipse;
-                                    el.Fill = Brushes.Transparent;
-                                    el.Stroke = Brushes.Silver;
-                                }
+                                Grid grid = item as Grid;
+                                var gr = grid.GetChildObjects();
 
-                                //Schriftfarbe abhängig von Theme einstellen
-                                if (it.GetType() == typeof(TextBlock))
+                                foreach (object it in gr)
                                 {
-                                    TextBlock el = it as TextBlock;
-
-                                    if ((bool)tg_theme.IsChecked)
+                                    //Wennn die Eingabe gelöscht wird dann zurücksetzten
+                                    if (it.GetType() == typeof(Ellipse))
                                     {
-                                        el.Foreground = Brushes.White;
+                                        Ellipse el = it as Ellipse;
+                                        el.Fill = Brushes.Transparent;
+                                        el.Stroke = Brushes.Silver;
                                     }
-                                    else
+
+                                    //Schriftfarbe abhängig von Theme einstellen
+                                    if (it.GetType() == typeof(TextBlock))
                                     {
-                                        el.Foreground = Brushes.Black;
-                                    }
-                                }
+                                        TextBlock el = it as TextBlock;
 
-                                //Abhängig vom Bit in der Liste Elippse mit Akzentfarbe füllen
-                                if (it.GetType() == typeof(Ellipse))
-                                {
-                                    Ellipse el = it as Ellipse;
-                                    int bit = Int32.Parse(el.Name.Replace("el_bit", ""));
-
-                                    var len = list.Count();
-
-                                    if (bit < len)
-                                    {
-                                        if (list[bit] == '1')
-                                        {
-                                            el.Fill = accentColor;
-                                            el.Stroke = accentColor2;
-                                        }
-                                        else
-                                        {
-                                            el.Fill = Brushes.Transparent;
-                                            el.Stroke = Brushes.Silver;
-                                        }
-                                    }
-                                }
-
-                                if (it.GetType() == typeof(TextBlock))
-                                {
-                                    TextBlock el = it as TextBlock;
-                                    int bit = Int32.Parse(el.Text);
-
-                                    var len = list.Count();
-
-                                    if (bit < len)
-                                    {
-                                        if (list[bit] == '1')
+                                        if ((bool)tg_theme.IsChecked)
                                         {
                                             el.Foreground = Brushes.White;
                                         }
                                         else
                                         {
-                                            if ((bool)tg_theme.IsChecked)
+                                            el.Foreground = Brushes.Black;
+                                        }
+                                    }
+
+                                    //Abhängig vom Bit in der Liste Elippse mit Akzentfarbe füllen
+                                    if (it.GetType() == typeof(Ellipse))
+                                    {
+                                        Ellipse el = it as Ellipse;
+                                        int bit = Int32.Parse(el.Name.Replace("el_bit", ""));
+
+                                        var len = list.Count();
+
+                                        if (bit < len)
+                                        {
+                                            if (list[bit] == '1')
+                                            {
+                                                el.Fill = accentColor;
+                                                el.Stroke = accentColor2;
+                                            }
+                                            else
+                                            {
+                                                el.Fill = Brushes.Transparent;
+                                                el.Stroke = Brushes.Silver;
+                                            }
+                                        }
+                                    }
+
+                                    if (it.GetType() == typeof(TextBlock))
+                                    {
+                                        TextBlock el = it as TextBlock;
+                                        int bit = Int32.Parse(el.Text);
+
+                                        var len = list.Count();
+
+                                        if (bit < len)
+                                        {
+                                            if (list[bit] == '1')
                                             {
                                                 el.Foreground = Brushes.White;
                                             }
                                             else
                                             {
-                                                el.Foreground = Brushes.Black;
+                                                if ((bool)tg_theme.IsChecked)
+                                                {
+                                                    el.Foreground = Brushes.White;
+                                                }
+                                                else
+                                                {
+                                                    el.Foreground = Brushes.Black;
+                                                }
                                             }
                                         }
                                     }
@@ -1806,143 +2269,242 @@ namespace IECMate
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Btn_encoding_loschen_Click(object sender, RoutedEventArgs e)
         {
-            var objects = grid_encoding.GetChildObjects();
-            foreach (object child in objects)
+            try
             {
-                if (child.GetType() == typeof(StackPanel))
+                var objects = grid_encoding.GetChildObjects();
+                foreach (object child in objects)
                 {
-                    StackPanel ch = child as StackPanel;
-                    var obj = ch.GetChildObjects();
-                    foreach (object item in obj)
+                    if (child.GetType() == typeof(StackPanel))
                     {
-                        if (item.GetType() == typeof(ToggleButton))
+                        StackPanel ch = child as StackPanel;
+                        var obj = ch.GetChildObjects();
+                        foreach (object item in obj)
                         {
-                            ToggleButton tb = item as ToggleButton;
-                            if ((bool)tb.IsChecked)
+                            if (item.GetType() == typeof(ToggleButton))
                             {
-                                tb.IsChecked = false;
+                                ToggleButton tb = item as ToggleButton;
+                                if ((bool)tb.IsChecked)
+                                {
+                                    tb.IsChecked = false;
+                                }
                             }
                         }
                     }
                 }
+                Log.Debug("Bitset: Encoding wurde gelöscht durch Anwender.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
         private void Text_encode_dec_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Set the event as handled
-            e.Handled = true;
-            // Select the Text
-            (sender as TextBox).SelectAll();
+            try
+            {
+                // Set the event as handled
+                e.Handled = true;
+                // Select the Text
+                (sender as TextBox).SelectAll();
+                Log.Debug("Bitset: Encoding Wert {w} wurde durch Benutzer ausgewählt.", (sender as TextBox).Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
         #endregion
 
         #region Helferfunktionen
         private void Btn_pfad_helfer_auswahlen_Click(object sender, RoutedEventArgs e)
         {
-            WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
-            folderDialog.ShowNewFolderButton = false;
-
-            if (Directory.Exists(text_projktpfad_helfer.Text))
+            try
             {
-                folderDialog.SelectedPath = text_projktpfad_helfer.Text;
+                WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+                folderDialog.ShowNewFolderButton = false;
+
+                if (Directory.Exists(text_projktpfad_helfer.Text))
+                {
+                    folderDialog.SelectedPath = text_projktpfad_helfer.Text;
+                }
+                else
+                {
+                    folderDialog.SelectedPath = Properties.Paths.drive_c;
+                }
+
+                WinForms.DialogResult result = folderDialog.ShowDialog();
+
+                if (result == WinForms.DialogResult.OK)
+                {
+                    text_projktpfad_helfer.Text = folderDialog.SelectedPath;
+                    Log.Information("Helfer: Pfad {p} wurde ausgewählt.", folderDialog.SelectedPath);
+                }
+                cb_select_me.Focus();
             }
-            else
+            catch (Exception ex)
             {
-                folderDialog.SelectedPath = Properties.Paths.drive_c;
+                Log.Error(ex, "Error");
             }
-
-            WinForms.DialogResult result = folderDialog.ShowDialog();
-
-            if (result == WinForms.DialogResult.OK)
-            {
-                text_projktpfad_helfer.Text = folderDialog.SelectedPath;
-            }
-            cb_select_me.Focus();
-
         }
 
         private async void FehlerHelferAsync()
         {
-            await this.ShowMessageAsync(Properties.Resources.dialogTitelHelfer, Properties.Resources.dialogMsgHelferFehler, MessageDialogStyle.Affirmative);
+            try
+            {
+                Log.Debug("Helfer: Fehler \"{f}\" wurde ausgelöst.", Properties.Resources.dialogMsgHelferFehler);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHelfer, Properties.Resources.dialogMsgHelferFehler, MessageDialogStyle.Affirmative);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private async void FehlerHelferAsyncME()
         {
-            await this.ShowMessageAsync(Properties.Resources.dialogTitelHelfer, Properties.Resources.dialogMsgHelferFehlerME, MessageDialogStyle.Affirmative);
+            try
+            {
+                Log.Debug("Helfer: Fehler \"{f}\" wurde ausgelöst.", Properties.Resources.dialogMsgHelferFehlerME);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHelfer, Properties.Resources.dialogMsgHelferFehlerME, MessageDialogStyle.Affirmative);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void OpenFileOrFolder(string input)
         {
-            if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
+            try
             {
-                FehlerHelferAsync();
-            }
-            else
-            {
-                try
-                {
-                    Process.Start(input);
-                }
-                catch (Exception)
+                if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
                 {
                     FehlerHelferAsync();
                 }
+                else
+                {
+                    try
+                    {
+                        Process.Start(input);
+                        Log.Information("Helfer: Datei oder Ordner {p} wurde geöffnet.", input);
+                    }
+                    catch (Exception)
+                    {
+                        FehlerHelferAsync();
+                    }
+                }
             }
-            
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }   
         }
 
         private void Btn_open_systemoptions_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Bt_openFormProgram_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.formProgram;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.formProgram;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Bt_openDiagnoseData_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.diagnoseData;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.diagnoseData;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }          
         }
 
         private void Bt_openDiagramSetup_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.diagramSetup;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.diagramSetup;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Bt_openPrjectFolder_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.machineParameter;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.machineParameter;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Bt_openMachineParameter_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Btn_open_machinesetup_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.MachSetup;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.MachSetup;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }          
         }
 
         private void Bt_simStarten_Click(object sender, RoutedEventArgs e)
-        {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation;
+        {  
             try
             {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation;
                 var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
@@ -1952,19 +2514,20 @@ namespace IECMate
                     }
                 };
                 process.Start();
+                Log.Information("Helfer: Simulation wurde gestartet.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 FehlerHelferAsync();
+                Log.Error(ex, "Error");
             }
         }
 
         private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
-        {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Visualization;
+        {          
             try
             {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.Start_Visualization;
                 var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
@@ -1974,18 +2537,26 @@ namespace IECMate
                     }
                 };
                 process.Start();
+                Log.Information("Helfer: Visualisierung wurde gestartet.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 FehlerHelferAsync();
+                Log.Error(ex, "Error");
             }
         }
 
         private void Bt_openConfig_Click(object sender, RoutedEventArgs e)
         {
-            string open = text_projktpfad_helfer.Text + Properties.Paths.config;
-            OpenFileOrFolder(open);
+            try
+            {
+                string open = text_projktpfad_helfer.Text + Properties.Paths.config;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private async void Bt_BackupProject_Click(object sender, RoutedEventArgs e)
@@ -2037,36 +2608,45 @@ namespace IECMate
                 }
                 await xp.CloseAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await this.ShowMessageAsync(Properties.Resources.dialogTitelBackup, Properties.Resources.dialogMsgBackupFehler, MessageDialogStyle.Affirmative);
+                Log.Error(ex, "Error");
+                Log.Error("Helfer: Fehler \"{f}\" ist aufgetreten.", Properties.Resources.dialogMsgBackupFehler);
             }
         }
 
         private void Cb_select_me_DropDownOpened(object sender, EventArgs e)
         {
-            cb_select_me.Items.Clear();
-            string mepfad = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol;
-
-            if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
-            {
-                FehlerHelferAsync();
-                return;
-            }
-
-            if (Directory.Exists(mepfad))
-            {
-                string[] subdirectoryEntries = Directory.GetDirectories(mepfad);
-
-                foreach (string subdirectory in subdirectoryEntries)
-                {
-                    cb_select_me.Items.Add(new DirectoryInfo(subdirectory).Name);
-                }
-            }
-            else
+            try
             {
                 cb_select_me.Items.Clear();
-                FehlerHelferAsync();
+                string mepfad = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol;
+
+                if (String.IsNullOrWhiteSpace(text_projktpfad_helfer.Text))
+                {
+                    FehlerHelferAsync();
+                    return;
+                }
+
+                if (Directory.Exists(mepfad))
+                {
+                    string[] subdirectoryEntries = Directory.GetDirectories(mepfad);
+
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        cb_select_me.Items.Add(new DirectoryInfo(subdirectory).Name);
+                    }
+                }
+                else
+                {
+                    cb_select_me.Items.Clear();
+                    FehlerHelferAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 
@@ -2134,7 +2714,7 @@ namespace IECMate
 
                 var message = counter.ToString() + " " + Properties.Resources.puLockDateien;
                 await this.ShowMessageAsync(Properties.Resources.dialogTitelHelferLock, message, MessageDialogStyle.Affirmative);
-
+                Log.Information("Helfer: Es wurden {a}", message);
             }
             catch (Exception)
             {
@@ -2144,19 +2724,29 @@ namespace IECMate
 
         private void Text_projktpfad_helfer_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Hier wird einfach überprüft ob der Dateipfad zu \config vorhanden ist
-            //Wenn ja, wird davon ausgegangen das es sich um ein IEC Projekt handelt
-            var suchpfad = text_projktpfad_helfer.Text + Properties.Paths.config;
-            suchpfad = suchpfad.Replace("\\\\", "\\");
-            if (Directory.Exists(suchpfad))
+            try
             {
-                HelferIstIecProjekt = true;
+                //Hier wird einfach überprüft ob der Dateipfad zu \config vorhanden ist
+                //Wenn ja, wird davon ausgegangen das es sich um ein IEC Projekt handelt
+                var suchpfad = text_projktpfad_helfer.Text + Properties.Paths.config;
+                suchpfad = suchpfad.Replace("\\\\", "\\");
+                if (Directory.Exists(suchpfad))
+                {
+                    HelferIstIecProjekt = true;
+                }
+                else
+                {
+                    HelferIstIecProjekt = false;
+                }
+                Log.Information("Helfer: IEC Projekt Pfad ausgewählt {v}.", HelferIstIecProjekt);
             }
-            else
+            catch (Exception ex)
             {
-                HelferIstIecProjekt = false;
+                Log.Error(ex, "Error");
             }
         }
+
+
         #endregion
 
 

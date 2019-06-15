@@ -115,6 +115,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\Log\\IEC_Mate.log ähnelt.
+        /// </summary>
+        internal static string LogFile {
+            get {
+                return ResourceManager.GetString("LogFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\data_Machine\\machineParameter ähnelt.
         /// </summary>
         internal static string machineParameter {
