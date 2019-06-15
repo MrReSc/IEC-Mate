@@ -8,6 +8,8 @@ IEC-Mate ist noch in der Beta Phase.
 
 Die neuste Version kann [hier](https://github.com/MrReSc/IEC-Mate/releases) heruntergeladen werden. Bei jedem Start von IEC-Mate wird automatisch auf Updates überprüft.
 
+Fehler können [hier](https://github.com/MrReSc/IEC-Mate/issues) gemeldet werden. Über das Einstellungsmenu können die Log Dateien eingesehen werden. Bei einem Bug, bitte Log Datei anhängen.
+
 IEC-Mate soll die Entwicklung von Software unterstützen. Dazu gibt es die folgenden Kernfunktionen:
 
 - Code
@@ -95,4 +97,5 @@ Grossen Dank an die Programmierer die Open Source Bibliothek zur Verfügung stel
 - [NHotkey](https://github.com/thomaslevesque/NHotkey)
 - [Windows Input Simulator Plus](https://github.com/TChatzigiannakis/InputSimulatorPlus)
 - [7-Zip](https://www.7-zip.org/)
+- [Serilog](https://github.com/serilog/serilog)
 
