@@ -272,10 +272,11 @@ namespace IECMate
                             WebClient wc = new WebClient();
                             wc.DownloadFileAsync(uri, filename);
                             wc.DownloadFileCompleted += new AsyncCompletedEventHandler(wc_DownloadFileCompleted);
+                            await this.ShowProgressAsync(Properties.Resources.dialogTitelDownlaod, Properties.Resources.dialogMsgDownload);
                         }
                         catch (Exception ex)
                         {
-                            await this.ShowMessageAsync("Download", ex.Message.ToString(), MessageDialogStyle.Affirmative);
+                            await this.ShowMessageAsync(Properties.Resources.dialogTitelDownlaod, ex.Message.ToString(), MessageDialogStyle.Affirmative);
                         }
                     }
 

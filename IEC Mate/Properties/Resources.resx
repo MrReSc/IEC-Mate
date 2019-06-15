@@ -159,6 +159,9 @@
   <data name="dialogMsgDateiOffnenFehler" xml:space="preserve">
     <value>Bitte eine Datei auswählen.</value>
   </data>
+  <data name="dialogMsgDownload" xml:space="preserve">
+    <value>Das Update wird heruntergeladen. Bitte warten...</value>
+  </data>
   <data name="dialogMsgDownloadUpdateFehler" xml:space="preserve">
     <value>Der Download ist Fehlgeschlagen.</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="dialogTitelDateiOffnen" xml:space="preserve">
     <value>Datei öffnen</value>
+  </data>
+  <data name="dialogTitelDownlaod" xml:space="preserve">
+    <value>Download Update</value>
   </data>
   <data name="dialogTitelDownloadUpdateFehler" xml:space="preserve">
     <value>Download Fehler</value>
