@@ -270,7 +270,7 @@ namespace IECMate
                     Convert.ToInt32(relVersion[1]) > Convert.ToInt32(aseVersion[1]) ||
                     Convert.ToInt32(relVersion[2]) > Convert.ToInt32(aseVersion[2]))
                 {
-                    Log.Information("Allgemein: Neues Release {Rel} verfügbar.", relVersion);
+                    Log.Information("Allgemein: Neues Release {Rel} verfügbar.", latest.Name);
                     var mymessageboxsettings = new MetroDialogSettings()
                     { 
                         AffirmativeButtonText = Properties.Resources.dialogDownloadUpdateButton,
@@ -278,9 +278,10 @@ namespace IECMate
                         NegativeButtonText = Properties.Resources.dialogNegButton,
                     };
 
-                    var updateMsg = Properties.Resources.dialogMsgUpdate + Environment.NewLine + latest.Body;
+                    var updateMsg = Properties.Resources.dialogMsgUpdate + Environment.NewLine + Environment.NewLine + latest.Body;
+                    var updateTitle = Properties.Resources.dialogTitleUpdate + " " + latest.Name;
 
-                    MessageDialogResult x = await this.ShowMessageAsync(Properties.Resources.dialogTitleUpdate, updateMsg, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mymessageboxsettings);
+                    MessageDialogResult x = await this.ShowMessageAsync(updateTitle, updateMsg, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mymessageboxsettings);
                     if (x == MessageDialogResult.Affirmative)
                     {
                         Log.Information("Allgemein: Udapte wurde gestartet.");
