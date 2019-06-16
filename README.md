@@ -2,11 +2,10 @@
 
 IEC-Mate ist noch in der Beta Phase. 
 
-[![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://github.com/MrReSc/IEC-Mate/pulse) [![GitHub license](https://img.shields.io/github/license/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/blob/master/LICENSE) ![](https://img.shields.io/github/downloads/MrReSc/IEC-Mate/total.svg) [![Releases](https://img.shields.io/github/release/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/releases)
+[![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://github.com/MrReSc/IEC-Mate/pulse) [![GitHub license](https://img.shields.io/github/license/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/blob/master/LICENSE) ![](https://img.shields.io/github/downloads/MrReSc/IEC-Mate/total.svg) [![Releases](https://img.shields.io/github/release/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/releases) ![](https://badges.frapsoft.com/os/v2/open-source.png?v=103)
 
 [![Open Issues](https://img.shields.io/github/issues/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/issues) [![Closed Issues](https://img.shields.io/github/issues-closed/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/issues?q=is%3Aissue+is%3Aclosed)
 
-[![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)]()
 
 Die neuste Version kann [hier](https://github.com/MrReSc/IEC-Mate/releases) heruntergeladen werden. Bei jedem Start von IEC-Mate wird automatisch auf Updates überprüft.
 
