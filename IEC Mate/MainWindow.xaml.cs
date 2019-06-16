@@ -47,6 +47,7 @@ namespace IECMate
         public string filename;
         public string TempFolder;
         public string logfile;
+        public bool InitRunning;
         #endregion
 
         #region Benachrichtigung der DataBinding Variablen
@@ -84,6 +85,8 @@ namespace IECMate
         public MainWindow()
         {
             #region Initialisierung
+            InitRunning = true;
+
             //Ordner in LocalApplicationData/Temp für IEC Mate erstellen
             //Wenn Ordner schon existier, dann passiert nichts
             TempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp\\IECMate\\");
@@ -105,7 +108,7 @@ namespace IECMate
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.updatesettings = false;
                 Properties.Settings.Default.Save();
-                Log.Information("Einstellungen von älterer Version übernommen.");
+                Log.Information("Einstellung: Werte von älterer Version übernommen.");
             }
 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.sprache);
@@ -248,6 +251,7 @@ namespace IECMate
             ReleaseCheck();
 
             Log.Information("Einstellungen geladen und Init fertig.");
+            InitRunning = false;
             #endregion
         }
 
@@ -266,7 +270,7 @@ namespace IECMate
                     Convert.ToInt32(relVersion[1]) > Convert.ToInt32(aseVersion[1]) ||
                     Convert.ToInt32(relVersion[2]) > Convert.ToInt32(aseVersion[2]))
                 {
-                    Log.Information("Neues Release {Rel} verfügbar.", relVersion);
+                    Log.Information("Allgemein: Neues Release {Rel} verfügbar.", relVersion);
                     var mymessageboxsettings = new MetroDialogSettings()
                     { 
                         AffirmativeButtonText = Properties.Resources.dialogDownloadUpdateButton,
@@ -279,7 +283,7 @@ namespace IECMate
                     MessageDialogResult x = await this.ShowMessageAsync(Properties.Resources.dialogTitleUpdate, updateMsg, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mymessageboxsettings);
                     if (x == MessageDialogResult.Affirmative)
                     {
-                        Log.Information("Udapte wurde gestartet.");
+                        Log.Information("Allgemein: Udapte wurde gestartet.");
                         Uri uri = new Uri(latest.Assets[0].BrowserDownloadUrl);
                         filename = TempFolder + latest.Assets[0].Name;
 
@@ -309,13 +313,13 @@ namespace IECMate
 
                     if (x == MessageDialogResult.Negative)
                     {
-                        Log.Information("Udapte wurde abgebrochen.");
+                        Log.Information("Allgemein: Udapte wurde abgebrochen.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error Update");
+                Log.Error(ex, "Error");
             }
         }
 
@@ -323,14 +327,14 @@ namespace IECMate
         {
             if (e.Error == null)
             {
-                Log.Information("Update Download fertig. IEC Mate wird geschlossen und neu gestartet.");
+                Log.Information("Allgemein: Update Download fertig. IEC Mate wird geschlossen und neu gestartet.");
                 Process.Start(filename);
                 Close();
                 Application.Current.Shutdown();
             }
             else
             {
-                Log.Error(e.Error, "Error beim Download von Update");
+                Log.Error(e.Error, "Error");
                 await this.ShowMessageAsync(Properties.Resources.dialogTitelDownloadUpdateFehler, Properties.Resources.dialogMsgDownloadUpdateFehler, MessageDialogStyle.Affirmative);
             }
         }
@@ -405,7 +409,7 @@ namespace IECMate
         {
             try
             {
-                Log.Information("About Fenster wurde geöffnet.");
+                Log.Debug("Allgemein: About Fenster wurde geöffnet.");
                 child_Infos.IsOpen = true;
                 lb_version.Content = AssemblyVersion(true);
                 text_lizenzen.Text = File.ReadAllText(@"resources\oss_lizenzen_iec_mate.txt");
@@ -464,7 +468,7 @@ namespace IECMate
         #region Hot Key
         private void OnHotkeyPressed(object sender, HotkeyEventArgs e)
         {
-            Log.Information("Hotkey {hk} wurde gedrückt.", e.Name);
+            Log.Debug("Hotkey: Kombination für {hk} wurde gedrückt.", e.Name);
             try
             {
                 string px = text_px_nummer.Text;
@@ -599,65 +603,32 @@ namespace IECMate
 
         private async void RegisterHotKey(string name, ComboBox combobox)
         {
-            if (combobox.SelectedIndex == 0)
-            {
-                //Wenn kein Key selected ist, dann wird er abgemeldet
-                HotkeyManager.Current.Remove(name);
-                Log.Debug("HotKey: {name} wurde abgemeldet.", name);
-                return;
-            }
-
-            //Beim Aufstarten kann es sonst zu null reference exeptions kommen
-            if (cb_hotekey_brackets.SelectedValue == null || cb_hotekey_plain.SelectedValue == null ||
-                cb_hotkey_pxBeginEnd.SelectedValue == null || cb_hotkey_pxComment.SelectedValue == null)
-            {
-                return;
-            }
-
             try
             {
-                //Aktuell Selektierter Keys auslesen
-                var key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                var key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                var key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                var key_4 = (Key)cb_hotkey_pxComment.SelectedValue;
+                if (combobox.SelectedIndex == 0)
+                {
+                    //Wenn kein Key selected ist, dann wird er abgemeldet
+                    HotkeyManager.Current.Remove(name);
+                    Log.Debug("HotKey: {name} wurde abgemeldet.", name);
+                    return;
+                }
+
+                //Beim Aufstarten kann es sonst zu null reference exeptions kommen oder doppelte Registrierung
+                if (InitRunning)
+                {
+                    return;
+                }
+
                 var key = (Key)combobox.SelectedValue;
 
-                switch (name)
-                {
-                    case "PxComment":
-                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                        break;
-                    case "PxBeginEnd":
-                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxComment.SelectedValue;
-                        break;
-                    case "PxPlain":
-                        key_1 = (Key)cb_hotekey_brackets.SelectedValue;
-                        key_2 = (Key)cb_hotkey_pxComment.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                        break;
-                    case "PxBrackets":
-                        key_1 = (Key)cb_hotkey_pxComment.SelectedValue;
-                        key_2 = (Key)cb_hotekey_plain.SelectedValue;
-                        key_3 = (Key)cb_hotkey_pxBeginEnd.SelectedValue;
-                        break;
-                }
-
-
-                if (key == key_1 || key == key_2 || key == key_3)
-                {
-                    combobox.SelectedIndex = 0;
-                    await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
-                }
-                else
-                {
-                    Log.Debug("HotKey: {name} wurde mit dem Zeichen {z} registriert.", name, key);
-                    HotkeyManager.Current.AddOrReplace(name, key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-                }
+                HotkeyManager.Current.AddOrReplace(name, key, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                Log.Debug("HotKey: {name} wurde mit dem Zeichen {z} registriert.", name, key);
+            }
+            catch (HotkeyAlreadyRegisteredException exo)
+            {
+                combobox.SelectedIndex = 0;
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelHotkey, Properties.Resources.dialogMsgHotkeyFehler, MessageDialogStyle.Affirmative);
+                Log.Error(exo, "Hotkey: Fehler");
             }
             catch (Exception ex)
             {
@@ -685,7 +656,7 @@ namespace IECMate
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     File.WriteAllText(saveFileDialog.FileName, text_code_template.Text);
-                    Log.Information("Code Vorlage wurde gespeichert unter dem Pfad: {p}.", saveFileDialog.FileName);
+                    Log.Information("Code: Vorlage wurde gespeichert unter dem Pfad: {p}.", saveFileDialog.FileName);
                 }
                     
             }
@@ -705,7 +676,7 @@ namespace IECMate
                 if (openFileDialog.ShowDialog() == true)
                 {
                     text_code_template.Text = File.ReadAllText(openFileDialog.FileName);
-                    Log.Information("Code Vorlage wurde geöffnet: {p}.", openFileDialog.FileName);
+                    Log.Information("Code: Vorlage wurde geöffnet: {p}.", openFileDialog.FileName);
                 }    
             }
             catch (Exception ex)
@@ -736,7 +707,7 @@ namespace IECMate
         {
             try
             {
-                Log.Information("Code Vorlage wurde gelöscht.");
+                Log.Information("Code: Vorlage wurde gelöscht.");
                 text_code_template.Text = String.Empty;
                 combo_vars.SelectedIndex = -1;
                 text_code_template.Focus();
@@ -751,7 +722,7 @@ namespace IECMate
         {
             try
             {
-                Log.Debug("Code Vorlage: Ersetzten einzel wurde gedrückt.");
+                Log.Debug("Code: Vorlage ersetzten einzel wurde gedrückt.");
                 Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
             }
             catch (Exception ex)
@@ -766,7 +737,7 @@ namespace IECMate
             {
                 if (!String.IsNullOrWhiteSpace(combo_vars.SelectedValue.ToString()) && !String.IsNullOrWhiteSpace(text_suchen.Text))
                 {
-                    Log.Debug("Code Vorlage: Alle ersetzten wurde gedrückt.");
+                    Log.Debug("Code: Vorlage alle ersetzten wurde gedrückt.");
                     do
                     {
                         Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
@@ -825,7 +796,7 @@ namespace IECMate
         {
             try
             {
-                Log.Debug("Code Gen: Generieren wurde gedrückt.");
+                Log.Debug("Code: Generieren wurde gedrückt.");
                 var code = Code_gen(variablen_liste[0], text_var1.Text,
                                     variablen_liste[1], text_var2.Text,
                                     variablen_liste[2], text_var3.Text,
@@ -833,7 +804,7 @@ namespace IECMate
 
                 if (!String.IsNullOrWhiteSpace(code.error))
                 {
-                    Log.Warning("Code Generieren Fehler: {F}", code.error);
+                    Log.Warning("Code: Generieren Fehler \"{F}\" ist aufgetreten.", code.error);
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelCodeGen, code.error, MessageDialogStyle.Affirmative);
                 }
                 else
@@ -977,7 +948,7 @@ namespace IECMate
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     File.WriteAllText(saveFileDialog.FileName, text_code_output.Text);
-                    Log.Information("Generierter Code wurde gespeichter unter {p}", saveFileDialog.FileName);
+                    Log.Information("Code: Generierter Code wurde gespeichter unter {p}", saveFileDialog.FileName);
                 }
                     
             }
@@ -1138,7 +1109,8 @@ namespace IECMate
                 HotkeyManager.Current.Remove("PxComment");
                 HotkeyManager.Current.Remove("PxBrackets");
 
-                Log.Information("IEC Mate wurde durch Anwender beendet.");
+                Log.Information("Einstellung: Alle Einstellung gespeichert.");
+                Log.Information("Einstellung: IEC Mate wurde durch Anwender beendet.");
             }
             catch (Exception ex)
             {
@@ -1229,7 +1201,7 @@ namespace IECMate
                     {
                         Properties.Settings.Default.sprache = "de-DE";
                         System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                        Log.Debug("Spache wird umgeschaltet nach {l}.", Properties.Settings.Default.sprache);
+                        Log.Debug("Einstellung: Spache wird umgeschaltet nach {l}.", Properties.Settings.Default.sprache);
                         Application.Current.Shutdown();
                     }
 
@@ -1249,7 +1221,7 @@ namespace IECMate
                     {
                         Properties.Settings.Default.sprache = "en-GB";
                         System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                        Log.Debug("Spache wird umgeschaltet nach {l}.", Properties.Settings.Default.sprache);
+                        Log.Debug("Einstellung: Spache wird umgeschaltet nach {l}.", Properties.Settings.Default.sprache);
                         Application.Current.Shutdown();
                     }
                 }
