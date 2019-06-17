@@ -509,24 +509,42 @@ namespace IECMate
         {
             try
             {
+                if (root_window.IsActive)
+                {
+                    return;
+                }
+
+                //Wenn Text in der Zwischenablage ist, dann wird dieser Zwischengespeichert
+                var zwischenspeicher = Clipboard.GetText();
+                if (!String.IsNullOrWhiteSpace(zwischenspeicher))
+                {
+                    Log.Debug("Hotkey: Zwischenablage wird temporär gespeichert.");
+                }
+
                 Log.Debug("Hotkey: Text wird kopiert. --> {hk}", text);
                 Clipboard.SetText(text);
                 var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
                 var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
+                var isVKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.VK_V);
 
                 //Erst wenn CTRL und SHIFT wieder losgelassen werden, wird der Text eingefügt
-                if (!root_window.IsActive)
+                Log.Debug("Hotkey: Loop zum warten bis CTRL und SHIFT losgelassen werden wird gestartet.");
+                do
                 {
-                    Log.Debug("Hotkey: Loop zum warten bis CTRL und SHIFT losgelassen werden wird gestartet.");
-                    do
-                    {
-                        isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
-                        isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
-                    } while (isControlKeyDown || isShiftKeyDown);
-                }
+                    isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
+                    isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
+                } while (isControlKeyDown || isShiftKeyDown);
                 
                 Log.Debug("Hotkey: Virtuell CTRL + V drücken.");
                 sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+
+                //Zwischengespeicherter Wert wieder zurück in die Zwischenablage
+                if (!String.IsNullOrWhiteSpace(zwischenspeicher))
+                {
+                    Thread.Sleep(100); //Diese Pause wird benötigt
+                    Log.Debug("Hotkey: Zwischenspeicher zurück in Zwischenablage.");
+                    Clipboard.SetDataObject(zwischenspeicher);
+                }              
             }
             catch (Exception ex)
             {
