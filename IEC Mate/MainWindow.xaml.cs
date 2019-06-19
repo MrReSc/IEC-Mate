@@ -515,17 +515,18 @@ namespace IECMate
                 }
 
                 //Wenn Text in der Zwischenablage ist, dann wird dieser Zwischengespeichert
-                var zwischenspeicher = Clipboard.GetText();
-                if (!String.IsNullOrWhiteSpace(zwischenspeicher))
+                var zwischenspeicher = String.Empty;
+                if (Clipboard.ContainsText())
                 {
+                    zwischenspeicher = Clipboard.GetText();
                     Log.Debug("Hotkey: Zwischenablage wird temporär gespeichert.");
                 }
 
+                Clipboard.SetDataObject(text);
                 Log.Debug("Hotkey: Text wird kopiert. --> {hk}", text);
-                Clipboard.SetText(text);
+
                 var isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
                 var isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
-                var isVKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.VK_V);
 
                 //Erst wenn CTRL und SHIFT wieder losgelassen werden, wird der Text eingefügt
                 Log.Debug("Hotkey: Loop zum warten bis CTRL und SHIFT losgelassen werden wird gestartet.");
@@ -534,17 +535,17 @@ namespace IECMate
                     isShiftKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.SHIFT);
                     isControlKeyDown = sim.InputDeviceState.IsKeyDown(VirtualKeyCode.CONTROL);
                 } while (isControlKeyDown || isShiftKeyDown);
-                
+
                 Log.Debug("Hotkey: Virtuell CTRL + V drücken.");
-                sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+                //sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+                System.Windows.Forms.SendKeys.SendWait("^v");
 
                 //Zwischengespeicherter Wert wieder zurück in die Zwischenablage
                 if (!String.IsNullOrWhiteSpace(zwischenspeicher))
                 {
-                    Thread.Sleep(100); //Diese Pause wird benötigt
-                    Log.Debug("Hotkey: Zwischenspeicher zurück in Zwischenablage.");
                     Clipboard.SetDataObject(zwischenspeicher);
-                }              
+                    Log.Debug("Hotkey: Zwischenspeicher zurück in Zwischenablage.");
+                }
             }
             catch (Exception ex)
             {
