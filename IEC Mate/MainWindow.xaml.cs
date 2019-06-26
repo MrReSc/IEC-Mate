@@ -1416,59 +1416,66 @@ namespace IECMate
                                     break;
                                 }
 
-                                using (var reader = File.OpenText(fileName))
+                                try
                                 {
-                                    var fileText = await reader.ReadToEndAsync();
-                                    if ((bool)ts_exakte_suche.IsChecked)
+                                    using (var reader = File.OpenText(fileName))
                                     {
-                                        //Der \b ist ein Wortgrenzen-Check, {0} ist die Variable --> Format \bsvDI_BlaFo\b
-                                        if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
+                                        var fileText = await reader.ReadToEndAsync();
+                                        if ((bool)ts_exakte_suche.IsChecked)
                                         {
-                                            //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
-                                            //Sobald der Erste treffer da ist, wird der Loop beendet
-                                            int _count = 0;
-                                            using (StringReader _reader = new StringReader(fileText))
+                                            //Der \b ist ein Wortgrenzen-Check, {0} ist die Variable --> Format \bsvDI_BlaFo\b
+                                            if (Regex.IsMatch(fileText, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
                                             {
-                                                string line;
-                                                while ((line = _reader.ReadLine()) != null)
+                                                //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
+                                                //Sobald der Erste treffer da ist, wird der Loop beendet
+                                                int _count = 0;
+                                                using (StringReader _reader = new StringReader(fileText))
                                                 {
-                                                    _count++;
-                                                    if (Regex.IsMatch(line, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
+                                                    string line;
+                                                    while ((line = _reader.ReadLine()) != null)
                                                     {
-                                                        break;
+                                                        _count++;
+                                                        if (Regex.IsMatch(line, string.Format(@"\b{0}\b", Regex.Escape(text_pattern_suche.Text)), RegexOptions.IgnoreCase))
+                                                        {
+                                                            break;
+                                                        }
                                                     }
                                                 }
+                                                string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
+                                                suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                             }
-                                            string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
-                                            suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                         }
-                                    }
-                                    else
-                                    {
-                                        //Nicht Case Sensitive
-                                        if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                        else
                                         {
-                                            //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
-                                            //Sobald der Erste treffer da ist, wird der Loop beendet
-                                            int _count = 0;
-                                            using (StringReader _reader = new StringReader(fileText))
+                                            //Nicht Case Sensitive
+                                            if (fileText.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                                             {
-                                                string line;
-                                                while ((line = _reader.ReadLine()) != null)
+                                                //Hier wird der Text des Files Linie für Linie anaylsiert und hochgezählt
+                                                //Sobald der Erste treffer da ist, wird der Loop beendet
+                                                int _count = 0;
+                                                using (StringReader _reader = new StringReader(fileText))
                                                 {
-                                                    _count++;
-                                                    if (line.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                                    string line;
+                                                    while ((line = _reader.ReadLine()) != null)
                                                     {
-                                                        break;
+                                                        _count++;
+                                                        if (line.IndexOf(text_pattern_suche.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                                                        {
+                                                            break;
+                                                        }
                                                     }
                                                 }
+                                                string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
+                                                suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                             }
-                                            string linie = Properties.Resources.suche_erster_treffer + " " + _count.ToString();
-                                            suchdatei.Add(new SucheDatei() { Pfad = fileName, Typ = Path.GetExtension(fileName), Linie = linie, LinieInt = _count });
                                         }
                                     }
                                 }
-
+                                catch (Exception exx)
+                                {
+                                    Log.Error(exx, "Error");
+                                }
+                               
                                 TimeSpan timeSpan = stopWatch.Elapsed;
                                 string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
                                 text_suche_count.Text = Properties.Resources.suche_dateien + count.ToString() + "/" + filecount.ToString() +
@@ -1485,7 +1492,6 @@ namespace IECMate
                         await Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_pattern_suche.Focus()));
                         stopWatch.Stop();
                         Log.Error(exs, "Error");
-
                     }
 
                     await x.CloseAsync();
