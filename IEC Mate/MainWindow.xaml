@@ -701,14 +701,14 @@
                                   GridLinesVisibility="Vertical"
                                   HorizontalScrollBarVisibility="Auto">
 
-                            <DataGrid.RowStyle>
-                                <Style>
+                            <DataGrid.RowStyle >
+                                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MetroDataGridRow}">
                                     <EventSetter Event="DataGridRow.MouseDoubleClick" Handler="Listbox_ergebnis_MouseDoubleClick"/>
                                 </Style>
                             </DataGrid.RowStyle>
 
                             <DataGrid.Resources>
-                                <Style x:Key="CellCenterStyle" TargetType="DataGridCell" BasedOn="{StaticResource AzureDataGridCell}">
+                                <Style x:Key="CellCenterStyle" TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
                                     <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
                                 </Style>
                             </DataGrid.Resources>
@@ -719,13 +719,16 @@
                                 <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="90" Binding="{Binding LinieInt}" CanUserSort="False"
                                                     CellStyle="{StaticResource CellCenterStyle}"/>
                             </DataGrid.Columns>
-
+                            
+                            
+                            
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
                                     <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
+                            
                         </DataGrid>
                     </Border>
                 </Grid>
