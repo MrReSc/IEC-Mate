@@ -762,7 +762,7 @@ namespace IECMate
             try
             {
                 Log.Debug("Code: Vorlage ersetzten einzel wurde gedrückt.");
-                Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                Replace(text_suchen.Text, combo_vars.Text, text_code_template);
             }
             catch (Exception ex)
             {
@@ -774,12 +774,12 @@ namespace IECMate
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(combo_vars.SelectedValue.ToString()) && !String.IsNullOrWhiteSpace(text_suchen.Text))
+                if (!String.IsNullOrWhiteSpace(combo_vars.Text) && !String.IsNullOrWhiteSpace(text_suchen.Text))
                 {
                     Log.Debug("Code: Vorlage alle ersetzten wurde gedrückt.");
                     do
                     {
-                        Replace(text_suchen.Text, combo_vars.SelectedValue.ToString(), text_code_template);
+                        Replace(text_suchen.Text, combo_vars.Text, text_code_template);
                     } while (text_code_template.Text.Contains(text_suchen.Text));
                 }
                
