@@ -484,7 +484,7 @@ namespace IECMate
                             PasteTextFromHotkey(text);
                             break;
                         case "PxBeginEnd":
-                            text = "// " + px + " begin" + Environment.NewLine + Environment.NewLine + "// " + px + " end";
+                            text = "// " + px + " begin" + Environment.NewLine + "// " + px + " end";
                             PasteTextFromHotkey(text);
                             break;
                         case "PxPlain":
