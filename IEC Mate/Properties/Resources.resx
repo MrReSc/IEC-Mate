@@ -390,6 +390,9 @@
   <data name="lb_sim" xml:space="preserve">
     <value>Simulation starten</value>
   </data>
+  <data name="lb_simStop" xml:space="preserve">
+    <value>Simulation beenden</value>
+  </data>
   <data name="lb_sprache" xml:space="preserve">
     <value>Sprache</value>
   </data>

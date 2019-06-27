@@ -1303,6 +1303,13 @@
                                     </StackPanel>
                                 </Button>
 
+                                <Button x:Name="bt_simStopen" Click="Bt_simStopen_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline"/>
+                                        <Label Content="{x:Static p:Resources.lb_simStop}" />
+                                    </StackPanel>
+                                </Button>
+
                                 <Button x:Name="bt_visuStarten" Click="Bt_visuStarten_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Monitor"/>

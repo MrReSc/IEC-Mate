@@ -880,6 +880,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Simulation beenden ähnelt.
+        /// </summary>
+        public static string lb_simStop {
+            get {
+                return ResourceManager.GetString("lb_simStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Sprache ähnelt.
         /// </summary>
         public static string lb_sprache {

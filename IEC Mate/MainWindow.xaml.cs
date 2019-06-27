@@ -2539,6 +2539,28 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+        private void Bt_simStopen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (var process in Process.GetProcessesByName("putty"))
+                {
+                    process.Kill();
+                }
+
+                foreach (var process in Process.GetProcessesByName("K2Ctrl"))
+                {
+                    process.Kill();
+                }
+
+                Log.Information("Helfer: Simulation wurde beendet.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+
+        }
 
         private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
         {          
@@ -2764,9 +2786,10 @@ namespace IECMate
         }
 
 
+
         #endregion
 
-
+       
     }
 }
 
