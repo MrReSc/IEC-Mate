@@ -311,6 +311,8 @@
                                     <Setter Property="AcceptsTab" Value="True"/>
                                     <Setter Property="Padding" Value="2"/>
                                     <Setter Property="IsTabStop" Value="False"/>
+                                    <Setter Property="FontFamily" Value="Consolas"/>
+                                    <Setter Property="FontWeight" Value="Medium"/>
                                 </Style>
                                 <!--Style für Label-->
                                 <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
@@ -342,7 +344,8 @@
                                 </DockPanel>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var1" 
-                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" >
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}" 
+                                         Foreground="MediumVioletRed">
                                 </TextBox>
                             </Grid>
 
@@ -363,7 +366,8 @@
                                 <Label Content="{x:Static p:Resources.lb_var2}" Grid.Row="0"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var2" 
-                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}">
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}"
+                                         Foreground="OrangeRed">
                                 </TextBox>
                             </Grid>
 
@@ -384,7 +388,8 @@
                                 <Label Content="{x:Static p:Resources.lb_var3}" Grid.Row="0"/>
 
                                 <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="text_var3" 
-                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}">
+                                         Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_var_einfügen}"
+                                         Foreground="DarkTurquoise">
                                 </TextBox>
                             </Grid>
                         </Grid>
