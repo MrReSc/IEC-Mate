@@ -899,23 +899,23 @@ namespace IECMate
                     return (outtext, Properties.Resources.dialogMsgCodeGen01 + " 3");
                 }
 
-                //Keine "Varibale_1" in Template aber in Liste
-                if (lines1 > 0 && !template.Contains(var_1))
-                {
-                    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 1");
-                }
+                ////Keine "Varibale_1" in Template aber in Liste
+                //if (lines1 > 0 && !template.Contains(var_1))
+                //{
+                //    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 1");
+                //}
 
-                //Keine "Varibale_2" in Template aber in Liste
-                if (lines2 > 0 && !template.Contains(var_2))
-                {
-                    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 2");
-                }
+                ////Keine "Varibale_2" in Template aber in Liste
+                //if (lines2 > 0 && !template.Contains(var_2))
+                //{
+                //    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 2");
+                //}
 
-                //Keine "Varibale_3" in Template aber in Liste
-                if (lines3 > 0 && !template.Contains(var_3))
-                {
-                    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 3");
-                }
+                ////Keine "Varibale_3" in Template aber in Liste
+                //if (lines3 > 0 && !template.Contains(var_3))
+                //{
+                //    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 3");
+                //}
 
                 //Die Anzahl Variablen in den Listen ist unterschiedlich und enthalten auch Text
                 if ((var1_vorhanden && var2_vorhanden && lines1 != lines2) ||
