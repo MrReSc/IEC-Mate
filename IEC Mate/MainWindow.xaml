@@ -1303,14 +1303,14 @@
 
                                 <Button x:Name="bt_simStarten" Click="Bt_simStarten_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline"/>
+                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Foreground="Green"/>
                                         <Label Content="{x:Static p:Resources.lb_sim}" />
                                     </StackPanel>
                                 </Button>
 
                                 <Button x:Name="bt_simStopen" Click="Bt_simStopen_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline"/>
+                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline" Foreground="Red"/>
                                         <Label Content="{x:Static p:Resources.lb_simStop}" />
                                     </StackPanel>
                                 </Button>
