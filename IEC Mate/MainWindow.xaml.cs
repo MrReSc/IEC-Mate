@@ -2744,8 +2744,8 @@ namespace IECMate
                     FileInfo info = new FileInfo(file);
                     string actual = info.Extension;
 
-                    if (actual.Equals(".puLock"))
-                    {
+                    if (actual.EndsWith("Lock"))
+                    { 
                         File.Delete(file);
                         counter++;
                     }

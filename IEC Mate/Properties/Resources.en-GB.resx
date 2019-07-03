@@ -172,7 +172,7 @@
     <value>Please select a ME.</value>
   </data>
   <data name="dialogMsgHelferLock" xml:space="preserve">
-    <value>All files with the file extension *.puLock will be deleted. Do you want to continue?</value>
+    <value>All files with the file extension *.*Lock will be deleted. Do you want to continue?</value>
   </data>
   <data name="dialogMsgHotkey" xml:space="preserve">
     <value>Please enter a PX number.</value>
@@ -220,7 +220,7 @@
     <value>Error during opening</value>
   </data>
   <data name="dialogTitelHelferLock" xml:space="preserve">
-    <value>Delete puLock files</value>
+    <value>Delete Lock files</value>
   </data>
   <data name="dialogTitelHotkey" xml:space="preserve">
     <value>Hotkey</value>
@@ -352,7 +352,7 @@
     <value>Project folder</value>
   </data>
   <data name="lb_puLock" xml:space="preserve">
-    <value>Delete puLock files</value>
+    <value>Delete Lock files</value>
   </data>
   <data name="lb_px" xml:space="preserve">
     <value>// PX05010</value>
@@ -427,7 +427,7 @@
     <value>Open folder</value>
   </data>
   <data name="puLockDateien" xml:space="preserve">
-    <value>puLock files were deleted.</value>
+    <value>Lock files were deleted.</value>
   </data>
   <data name="suche_dateien" xml:space="preserve">
     <value>Scanned files: </value>

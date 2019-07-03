@@ -223,7 +223,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden alle Datein mit der Dateiendung *.puLock gelöscht. Möchten Sie fortfahren? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Es werden alle Dateien mit der Dateiendung *.*Lock gelöscht. Möchten Sie fortfahren? ähnelt.
         /// </summary>
         public static string dialogMsgHelferLock {
             get {
@@ -367,7 +367,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Löschen von puLock Datein ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Löschen von Lock Dateien ähnelt.
         /// </summary>
         public static string dialogTitelHelferLock {
             get {
@@ -763,7 +763,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die puLock Datein löschen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Lock Dateien löschen ähnelt.
         /// </summary>
         public static string lb_puLock {
             get {
@@ -988,7 +988,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die puLock Datein wurden gelöscht. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Lock Dateien wurden gelöscht. ähnelt.
         /// </summary>
         public static string puLockDateien {
             get {
