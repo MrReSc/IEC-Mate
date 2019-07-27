@@ -463,7 +463,7 @@
                                     </StackPanel.Resources>
                                     
                                     <TextBox x:Name="text_suchen" Width="200" Margin="0,0,20,0" 
-                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach}"
+                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach_code}"
                                              Controls:TextBoxHelper.ClearTextButton="True">
                                     </TextBox>
 
@@ -473,17 +473,17 @@
                                               Controls:TextBoxHelper.Watermark="{x:Static p:Resources.cb_var_auswahlen}">
                                     </ComboBox>
 
-                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click">
+                                    <Button x:Name="btn_ersetzten_ein" Margin="0" Click="Btn_ersetzten_ein_Click" ToolTip="{x:Static p:Resources.tt_ersetzten}">
                                         <iconPacks:PackIconMaterial Kind="ArrowRightBold" Width="18" Height="auto"/>
                                     </Button>
 
-                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click">
+                                    <Button x:Name="btn_ersetzten" Click="Btn_ersetzten_Click" ToolTip="{x:Static p:Resources.tt_ersetzten_alle}">
                                         <iconPacks:PackIconMaterial Kind="RotateRight" Width="auto" Height="auto"/>
                                     </Button>
 
                                     <Border Width="2" BorderBrush="{DynamicResource GrayBrush9}" BorderThickness="1" CornerRadius="1" Height="22" Margin="2,0"/>
 
-                                    <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Width="auto" >
+                                    <Button x:Name="btn_gen" Click="Btn_gen_Click" Margin="0" Width="auto" ToolTip="{x:Static p:Resources.lb_genereieren}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Height="auto" Width="auto">
                                             <iconPacks:PackIconMaterial Kind="Play" Foreground="LimeGreen" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="0"/>
                                             <Label Height="25" VerticalAlignment="Center" Content="{x:Static p:Resources.lb_genereieren}"/>
@@ -492,11 +492,11 @@
 
                                     <Border Width="2" BorderBrush="{DynamicResource GrayBrush9}" BorderThickness="1" CornerRadius="1" Height="22" Margin="2,0"/>
 
-                                    <Button Click="Btn_template_offnen_Click">
+                                    <Button Click="Btn_template_offnen_Click" ToolTip="{x:Static p:Resources.dp_datei_import}">
                                         <iconPacks:PackIconMaterial Kind="Import" Width="auto" Height="auto" Foreground="Chocolate"/>
                                     </Button>
 
-                                    <Button Click="Btn_template_speichern_Click">
+                                    <Button Click="Btn_template_speichern_Click" ToolTip="{x:Static p:Resources.dp_datei_speichern}">
                                         <iconPacks:PackIconMaterial Kind="ContentSave" Width="auto" Height="auto" Foreground="DodgerBlue"/>
                                     </Button>
 
@@ -585,7 +585,7 @@
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="auto" Height="auto"/>
                                     </Button>
 
-                                    <Button Click="Btn_gen_speichern_Click" >
+                                    <Button Click="Btn_gen_speichern_Click" ToolTip="{x:Static p:Resources.dp_datei_code_speichern}">
                                         <iconPacks:PackIconMaterial Kind="ContentSave" Width="auto" Height="auto" Foreground="DodgerBlue"/>
                                     </Button>
 

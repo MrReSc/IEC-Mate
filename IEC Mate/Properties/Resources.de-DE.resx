@@ -528,6 +528,12 @@
   <data name="tt_code_gen_copy" xml:space="preserve">
     <value>Kopiert den kompletten Code in die Zwischenablage.</value>
   </data>
+  <data name="tt_ersetzten" xml:space="preserve">
+    <value>Ersetzten</value>
+  </data>
+  <data name="tt_ersetzten_alle" xml:space="preserve">
+    <value>Alle ersetzten</value>
+  </data>
   <data name="tt_ers_ruck" xml:space="preserve">
     <value>Macht das ersetzten wieder Rückgangig.</value>
   </data>
@@ -569,5 +575,8 @@
   </data>
   <data name="wm_file_ext" xml:space="preserve">
     <value>Dateiendungen eintragen...</value>
+  </data>
+  <data name="tb_suchen_nach_code" xml:space="preserve">
+    <value>Suchen nach... (Strg + F)</value>
   </data>
 </root>

@@ -528,6 +528,12 @@
   <data name="tt_code_gen_copy" xml:space="preserve">
     <value>Copies the complete code to the clipboard.</value>
   </data>
+  <data name="tt_ersetzten" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="tt_ersetzten_alle" xml:space="preserve">
+    <value>Replace all</value>
+  </data>
   <data name="tt_ers_ruck" xml:space="preserve">
     <value>Makes the replaced code recede.</value>
   </data>
@@ -569,5 +575,8 @@
   </data>
   <data name="wm_file_ext" xml:space="preserve">
     <value>Enter file extensions...</value>
+  </data>
+  <data name="tb_suchen_nach_code" xml:space="preserve">
+    <value>Search for... (Strg + F)</value>
   </data>
 </root>

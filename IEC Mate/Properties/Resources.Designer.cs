@@ -1105,6 +1105,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchen nach... (Strg + F) ähnelt.
+        /// </summary>
+        public static string tb_suchen_nach_code {
+            get {
+                return ResourceManager.GetString("tb_suchen_nach_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Variablen hier einfügen... ähnelt.
         /// </summary>
         public static string tb_var_einfügen {
@@ -1299,6 +1308,24 @@ namespace IECMate.Properties {
         public static string tt_ers_ruck {
             get {
                 return ResourceManager.GetString("tt_ers_ruck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ersetzten ähnelt.
+        /// </summary>
+        public static string tt_ersetzten {
+            get {
+                return ResourceManager.GetString("tt_ersetzten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alle ersetzten ähnelt.
+        /// </summary>
+        public static string tt_ersetzten_alle {
+            get {
+                return ResourceManager.GetString("tt_ersetzten_alle", resourceCulture);
             }
         }
         
