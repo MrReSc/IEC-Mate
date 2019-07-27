@@ -736,6 +736,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die me_xxx.tu Type Datei ähnelt.
+        /// </summary>
+        public static string lb_me_tu {
+            get {
+                return ResourceManager.GetString("lb_me_tu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die xml der ME ähnelt.
         /// </summary>
         public static string lb_me_xml {

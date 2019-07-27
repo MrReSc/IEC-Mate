@@ -579,4 +579,7 @@
   <data name="tb_suchen_nach_code" xml:space="preserve">
     <value>Suchen nach... (Strg + F)</value>
   </data>
+  <data name="lb_me_tu" xml:space="preserve">
+    <value>me_xxx.tu Type Datei</value>
+  </data>
 </root>

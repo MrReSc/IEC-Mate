@@ -1406,6 +1406,13 @@
                                             <Label Content="{x:Static p:Resources.lb_me_xml}"/>
                                         </StackPanel>
                                     </Button>
+
+                                    <Button x:Name="btn_open_me_tu" Click="Btn_open_me_tu_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <iconPacks:PackIconMaterial Kind="FileOutline"/>
+                                            <Label Content="{x:Static p:Resources.lb_me_tu}"/>
+                                        </StackPanel>
+                                    </Button>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>

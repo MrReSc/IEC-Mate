@@ -2704,12 +2704,26 @@ namespace IECMate
 
         }
 
+        private void Btn_open_me_tu_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string me = cb_select_me.SelectedValue.ToString();
+                string open = text_projktpfad_helfer.Text + Properties.Paths.ieccontrol + "\\" + me + "\\" + me + ".tu";
+                OpenFileOrFolder(open);
+            }
+            catch (Exception)
+            {
+                FehlerHelferAsyncME();
+            }       
+        }
+
         private void Btn_open_xml_hmi_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 string me = cb_select_me.SelectedValue.ToString();
-                string open = text_projktpfad_helfer.Text + "\\application\\view\\" + me + "\\hmi\\text";
+                string open = text_projktpfad_helfer.Text + "\\application\\control\\" + me + "\\hmi\\text";
                 OpenFileOrFolder(open);
             }
             catch (Exception)
@@ -2787,9 +2801,10 @@ namespace IECMate
 
 
 
+
         #endregion
 
-       
+
     }
 }
 
