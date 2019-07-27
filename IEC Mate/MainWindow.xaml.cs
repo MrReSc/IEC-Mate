@@ -239,6 +239,7 @@ namespace IECMate
             {
                 cb_select_me.Items.Add(Properties.Settings.Default.me_auswahl);
                 cb_select_me.SelectedIndex = 0;
+                TexteMEFunktionen();
             }
 
             //Inhalt laden
@@ -384,8 +385,39 @@ namespace IECMate
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => this.text_code_template.Focus()));
                 }
+
             }
             
+        }
+
+        private void TexteMEFunktionen()
+        {
+            try
+            {
+                string me;
+
+                // Wenn eine ME ausgewählt ist, dann werden die Texte für ME Funktionen angepasst
+                if (!string.IsNullOrWhiteSpace(cb_select_me.Text))
+                {
+                    me = cb_select_me.Text.Replace("_", "__");
+                }
+                else
+                {
+                    me = "ME";
+                }
+
+                // Header von GroupBox
+                gb_me_funktionen.Header = Properties.Resources.gb_helfer_funkionen_me + " " + me;
+
+                //Buttons
+                lb_me.Content = Properties.Resources.lb_me + " " + me;
+                lb_me_xml.Content = Properties.Resources.lb_me_xml + " " + me;
+                lb_me_tu.Content = me + ".tu " + Properties.Resources.lb_me_tu;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
         }
 
         private void Btn_vaiablenliste_loschen_Click(object sender, RoutedEventArgs e)
@@ -2655,6 +2687,19 @@ namespace IECMate
             }
         }
 
+
+        private void Cb_select_me_DropDownClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                TexteMEFunktionen();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private void Cb_select_me_DropDownOpened(object sender, EventArgs e)
         {
             try
@@ -2723,7 +2768,7 @@ namespace IECMate
             try
             {
                 string me = cb_select_me.SelectedValue.ToString();
-                string open = text_projktpfad_helfer.Text + "\\application\\control\\" + me + "\\hmi\\text";
+                string open = text_projktpfad_helfer.Text + "\\application\\view\\" + me + "\\hmi\\text";
                 OpenFileOrFolder(open);
             }
             catch (Exception)
@@ -2798,6 +2843,8 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+
+
 
 
 

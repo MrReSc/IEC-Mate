@@ -277,7 +277,7 @@
     <value>Search result</value>
   </data>
   <data name="gb_helfer_funkionen_me" xml:space="preserve">
-    <value>Function for ME</value>
+    <value>Functions for</value>
   </data>
   <data name="gb_hotkeys" xml:space="preserve">
     <value>Hotkeys</value>
@@ -340,10 +340,10 @@
     <value>set_MachSetup.xml</value>
   </data>
   <data name="lb_me" xml:space="preserve">
-    <value>ME folder</value>
+    <value>IEC folder</value>
   </data>
   <data name="lb_me_xml" xml:space="preserve">
-    <value>xml of the ME</value>
+    <value>xml folder of</value>
   </data>
   <data name="lb_oss_lizenz" xml:space="preserve">
     <value>Open Source Licenses:</value>
@@ -580,6 +580,6 @@
     <value>Search for... (Strg + F)</value>
   </data>
   <data name="lb_me_tu" xml:space="preserve">
-    <value>me_xxx.tu Type File</value>
+    <value>Type File</value>
   </data>
 </root>

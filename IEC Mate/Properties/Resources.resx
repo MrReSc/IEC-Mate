@@ -277,7 +277,7 @@
     <value>Suchergebnis</value>
   </data>
   <data name="gb_helfer_funkionen_me" xml:space="preserve">
-    <value>Funktion für ME</value>
+    <value>Funktionen für</value>
   </data>
   <data name="gb_hotkeys" xml:space="preserve">
     <value>Hot Keys</value>
@@ -340,10 +340,10 @@
     <value>set_MachSetup.xml</value>
   </data>
   <data name="lb_me" xml:space="preserve">
-    <value>ME Ordner</value>
+    <value>IEC Ordner</value>
   </data>
   <data name="lb_me_xml" xml:space="preserve">
-    <value>xml der ME</value>
+    <value>xml Ordner von</value>
   </data>
   <data name="lb_oss_lizenz" xml:space="preserve">
     <value>Open Source Lizenzen:</value>
@@ -580,6 +580,6 @@
     <value>Suchen nach... (Strg + F)</value>
   </data>
   <data name="lb_me_tu" xml:space="preserve">
-    <value>me_xxx.tu Type Datei</value>
+    <value>Type Datei</value>
   </data>
 </root>

@@ -538,7 +538,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Funktion für ME ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Funktionen für ähnelt.
         /// </summary>
         public static string gb_helfer_funkionen_me {
             get {
@@ -727,7 +727,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ME Ordner ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die IEC Ordner ähnelt.
         /// </summary>
         public static string lb_me {
             get {
@@ -736,7 +736,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die me_xxx.tu Type Datei ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type Datei ähnelt.
         /// </summary>
         public static string lb_me_tu {
             get {
@@ -745,7 +745,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die xml der ME ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die xml Ordner von ähnelt.
         /// </summary>
         public static string lb_me_xml {
             get {
