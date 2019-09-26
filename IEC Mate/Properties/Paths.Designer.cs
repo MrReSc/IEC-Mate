@@ -160,6 +160,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die C:\\DataView\\view\\DataView.exe ähnelt.
+        /// </summary>
+        internal static string Start_VisualizationDataView {
+            get {
+                return ResourceManager.GetString("Start_VisualizationDataView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\data_Machine\\machineSetup\\systemOptions.properties ähnelt.
         /// </summary>
         internal static string systemOptions {

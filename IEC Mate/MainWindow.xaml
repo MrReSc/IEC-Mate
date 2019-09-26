@@ -1317,14 +1317,19 @@
 
                                 <Button x:Name="bt_visuStarten" Click="Bt_visuStarten_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor"/>
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Orange"/>
                                         <Label Content="{x:Static p:Resources.lb_visu}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Rectangle Width="310" Height="43" HorizontalAlignment="Left" Margin="0,0,0,10" />
+                                <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="DarkGreen"/>
+                                        <Label Content="{x:Static p:Resources.lb_visuDataView}"/>
+                                    </StackPanel>
+                                </Button>
 
-                                <Button x:Name="bt_lock_loschen" Click="Bt_lock_loschen_Click">
+                                <Button x:Name="bt_lock_loschen" Click="Bt_lock_loschen_Click" Margin="0,20,0,10">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Delete"/>
                                         <Label Content="{x:Static p:Resources.lb_puLock}"/>
@@ -1337,6 +1342,7 @@
                                         <Label Content="{x:Static p:Resources.lb_backup}"/>
                                     </StackPanel>
                                 </Button>
+
                             </StackPanel>
                         </Grid>
                     </GroupBox>

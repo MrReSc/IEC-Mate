@@ -961,6 +961,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Visualisierung starten ähnelt.
+        /// </summary>
+        public static string lb_visuDataView {
+            get {
+                return ResourceManager.GetString("lb_visuDataView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Datei öffnen ähnelt.
         /// </summary>
         public static string mi_datei_offnen {

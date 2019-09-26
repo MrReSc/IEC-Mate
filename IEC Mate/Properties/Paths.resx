@@ -156,4 +156,7 @@
   <data name="LogFile" xml:space="preserve">
     <value>\\Log\\IEC_Mate.log</value>
   </data>
+  <data name="Start_VisualizationDataView" xml:space="preserve">
+    <value>C:\\DataView\\view\\DataView.exe</value>
+  </data>
 </root>

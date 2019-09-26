@@ -582,4 +582,7 @@
   <data name="lb_me_tu" xml:space="preserve">
     <value>Type Datei</value>
   </data>
+  <data name="lb_visuDataView" xml:space="preserve">
+    <value>DataView Visualisierung starten</value>
+  </data>
 </root>

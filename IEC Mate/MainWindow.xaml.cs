@@ -2585,6 +2585,16 @@ namespace IECMate
                     process.Kill();
                 }
 
+                foreach (var process in Process.GetProcessesByName("DataView"))
+                {
+                    process.Kill();
+                }
+
+                foreach (var process in Process.GetProcessesByName("java"))
+                {
+                    process.Kill();
+                }
+
                 Log.Information("Helfer: Simulation wurde beendet.");
             }
             catch (Exception ex)
@@ -2608,7 +2618,30 @@ namespace IECMate
                     }
                 };
                 process.Start();
-                Log.Information("Helfer: Visualisierung wurde gestartet.");
+                Log.Information("Helfer: Visualisierung dat@net wurde gestartet.");
+            }
+            catch (Exception ex)
+            {
+                FehlerHelferAsync();
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_visuStartenDataView_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = Properties.Paths.Start_VisualizationDataView;
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = open,
+                        WorkingDirectory = Path.GetDirectoryName(open)
+                    }
+                };
+                process.Start();
+                Log.Information("Helfer: Visualisierung DataView wurde gestartet.");
             }
             catch (Exception ex)
             {
@@ -2849,8 +2882,8 @@ namespace IECMate
 
 
 
-        #endregion
 
+        #endregion
 
     }
 }
