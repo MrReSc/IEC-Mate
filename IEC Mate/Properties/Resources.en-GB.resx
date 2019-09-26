@@ -412,7 +412,7 @@
     <value>not installed</value>
   </data>
   <data name="lb_visu" xml:space="preserve">
-    <value>Start visualization</value>
+    <value>Start dat@net visualization</value>
   </data>
   <data name="mi_datei_offnen" xml:space="preserve">
     <value>Open file</value>

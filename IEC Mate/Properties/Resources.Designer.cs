@@ -952,7 +952,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Visualisierung starten ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net Visualisierung starten ähnelt.
         /// </summary>
         public static string lb_visu {
             get {
