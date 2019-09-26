@@ -2554,7 +2554,12 @@ namespace IECMate
             try
             {
                 string text = File.ReadAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation);
-                text = text.Replace("rem goto ende3", "goto ende3");
+
+                if (!text.Contains("rem start DataView.exe"))
+                {
+                    text = text.Replace("start DataView.exe", "rem start DataView.exe");
+                }
+                
                 File.WriteAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation, text);
             }
             catch (Exception ex)
@@ -2568,7 +2573,7 @@ namespace IECMate
             try
             {
                 string text = File.ReadAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation);
-                text = text.Replace("goto ende3", "rem goto ende3");
+                text = text.Replace("rem start DataView.exe", "start DataView.exe");
                 File.WriteAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation, text);
             }
             catch (Exception ex)
