@@ -70,6 +70,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die C:\\DataView ähnelt.
+        /// </summary>
+        internal static string dataview {
+            get {
+                return ResourceManager.GetString("dataview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\data_Customer\\diagnoseData ähnelt.
         /// </summary>
         internal static string diagnoseData {

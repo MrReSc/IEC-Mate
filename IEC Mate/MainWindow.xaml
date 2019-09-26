@@ -1171,10 +1171,10 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="*" />
                         <RowDefinition Height="20" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="0.85*" />
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
@@ -1271,11 +1271,6 @@
                                     </StackPanel>
                                 </Button>
 
-                                
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Grid.Row="1">
-
                                 <Button x:Name="bt_openPrjectFolder" Click="Bt_openPrjectFolder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen"/>
@@ -1290,46 +1285,31 @@
                                     </StackPanel>
                                 </Button>
 
+
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" Grid.Row="1">
+
                                 <Button x:Name="bt_openMachineParameter" Click="Bt_openMachineParameter_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="Orange"/>
                                         <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
                                     </StackPanel>
                                 </Button>
 
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="5" Grid.Row="1">
-
-                                <Button x:Name="bt_simStarten" Click="Bt_simStarten_Click">
+                                <Button x:Name="bt_openDataViewFolder" Click="Bt_openDataViewFolder_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Foreground="Green"/>
-                                        <Label Content="{x:Static p:Resources.lb_sim}" />
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="Purple"/>
+                                        <Label Content="{x:Static p:Resources.lb_dataviewFolder}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_simStopen" Click="Bt_simStopen_Click">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline" Foreground="Red"/>
-                                        <Label Content="{x:Static p:Resources.lb_simStop}" />
-                                    </StackPanel>
-                                </Button>
+                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
+                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
+                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
 
-                                <Button x:Name="bt_visuStarten" Click="Bt_visuStarten_Click">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Orange"/>
-                                        <Label Content="{x:Static p:Resources.lb_visu}"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Blue"/>
-                                        <Label Content="{x:Static p:Resources.lb_visuDataView}"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button x:Name="bt_lock_loschen" Click="Bt_lock_loschen_Click" Margin="0,20,0,10">
+                                <Button x:Name="bt_lock_loschen" Click="Bt_lock_loschen_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Delete"/>
                                         <Label Content="{x:Static p:Resources.lb_puLock}"/>
@@ -1342,6 +1322,64 @@
                                         <Label Content="{x:Static p:Resources.lb_backup}"/>
                                     </StackPanel>
                                 </Button>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="5" Grid.Row="1">
+
+                                <Button x:Name="bt_simStarten" Click="Bt_simStarten_Click"
+                                        ToolTip="{x:Static p:Resources.tt_sim_start}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Foreground="Green"/>
+                                        <Label Content="{x:Static p:Resources.lb_sim}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_simStopen" Click="Bt_simStopen_Click"
+                                        ToolTip="{x:Static p:Resources.tt_stop_sim}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline" Foreground="Red"/>
+                                        <Label Content="{x:Static p:Resources.lb_simStop}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_visuStarten" Click="Bt_visuStarten_Click"
+                                        ToolTip="{x:Static p:Resources.tt_visu_datanet}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Orange"/>
+                                        <Label Content="{x:Static p:Resources.lb_visu}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click"
+                                        ToolTip="{x:Static p:Resources.tt_visu_dataview}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Purple"/>
+                                        <Label Content="{x:Static p:Resources.lb_visuDataView}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
+
+                                <Button x:Name="bt_disableDataView"
+                                        ToolTip="{x:Static p:Resources.tt_dataview_sim_disable}" Click="Bt_disableDataView_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="CloseBoxOutline" Foreground="Purple"/>
+                                        <Label Content="{x:Static p:Resources.lb_dataview_sim_disable}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_enableDataView"
+                                        ToolTip="{x:Static p:Resources.tt_dataview_sim_enable}" Click="Bt_enableDataView_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="CheckboxMarkedOutline" Foreground="Purple"/>
+                                        <Label Content="{x:Static p:Resources.lb_dataview_sim_enable}"/>
+                                    </StackPanel>
+                                </Button>
+
+
+
+
 
                             </StackPanel>
                         </Grid>

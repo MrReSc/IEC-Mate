@@ -159,4 +159,7 @@
   <data name="Start_VisualizationDataView" xml:space="preserve">
     <value>C:\\DataView\\view\\DataView.exe</value>
   </data>
+  <data name="dataview" xml:space="preserve">
+    <value>C:\\DataView</value>
+  </data>
 </root>

@@ -2536,6 +2536,47 @@ namespace IECMate
             }
         }
 
+        private void Bt_openDataViewFolder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = Properties.Paths.dataview;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_disableDataView_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = File.ReadAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation);
+                text = text.Replace("rem goto ende3", "goto ende3");
+                File.WriteAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation, text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_enableDataView_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = File.ReadAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation);
+                text = text.Replace("goto ende3", "rem goto ende3");
+                File.WriteAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation, text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private void Btn_open_machinesetup_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -2884,11 +2925,8 @@ namespace IECMate
 
 
 
-
-
-
-
         #endregion
+
 
     }
 }

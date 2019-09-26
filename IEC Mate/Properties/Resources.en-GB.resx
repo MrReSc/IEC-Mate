@@ -349,7 +349,7 @@
     <value>Open Source Licenses:</value>
   </data>
   <data name="lb_pojectFolder" xml:space="preserve">
-    <value>Project folder</value>
+    <value>Open dat@net project folder</value>
   </data>
   <data name="lb_puLock" xml:space="preserve">
     <value>Delete Lock files</value>
@@ -584,5 +584,32 @@
   </data>
   <data name="lb_visuDataView" xml:space="preserve">
     <value>Start DataView visualization</value>
+  </data>
+  <data name="tt_sim_start" xml:space="preserve">
+    <value>Starts the simulation in the specified project directory.</value>
+  </data>
+  <data name="tt_stop_sim" xml:space="preserve">
+    <value>Stops the processes "K2Ctrl", "putty", "cmd", "DataView" and "java". This can also unintentionally terminate other programs.</value>
+  </data>
+  <data name="tt_visu_datanet" xml:space="preserve">
+    <value>Starts a dat@net visualization in the specified project directory.</value>
+  </data>
+  <data name="tt_visu_dataview" xml:space="preserve">
+    <value>Start the DataView.exe from the directory C:/DataView.</value>
+  </data>
+  <data name="lb_dataviewFolder" xml:space="preserve">
+    <value>Open DataView folder</value>
+  </data>
+  <data name="lb_dataview_sim_disable" xml:space="preserve">
+    <value>Disable DataView Simulation</value>
+  </data>
+  <data name="lb_dataview_sim_enable" xml:space="preserve">
+    <value>Enable DataView Simulation</value>
+  </data>
+  <data name="tt_dataview_sim_disable" xml:space="preserve">
+    <value>Disables the automatic start of the DataView visualization in Start_Simulation.bat</value>
+  </data>
+  <data name="tt_dataview_sim_enable" xml:space="preserve">
+    <value>Enables the automatic start of the DataView visualization in Start_Simulation.bat</value>
   </data>
 </root>

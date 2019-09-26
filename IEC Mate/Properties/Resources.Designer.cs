@@ -655,6 +655,33 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Simulation deaktivieren ähnelt.
+        /// </summary>
+        public static string lb_dataview_sim_disable {
+            get {
+                return ResourceManager.GetString("lb_dataview_sim_disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Simulation aktivieren ähnelt.
+        /// </summary>
+        public static string lb_dataview_sim_enable {
+            get {
+                return ResourceManager.GetString("lb_dataview_sim_enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Ordner öffnen ähnelt.
+        /// </summary>
+        public static string lb_dataviewFolder {
+            get {
+                return ResourceManager.GetString("lb_dataviewFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die diagnoseData ähnelt.
         /// </summary>
         public static string lb_diagnoseData {
@@ -763,7 +790,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Projekt Ordner ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net Projekt Ordner öffnen ähnelt.
         /// </summary>
         public static string lb_pojectFolder {
             get {
@@ -1321,6 +1348,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Deaktiviert den automatischen start der DataView Visualisierung in Start_Simulation.bat ähnelt.
+        /// </summary>
+        public static string tt_dataview_sim_disable {
+            get {
+                return ResourceManager.GetString("tt_dataview_sim_disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Aktiviert den automatischen start der DataView Visualisierung in Start_Simulation.bat ähnelt.
+        /// </summary>
+        public static string tt_dataview_sim_enable {
+            get {
+                return ResourceManager.GetString("tt_dataview_sim_enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Macht das ersetzten wieder Rückgangig. ähnelt.
         /// </summary>
         public static string tt_ers_ruck {
@@ -1402,6 +1447,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Startet die Simulation im angegebenen Projektverzeichnis. ähnelt.
+        /// </summary>
+        public static string tt_sim_start {
+            get {
+                return ResourceManager.GetString("tt_sim_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;K2Ctrl&quot;, &quot;putty&quot;, &quot;cmd&quot;, &quot;DataView&quot; und &quot;java&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
+        /// </summary>
+        public static string tt_stop_sim {
+            get {
+                return ResourceManager.GetString("tt_stop_sim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Es werden auch die ausgeschlossenen Dateitypen durchsucht. ähnelt.
         /// </summary>
         public static string tt_suche_bin {
@@ -1434,6 +1497,24 @@ namespace IECMate.Properties {
         public static string tt_suche_offnen {
             get {
                 return ResourceManager.GetString("tt_suche_offnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Startet eine dat@net Visualisierung im angegebenen Projektverzeichnis. ähnelt.
+        /// </summary>
+        public static string tt_visu_datanet {
+            get {
+                return ResourceManager.GetString("tt_visu_datanet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Starte die DataView.exe aus dem Verzeichnis C:/DataView. ähnelt.
+        /// </summary>
+        public static string tt_visu_dataview {
+            get {
+                return ResourceManager.GetString("tt_visu_dataview", resourceCulture);
             }
         }
         
