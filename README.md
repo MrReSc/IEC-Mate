@@ -100,3 +100,24 @@ Grossen Dank an die Programmierer die Open Source Bibliothek zur Verfügung stel
 - [7-Zip](https://www.7-zip.org/)
 - [Serilog](https://github.com/serilog/serilog)
 
+## Entwicklungsumgebung einrichten
+
+Als Entwicklungsumgebung dient Visual Studio 2017 oder 2019. Alle Erweiterungen können direkt in Visual Studio über das Menu `Extensions -> Extension Manager` installiert werden.
+
+Um die Entwicklung zu vereinfachen sollten folgende Erweiterungen installiert werden:
+
+- [GitHub](https://visualstudio.github.com/)
+- [AutomaticVersion](https://marketplace.visualstudio.com/items?itemName=PrecisionInfinity.AutomaticVersions)
+
+Um das Projekt erstellen zu können, werden zwingend folgende Erweiterung benötigt:
+
+- [Visual Studio Installer Project](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects)
+
+Nun kann über die GitHub Erweiterung das Projekt geklont werden.
+
+Nun kann die `IEC Mate.sln` Solution geöffnet werden. Wenn die Solution offen ist, kann mit einem Rechtsklick auf `Soloution (oberste Ebene) -> Restore NuGet Packages` alle benötigten Bibliotheken wieder heruntergeladen werden.
+
+### Bekannte Probleme
+
+- Wenn die ganzen Referenzen nicht erkannt werden, muss einfach im Solution Explorer zu den Referenzen navigiert werden. Alle gelben Warnzeichen sollten nach ein paar Sekunden verschwinden.
+- Wenn der Error `XDG0008` bei Übersetzten der Software auftritt, dann muss die Datei `MainWindow.xaml` mit einem `Rechtsklick -> Exluce from Project` vom Projekt entfernt werden. Danach sollte ein Übersetzten ohne Fehler funktionieren. Wenn es immer noch Fehler gibt, kann versucht werden, das Target auf `Release` zu wechseln und wieder auf `Debug` zurück. Wenn das Übersetzten fehlerfrei geklappt hat, muss mittel Rechtsklick auf das Projekt `IEC Mate -> Add -> Existing Item` die Datei `MainWindow.xaml.cs` wieder hinzugefügt werden.
