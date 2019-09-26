@@ -1324,7 +1324,7 @@
 
                                 <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="DarkGreen"/>
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Blue"/>
                                         <Label Content="{x:Static p:Resources.lb_visuDataView}"/>
                                     </StackPanel>
                                 </Button>

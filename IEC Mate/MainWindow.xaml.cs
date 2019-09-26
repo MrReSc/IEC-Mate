@@ -2595,6 +2595,11 @@ namespace IECMate
                     process.Kill();
                 }
 
+                foreach (var process in Process.GetProcessesByName("cmd"))
+                {
+                    process.Kill();
+                }
+
                 Log.Information("Helfer: Simulation wurde beendet.");
             }
             catch (Exception ex)
