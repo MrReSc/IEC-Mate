@@ -1161,6 +1161,7 @@ namespace IECMate
                 Properties.Settings.Default.hotkey_beginend = cb_hotkey_pxBeginEnd.SelectedValue.ToString();
                 Properties.Settings.Default.hotkey_plain = cb_hotekey_plain.SelectedValue.ToString();
                 Properties.Settings.Default.hotkey_comment = cb_hotkey_pxComment.SelectedValue.ToString();
+                Properties.Settings.Default.hotkey_brackets = cb_hotekey_brackets.SelectedValue.ToString();
                 if (cb_select_me.SelectedIndex == -1)
                 {
                     Properties.Settings.Default.me_auswahl = "";
