@@ -70,15 +70,6 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die C:\\DataView ähnelt.
-        /// </summary>
-        internal static string dataview {
-            get {
-                return ResourceManager.GetString("dataview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\data_Customer\\diagnoseData ähnelt.
         /// </summary>
         internal static string diagnoseData {
@@ -102,6 +93,24 @@ namespace IECMate.Properties {
         internal static string drive_c {
             get {
                 return ResourceManager.GetString("drive_c", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\PostCheckoutNoPause.bat ähnelt.
+        /// </summary>
+        internal static string dv_PostCheckoutNoPause {
+            get {
+                return ResourceManager.GetString("dv_PostCheckoutNoPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\DVIEW_Work\\Tools ähnelt.
+        /// </summary>
+        internal static string dv_tools {
+            get {
+                return ResourceManager.GetString("dv_tools", resourceCulture);
             }
         }
         
@@ -169,7 +178,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die C:\\DataView\\view\\DataView.exe ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\view\\DataView.exe ähnelt.
         /// </summary>
         internal static string Start_VisualizationDataView {
             get {

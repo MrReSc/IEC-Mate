@@ -1293,18 +1293,12 @@
 
                                 <Button x:Name="bt_openMachineParameter" Click="Bt_openMachineParameter_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="Orange"/>
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
                                         <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_openDataViewFolder" Click="Bt_openDataViewFolder_Click">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="Purple"/>
-                                        <Label Content="{x:Static p:Resources.lb_dataviewFolder}"/>
-                                    </StackPanel>
-                                </Button>
-
+                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
@@ -1346,19 +1340,12 @@
                                 <Button x:Name="bt_visuStarten" Click="Bt_visuStarten_Click"
                                         ToolTip="{x:Static p:Resources.tt_visu_datanet}">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Orange"/>
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="DarkCyan"/>
                                         <Label Content="{x:Static p:Resources.lb_visu}"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click"
-                                        ToolTip="{x:Static p:Resources.tt_visu_dataview}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Purple"/>
-                                        <Label Content="{x:Static p:Resources.lb_visuDataView}"/>
-                                    </StackPanel>
-                                </Button>
-
+                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
 
                                 <Button x:Name="bt_disableDataView"
@@ -1459,7 +1446,7 @@
                         <!--#endregion-->
 
                         <!--#region Hot Keys-->
-                        <GroupBox Grid.Column="2" Header="{x:Static p:Resources.gb_hotkeys}">
+                        <!--<GroupBox Grid.Column="2" Header="{x:Static p:Resources.gb_hotkeys}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -1529,14 +1516,246 @@
 
                                 </StackPanel>
                             </Grid>
-                        </GroupBox>
+                        </GroupBox>-->
                         <!--#endregion-->
                         
                     </Grid>
                 </Grid>
             </TabItem>
             <!--#endregion-->
-            
+
+            <!--#region DataView Tab-->
+            <TabItem x:Name="ti_dataview" Header="{x:Static p:Resources.ti_helfer_dataview}">
+                <Grid Margin="0,7,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="text_projktpfad_dataview" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
+                             Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_dataview_TextChanged">
+                    </TextBox>
+               
+                    <Button x:Name="btn_pfad_dataview_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_dataview_auswahlen_Click">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
+                    </Button>
+
+                    <!--#region DataView Allgemein-->
+                    <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_datei_funktion}" Grid.ColumnSpan="4">
+                        <GroupBox.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="BorderThickness" Value="1"></Setter>
+                                <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                <Setter Property="Width" Value="310"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                <Setter Property="Focusable" Value="False"></Setter>
+                            </Style>
+
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                <Setter Property="FontSize" Value="14"></Setter>
+                            </Style>
+
+                            <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+                                <Setter Property="Width" Value="auto"></Setter>
+                                <Setter Property="Height" Value="auto"></Setter>
+                                <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            </Style>
+
+                        </GroupBox.Resources>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+
+                            
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+
+                                <Button x:Name="bt_openDataViewToolsFolder" Click="Bt_openDataViewToolsFolder_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_dataview_tools}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="btn_open_postcheckout" Click="Btn_open_postcheckout_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Foreground="Green"/>
+                                        <Label Content="{x:Static p:Resources.lb_dataview_PostCheckoutNoPause}"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" Grid.Row="1">
+                                
+                                <Button x:Name="bt_openDataViewFolder" Click="Bt_openDataViewFolder_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="5" Grid.Row="1">
+
+                                <Button x:Name="bt_simStopenDataview"
+                                        ToolTip="{x:Static p:Resources.tt_stop_simDataview}" Click="Bt_simStopenDataview_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline" Foreground="Red"/>
+                                        <Label Content="{x:Static p:Resources.lb_simStop}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click"
+                                        ToolTip="{x:Static p:Resources.tt_visu_dataview}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="Monitor" Foreground="DarkCyan"/>
+                                        <Label Content="{x:Static p:Resources.lb_visu}"/>
+                                    </StackPanel>
+                                </Button>
+                                
+                            </StackPanel>
+
+                        </Grid>
+                    </GroupBox>
+                    <!--#endregion-->
+
+                    <!--#region DataView Kunden DB-->
+                    <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_dataview_db}" Grid.ColumnSpan="4" Grid.RowSpan="3">
+
+                    </GroupBox>
+                    <!--#endregion-->
+
+                </Grid>
+            </TabItem>
+            <!--#endregion-->
+
+            <!--#region Helfer Allgemein Tab-->
+            <TabItem x:Name="ti_helfer_algemein" Header="{x:Static p:Resources.ti_helfer_alg}">
+                <Grid Margin="0,7,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--#region DataView Allgemein-->
+                    <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_hotkeys}" Grid.ColumnSpan="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="245" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <Controls:ToggleSwitch x:Name="ts_hotkey"  
+                                                           Content="{x:Static p:Resources.tg_hotkey_ein}" 
+                                                           Width="auto" 
+                                                           HorizontalAlignment="Left" 
+                                                           VerticalAlignment="Center"
+                                                           IsCheckedChanged="Ts_hotkey_IsCheckedChanged" 
+                                                           ToolTip="{x:Static p:Resources.tt_hotkey}" Margin="0,3,0,10"/>
+
+                                <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" 
+                                             Margin="0" 
+                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left" 
+                                             TextChanged="Text_px_nummer_TextChanged">
+                                </TextBox>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" Grid.Row="1">
+
+                                <DockPanel Margin="0">
+                                    <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                    <ComboBox x:Name="cb_hotkey_pxComment" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxComment_SelectionChanged"/>
+                                </DockPanel>
+
+                                <Label Content="{x:Static p:Resources.lb_px_comment}" Margin="0,-5,0,0"/>
+                                <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px}"/>
+
+                                <DockPanel Margin="0,5,0,0">
+                                    <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                    <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
+                                </DockPanel>
+
+                                <Label Content="{x:Static p:Resources.lb_px_beginend}" Margin="0,-5,0,0"/>
+                                <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}" Margin="0,-10,0,0"/>
+                                <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic" Margin="0,-10,0,0"></Label>
+                                <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_end}"/>
+
+                                <DockPanel Margin="0,5,0,0">
+                                    <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                    <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
+                                </DockPanel>
+
+                                <Label Content="{x:Static p:Resources.lb_px_plain}" Margin="0,-5,0,0"/>
+                                <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_plain_text}"/>
+
+                                <DockPanel Margin="0,5,0,0">
+                                    <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
+                                    <ComboBox x:Name="cb_hotekey_brackets" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_brackets_SelectionChanged"/>
+                                </DockPanel>
+                                <Label Content="{x:Static p:Resources.lb_px_brackets}" Margin="0,-5,0,0"/>
+                                <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_brackets_text}"/>
+
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <!--#endregion-->
+
+                </Grid>
+            </TabItem>
+            <!--#endregion-->
+
         </TabControl>
     </Grid>
 </Controls:MetroWindow>

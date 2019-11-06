@@ -502,6 +502,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Datenbank ähnelt.
+        /// </summary>
+        public static string gb_dataview_db {
+            get {
+                return ResourceManager.GetString("gb_dataview_db", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Globale Funktionen ähnelt.
         /// </summary>
         public static string gb_datei_funktion {
@@ -655,6 +664,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PostCheckoutNoPause.bat ausführen ähnelt.
+        /// </summary>
+        public static string lb_dataview_PostCheckoutNoPause {
+            get {
+                return ResourceManager.GetString("lb_dataview_PostCheckoutNoPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die DataView Simulation deaktivieren ähnelt.
         /// </summary>
         public static string lb_dataview_sim_disable {
@@ -673,11 +691,11 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Ordner öffnen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Tools öffnen ähnelt.
         /// </summary>
-        public static string lb_dataviewFolder {
+        public static string lb_dataview_tools {
             get {
-                return ResourceManager.GetString("lb_dataviewFolder", resourceCulture);
+                return ResourceManager.GetString("lb_dataview_tools", resourceCulture);
             }
         }
         
@@ -790,7 +808,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net Projekt Ordner öffnen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Projekt Ordner öffnen ähnelt.
         /// </summary>
         public static string lb_pojectFolder {
             get {
@@ -979,20 +997,11 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net Visualisierung starten ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Visualisierung starten ähnelt.
         /// </summary>
         public static string lb_visu {
             get {
                 return ResourceManager.GetString("lb_visu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Visualisierung starten ähnelt.
-        /// </summary>
-        public static string lb_visuDataView {
-            get {
-                return ResourceManager.GetString("lb_visuDataView", resourceCulture);
             }
         }
         
@@ -1258,11 +1267,29 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Helfer ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net ähnelt.
         /// </summary>
         public static string ti_helfer {
             get {
                 return ResourceManager.GetString("ti_helfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Helfer ähnelt.
+        /// </summary>
+        public static string ti_helfer_alg {
+            get {
+                return ResourceManager.GetString("ti_helfer_alg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView ähnelt.
+        /// </summary>
+        public static string ti_helfer_dataview {
+            get {
+                return ResourceManager.GetString("ti_helfer_dataview", resourceCulture);
             }
         }
         
@@ -1456,11 +1483,20 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;K2Ctrl&quot;, &quot;putty&quot;, &quot;cmd&quot;, &quot;DataView&quot; und &quot;java&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;K2Ctrl&quot;, &quot;putty&quot; und &quot;cmd&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
         /// </summary>
         public static string tt_stop_sim {
             get {
                 return ResourceManager.GetString("tt_stop_sim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;DataView&quot; und &quot;java&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
+        /// </summary>
+        public static string tt_stop_simDataview {
+            get {
+                return ResourceManager.GetString("tt_stop_simDataview", resourceCulture);
             }
         }
         
@@ -1510,7 +1546,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Starte die DataView.exe aus dem Verzeichnis C:/DataView. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Startet eine DataView Visualisierung im angegebenen Projektverzeichnis. ähnelt.
         /// </summary>
         public static string tt_visu_dataview {
             get {

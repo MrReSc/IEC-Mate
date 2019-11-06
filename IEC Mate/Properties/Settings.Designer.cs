@@ -432,5 +432,17 @@ namespace IECMate.Properties {
                 this["offnen_mit_nppp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string projekt_pfad_dataview {
+            get {
+                return ((string)(this["projekt_pfad_dataview"]));
+            }
+            set {
+                this["projekt_pfad_dataview"] = value;
+            }
+        }
     }
 }

@@ -157,9 +157,12 @@
     <value>\\Log\\IEC_Mate.log</value>
   </data>
   <data name="Start_VisualizationDataView" xml:space="preserve">
-    <value>C:\\DataView\\view\\DataView.exe</value>
+    <value>\\view\\DataView.exe</value>
   </data>
-  <data name="dataview" xml:space="preserve">
-    <value>C:\\DataView</value>
+  <data name="dv_PostCheckoutNoPause" xml:space="preserve">
+    <value>\\PostCheckoutNoPause.bat</value>
+  </data>
+  <data name="dv_tools" xml:space="preserve">
+    <value>\\DVIEW_Work\\Tools</value>
   </data>
 </root>

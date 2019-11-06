@@ -215,6 +215,7 @@ namespace IECMate
 
             text_projktpfad_suche.Text = Properties.Settings.Default.projekt_pfad_suche;
             text_projktpfad_helfer.Text = Properties.Settings.Default.projekt_pfad_helfer;
+            text_projktpfad_dataview.Text = Properties.Settings.Default.projekt_pfad_dataview;
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
             ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
@@ -1155,6 +1156,7 @@ namespace IECMate
                 Properties.Settings.Default.zeilennummern = (bool)tg_line_no.IsChecked;
                 Properties.Settings.Default.projekt_pfad_suche = text_projktpfad_suche.Text;
                 Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
+                Properties.Settings.Default.projekt_pfad_dataview = text_projktpfad_dataview.Text;
                 Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
                 Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
                 Properties.Settings.Default.pxnummer = text_px_nummer.Text;
@@ -2406,6 +2408,37 @@ namespace IECMate
             }
         }
 
+        private void Btn_pfad_dataview_auswahlen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+                folderDialog.ShowNewFolderButton = false;
+
+                if (Directory.Exists(text_projktpfad_dataview.Text))
+                {
+                    folderDialog.SelectedPath = text_projktpfad_dataview.Text;
+                }
+                else
+                {
+                    folderDialog.SelectedPath = Properties.Paths.drive_c;
+                }
+
+                WinForms.DialogResult result = folderDialog.ShowDialog();
+
+                if (result == WinForms.DialogResult.OK)
+                {
+                    text_projktpfad_dataview.Text = folderDialog.SelectedPath;
+                    Log.Information("Helfer: DataView Pfad {p} wurde ausgewählt.", folderDialog.SelectedPath);
+                }
+                ti_dataview.Focus();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private async void FehlerHelferAsync()
         {
             try
@@ -2541,7 +2574,20 @@ namespace IECMate
         {
             try
             {
-                string open = Properties.Paths.dataview;
+                string open = text_projktpfad_dataview.Text;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_openDataViewToolsFolder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_projktpfad_dataview.Text + Properties.Paths.dv_tools;
                 OpenFileOrFolder(open);
             }
             catch (Exception ex)
@@ -2656,6 +2702,28 @@ namespace IECMate
 
         }
 
+        private void Bt_simStopenDataview_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (var process in Process.GetProcessesByName("DataView"))
+                {
+                    process.Kill();
+                }
+
+                foreach (var process in Process.GetProcessesByName("java"))
+                {
+                    process.Kill();
+                }
+
+                Log.Information("DataView: Simulation wurde beendet.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
         {          
             try
@@ -2670,7 +2738,7 @@ namespace IECMate
                     }
                 };
                 process.Start();
-                Log.Information("Helfer: Visualisierung dat@net wurde gestartet.");
+                Log.Information("dat@net: Visualisierung dat@net wurde gestartet.");
             }
             catch (Exception ex)
             {
@@ -2683,7 +2751,7 @@ namespace IECMate
         {
             try
             {
-                string open = Properties.Paths.Start_VisualizationDataView;
+                string open = text_projktpfad_dataview.Text + Properties.Paths.Start_VisualizationDataView;
                 var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
@@ -2693,7 +2761,30 @@ namespace IECMate
                     }
                 };
                 process.Start();
-                Log.Information("Helfer: Visualisierung DataView wurde gestartet.");
+                Log.Information("DataView: Visualisierung DataView wurde gestartet.");
+            }
+            catch (Exception ex)
+            {
+                FehlerHelferAsync();
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Btn_open_postcheckout_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_projktpfad_dataview.Text + Properties.Paths.dv_tools + Properties.Paths.dv_PostCheckoutNoPause;
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = open,
+                        WorkingDirectory = Path.GetDirectoryName(open)
+                    }
+                };
+                process.Start();
+                Log.Information("DataView: PostCheckoutNoPause.bat wurde gestartet.");
             }
             catch (Exception ex)
             {
@@ -2929,7 +3020,29 @@ namespace IECMate
             }
         }
 
-
+        private void Text_projktpfad_dataview_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                //Hier wird einfach überprüft ob der Dateipfad zu \Tools vorhanden ist
+                //Wenn ja, wird davon ausgegangen das es sich um ein DataView Projekt handelt
+                var suchpfad = text_projktpfad_dataview.Text + Properties.Paths.dv_tools;
+                suchpfad = suchpfad.Replace("\\\\", "\\");
+                if (Directory.Exists(suchpfad))
+                {
+                    HelferIstIecProjekt = true;
+                }
+                else
+                {
+                    HelferIstIecProjekt = false;
+                }
+                Log.Information("Helfer: DataView Projekt Pfad ausgewählt {v}.", HelferIstIecProjekt);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
 
         #endregion
 
