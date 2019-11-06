@@ -997,11 +997,20 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Visualisierung starten ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net HMI starten ähnelt.
         /// </summary>
         public static string lb_visu {
             get {
                 return ResourceManager.GetString("lb_visu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView HMI starten ähnelt.
+        /// </summary>
+        public static string lb_visu_dataview {
+            get {
+                return ResourceManager.GetString("lb_visu_dataview", resourceCulture);
             }
         }
         
@@ -1483,20 +1492,11 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;K2Ctrl&quot;, &quot;putty&quot; und &quot;cmd&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;K2Ctrl&quot;, &quot;putty&quot;, &quot;DataView&quot;, &quot;java&quot; und &quot;cmd&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
         /// </summary>
         public static string tt_stop_sim {
             get {
                 return ResourceManager.GetString("tt_stop_sim", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Stopt die Prozesse &quot;DataView&quot; und &quot;java&quot;. Dies kann auch unbeabsichtigt andere Programme beenden. ähnelt.
-        /// </summary>
-        public static string tt_stop_simDataview {
-            get {
-                return ResourceManager.GetString("tt_stop_simDataview", resourceCulture);
             }
         }
         

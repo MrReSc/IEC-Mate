@@ -412,7 +412,7 @@
     <value>not installed</value>
   </data>
   <data name="lb_visu" xml:space="preserve">
-    <value>Start visualization</value>
+    <value>Start da@net HMI</value>
   </data>
   <data name="mi_datei_offnen" xml:space="preserve">
     <value>Open file</value>
@@ -586,7 +586,7 @@
     <value>Starts the simulation in the specified project directory.</value>
   </data>
   <data name="tt_stop_sim" xml:space="preserve">
-    <value>Stops the processes "K2Ctrl", "putty" and "cmd". This can also unintentionally terminate other programs.</value>
+    <value>Stops the processes "K2Ctrl", "putty", "DataView", "java" and "cmd". This can also unintentionally terminate other programs.</value>
   </data>
   <data name="tt_visu_datanet" xml:space="preserve">
     <value>Starts a dat@net visualization in the specified project directory.</value>
@@ -621,7 +621,7 @@
   <data name="ti_helfer_dataview" xml:space="preserve">
     <value>DataView</value>
   </data>
-  <data name="tt_stop_simDataview" xml:space="preserve">
-    <value>Stops the processes "DataView" and "java". This can also unintentionally terminate other programs.</value>
+  <data name="lb_visu_dataview" xml:space="preserve">
+    <value>Start DataView HMI</value>
   </data>
 </root>

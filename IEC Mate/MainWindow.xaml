@@ -1627,19 +1627,11 @@
 
                             <StackPanel Grid.Column="5" Grid.Row="1">
 
-                                <Button x:Name="bt_simStopenDataview"
-                                        ToolTip="{x:Static p:Resources.tt_stop_simDataview}" Click="Bt_simStopenDataview_Click">
-                                    <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="StopCircleOutline" Foreground="Red"/>
-                                        <Label Content="{x:Static p:Resources.lb_simStop}" />
-                                    </StackPanel>
-                                </Button>
-
                                 <Button x:Name="bt_visuStartenDataView" Click="Bt_visuStartenDataView_Click"
                                         ToolTip="{x:Static p:Resources.tt_visu_dataview}">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="Monitor" Foreground="DarkCyan"/>
-                                        <Label Content="{x:Static p:Resources.lb_visu}"/>
+                                        <Label Content="{x:Static p:Resources.lb_visu_dataview}"/>
                                     </StackPanel>
                                 </Button>
                                 

@@ -2678,17 +2678,17 @@ namespace IECMate
                     process.Kill();
                 }
 
+                foreach (var process in Process.GetProcessesByName("cmd"))
+                {
+                    process.Kill();
+                }
+
                 foreach (var process in Process.GetProcessesByName("DataView"))
                 {
                     process.Kill();
                 }
 
                 foreach (var process in Process.GetProcessesByName("java"))
-                {
-                    process.Kill();
-                }
-
-                foreach (var process in Process.GetProcessesByName("cmd"))
                 {
                     process.Kill();
                 }
@@ -2700,28 +2700,6 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
 
-        }
-
-        private void Bt_simStopenDataview_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                foreach (var process in Process.GetProcessesByName("DataView"))
-                {
-                    process.Kill();
-                }
-
-                foreach (var process in Process.GetProcessesByName("java"))
-                {
-                    process.Kill();
-                }
-
-                Log.Information("DataView: Simulation wurde beendet.");
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error");
-            }
         }
 
         private void Bt_visuStarten_Click(object sender, RoutedEventArgs e)
