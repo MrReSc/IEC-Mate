@@ -216,6 +216,9 @@ namespace IECMate
             text_projktpfad_suche.Text = Properties.Settings.Default.projekt_pfad_suche;
             text_projktpfad_helfer.Text = Properties.Settings.Default.projekt_pfad_helfer;
             text_projktpfad_dataview.Text = Properties.Settings.Default.projekt_pfad_dataview;
+            text_kundenprojekt.Text = Properties.Settings.Default.projekt_pfad_kundenordner;
+            text_kundenspez.Text = Properties.Settings.Default.kundenspez;
+            text_db_connectionstring.Text = Properties.Settings.Default.sql_connection_string;
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
             ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
@@ -1157,6 +1160,9 @@ namespace IECMate
                 Properties.Settings.Default.projekt_pfad_suche = text_projktpfad_suche.Text;
                 Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
                 Properties.Settings.Default.projekt_pfad_dataview = text_projktpfad_dataview.Text;
+                Properties.Settings.Default.projekt_pfad_kundenordner = text_kundenprojekt.Text;
+                Properties.Settings.Default.kundenspez = text_kundenspez.Text;
+                Properties.Settings.Default.sql_connection_string = text_db_connectionstring.Text;
                 Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
                 Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
                 Properties.Settings.Default.pxnummer = text_px_nummer.Text;
@@ -1320,6 +1326,23 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+
+        private void Btn_default_db_connectionstring_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                text_db_connectionstring.Text = Properties.Settings.Default.sql_connection_string_default;
+                text_db_connectionstring.Focus();
+                text_db_connectionstring.CaretIndex = text_db_connectionstring.Text.Length;
+                Log.Information("DataView: Default connectionstring wurden geladen.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+
+        }
+
         private void Btn_logfile_offnen_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -2439,6 +2462,37 @@ namespace IECMate
             }
         }
 
+        private void Btn_pfad_kundenprojekt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+                folderDialog.ShowNewFolderButton = false;
+
+                if (Directory.Exists(text_kundenprojekt.Text))
+                {
+                    folderDialog.SelectedPath = text_kundenprojekt.Text;
+                }
+                else
+                {
+                    folderDialog.SelectedPath = Properties.Paths.drive_c;
+                }
+
+                WinForms.DialogResult result = folderDialog.ShowDialog();
+
+                if (result == WinForms.DialogResult.OK)
+                {
+                    text_kundenprojekt.Text = folderDialog.SelectedPath;
+                    Log.Information("DataView: Kundenordner Pfad {p} wurde ausgewählt.", folderDialog.SelectedPath);
+                }
+                ti_dataview.Focus();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private async void FehlerHelferAsync()
         {
             try
@@ -2575,6 +2629,19 @@ namespace IECMate
             try
             {
                 string open = text_projktpfad_dataview.Text;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_openKundendatenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_kundenprojekt.Text;
                 OpenFileOrFolder(open);
             }
             catch (Exception ex)
@@ -2763,6 +2830,29 @@ namespace IECMate
                 };
                 process.Start();
                 Log.Information("DataView: PostCheckoutNoPause.bat wurde gestartet.");
+            }
+            catch (Exception ex)
+            {
+                FehlerHelferAsync();
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Btn_open_update_DB_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_kundenprojekt.Text + Properties.Paths.kundenordner_install + Properties.Paths.Start_db_update_kundenordner;
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = open,
+                        WorkingDirectory = Path.GetDirectoryName(open)
+                    }
+                };
+                process.Start();
+                Log.Information("DataView: update_Dataview_simulation_DB_to_new_vers_and_this_order.bat wurde gestartet.");
             }
             catch (Exception ex)
             {
@@ -3021,6 +3111,43 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+
+        private void Btn_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string connectionString = @"server=localhost;userid=user1;password=12345;database=mydb";
+
+                MySqlConnection connection = null;
+                MySqlDataReader reader = null;
+
+                connection = new MySqlConnection(connectionString);
+                connection.Open();
+
+                string stm = "SELECT * FROM Customers";
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+                dataAdapter.SelectCommand = new MySqlCommand(stm, connection);
+                DataTable table = new DataTable();
+                dataAdapter.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+                if (connection != null)
+                    connection.Close();
+            }
+        }
+
+
+
+
+
 
         #endregion
 

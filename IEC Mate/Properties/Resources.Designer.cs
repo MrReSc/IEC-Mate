@@ -700,6 +700,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update Datenbank aus Kundenordner ähnelt.
+        /// </summary>
+        public static string lb_dataview_update_db_kundenordner {
+            get {
+                return ResourceManager.GetString("lb_dataview_update_db_kundenordner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die diagnoseData ähnelt.
         /// </summary>
         public static string lb_diagnoseData {
@@ -1132,6 +1141,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die MySQL connection string ähnelt.
+        /// </summary>
+        public static string tb_db_connectionstring {
+            get {
+                return ResourceManager.GetString("tb_db_connectionstring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Ersetzten durch: ähnelt.
         /// </summary>
         public static string tb_ersetzten_druch {
@@ -1141,11 +1159,38 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PE39 ähnelt.
+        /// </summary>
+        public static string tb_kundenspez {
+            get {
+                return ResourceManager.GetString("tb_kundenspez", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die neuer Bitset (Dezimalzahl) ähnelt.
+        /// </summary>
+        public static string tb_kundenspez_update {
+            get {
+                return ResourceManager.GetString("tb_kundenspez_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Projekt Ordner auswählen... ähnelt.
         /// </summary>
         public static string tb_proj_auswahlen {
             get {
                 return ResourceManager.GetString("tb_proj_auswahlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kundenordner auswählen... ähnelt.
+        /// </summary>
+        public static string tb_proj_kundenordner {
+            get {
+                return ResourceManager.GetString("tb_proj_kundenordner", resourceCulture);
             }
         }
         
@@ -1402,6 +1447,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die update_Dataview_simulation_DB_to_new_vers_and_this_order.bat aus Kundenordner ausführen ähnelt.
+        /// </summary>
+        public static string tt_dataview_update_db_kundenordner {
+            get {
+                return ResourceManager.GetString("tt_dataview_update_db_kundenordner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Macht das ersetzten wieder Rückgangig. ähnelt.
         /// </summary>
         public static string tt_ers_ruck {
@@ -1474,11 +1528,38 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset aus der Datenbank für den Kundenspez abrufen. ähnelt.
+        /// </summary>
+        public static string tt_kundenspez {
+            get {
+                return ResourceManager.GetString("tt_kundenspez", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset in der Datenbank für den Kundenspez ändern (Dezimalzahl). ähnelt.
+        /// </summary>
+        public static string tt_kundenspez_update {
+            get {
+                return ResourceManager.GetString("tt_kundenspez_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Dokument wird automatisch bei der richtigen Zeile mit Notepad++ geöffnet. ähnelt.
         /// </summary>
         public static string tt_offnen_nppp {
             get {
                 return ResourceManager.GetString("tt_offnen_nppp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die z.B. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612 ähnelt.
+        /// </summary>
+        public static string tt_proj_kundenordner {
+            get {
+                return ResourceManager.GetString("tt_proj_kundenordner", resourceCulture);
             }
         }
         

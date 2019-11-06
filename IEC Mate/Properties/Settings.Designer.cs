@@ -444,5 +444,53 @@ namespace IECMate.Properties {
                 this["projekt_pfad_dataview"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root\"")]
+        public string sql_connection_string {
+            get {
+                return ((string)(this["sql_connection_string"]));
+            }
+            set {
+                this["sql_connection_string"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string projekt_pfad_kundenordner {
+            get {
+                return ((string)(this["projekt_pfad_kundenordner"]));
+            }
+            set {
+                this["projekt_pfad_kundenordner"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root\"")]
+        public string sql_connection_string_default {
+            get {
+                return ((string)(this["sql_connection_string_default"]));
+            }
+            set {
+                this["sql_connection_string_default"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string kundenspez {
+            get {
+                return ((string)(this["kundenspez"]));
+            }
+            set {
+                this["kundenspez"] = value;
+            }
+        }
     }
 }

@@ -133,6 +133,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\Projekt_Datanet\\install ähnelt.
+        /// </summary>
+        internal static string kundenordner_install {
+            get {
+                return ResourceManager.GetString("kundenordner_install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\Log\\IEC_Mate.log ähnelt.
         /// </summary>
         internal static string LogFile {
@@ -156,6 +165,15 @@ namespace IECMate.Properties {
         internal static string MachSetup {
             get {
                 return ResourceManager.GetString("MachSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\update_Dataview_simulation_DB_to_new_vers_and_this_order.bat ähnelt.
+        /// </summary>
+        internal static string Start_db_update_kundenordner {
+            get {
+                return ResourceManager.GetString("Start_db_update_kundenordner", resourceCulture);
             }
         }
         

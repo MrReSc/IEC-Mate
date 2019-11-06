@@ -165,4 +165,10 @@
   <data name="dv_tools" xml:space="preserve">
     <value>\\DVIEW_Work\\Tools</value>
   </data>
+  <data name="kundenordner_install" xml:space="preserve">
+    <value>\\Projekt_Datanet\\install</value>
+  </data>
+  <data name="Start_db_update_kundenordner" xml:space="preserve">
+    <value>\\update_Dataview_simulation_DB_to_new_vers_and_this_order.bat</value>
+  </data>
 </root>

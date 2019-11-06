@@ -621,7 +621,34 @@
   <data name="ti_helfer_dataview" xml:space="preserve">
     <value>DataView</value>
   </data>
+  <data name="lb_dataview_update_db_kundenordner" xml:space="preserve">
+    <value>Update database from customer folder</value>
+  </data>
   <data name="lb_visu_dataview" xml:space="preserve">
     <value>Start DataView HMI</value>
+  </data>
+  <data name="tb_db_connectionstring" xml:space="preserve">
+    <value>MySQL connection string</value>
+  </data>
+  <data name="tb_kundenspez" xml:space="preserve">
+    <value>PE39</value>
+  </data>
+  <data name="tb_kundenspez_update" xml:space="preserve">
+    <value>new bit set (decimal number)</value>
+  </data>
+  <data name="tb_proj_kundenordner" xml:space="preserve">
+    <value>Select customer folder...</value>
+  </data>
+  <data name="tt_dataview_update_db_kundenordner" xml:space="preserve">
+    <value>Run update_Dataview_simulation_DB_to_new_vers_and_this_order.bat from customer folder</value>
+  </data>
+  <data name="tt_kundenspez" xml:space="preserve">
+    <value>Retrieve the bitset from the database for the customer specification.</value>
+  </data>
+  <data name="tt_kundenspez_update" xml:space="preserve">
+    <value>Change the bitset in the database for the customer specification (decimal number).</value>
+  </data>
+  <data name="tt_proj_kundenordner" xml:space="preserve">
+    <value>e.g. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612</value>
   </data>
 </root>

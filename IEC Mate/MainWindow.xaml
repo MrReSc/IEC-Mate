@@ -1643,6 +1643,129 @@
 
                     <!--#region DataView Kunden DB-->
                     <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_dataview_db}" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <TextBox x:Name="text_kundenprojekt" Grid.Column="1" Grid.Row="1" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_kundenordner}" Margin="0" 
+                                     Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_proj_kundenordner}">
+                            </TextBox>
+
+                            <Button x:Name="btn_pfad_kundenprojekt" Grid.Row="1" Grid.Column="2" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_kundenprojekt_Click" >
+                                <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
+                            </Button>
+
+                            <StackPanel Grid.Column="1" Grid.Row="2" Margin="0,20,0,0">
+
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderThickness" Value="1"></Setter>
+                                        <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                        <Setter Property="Width" Value="310"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                        <Setter Property="Focusable" Value="False"></Setter>
+                                    </Style>
+
+                                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                        <Setter Property="FontSize" Value="14"></Setter>
+                                    </Style>
+
+                                    <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+                                        <Setter Property="Width" Value="auto"></Setter>
+                                        <Setter Property="Height" Value="auto"></Setter>
+                                        <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                    </Style>
+
+                                </StackPanel.Resources>
+
+                                <Button x:Name="bt_openKundendatenFolder" Click="Bt_openKundendatenFolder_Click" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="btn_open_update_DB" ToolTip="{x:Static p:Resources.tt_dataview_update_db_kundenordner}" Click="Btn_open_update_DB_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="DatabasePlus"/>
+                                        <Label Content="{x:Static p:Resources.lb_dataview_update_db_kundenordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                            <TextBox x:Name="text_db_connectionstring" Grid.Column="4" Grid.Row="1" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_db_connectionstring}" Margin="0" 
+                                     Width="500" VerticalContentAlignment="Center">
+                            </TextBox>
+
+                            <Button x:Name="btn_default_db_connectionstring" Grid.Row="1" Grid.Column="5" Width="30" Height="30" HorizontalAlignment="Left"
+                                    Focusable="False" ToolTip="{x:Static p:Resources.tt_file_ext_default}" Click="Btn_default_db_connectionstring_Click">
+                                <iconPacks:PackIconMaterial Kind="BackupRestore" Width="auto" Height="auto"/>
+                            </Button>
+
+                            <Grid Grid.Row="2" Grid.Column="4" Margin="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBox x:Name="text_kundenspez" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez}" Margin="0" 
+                                         VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" Width="200" MinHeight="30">
+                                </TextBox>
+
+                                <TextBox x:Name="text_select_bitset_kundenspez" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" 
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
+                                </TextBox>
+
+                                <Button x:Name="btn_bitset_kundenspez" Grid.Column="1" Grid.Row="2" Width="30" Height="30" HorizontalAlignment="Left"
+                                    Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez}" Click="Btn_bitset_kundenspez_Click" >
+                                    <iconPacks:PackIconMaterial Kind="DatabaseSearch" Width="auto" Height="auto"/>
+                                </Button>
+
+                                <TextBox x:Name="text_bitset" Grid.Column="0" Grid.Row="4" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez_update}" Margin="0" 
+                                         VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" Width="200">
+                                </TextBox>
+
+                                <Button x:Name="btn_update_bitset_kundenspez" Grid.Column="1" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
+                                    Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_update}" >
+                                    <iconPacks:PackIconMaterial Kind="DatabaseImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
+                                </Button>
+
+                            </Grid>
+
+
+
+                        </Grid>
 
                     </GroupBox>
                     <!--#endregion-->

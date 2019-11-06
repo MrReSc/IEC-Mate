@@ -621,7 +621,34 @@
   <data name="ti_helfer_dataview" xml:space="preserve">
     <value>DataView</value>
   </data>
+  <data name="lb_dataview_update_db_kundenordner" xml:space="preserve">
+    <value>Update Datenbank aus Kundenordner</value>
+  </data>
   <data name="lb_visu_dataview" xml:space="preserve">
     <value>DataView HMI starten</value>
+  </data>
+  <data name="tb_db_connectionstring" xml:space="preserve">
+    <value>MySQL connection string</value>
+  </data>
+  <data name="tb_kundenspez" xml:space="preserve">
+    <value>PE39</value>
+  </data>
+  <data name="tb_kundenspez_update" xml:space="preserve">
+    <value>neuer Bitset (Dezimalzahl)</value>
+  </data>
+  <data name="tb_proj_kundenordner" xml:space="preserve">
+    <value>Kundenordner auswählen...</value>
+  </data>
+  <data name="tt_dataview_update_db_kundenordner" xml:space="preserve">
+    <value>update_Dataview_simulation_DB_to_new_vers_and_this_order.bat aus Kundenordner ausführen</value>
+  </data>
+  <data name="tt_kundenspez" xml:space="preserve">
+    <value>Bitset aus der Datenbank für den Kundenspez abrufen.</value>
+  </data>
+  <data name="tt_kundenspez_update" xml:space="preserve">
+    <value>Bitset in der Datenbank für den Kundenspez ändern (Dezimalzahl).</value>
+  </data>
+  <data name="tt_proj_kundenordner" xml:space="preserve">
+    <value>z.B. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612</value>
   </data>
 </root>
