@@ -1675,8 +1675,10 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="245" />
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="5" />
                             </Grid.ColumnDefinitions>
@@ -1723,6 +1725,10 @@
                                 <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}" Margin="0,-10,0,0"/>
                                 <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic" Margin="0,-10,0,0"></Label>
                                 <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_end}"/>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="5" Grid.Row="1">
 
                                 <DockPanel Margin="0,5,0,0">
                                     <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
