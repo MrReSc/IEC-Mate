@@ -1,7 +1,5 @@
 # IEC-Mate
 
-Die erste stabile Version von IEC-Mate ist erschienen :heart_eyes_cat: :tada: :bell: :cocktail:
-
 [![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://github.com/MrReSc/IEC-Mate/pulse) [![GitHub license](https://img.shields.io/github/license/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/blob/master/LICENSE) ![](https://img.shields.io/github/downloads/MrReSc/IEC-Mate/total.svg) [![Releases](https://img.shields.io/github/release/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/releases) ![](https://badges.frapsoft.com/os/v2/open-source.png?v=103)
 
 [![Open Issues](https://img.shields.io/github/issues/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/issues) [![Closed Issues](https://img.shields.io/github/issues-closed/MrReSc/IEC-Mate.svg)](https://github.com/MrReSc/IEC-Mate/issues?q=is%3Aissue+is%3Aclosed)
@@ -16,9 +14,11 @@ IEC-Mate soll die Entwicklung von Software unterstützen. Dazu gibt es die folge
 - Code
 - Suche
 - Bitset
+- dat@net
+- DataView
 - Helfer
 
-Die Helfer Funktionen sind sehr spezifisch für KEBA IEC Projekte abgestimmt.
+Die dat@net und DataView Funktionen sind sehr spezifisch für KEBA IEC Projekte abgestimmt.
 
 ## Code
 
@@ -52,9 +52,7 @@ Die Bitset-Funktion bietet die Möglichkeit schnell zwischen Binär-, Hexadezima
 
 ![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/bitset.gif?raw=true)
 
-## Helfer
-
-IEC-Mate hat auch einige Helfer-Funktionen. 
+## dat@net
 
 Spezifisch auf IEC Projekte zugeschnitten sind die Ordner- und Datei-Helfer. Sie ermöglichen einen schnellen Zugriff auf häufig genutzt Dateien und Ordner.
 
@@ -66,9 +64,13 @@ Die Simulation und die Visualisierung für das ausgewählte Projekt kann direkt 
 
 Auch gibt es einen Button um die ``*.puLock`` Dateien im ausgewählten Projekt zu löschen.
 
-Wenn IEC-Mate geöffnet ist, kann mit den konfigurierten Tastenkombinationen die PX Nummer in verschiedenen Variationen in andere Applikationen eingefügt werden. 
+## DataView
 
-![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/helper_hotkey.gif?raw=true)
+
+
+## Helfer
+
+Wenn IEC-Mate geöffnet ist, kann mit den konfigurierten Tastenkombinationen die PX Nummer in verschiedenen Variationen in andere Applikationen eingefügt werden. 
 
 ## Einstellungen
 
