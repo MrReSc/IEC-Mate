@@ -56,7 +56,7 @@ Die Bitset-Funktion bietet die Möglichkeit schnell zwischen Binär-, Hexadezima
 
 Spezifisch auf IEC Projekte zugeschnitten sind die Ordner- und Datei-Helfer. Sie ermöglichen einen schnellen Zugriff auf häufig genutzt Dateien und Ordner.
 
-![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/helper_folder.gif?raw=true)
+![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/datanet.png?raw=true)
 
 Mit der Backupfunktion kann das aktuell ausgewählte Verzeichnis als Archiv `*.7z` gespeichert werden. 
 
@@ -66,11 +66,29 @@ Auch gibt es einen Button um die ``*.puLock`` Dateien im ausgewählten Projekt z
 
 ## DataView
 
+![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/dataview.png?raw=true)
 
+#### DataView Entwicklung
+
+Die Funktionen in der Box `DataView Entwicklung` beziehen sich immer auf das Entwicklungsprojekt `.\DVIEW_Work\`.
+
+#### DataView Simulation
+
+Die Funktionen in der Box `DataView Simulation` beziehen sich immer auf das Simulationsprojekt `.\view\`.
+
+#### DataView Datenbank
+
+Wenn ein Kundenordner eingestellt ist, kann hier der Batch `update_Dataview_simulation_DB_to_new_vers_and_this_order.bat` ausgeführt werden.
+
+#### DataView Datenbank Bitset
+
+Hier kann das Bitset zu einem Kundenspez. in der DataView Datenbank abgerufen und geändert werden. 
 
 ## Helfer
 
 Wenn IEC-Mate geöffnet ist, kann mit den konfigurierten Tastenkombinationen die PX Nummer in verschiedenen Variationen in andere Applikationen eingefügt werden. 
+
+![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/helper.png?raw=true)
 
 ## Einstellungen
 
@@ -101,6 +119,7 @@ Grossen Dank an die Programmierer die Open Source Bibliothek zur Verfügung stel
 - [Windows Input Simulator Plus](https://github.com/TChatzigiannakis/InputSimulatorPlus)
 - [7-Zip](https://www.7-zip.org/)
 - [Serilog](https://github.com/serilog/serilog)
+- [Async MySQL Connector](https://github.com/mysql-net/MySqlConnector)
 
 ## Entwicklungsumgebung einrichten
 
