@@ -22,6 +22,11 @@ Octokit - GitHub API Client Library for .NET
 MIT License
 Copyright 2017 GitHub, Inc.
 
+MySqlConnector
+*****************
+MIT License
+Copyright (c) 2016 Bradley Grainger
+
 NHotkey
 *****************
 Apache License Version 2.0, January 2004 http://www.apache.org/licenses/
