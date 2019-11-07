@@ -171,4 +171,13 @@
   <data name="Start_db_update_kundenordner" xml:space="preserve">
     <value>\\update_Dataview_simulation_DB_to_new_vers_and_this_order.bat</value>
   </data>
+  <data name="dv_bilder_dev" xml:space="preserve">
+    <value>\\DVIEW_Work\\contents\\images</value>
+  </data>
+  <data name="dv_usb_dev" xml:space="preserve">
+    <value>\\DVIEW_Work\\media\\usb0\\dataView</value>
+  </data>
+  <data name="dv_usb_sim" xml:space="preserve">
+    <value>\\view\\media\\usb0\\dataView</value>
+  </data>
 </root>

@@ -447,7 +447,7 @@ namespace IECMate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root")]
         public string sql_connection_string {
             get {
                 return ((string)(this["sql_connection_string"]));
@@ -471,7 +471,7 @@ namespace IECMate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root")]
         public string sql_connection_string_default {
             get {
                 return ((string)(this["sql_connection_string_default"]));

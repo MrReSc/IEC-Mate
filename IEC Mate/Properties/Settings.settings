@@ -108,13 +108,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="sql_connection_string" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root"</Value>
+      <Value Profile="(Default)">Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root</Value>
     </Setting>
     <Setting Name="projekt_pfad_kundenordner" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="sql_connection_string_default" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root"</Value>
+      <Value Profile="(Default)">Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root</Value>
     </Setting>
     <Setting Name="kundenspez" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

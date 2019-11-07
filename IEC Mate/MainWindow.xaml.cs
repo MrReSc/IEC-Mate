@@ -34,6 +34,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
 using Serilog;
+using MySql.Data.MySqlClient;
 
 namespace IECMate
 {
@@ -2506,6 +2507,19 @@ namespace IECMate
             }
         }
 
+        private async void FehlerHelferDatenbank()
+        {
+            try
+            {
+                Log.Debug("DataView: Datenbank Fehler \"{f}\" wurde ausgelöst.", Properties.Resources.dialogMsgDatenbankFehler);
+                await this.ShowMessageAsync(Properties.Resources.dialogTitelDatenbankFehler, Properties.Resources.dialogMsgDatenbankFehler, MessageDialogStyle.Affirmative);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private async void FehlerHelferAsyncME()
         {
             try
@@ -2629,6 +2643,45 @@ namespace IECMate
             try
             {
                 string open = text_projktpfad_dataview.Text;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_openDataViewUSBfolderDev_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_projktpfad_dataview.Text + Properties.Paths.dv_usb_dev;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_openDataViewBilderFolder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_projktpfad_dataview.Text + Properties.Paths.dv_bilder_dev;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_openDataViewUSBfolderSim_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_projktpfad_dataview.Text + Properties.Paths.dv_usb_sim;
                 OpenFileOrFolder(open);
             }
             catch (Exception ex)
@@ -3112,44 +3165,100 @@ namespace IECMate
             }
         }
 
-        private void Btn_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+        private async void Btn_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string connectionString = @"server=localhost;userid=user1;password=12345;database=mydb";
+                var connString = text_db_connectionstring.Text;
+                var spez = text_kundenspez.Text;
+                text_select_bitset_kundenspez.Text = String.Empty;
 
-                MySqlConnection connection = null;
-                MySqlDataReader reader = null;
+                using (var conn = new MySqlConnection(connString))
+                {
+                    await conn.OpenAsync();
 
-                connection = new MySqlConnection(connectionString);
-                connection.Open();
+                    // Retrieve Bitset
+                    using (var cmd = new MySqlCommand("SELECT SETintValue FROM bu_dc_control.tbl_setup WHERE SETname LIKE '" + spez + ".%';", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync()) 
+                        while (await reader.ReadAsync())
+                            text_select_bitset_kundenspez.Text = reader.GetInt32(0).ToString();
+                }
 
-                string stm = "SELECT * FROM Customers";
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
-                dataAdapter.SelectCommand = new MySqlCommand(stm, connection);
-                DataTable table = new DataTable();
-                dataAdapter.Fill(table);
-                return table;
+            }
+            catch (MySqlException ex)
+            {
+                FehlerHelferDatenbank();
+                Log.Error(ex, "Error");
             }
             catch (Exception ex)
             {
                 Log.Error(ex, "Error");
             }
-            finally
-            {
-                if (reader != null)
-                    reader.Close();
-                if (connection != null)
-                    connection.Close();
-            }
         }
 
-
-
-
-
-
         #endregion
+
+        private void Text_bitset_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
+
+        private async void Btn_update_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var connString = text_db_connectionstring.Text;
+                var spez = text_kundenspez.Text;
+                int value = Int32.Parse(text_bitset.Text);
+                int setid = 999999999;
+
+                if (value > 2147483647)
+                {
+                    Log.Debug("DataView: Bitset zu grosse Zahl.");
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDatenbankFehler, Properties.Resources.dialogMsgDatenbankBitsetFehler, MessageDialogStyle.Affirmative);
+                    return;
+                }
+
+                using (var conn = new MySqlConnection(connString))
+                {
+                    await conn.OpenAsync();
+
+                    // Retrieve SETid
+                    using (var cmd = new MySqlCommand("SELECT SETid FROM bu_dc_control.tbl_setup WHERE SETname LIKE '" + spez + ".%';", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                        while (await reader.ReadAsync())
+                            setid = reader.GetInt32(0);
+
+                    if (setid == 999999999)
+                    {
+                        Log.Debug("DataView: Keine passenden SETid gefunden.");
+                        return;
+                    }
+
+                    // Update Bitset
+                    using (var cmd = new MySqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "UPDATE bu_dc_control.tbl_setup SET SETintValue = (@p) WHERE SETid = (@id)";
+                        cmd.Parameters.AddWithValue("p", value);
+                        cmd.Parameters.AddWithValue("id", setid);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+
+
+            }
+            catch (MySqlException ex)
+            {
+                FehlerHelferDatenbank();
+                Log.Error(ex, "Error");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
 
 
     }

@@ -166,7 +166,7 @@
     <value>Der Download ist Fehlgeschlagen.</value>
   </data>
   <data name="dialogMsgHelferFehler" xml:space="preserve">
-    <value>Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.</value>
+    <value>Datei oder Ordner nicht vorhanden. Bitte den Projektpfad überprüfen.</value>
   </data>
   <data name="dialogMsgHelferFehlerME" xml:space="preserve">
     <value>Bitte eine ME auswählen.</value>
@@ -650,5 +650,29 @@
   </data>
   <data name="tt_proj_kundenordner" xml:space="preserve">
     <value>z.B. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612</value>
+  </data>
+  <data name="dialogMsgDatenbankBitsetFehler" xml:space="preserve">
+    <value>Die eingegebene Zahl ist zu gross. Maximal 2147483647 erlaubt.</value>
+  </data>
+  <data name="dialogMsgDatenbankFehler" xml:space="preserve">
+    <value>Verbindung zur Datenbank fehlgeschlagen. Bitte MySQL connection string überprüfen.</value>
+  </data>
+  <data name="dialogTitelDatenbankFehler" xml:space="preserve">
+    <value>Datenbank Fehler</value>
+  </data>
+  <data name="gb_dataview_db_bitset" xml:space="preserve">
+    <value>DataView Datenbank Bitset</value>
+  </data>
+  <data name="gb_dataview_dev" xml:space="preserve">
+    <value>DataView Entwicklung</value>
+  </data>
+  <data name="gb_dataview_sim" xml:space="preserve">
+    <value>DataView Simualtion</value>
+  </data>
+  <data name="lb_dataview_bilder_ordner" xml:space="preserve">
+    <value>Bilder Ordner öffnen</value>
+  </data>
+  <data name="lb_dataview_usb_folder" xml:space="preserve">
+    <value>usb0 Speicher Ordner öffnen</value>
   </data>
 </root>

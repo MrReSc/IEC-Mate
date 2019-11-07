@@ -97,6 +97,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\DVIEW_Work\\contents\\images ähnelt.
+        /// </summary>
+        internal static string dv_bilder_dev {
+            get {
+                return ResourceManager.GetString("dv_bilder_dev", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\PostCheckoutNoPause.bat ähnelt.
         /// </summary>
         internal static string dv_PostCheckoutNoPause {
@@ -111,6 +120,24 @@ namespace IECMate.Properties {
         internal static string dv_tools {
             get {
                 return ResourceManager.GetString("dv_tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\DVIEW_Work\\media\\usb0\\dataView ähnelt.
+        /// </summary>
+        internal static string dv_usb_dev {
+            get {
+                return ResourceManager.GetString("dv_usb_dev", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\view\\media\\usb0\\dataView ähnelt.
+        /// </summary>
+        internal static string dv_usb_sim {
+            get {
+                return ResourceManager.GetString("dv_usb_sim", resourceCulture);
             }
         }
         

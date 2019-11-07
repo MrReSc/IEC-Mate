@@ -187,6 +187,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die eingegebene Zahl ist zu gross. Maximal 2147483647 erlaubt. ähnelt.
+        /// </summary>
+        public static string dialogMsgDatenbankBitsetFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgDatenbankBitsetFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Verbindung zur Datenbank fehlgeschlagen. Bitte MySQL connection string überprüfen. ähnelt.
+        /// </summary>
+        public static string dialogMsgDatenbankFehler {
+            get {
+                return ResourceManager.GetString("dialogMsgDatenbankFehler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Das Update wird heruntergeladen. Bitte warten... ähnelt.
         /// </summary>
         public static string dialogMsgDownload {
@@ -205,7 +223,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Datei oder  Ordner nicht vorhanden. Bitte den Projektpfad überprüfen. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Datei oder Ordner nicht vorhanden. Bitte den Projektpfad überprüfen. ähnelt.
         /// </summary>
         public static string dialogMsgHelferFehler {
             get {
@@ -336,6 +354,15 @@ namespace IECMate.Properties {
         public static string dialogTitelDateiOffnen {
             get {
                 return ResourceManager.GetString("dialogTitelDateiOffnen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Datenbank Fehler ähnelt.
+        /// </summary>
+        public static string dialogTitelDatenbankFehler {
+            get {
+                return ResourceManager.GetString("dialogTitelDatenbankFehler", resourceCulture);
             }
         }
         
@@ -511,6 +538,33 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Datenbank Bitset ähnelt.
+        /// </summary>
+        public static string gb_dataview_db_bitset {
+            get {
+                return ResourceManager.GetString("gb_dataview_db_bitset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Entwicklung ähnelt.
+        /// </summary>
+        public static string gb_dataview_dev {
+            get {
+                return ResourceManager.GetString("gb_dataview_dev", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Simualtion ähnelt.
+        /// </summary>
+        public static string gb_dataview_sim {
+            get {
+                return ResourceManager.GetString("gb_dataview_sim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Globale Funktionen ähnelt.
         /// </summary>
         public static string gb_datei_funktion {
@@ -664,6 +718,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bilder Ordner öffnen ähnelt.
+        /// </summary>
+        public static string lb_dataview_bilder_ordner {
+            get {
+                return ResourceManager.GetString("lb_dataview_bilder_ordner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die PostCheckoutNoPause.bat ausführen ähnelt.
         /// </summary>
         public static string lb_dataview_PostCheckoutNoPause {
@@ -705,6 +768,15 @@ namespace IECMate.Properties {
         public static string lb_dataview_update_db_kundenordner {
             get {
                 return ResourceManager.GetString("lb_dataview_update_db_kundenordner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die usb0 Speicher Ordner öffnen ähnelt.
+        /// </summary>
+        public static string lb_dataview_usb_folder {
+            get {
+                return ResourceManager.GetString("lb_dataview_usb_folder", resourceCulture);
             }
         }
         

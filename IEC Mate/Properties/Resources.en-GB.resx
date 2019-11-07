@@ -651,4 +651,28 @@
   <data name="tt_proj_kundenordner" xml:space="preserve">
     <value>e.g. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612</value>
   </data>
+  <data name="dialogMsgDatenbankBitsetFehler" xml:space="preserve">
+    <value>The number entered is too large. Maximum 2147483647 allowed.</value>
+  </data>
+  <data name="dialogMsgDatenbankFehler" xml:space="preserve">
+    <value>Connection to database failed. Please check MySQL connection string.</value>
+  </data>
+  <data name="dialogTitelDatenbankFehler" xml:space="preserve">
+    <value>Database error</value>
+  </data>
+  <data name="gb_dataview_db_bitset" xml:space="preserve">
+    <value>DataView database bitset</value>
+  </data>
+  <data name="gb_dataview_dev" xml:space="preserve">
+    <value>DataView Development</value>
+  </data>
+  <data name="gb_dataview_sim" xml:space="preserve">
+    <value>DataView Simualtion</value>
+  </data>
+  <data name="lb_dataview_bilder_ordner" xml:space="preserve">
+    <value>Open Images folder</value>
+  </data>
+  <data name="lb_dataview_usb_folder" xml:space="preserve">
+    <value>Open usb0 memory folder</value>
+  </data>
 </root>
