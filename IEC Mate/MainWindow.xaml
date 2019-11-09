@@ -1373,12 +1373,11 @@
                     <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
                         <!--#region Datein ME öffnen-->
-                        <GroupBox x:Name="gb_me_funktionen" Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}">
+                        <GroupBox x:Name="gb_me_funktionen" Grid.Column="0" Header="{x:Static p:Resources.gb_helfer_funkionen_me}" >
                             <GroupBox.Resources>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
                                     <Setter Property="Background" Value="Transparent"></Setter>
