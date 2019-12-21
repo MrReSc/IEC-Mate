@@ -714,14 +714,6 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
-
-        private void Text_px_nummer_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(text_px_nummer.Text))
-            {
-                ts_hotkey.IsChecked = false;
-            }
-        }
         #endregion
 
         #region Code Vorlage
@@ -3273,8 +3265,6 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
-
-
     }
 }
 

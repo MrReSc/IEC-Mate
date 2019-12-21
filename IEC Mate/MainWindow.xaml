@@ -1922,9 +1922,7 @@
 
                                 <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" 
                                              Margin="0" 
-                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left" 
-                                             TextChanged="Text_px_nummer_TextChanged">
-                                </TextBox>
+                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left"/>
 
                             </StackPanel>
 
