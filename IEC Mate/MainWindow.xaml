@@ -7,7 +7,7 @@
                       xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
                       xmlns:p = "clr-namespace:IECMate.Properties"
                       xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-                      Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200" KeyDown="Window_KeyDown"
+                      Title="{x:Static p:Resources.app_titel}" MinHeight="900" MinWidth="1200" Height="900" Width="1200"
                       WindowStartupLocation="CenterScreen"
                       ResizeMode="CanResizeWithGrip"    
                       Closing="MetroWindow_Closing"
@@ -431,7 +431,7 @@
                                             x:Name="text_code_template" 
                                             Width="auto" Height="auto" IsTabStop="False"
                                             ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                            Foreground="{DynamicResource TextBrush}">
+                                            Foreground="{DynamicResource TextBrush}" KeyDown="Text_code_template_KeyDown">
                                         <avalonEdit:TextEditor.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="{x:Static p:Resources.dp_datei_import}" Click="Btn_template_offnen_Click"/>
@@ -1842,7 +1842,7 @@
 
                                     <TextBox x:Name="text_kundenspez" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez}" Margin="0" 
                                          VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
-                                         Width="200" MinHeight="30" MaxLength="4" CharacterCasing="Upper">
+                                         Width="200" MinHeight="30" MaxLength="4" CharacterCasing="Upper" KeyDown="Text_kundenspez_KeyDown">
                                     </TextBox>
 
                                     <TextBox x:Name="text_select_bitset_kundenspez" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" 

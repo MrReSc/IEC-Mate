@@ -756,7 +756,7 @@ namespace IECMate
             }
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Text_code_template_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -3171,7 +3171,20 @@ namespace IECMate
             }
         }
 
-        private async void Btn_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+        private void Text_kundenspez_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                GetBitsetKundenspez();
+            }
+        }
+
+        private void Btn_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+        {
+            GetBitsetKundenspez();
+        }
+
+        private async void GetBitsetKundenspez()
         {
             try
             {
@@ -3210,7 +3223,14 @@ namespace IECMate
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
-        private async void Btn_update_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+
+        private void Btn_update_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBitsetKundenspez();
+        }
+
+
+        private async void UpdateBitsetKundenspez()
         {
             try
             {
@@ -3252,8 +3272,6 @@ namespace IECMate
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
-
-
             }
             catch (MySqlException ex)
             {
