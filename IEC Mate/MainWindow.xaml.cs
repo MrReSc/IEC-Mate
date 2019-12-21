@@ -98,7 +98,10 @@ namespace IECMate
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File(logfile, rollingInterval: RollingInterval.Day)
+                .WriteTo.File(logfile, 
+                              rollingInterval: RollingInterval.Day, 
+                              fileSizeLimitBytes: Properties.Settings.Default.LogFileSize, 
+                              retainedFileCountLimit: Properties.Settings.Default.LofFileRetain)
                 .CreateLogger();
 
             Log.Information("IEC Mate wurde gestartet.");

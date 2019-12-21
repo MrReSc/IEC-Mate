@@ -492,5 +492,29 @@ namespace IECMate.Properties {
                 this["kundenspez"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30000000")]
+        public long LogFileSize {
+            get {
+                return ((long)(this["LogFileSize"]));
+            }
+            set {
+                this["LogFileSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31")]
+        public int LofFileRetain {
+            get {
+                return ((int)(this["LofFileRetain"]));
+            }
+            set {
+                this["LofFileRetain"] = value;
+            }
+        }
     }
 }

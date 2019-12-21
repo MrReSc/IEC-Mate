@@ -119,5 +119,11 @@
     <Setting Name="kundenspez" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="LogFileSize" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">30000000</Value>
+    </Setting>
+    <Setting Name="LofFileRetain" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">31</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
