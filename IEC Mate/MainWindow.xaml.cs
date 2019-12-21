@@ -816,7 +816,7 @@ namespace IECMate
                     Log.Debug("Code: Vorlage alle ersetzten wurde gedrückt.");
                     do
                     {
-                        Replace(text_suchen.Text, combo_vars.Text, text_code_template);
+                        Replace(text_suchen.Text, combo_vars.Text, text_code_template, true);
                     } while (text_code_template.Text.Contains(text_suchen.Text));
                 }
                
@@ -829,13 +829,13 @@ namespace IECMate
 
         private int lastUsedIndex = 0;
 
-        public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor)
+        public void Replace(string s, string replacement, ICSharpCode.AvalonEdit.TextEditor editor, bool replaceAll = false)
         {
             try
             {
                 int nIndex = -1;
 
-                if (editor.SelectedText.Equals(s))
+                if (editor.SelectedText.Equals(s) &! replaceAll)
                 {
                     nIndex = editor.SelectionStart;
                 }
@@ -858,9 +858,15 @@ namespace IECMate
                 {
                     lastUsedIndex = 0;
                 }
+
+                if (editor.Text.Contains(s) == false)
+                {
+                    lastUsedIndex = 0;
+                }
             }
             catch (Exception ex)
             {
+                lastUsedIndex = 0;
                 Log.Error(ex, "Error");
             }
         }
