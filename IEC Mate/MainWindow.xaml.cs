@@ -836,6 +836,11 @@ namespace IECMate
         {
             try
             {
+                if (string.IsNullOrEmpty(s))
+                {
+                    return;
+                }
+
                 int nIndex = -1;
 
                 if (editor.SelectedText.Equals(s) &! replaceAll)
