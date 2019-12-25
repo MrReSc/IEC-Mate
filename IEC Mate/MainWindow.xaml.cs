@@ -1946,7 +1946,10 @@ namespace IECMate
                                 {
                                     if (s.StartsWith("name"))
                                     {
-                                        if (s.Contains("svDI") || s.Contains("svDO") || s.Contains("svAI") || s.Contains("svAO"))
+                                        if (s.Contains("svDI") || s.Contains("svDO") || 
+                                            s.Contains("svAI") || s.Contains("svAO") || 
+                                            s.Contains("svBI") || s.Contains("svBO") || 
+                                            s.Contains("svWI") || s.Contains("svWO"))
                                         {
                                             string[] tokens = s.Split('.');
                                             string[] tok = tokens[1].Split('"');
