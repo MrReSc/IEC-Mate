@@ -499,7 +499,7 @@
     <value>Code</value>
   </data>
   <data name="ti_helfer" xml:space="preserve">
-    <value>dat@net</value>
+    <value>Dat@net</value>
   </data>
   <data name="ti_suche" xml:space="preserve">
     <value>Search</value>
@@ -589,7 +589,7 @@
     <value>Stops the processes "K2Ctrl", "putty", "DataView", "java" and "cmd". This can also unintentionally terminate other programs.</value>
   </data>
   <data name="tt_visu_datanet" xml:space="preserve">
-    <value>Starts a dat@net visualization in the specified project directory.</value>
+    <value>Starts a Dat@net visualization in the specified project directory.</value>
   </data>
   <data name="tt_visu_dataview" xml:space="preserve">
     <value>Starts a DataView visualization in the specified project directory.</value>

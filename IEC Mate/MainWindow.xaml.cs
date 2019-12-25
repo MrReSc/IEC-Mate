@@ -2842,7 +2842,7 @@ namespace IECMate
                     }
                 };
                 process.Start();
-                Log.Information("dat@net: Visualisierung dat@net wurde gestartet.");
+                Log.Information("Dat@net: Visualisierung Dat@net wurde gestartet.");
             }
             catch (Exception ex)
             {

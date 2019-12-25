@@ -1078,7 +1078,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net HMI starten ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dat@net HMI starten ähnelt.
         /// </summary>
         public static string lb_visu {
             get {
@@ -1393,7 +1393,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die dat@net ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dat@net ähnelt.
         /// </summary>
         public static string ti_helfer {
             get {
@@ -1690,7 +1690,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Startet eine dat@net Visualisierung im angegebenen Projektverzeichnis. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Startet eine Dat@net Visualisierung im angegebenen Projektverzeichnis. ähnelt.
         /// </summary>
         public static string tt_visu_datanet {
             get {

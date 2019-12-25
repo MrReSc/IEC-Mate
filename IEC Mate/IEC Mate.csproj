@@ -28,7 +28,7 @@
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
     <AssemblyFileVersionSettings>None.None.Increment.DateStamp</AssemblyFileVersionSettings>
     <AssemblyInfoVersionSettings>None.None.Increment.DateStamp</AssemblyInfoVersionSettings>
-    <AssemblyVersion>1.0.1392.19355</AssemblyVersion>
+    <AssemblyVersion>1.0.1393.19359</AssemblyVersion>
     <PublishUrl>C:\Users\r.scheidegger\Downloads\IEC Mate\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -42,7 +42,7 @@
     <ProductName>IEC-Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>19222</ApplicationRevision>
-    <ApplicationVersion>1.0.1392.19355</ApplicationVersion>
+    <ApplicationVersion>1.0.1393.19359</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

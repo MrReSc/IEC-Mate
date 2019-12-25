@@ -412,7 +412,7 @@
     <value>nicht installiert</value>
   </data>
   <data name="lb_visu" xml:space="preserve">
-    <value>dat@net HMI starten</value>
+    <value>Dat@net HMI starten</value>
   </data>
   <data name="mi_datei_offnen" xml:space="preserve">
     <value>Datei öffnen</value>
@@ -499,7 +499,7 @@
     <value>Code</value>
   </data>
   <data name="ti_helfer" xml:space="preserve">
-    <value>dat@net</value>
+    <value>Dat@net</value>
   </data>
   <data name="ti_suche" xml:space="preserve">
     <value>Suche</value>
@@ -589,7 +589,7 @@
     <value>Stopt die Prozesse "K2Ctrl", "putty", "DataView", "java" und "cmd". Dies kann auch unbeabsichtigt andere Programme beenden.</value>
   </data>
   <data name="tt_visu_datanet" xml:space="preserve">
-    <value>Startet eine dat@net Visualisierung im angegebenen Projektverzeichnis.</value>
+    <value>Startet eine Dat@net Visualisierung im angegebenen Projektverzeichnis.</value>
   </data>
   <data name="tt_visu_dataview" xml:space="preserve">
     <value>Startet eine DataView Visualisierung im angegebenen Projektverzeichnis.</value>
