@@ -1211,7 +1211,7 @@
                             <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
                                 <Setter Property="Width" Value="auto"></Setter>
                                 <Setter Property="Height" Value="auto"></Setter>
-                                <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                <Setter Property="Margin" Value="5,0"></Setter>
                                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                             </Style>
 
@@ -1397,7 +1397,7 @@
                                 <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
                                     <Setter Property="Width" Value="auto"></Setter>
                                     <Setter Property="Height" Value="auto"></Setter>
-                                    <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                    <Setter Property="Margin" Value="5,0"></Setter>
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
 
@@ -1579,7 +1579,7 @@
                                 <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
                                     <Setter Property="Width" Value="auto"></Setter>
                                     <Setter Property="Height" Value="auto"></Setter>
-                                    <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                    <Setter Property="Margin" Value="4,0,5,0"></Setter>
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
 
@@ -1670,7 +1670,7 @@
                                 <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
                                     <Setter Property="Width" Value="auto"></Setter>
                                     <Setter Property="Height" Value="auto"></Setter>
-                                    <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                    <Setter Property="Margin" Value="5,0"></Setter>
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
 
@@ -1771,7 +1771,7 @@
                                         <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
                                             <Setter Property="Width" Value="auto"></Setter>
                                             <Setter Property="Height" Value="auto"></Setter>
-                                            <Setter Property="Margin" Value="0,0,20,0"></Setter>
+                                            <Setter Property="Margin" Value="5,0"></Setter>
                                             <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                         </Style>
 
