@@ -222,6 +222,7 @@ namespace IECMate
             text_projktpfad_dataview.Text = Properties.Settings.Default.projekt_pfad_dataview;
             text_kundenprojekt.Text = Properties.Settings.Default.projekt_pfad_kundenordner;
             text_kundenspez.Text = Properties.Settings.Default.kundenspez;
+            text_kundenspez_datanet.Text = Properties.Settings.Default.kundenspez_datanet;
             text_db_connectionstring.Text = Properties.Settings.Default.sql_connection_string;
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
             ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
@@ -1169,6 +1170,7 @@ namespace IECMate
                 Properties.Settings.Default.projekt_pfad_dataview = text_projktpfad_dataview.Text;
                 Properties.Settings.Default.projekt_pfad_kundenordner = text_kundenprojekt.Text;
                 Properties.Settings.Default.kundenspez = text_kundenspez.Text;
+                Properties.Settings.Default.kundenspez_datanet = text_kundenspez_datanet.Text;
                 Properties.Settings.Default.sql_connection_string = text_db_connectionstring.Text;
                 Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
                 Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
@@ -3218,20 +3220,16 @@ namespace IECMate
             }
         }
 
-        #endregion
-
         private void Text_bitset_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
-
         private void Btn_update_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
         {
             UpdateBitsetKundenspez();
         }
-
 
         private async void UpdateBitsetKundenspez()
         {
@@ -3239,7 +3237,7 @@ namespace IECMate
             {
                 var connString = text_db_connectionstring.Text;
                 var spez = text_kundenspez.Text;
-                int value = Int32.Parse(text_bitset.Text);
+                var value = Int64.Parse(text_bitset.Text);
                 int setid = 999999999;
 
                 if (value > 2147483647)
@@ -3286,6 +3284,218 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+
+        private void Btn_bitset_decode_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(text_select_bitset_kundenspez.Text))
+                {
+                    ti_bitset.Focus();
+                    text_decode.Text = text_select_bitset_kundenspez.Text;
+                    text_decode.CaretIndex = text_decode.Text.Length;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Btn_bitset_kundenspez_datanet_Click(object sender, RoutedEventArgs e)
+        {
+            text_select_bitset_kundenspez_datanet.Text = FindBitsetDatanet();
+        }
+
+        private void Text_kundenspez_datanet_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                text_select_bitset_kundenspez_datanet.Text = FindBitsetDatanet();
+            }
+        }
+
+        private string FindBitsetDatanet()
+        {
+            try
+            {
+                var file = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
+                file = file.Replace("\\\\", "\\");
+                var bitset = "";
+
+                if (!String.IsNullOrWhiteSpace(text_kundenspez_datanet.Text))
+                {
+                    using (var sr = new StreamReader(file, true))
+                    {
+                        var s = "";
+                        var index = "";
+
+
+                        while ((s = sr.ReadLine()) != null)
+                        {
+                            if (s.Contains(text_kundenspez_datanet.Text))
+                            {
+                                index = Regex.Match(s, @"\[([^)]*)\]").Groups[1].Value;
+                            }
+
+                            if (s.Contains("system.svMEyCUfunc[" + index + "].value"))
+                            {
+                                string[] tokens = s.Split('=');
+                                string[] tok = tokens[1].Split('|');
+                                bitset = tok[0].Replace(" ", "");
+                            }
+                        }
+                    }
+                }
+                return bitset;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+                return "";
+            }
+        }
+
+        private void Btn_update_bitset_kundenspez_datanet_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBitsetDatanet(text_kundenspez_datanet.Text, text_bitset_datanet.Text);
+        }
+
+        private async void UpdateBitsetDatanet(string kundenspez, string bitset)
+        {
+            try
+            {
+                var file = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
+                file = file.Replace("\\\\", "\\");
+                var index = "";
+                var oldText = "";
+                var newText = "";
+                var value = Int64.Parse(bitset);
+
+                if (value > 2147483647)
+                {
+                    Log.Debug("Dat@net: Bitset zu grosse Zahl.");
+                    await this.ShowMessageAsync(Properties.Resources.dialogTitelDatenbankFehler, Properties.Resources.dialogMsgDatenbankBitsetFehler, MessageDialogStyle.Affirmative);
+                    return;
+                }
+
+                if (!String.IsNullOrWhiteSpace(kundenspez))
+                {
+                    using (var sr = new StreamReader(file, true))
+                    {
+                        var s = "";
+
+                        while ((s = sr.ReadLine()) != null)
+                        {
+                            if (s.Contains(kundenspez))
+                            {
+                                index = Regex.Match(s, @"\[([^)]*)\]").Groups[1].Value;
+                            }
+
+                            if (s.Contains("system.svMEyCUfunc[" + index + "].value"))
+                            {
+                                oldText = s;
+                            }
+                        }
+                    }
+                }
+
+                if (!String.IsNullOrWhiteSpace(bitset))
+                {
+                    string text = File.ReadAllText(file);
+                    newText = "system.svMEyCUfunc[" + index + "].value = " + bitset + "|DINT";
+                    text = text.Replace(oldText, newText);
+                    File.WriteAllText(file, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Btn_checksum_datanet_Click(object sender, RoutedEventArgs e)
+        {
+            text_checksum_datanet.Text = FindChecksumDatanet();
+        }
+
+        private string FindChecksumDatanet()
+        {
+            try
+            {
+                var file = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
+                file = file.Replace("\\\\", "\\");
+                var checksum = "";
+
+                using (var sr = new StreamReader(file, true))
+                {
+                    var s = "";
+
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        if (s.Contains("SY_OP_CHECKSUM"))
+                        {
+                            string[] tokens = s.Split('=');
+                            string[] tok = tokens[1].Split('|');
+                            checksum = tok[0].Replace(" ", "");
+                        }
+                    }
+                }
+                return checksum;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+                return "";
+            }
+        }
+
+        private void Btn_set_checksum_datanet_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateChecksumDatanet();
+        }
+
+        private void UpdateChecksumDatanet()
+        {
+            try
+            {
+                var file = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
+                file = file.Replace("\\\\", "\\");
+                var checksum = text_checksum_datanet.Text;
+
+                if (!String.IsNullOrWhiteSpace(checksum))
+                {
+                    string text = File.ReadAllText(file);
+                    text = text.Replace(checksum, "-1");
+                    File.WriteAllText(file, text);
+                    text_checksum_datanet.Text = FindChecksumDatanet();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Btn_bitset_kundenspez_decode_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(text_select_bitset_kundenspez_datanet.Text))
+                {
+                    ti_bitset.Focus();
+                    text_decode.Text = text_select_bitset_kundenspez_datanet.Text;
+                    text_decode.CaretIndex = text_decode.Text.Length;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+        #endregion
+
+
     }
 }
 

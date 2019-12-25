@@ -516,5 +516,17 @@ namespace IECMate.Properties {
                 this["LofFileRetain"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string kundenspez_datanet {
+            get {
+                return ((string)(this["kundenspez_datanet"]));
+            }
+            set {
+                this["kundenspez_datanet"] = value;
+            }
+        }
     }
 }

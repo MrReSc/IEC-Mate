@@ -658,7 +658,7 @@
     <value>Connection to database failed. Please check MySQL connection string.</value>
   </data>
   <data name="dialogTitelDatenbankFehler" xml:space="preserve">
-    <value>Database error</value>
+    <value>Bitset error</value>
   </data>
   <data name="gb_dataview_db_bitset" xml:space="preserve">
     <value>DataView database bitset</value>
@@ -674,5 +674,23 @@
   </data>
   <data name="lb_dataview_usb_folder" xml:space="preserve">
     <value>Open usb0 memory folder</value>
+  </data>
+  <data name="gb_datanet_bitset" xml:space="preserve">
+    <value>Bitset Dat@net</value>
+  </data>
+  <data name="tt_checksum_datanet" xml:space="preserve">
+    <value>Get checksum from systemOptions.properties file.</value>
+  </data>
+  <data name="tt_kundenspez_checksum_datanet" xml:space="preserve">
+    <value>Set checksum to the value -1.</value>
+  </data>
+  <data name="tt_kundenspez_datanet" xml:space="preserve">
+    <value>Retrieve the bitset from systemOptions.properties file for the customer specification.</value>
+  </data>
+  <data name="tt_kundenspez_update_datanet" xml:space="preserve">
+    <value>Change the bitset in the systemOptions.properties file for the customer specification (decimal number).</value>
+  </data>
+  <data name="tt_kundenspez_decodieren" xml:space="preserve">
+    <value>Bitset decoding.</value>
   </data>
 </root>

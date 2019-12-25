@@ -358,7 +358,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Datenbank Fehler ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Biteset Fehler ähnelt.
         /// </summary>
         public static string dialogTitelDatenbankFehler {
             get {
@@ -525,6 +525,15 @@ namespace IECMate.Properties {
         public static string gb_code_vorlage {
             get {
                 return ResourceManager.GetString("gb_code_vorlage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset Dat@net ähnelt.
+        /// </summary>
+        public static string gb_datanet_bitset {
+            get {
+                return ResourceManager.GetString("gb_datanet_bitset", resourceCulture);
             }
         }
         
@@ -1492,6 +1501,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checksumme aus systemOptions.properties abrufen. ähnelt.
+        /// </summary>
+        public static string tt_checksum_datanet {
+            get {
+                return ResourceManager.GetString("tt_checksum_datanet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Kopiert den kompletten Code in die Zwischenablage. ähnelt.
         /// </summary>
         public static string tt_code_gen_copy {
@@ -1609,11 +1627,47 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checksumme auf den Wert -1 setzten. ähnelt.
+        /// </summary>
+        public static string tt_kundenspez_checksum_datanet {
+            get {
+                return ResourceManager.GetString("tt_kundenspez_checksum_datanet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset aus systemOptions.properties für den Kundenspez abrufen. ähnelt.
+        /// </summary>
+        public static string tt_kundenspez_datanet {
+            get {
+                return ResourceManager.GetString("tt_kundenspez_datanet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset decodieren. ähnelt.
+        /// </summary>
+        public static string tt_kundenspez_decodieren {
+            get {
+                return ResourceManager.GetString("tt_kundenspez_decodieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bitset in der Datenbank für den Kundenspez ändern (Dezimalzahl). ähnelt.
         /// </summary>
         public static string tt_kundenspez_update {
             get {
                 return ResourceManager.GetString("tt_kundenspez_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset in systemOptions.properties für den Kundenspez ändern (Dezimalzahl). ähnelt.
+        /// </summary>
+        public static string tt_kundenspez_update_datanet {
+            get {
+                return ResourceManager.GetString("tt_kundenspez_update_datanet", resourceCulture);
             }
         }
         

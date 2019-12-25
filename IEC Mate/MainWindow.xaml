@@ -68,16 +68,16 @@
     </Controls:MetroWindow.RightWindowCommands>
 
     <!--#endregion-->
-    
+
     <!--#region Einstellungs Menu-->
     <Controls:MetroWindow.Flyouts>
-        
+
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="fo_einstellungen" Header="{x:Static p:Resources.fo_einstellungen}" 
                              Position="Right" Width="350" IsPinned="False" Theme="Adapt">
 
                 <Grid>
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
@@ -95,13 +95,13 @@
                     <!--Aussehen-->
                     <StackPanel Grid.Column="1" Grid.Row="0">
                         <Label Content="{x:Static p:Resources.lb_aussehen}" FontSize="30" Margin="0"/>
-                        
+
                         <Controls:ToggleSwitch x:Name="tg_theme"
                                                OnLabel="{x:Static p:Resources.tg_theme_hell}" 
                                                OffLabel="{x:Static p:Resources.tg_theme_dunkel}" 
                                                IsCheckedChanged="Tg_theme_IsCheckedChanged" 
                                                Margin="5,0,0,10"/>
-                        
+
                         <ComboBox x:Name="cb_akzent_farbe" Margin="5,0" 
                                   SelectionChanged="Cb_akzent_farbe_SelectionChanged" 
                                   FontSize="15"/>
@@ -109,7 +109,7 @@
 
                     <!--Editor-->
                     <StackPanel Grid.Column="1" Grid.Row="1">
-                       
+
                         <Label Content="{x:Static p:Resources.lb_editor}" Grid.Column="1" Grid.Row="3" FontSize="30" Margin="0,15,0,0"/>
 
                         <Controls:ToggleSwitch x:Name="tg_leerzeichen" 
@@ -164,7 +164,7 @@
                                            ToolTip="{x:Static p:Resources.tt_suche_bin}" 
                                            Margin="5,0,5,10"
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
-                        
+
                         <TextBox x:Name="text_file_ext" TextWrapping="Wrap" FontSize="14"
                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -253,7 +253,7 @@
                 </TextBlock>
                 <Label Content="{x:Static p:Resources.lb_lizenz}" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
                 <TextBox x:Name="text_iecmate_lizenz" FontSize="12" TextWrapping="Wrap" MaxWidth="400" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-               
+
                 <Label Content="{x:Static p:Resources.lb_oss_lizenz}" HorizontalAlignment="Center" FontSize="16" FontFamily="Consola" FontWeight="Bold"/>
                 <TextBox x:Name="text_lizenzen" FontSize="12" TextWrapping="Wrap" MaxWidth="400" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
@@ -265,7 +265,7 @@
         <TabControl x:Name="tc_root" Grid.Column="1" Grid.Row="1" Controls:TabControlHelper.Underlined="SelectedTabItem" 
                     SelectionChanged="Tc_root_SelectionChanged" 
                     Margin="0,5,0,0">
-            
+
             <!--#region Code Tab-->
             <TabItem x:Name="ti_code" Header="{x:Static p:Resources.ti_code}">
                 <Grid Margin="0,5,0,0">
@@ -274,10 +274,10 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <!--#region Variablenlisten-->
                     <GroupBox Grid.Column="0" Header="{x:Static p:Resources.gb_variablen}">
-                      
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
@@ -333,7 +333,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
-                               
+
                                 <DockPanel Grid.Column="0" Grid.Row="0">
                                     <Label Content="{x:Static p:Resources.lb_var1}" DockPanel.Dock="left"/>
                                     <Button x:Name="btn_vaiablenliste_loschen" Width="25" Height="25" 
@@ -461,7 +461,7 @@
                                             <Setter Property="Focusable" Value="False"></Setter>
                                         </Style>
                                     </StackPanel.Resources>
-                                    
+
                                     <TextBox x:Name="text_suchen" Width="200" Margin="0,0,20,0" 
                                              VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_suchen_nach_code}"
                                              Controls:TextBoxHelper.ClearTextButton="True">
@@ -526,7 +526,7 @@
                                     <Setter Property="IsHitTestVisible" Value="False"></Setter>
                                 </Style>
                             </StackPanel.Resources>
-                            
+
                             <Rectangle Fill="{DynamicResource GrayBrush4}" Stroke="{DynamicResource GrayBrush4}"/>
                             <Rectangle Fill="Transparent" Stroke="Transparent"/>
                             <Rectangle Fill="{DynamicResource GrayBrush4}" Stroke="{DynamicResource GrayBrush4}"/>
@@ -603,7 +603,7 @@
                 </Grid>
             </TabItem>
             <!--#endregion-->
-            
+
             <!--#region Suche Tab-->
             <TabItem x:Name="ti_suche" Header="{x:Static p:Resources.ti_suche}">
                 <Grid Margin="0,5,0,0">
@@ -617,11 +617,11 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="10*" />
                         <RowDefinition Height="5" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="15" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="243*" />
                     </Grid.RowDefinitions>
 
                     <Grid.Resources>
@@ -670,7 +670,7 @@
                                            Content="{x:Static p:Resources.ts_exakte_ein}" 
                                            ToolTip="{x:Static p:Resources.tt_suche_exakt}" 
                                            IsCheckedChanged="Ts_exakte_suche_IsCheckedChanged"/>
-                  
+
                     <Controls:ToggleSwitch x:Name="ts_kbus_suche" Grid.Column="3" Grid.Row="2" 
                                            Content="{x:Static p:Resources.ts_hw_ein}" 
                                            IsChecked="False"  
@@ -724,22 +724,22 @@
                                 <DataGridTextColumn Header="{x:Static p:Resources.header_linie}" MinWidth="90" Binding="{Binding LinieInt}" CanUserSort="False"
                                                     CellStyle="{StaticResource CellCenterStyle}"/>
                             </DataGrid.Columns>
-                            
-                            
-                            
+
+
+
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem x:Name="mi_open_file" Header="{x:Static p:Resources.mi_datei_offnen}" Click="Mi_open_file_Click"/>
                                     <MenuItem x:Name="mi_open_folder" Header="{x:Static p:Resources.mi_pfad_offnen}" Click="Mi_open_folder_Click"/>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
-                            
+
                         </DataGrid>
                     </Border>
                 </Grid>
             </TabItem>
             <!--#endregion-->
-            
+
             <!--#region Bitset Tab-->
             <TabItem x:Name="ti_bitset" Header="{x:Static p:Resources.ti_bitset}">
                 <Grid Margin="0,5,0,0">
@@ -785,7 +785,7 @@
                                             <Setter Property="Background" Value="{DynamicResource GrayBrush8}"></Setter>
                                         </Style>
                                     </StackPanel.Resources>
-                                    
+
                                     <TextBox x:Name="text_encode_dec"  Text="{x:Static p:Resources.tb_bitset_dez}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
@@ -877,12 +877,12 @@
                                     <ToggleButton x:Name="tb_bit31">31</ToggleButton>
                                 </StackPanel>
                                 <!--#endregion-->
-                                
+
                             </Grid>
                         </Grid>
                     </GroupBox>
                     <!--#endregion-->
-                    
+
                     <!--#region Decoding-->
                     <GroupBox Grid.Row="2" Header="{x:Static p:Resources.gb_decoding}">
                         <Grid>
@@ -953,7 +953,7 @@
                                             <Setter Property="Margin" Value="8,0,15,0"/>
                                         </Style>
                                     </StackPanel.Resources>
-                                    
+
                                     <Grid>
                                         <Ellipse x:Name="el_bit0"/>
                                         <TextBlock Text="0"/>
@@ -1106,7 +1106,7 @@
                                             <Setter Property="Margin" Value="8,0,15,0"/>
                                         </Style>
                                     </StackPanel.Resources>
-                                    
+
                                     <Grid>
                                         <Ellipse x:Name="el_bit24"/>
                                         <TextBlock Text="24"/>
@@ -1148,12 +1148,12 @@
                                     </Grid>
                                 </StackPanel>
                                 <!--#endregion-->
-                                
+
                             </Grid>
                         </Grid>
                     </GroupBox>
                     <!--#endregion-->
-                    
+
                 </Grid>
             </TabItem>
             <!--#endregion-->
@@ -1373,7 +1373,8 @@
                     <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <!--#region Datein ME öffnen-->
@@ -1444,80 +1445,92 @@
                         </GroupBox>
                         <!--#endregion-->
 
-                        <!--#region Hot Keys-->
-                        <!--<GroupBox Grid.Column="2" Header="{x:Static p:Resources.gb_hotkeys}">
+                        <!--#region Bitset Dat@net-->
+                        <GroupBox Grid.Column="2" Header="{x:Static p:Resources.gb_datanet_bitset}" >
+
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="5" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="5" />
+                                    <RowDefinition Height="auto" />
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="5" />
                                 </Grid.RowDefinitions>
 
-                                <StackPanel Grid.Column="1" Grid.Row="1">
-                                    <Controls:ToggleSwitch x:Name="ts_hotkey"  
-                                                           Content="{x:Static p:Resources.tg_hotkey_ein}" 
-                                                           Width="auto" 
-                                                           HorizontalAlignment="Left" 
-                                                           VerticalAlignment="Center"
-                                                           IsCheckedChanged="Ts_hotkey_IsCheckedChanged" 
-                                                           ToolTip="{x:Static p:Resources.tt_hotkey}" Margin="0,3,0,10"/>
+                                <Grid Grid.Row="2" Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                                    <TextBox x:Name="text_px_nummer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_px_nummer}" 
-                                             Margin="0" 
-                                             VerticalContentAlignment="Center" Controls:TextBoxHelper.ClearTextButton="True" Width="245" HorizontalAlignment="Left" 
-                                             TextChanged="Text_px_nummer_TextChanged">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBox x:Name="text_kundenspez_datanet" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez}" Margin="0" 
+                                         VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
+                                         Width="200" MinHeight="30" MaxLength="4" CharacterCasing="Upper" KeyDown="Text_kundenspez_datanet_KeyDown">
                                     </TextBox>
 
-                                </StackPanel>
+                                    <TextBox x:Name="text_select_bitset_kundenspez_datanet" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" 
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
+                                    </TextBox>
 
-                                <StackPanel Grid.Column="3" Grid.Row="1">
+                                    <Button x:Name="btn_bitset_kundenspez_datanet" Grid.Column="1" Grid.Row="2" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_datanet}" Click="Btn_bitset_kundenspez_datanet_Click">
+                                        <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
+                                    </Button>
 
-                                    <DockPanel>
-                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotkey_pxComment" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxComment_SelectionChanged"/>
-                                    </DockPanel>
+                                    <Button x:Name="btn_bitset_kundenspez_decode" Grid.Column="2" Grid.Row="2" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_decodieren}" Click="Btn_bitset_kundenspez_decode_Click">
+                                        <iconPacks:PackIconMaterial Kind="FlipToFront" Width="auto" Height="auto"/>
+                                    </Button>
 
-                                    <Label Content="{x:Static p:Resources.lb_px_comment}" Margin="0,-5,0,0"/>
-                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px}"/>
+                                    <TextBox x:Name="text_bitset_datanet" Grid.Column="0" Grid.Row="4" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez_update}" Margin="0" 
+                                         VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
+                                         Width="200" MaxLength="10" PreviewTextInput="Text_bitset_PreviewTextInput">
+                                    </TextBox>
 
-                                    <DockPanel Margin="0,5,0,0">
-                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotkey_pxBeginEnd" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotkey_pxBeginEnd_SelectionChanged"/>
-                                    </DockPanel>
+                                    <Button x:Name="btn_update_bitset_kundenspez_datanet" Grid.Column="1" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_update_datanet}" Click="Btn_update_bitset_kundenspez_datanet_Click">
+                                        <iconPacks:PackIconMaterial Kind="FileImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
+                                    </Button>
 
-                                    <Label Content="{x:Static p:Resources.lb_px_beginend}" Margin="0,-5,0,0"/>
-                                    <Label Foreground="ForestGreen" Content="{x:Static p:Resources.lb_px_begin}" Margin="0,-10,0,0"/>
-                                    <Label Foreground="SteelBlue" Content="{x:Static p:Resources.lb_px_code}" FontStyle="Italic" Margin="0,-10,0,0"></Label>
-                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_end}"/>
+                                    <TextBox x:Name="text_checksum_datanet" Grid.Column="4" Grid.Row="0" VerticalContentAlignment="Center" 
+                                        Width="200" IsReadOnly="True" Background="{DynamicResource GrayBrush8}"
+                                        Controls:TextBoxHelper.Watermark="SY_OP_CHECKSUM">
+                                    </TextBox>
 
-                                    <DockPanel Margin="0,5,0,0">
-                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotekey_plain" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_plain_SelectionChanged"/>
-                                    </DockPanel>
+                                    <Button x:Name="btn_checksum_datanet" Grid.Column="5" Grid.Row="0" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_checksum_datanet}" Click="Btn_checksum_datanet_Click">
+                                        <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
+                                    </Button>
 
-                                    <Label Content="{x:Static p:Resources.lb_px_plain}" Margin="0,-5,0,0"/>
-                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_plain_text}"/>
-
-                                    <DockPanel Margin="0,5,0,0">
-                                        <Label FontWeight="Bold" Margin="0" DockPanel.Dock="Left" Content="{x:Static p:Resources.lb_ctrl_shift}"/>
-                                        <ComboBox x:Name="cb_hotekey_brackets" DockPanel.Dock="Right" Width="80" HorizontalAlignment="Left" SelectionChanged="Cb_hotekey_brackets_SelectionChanged"/>
-                                    </DockPanel>
-                                    <Label Content="{x:Static p:Resources.lb_px_brackets}" Margin="0,-5,0,0"/>
-                                    <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_brackets_text}"/>
-
-                                </StackPanel>
+                                    <Button x:Name="btn_set_checksum_datanet" Grid.Column="6" Grid.Row="0" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_checksum_datanet}" Click="Btn_set_checksum_datanet_Click">
+                                        <iconPacks:PackIconMaterial Kind="CircleEditOutline" Width="auto" Height="auto" Foreground="OrangeRed"/>
+                                    </Button>
+                                </Grid>
                             </Grid>
-                        </GroupBox>-->
+                        </GroupBox>
                         <!--#endregion-->
-                        
                     </Grid>
                 </Grid>
             </TabItem>
@@ -1545,7 +1558,7 @@
                     <TextBox x:Name="text_projktpfad_dataview" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
                              Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_dataview_TextChanged">
                     </TextBox>
-               
+
                     <Button x:Name="btn_pfad_dataview_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_dataview_auswahlen_Click">
                         <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                     </Button>
@@ -1716,7 +1729,7 @@
 
                     </Grid>
 
-                   
+
                     <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -1828,6 +1841,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
@@ -1854,13 +1868,18 @@
                                         <iconPacks:PackIconMaterial Kind="DatabaseSearch" Width="auto" Height="auto"/>
                                     </Button>
 
+                                    <Button x:Name="btn_bitset_decode" Grid.Column="2" Grid.Row="2" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_decodieren}" Click="Btn_bitset_decode_Click">
+                                        <iconPacks:PackIconMaterial Kind="FlipToFront" Width="auto" Height="auto"/>
+                                    </Button>
+
                                     <TextBox x:Name="text_bitset" Grid.Column="0" Grid.Row="4" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez_update}" Margin="0" 
                                          VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
                                          Width="200" MaxLength="10" PreviewTextInput="Text_bitset_PreviewTextInput">
                                     </TextBox>
 
                                     <Button x:Name="btn_update_bitset_kundenspez" Grid.Column="1" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
-                                    Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_update}" Click="Btn_update_bitset_kundenspez_Click" >
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_update}" Click="Btn_update_bitset_kundenspez_Click" >
                                         <iconPacks:PackIconMaterial Kind="DatabaseImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
                                     </Button>
                                 </Grid>
