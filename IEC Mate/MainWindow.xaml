@@ -799,8 +799,8 @@
                                     </TextBox>
                                 </StackPanel>
 
-                                <Button x:Name="btn_encoding_loschen" Grid.Row="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_encoding_loschen_Click">
-                                    <iconPacks:PackIconMaterial Kind="Delete" Width="auto" Height="auto" />
+                                <Button x:Name="btn_encoding_loschen" Grid.Row="1" Width="30" Height="30" HorizontalAlignment="Left" Focusable="False" Click="Btn_encoding_loschen_Click">
+                                    <iconPacks:PackIconMaterial Kind="Close" Width="auto" Height="auto"/>
                                 </Button>
                             </Grid>
 
@@ -1174,7 +1174,7 @@
                         <RowDefinition Height="20" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="20" />
-                        <RowDefinition Height="0.85*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
@@ -1278,18 +1278,16 @@
                                     </StackPanel>
                                 </Button>
 
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" Grid.Row="1">
+
                                 <Button x:Name="bt_openConfig" Click="Bt_openConfig_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterial Kind="FolderOpen"/>
                                         <Label Content="{x:Static p:Resources.lb_config}"/>
                                     </StackPanel>
                                 </Button>
-
-
-
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="3" Grid.Row="1">
 
                                 <Button x:Name="bt_openMachineParameter" Click="Bt_openMachineParameter_Click">
                                     <StackPanel Orientation="Horizontal">
@@ -1298,8 +1296,6 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
-                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
 
@@ -1345,7 +1341,6 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
                                 <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
 
                                 <Button x:Name="bt_disableDataView"
