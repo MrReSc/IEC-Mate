@@ -3323,7 +3323,7 @@ namespace IECMate
                 file = file.Replace("\\\\", "\\");
                 var bitset = "";
 
-                if (!String.IsNullOrWhiteSpace(text_kundenspez_datanet.Text))
+                if (!String.IsNullOrWhiteSpace(text_kundenspez_datanet.Text) & (text_kundenspez_datanet.Text.Length == 4))
                 {
                     using (var sr = new StreamReader(file, true))
                     {
@@ -3379,7 +3379,7 @@ namespace IECMate
                     return;
                 }
 
-                if (!String.IsNullOrWhiteSpace(kundenspez))
+                if (!String.IsNullOrWhiteSpace(kundenspez) & (kundenspez.Length == 4))
                 {
                     using (var sr = new StreamReader(file, true))
                     {
