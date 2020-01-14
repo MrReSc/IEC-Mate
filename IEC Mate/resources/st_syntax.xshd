@@ -1,19 +1,16 @@
 ﻿<?xml version="1.0"?>
 
-<SyntaxDefinition name="ST"
-
-        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+<SyntaxDefinition name="ST" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
   <Color name="Comment" foreground="ForestGreen" />
-  <Color name="Error" foreground="Red" />
   <Color name="String" foreground="DarkOrange" />
+  <Color name="XMLtags" foreground="DodgerBlue" />
+  <Color name="XMLtagB" foreground="Gray" />
+
 
   <!-- This is the main ruleset. -->
   <RuleSet>
     <Span color="Comment" begin="//"></Span>
-    
     <Span color="Comment" multiline="true" begin="\(\*" end="\*\)" />
-
-    <Span color="Error" begin="#-->" />
 
     <Span color="String">
       <Begin>"</Begin>
@@ -23,7 +20,7 @@
         <Span begin="\\" end="." />
       </RuleSet>
     </Span>
-
+        
     <Keywords foreground="DodgerBlue">
       <Word>IF</Word>
       <Word>ELSE</Word>
@@ -55,10 +52,6 @@
       <Word>AND</Word>
       <Word>NOT</Word>
       <Word>XOR</Word>
-      <!--<Word>+</Word>
-      <Word>-</Word>
-      <Word>/</Word>
-      <Word>*</Word>-->
       <Word>MOD</Word>
       <Word>TRUE</Word>
       <Word>FALSE</Word>
@@ -76,14 +69,30 @@
       <Word>Variable_3</Word>
     </Keywords>
 
-    <!-- Digits -->
-    <!--<Rule foreground="Beige">
-      \b0[xX][0-9a-fA-F]+  # hex number
-      |    \b
-      (    \d+(\.[0-9]+)?   #number with optional floating point
-      |    \.[0-9]+         #or just starting with floating point
-      )
-      ([eE][+-]?[0-9]+)? # optional exponent
-    </Rule>-->
+    <!--<Span color="XMLtagB">
+      <Begin>&lt;row</Begin>
+      <End>&gt;</End>
+    </Span>
+
+    <Span color="XMLtagB">
+      <Begin>&lt;/row</Begin>
+      <End>&gt;</End>
+    </Span>-->
+
+    <Span color="XMLtagB">
+      <Begin>&lt;column</Begin>
+      <End>&gt;</End>
+    </Span>
+
+    <Span color="XMLtagB">
+      <Begin>&lt;/column</Begin>
+      <End>&gt;</End>
+    </Span>
+
+    <Span color="XMLtags">
+      <Begin>&lt;</Begin>
+      <End>&gt;</End>
+    </Span>
+    
   </RuleSet>
 </SyntaxDefinition>
