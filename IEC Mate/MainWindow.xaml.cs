@@ -924,7 +924,10 @@ namespace IECMate
                 var var2_vorhanden = !String.IsNullOrWhiteSpace(var_2_text);
                 var var3_vorhanden = !String.IsNullOrWhiteSpace(var_3_text);
 
-                
+                var var1_im_tempalte = template.Contains(var_1);
+                var var2_im_tempalte = template.Contains(var_2);
+                var var3_im_tempalte = template.Contains(var_3);
+
                 //Keine Variable in Liste 1 aber "Varibale_1" in Template
                 if (lines1 == 0 && template.Contains(var_1))
                 {
@@ -943,28 +946,10 @@ namespace IECMate
                     return (outtext, Properties.Resources.dialogMsgCodeGen01 + " 3");
                 }
 
-                ////Keine "Varibale_1" in Template aber in Liste
-                //if (lines1 > 0 && !template.Contains(var_1))
-                //{
-                //    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 1");
-                //}
-
-                ////Keine "Varibale_2" in Template aber in Liste
-                //if (lines2 > 0 && !template.Contains(var_2))
-                //{
-                //    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 2");
-                //}
-
-                ////Keine "Varibale_3" in Template aber in Liste
-                //if (lines3 > 0 && !template.Contains(var_3))
-                //{
-                //    return (outtext, Properties.Resources.dialogMsgCodeGen02 + " 3");
-                //}
-
-                //Die Anzahl Variablen in den Listen ist unterschiedlich und enthalten auch Text
-                if ((var1_vorhanden && var2_vorhanden && lines1 != lines2) ||
-                     (var1_vorhanden && var3_vorhanden && lines1 != lines3) ||
-                     (var2_vorhanden && var3_vorhanden && lines2 != lines3)
+                //Die Anzahl Variablen in den Listen ist unterschiedlich und enthalten Text und werden im Template verwendet
+                if ((var1_vorhanden && var2_vorhanden && lines1 != lines2 && var1_im_tempalte && var2_im_tempalte) ||
+                    (var1_vorhanden && var3_vorhanden && lines1 != lines3 && var1_im_tempalte && var3_im_tempalte) ||
+                    (var2_vorhanden && var3_vorhanden && lines2 != lines3 && var2_im_tempalte && var3_im_tempalte)
                    )
                 {
                     return (outtext, Properties.Resources.dialogMsgCodeGen00);
@@ -976,17 +961,17 @@ namespace IECMate
                 {
                     string temp_text = template;
 
-                    if (!String.IsNullOrWhiteSpace(var_1_text))
+                    if (!String.IsNullOrWhiteSpace(var_1_text) && var1_im_tempalte)
                     {
                         temp_text = temp_text.Replace(var_1, vars_1[i]);
                     }
 
-                    if (!String.IsNullOrWhiteSpace(var_2_text))
+                    if (!String.IsNullOrWhiteSpace(var_2_text) && var2_im_tempalte)
                     {
                         temp_text = temp_text.Replace(var_2, vars_2[i]);
                     }
 
-                    if (!String.IsNullOrWhiteSpace(var_3_text))
+                    if (!String.IsNullOrWhiteSpace(var_3_text) && var3_im_tempalte)
                     {
                         temp_text = temp_text.Replace(var_3, vars_3[i]);
                     }
