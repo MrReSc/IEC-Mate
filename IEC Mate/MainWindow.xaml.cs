@@ -2055,6 +2055,65 @@ namespace IECMate
             }
         }
 
+        private void Btn_decode_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var bitset = text_decode_out1.Text;
+
+                if (String.IsNullOrWhiteSpace(bitset))
+                {
+                    return;
+                }
+                else
+                {
+                    bitset = bitset.Remove(0, 2); //2# entfernen
+                }
+
+                //Bitset String mit Nullen erweitern bis 32
+                if (bitset.Length < 32)
+                {
+                    for (int i = bitset.Length; i < 32; i++)
+                    {
+                        bitset = "0" + bitset;
+                    }
+                }
+
+                var objects = grid_encoding.GetChildObjects();
+                foreach (object child in objects)
+                {
+                    if (child.GetType() == typeof(StackPanel))
+                    {
+                        StackPanel ch = child as StackPanel;
+                        var obj = ch.GetChildObjects();
+                        foreach (object item in obj)
+                        {
+                            if (item.GetType() == typeof(ToggleButton))
+                            {
+                                ToggleButton tb = item as ToggleButton;
+                                int bit = Int32.Parse(tb.Content.ToString());
+                                var b = bitset[31 - bit];
+
+                                if (b == '1')
+                                {
+                                    tb.IsChecked = true;
+                                }
+                                else
+                                {
+                                    tb.IsChecked = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.Debug("Bitset: Decodierung wurde zu Encodieren kopiert durch Anwender.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         public void DecodeText()
         {
             try
@@ -3478,9 +3537,8 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+
         #endregion
-
-
     }
 }
 

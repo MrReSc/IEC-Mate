@@ -922,19 +922,30 @@
                                 <RowDefinition Height="5" />
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
-                                <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_bitset_decode}" Controls:TextBoxHelper.ClearTextButton="True"
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel VerticalAlignment="Top">
+                                    <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_bitset_decode}" Controls:TextBoxHelper.ClearTextButton="True"
                                          Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" TextChanged="Text_decode_TextChanged">
-                                </TextBox>
+                                    </TextBox>
 
-                                <TextBox x:Name="text_decode_out1" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
+                                    <TextBox x:Name="text_decode_out1" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
                                          IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
-                                </TextBox>
+                                    </TextBox>
 
-                                <TextBox x:Name="text_decode_out2" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
+                                    <TextBox x:Name="text_decode_out2" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
                                          IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
-                                </TextBox>
-                            </StackPanel>
+                                    </TextBox>
+                                </StackPanel>
+
+                                <Button x:Name="btn_decode" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Click="Btn_decode_Click">
+                                    <iconPacks:PackIconMaterial Kind="ArrowUpCircleOutline" Width="auto" Height="auto"/>
+                                </Button>
+                            </Grid>
 
                             <Grid x:Name="grid_decoding" Grid.Column="2" Grid.Row="1" ToggleButton.Checked="Encoding_Checked" ToggleButton.Unchecked="Encoding_Checked">
                                 <Grid.ColumnDefinitions>
