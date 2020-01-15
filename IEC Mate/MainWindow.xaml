@@ -966,7 +966,8 @@
 
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type Ellipse}">
-                                        <Setter Property="Stroke" Value="Silver"/>
+                                        <!--<Setter Property="Stroke" Value="Silver"/>-->
+                                        <Setter Property="Stroke" Value="{DynamicResource GrayBrush5}"/>
                                         <Setter Property="StrokeThickness" Value="2"/>
                                     </Style>
 

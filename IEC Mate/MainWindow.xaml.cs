@@ -2059,7 +2059,22 @@ namespace IECMate
         {
             try
             {
-                var bitset = text_decode_out1.Text;
+                var bitset = String.Empty;
+
+                if (text_decode_out1.Text.StartsWith("2#"))
+                {
+                    bitset = text_decode_out1.Text;
+                }
+
+                if (text_decode_out2.Text.StartsWith("2#"))
+                {
+                    bitset = text_decode_out2.Text;
+                }
+
+                if (text_decode.Text.StartsWith("2#"))
+                {
+                    bitset = text_decode.Text;
+                }
 
                 if (String.IsNullOrWhiteSpace(bitset))
                 {
@@ -2304,6 +2319,7 @@ namespace IECMate
                 //Akzentfarbe von Theme
                 var accentColor = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor").ToString());
                 var accentColor2 = (Brush)converter.ConvertFromString(ThemeManager.GetResourceFromAppStyle(this, "AccentColor2").ToString());
+                var stroke = (Brush)App.Current.Resources["GrayBrush5"];
                 //Alle Objekte von Grid
                 var objects = grid_decoding.GetChildObjects();
 
@@ -2327,7 +2343,7 @@ namespace IECMate
                                     {
                                         Ellipse el = it as Ellipse;
                                         el.Fill = Brushes.Transparent;
-                                        el.Stroke = Brushes.Silver;
+                                        el.Stroke = stroke;// Brushes.Silver;
                                     }
 
                                     //Schriftfarbe abhängig von Theme einstellen
@@ -2363,7 +2379,7 @@ namespace IECMate
                                             else
                                             {
                                                 el.Fill = Brushes.Transparent;
-                                                el.Stroke = Brushes.Silver;
+                                                el.Stroke = stroke;//Brushes.Silver;
                                             }
                                         }
                                     }
