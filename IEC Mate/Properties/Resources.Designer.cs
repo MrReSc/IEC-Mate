@@ -1771,6 +1771,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset zum Encodieren verschieben. ähnelt.
+        /// </summary>
+        public static string tt_zu_encodieng_kopieren {
+            get {
+                return ResourceManager.GetString("tt_zu_encodieng_kopieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bitte eine ME auswählen... ähnelt.
         /// </summary>
         public static string wm_cb_me_auswahlen {

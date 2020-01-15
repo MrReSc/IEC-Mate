@@ -693,4 +693,7 @@
   <data name="tt_kundenspez_decodieren" xml:space="preserve">
     <value>Bitset decodieren.</value>
   </data>
+  <data name="tt_zu_encodieng_kopieren" xml:space="preserve">
+    <value>Bitset zum Encodieren verschieben.</value>
+  </data>
 </root>

@@ -942,7 +942,8 @@
                                     </TextBox>
                                 </StackPanel>
 
-                                <Button x:Name="btn_decode" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Click="Btn_decode_Click">
+                                <Button x:Name="btn_decode" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Click="Btn_decode_Click"
+                                        ToolTip="{x:Static p:Resources.tt_zu_encodieng_kopieren}">
                                     <iconPacks:PackIconMaterial Kind="ArrowUpCircleOutline" Width="auto" Height="auto"/>
                                 </Button>
                             </Grid>
