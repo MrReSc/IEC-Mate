@@ -79,7 +79,7 @@
       <End>&gt;</End>
     </Span>-->
 
-    <Span color="XMLtagB">
+    <!--<Span color="XMLtagB">
       <Begin>&lt;column</Begin>
       <End>&gt;</End>
     </Span>
@@ -87,7 +87,7 @@
     <Span color="XMLtagB">
       <Begin>&lt;/column</Begin>
       <End>&gt;</End>
-    </Span>
+    </Span>-->
 
     <Span color="XMLtags">
       <Begin>&lt;</Begin>
