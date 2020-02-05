@@ -1635,6 +1635,8 @@
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="5" />
                                 </Grid.ColumnDefinitions>
@@ -1655,6 +1657,27 @@
                                         </StackPanel>
                                     </Button>
 
+                                    <Button x:Name="bt_openDataViewFolder" Click="Bt_openDataViewFolder_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                            <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button x:Name="bt_openDataViewBilderFolder" Click="Bt_openDataViewBilderFolder_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                            <Label Content="{x:Static p:Resources.lb_dataview_bilder_ordner}"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button x:Name="bt_openDataViewUSBfolderDev" Click="Bt_openDataViewUSBfolderDev_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <iconPacks:PackIconMaterial Kind="Usb"/>
+                                            <Label Content="{x:Static p:Resources.lb_dataview_usb_folder}"/>
+                                        </StackPanel>
+                                    </Button>
+
                                     <Button x:Name="btn_open_postcheckout" Click="Btn_open_postcheckout_Click">
                                         <StackPanel Orientation="Horizontal">
                                             <iconPacks:PackIconMaterial Kind="PlayCircleOutline" Foreground="Green"/>
@@ -1666,26 +1689,144 @@
 
                                 <StackPanel Grid.Column="3" Grid.Row="1">
 
-                                    <Button x:Name="bt_openDataViewFolder" Click="Bt_openDataViewFolder_Click">
+                                    <Button x:Name="btn_open_framework" Click="Btn_open_framework_Click" >
                                         <StackPanel Orientation="Horizontal">
-                                            <iconPacks:PackIconMaterial Kind="FolderOpen"/>
-                                            <Label Content="{x:Static p:Resources.lb_pojectFolder}"/>
+                                            <iconPacks:PackIconMaterial Kind="FileOutline"/>
+                                            <Label Content="{x:Static p:Resources.lb_framework}"/>
                                         </StackPanel>
                                     </Button>
 
-                                    <Button x:Name="bt_openDataViewUSBfolderDev" Click="Bt_openDataViewUSBfolderDev_Click">
-                                        <StackPanel Orientation="Horizontal">
-                                            <iconPacks:PackIconMaterial Kind="Usb"/>
-                                            <Label Content="{x:Static p:Resources.lb_dataview_usb_folder}"/>
-                                        </StackPanel>
-                                    </Button>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <Button x:Name="bt_openDataViewBilderFolder" Click="Bt_openDataViewBilderFolder_Click">
-                                        <StackPanel Orientation="Horizontal">
-                                            <iconPacks:PackIconMaterial Kind="FolderOpen"/>
-                                            <Label Content="{x:Static p:Resources.lb_dataview_bilder_ordner}"/>
-                                        </StackPanel>
-                                    </Button>
+                                        <Grid.Resources>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                                <Setter Property="Background" Value="Transparent"></Setter>
+                                                <Setter Property="BorderThickness" Value="1"></Setter>
+                                                <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                                <Setter Property="Width" Value="150"></Setter>
+                                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                                <Setter Property="Focusable" Value="False"></Setter>
+                                            </Style>
+                                        </Grid.Resources>
+
+                                        <Button x:Name="bt_dvStartAdmin" Grid.Column="0"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_admin}" Click="Bt_dvStartAdmin_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="Account" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_admin}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="bt_dvStartUser" Grid.Column="2"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_admin}" Click="Bt_dvStartUser_Click" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="AccountArrowLeft" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_user}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.Resources>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                                <Setter Property="Background" Value="Transparent"></Setter>
+                                                <Setter Property="BorderThickness" Value="1"></Setter>
+                                                <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                                <Setter Property="Width" Value="150"></Setter>
+                                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                                <Setter Property="Focusable" Value="False"></Setter>
+                                            </Style>
+                                        </Grid.Resources>
+
+                                        <Button x:Name="bt_dvStartVoll" Grid.Column="0"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_voll}" Click="Bt_dvStartVoll_Click" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="CellphoneScreenshot" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_voll}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="bt_dvStartHalb" Grid.Column="2"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_voll}" Click="Bt_dvStartHalb_Click" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="MonitorScreenshot" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_halb}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.Resources>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                                <Setter Property="Background" Value="Transparent"></Setter>
+                                                <Setter Property="BorderThickness" Value="1"></Setter>
+                                                <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                                <Setter Property="Width" Value="96"></Setter>
+                                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                                <Setter Property="Focusable" Value="False"></Setter>
+                                            </Style>
+
+                                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                                <Setter Property="FontSize" Value="10"></Setter>
+                                            </Style>
+                                        </Grid.Resources>
+
+                                        <Button x:Name="bt_dvStartPri" Grid.Column="0"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_pri}" Click="Bt_dvStartPri_Click" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_pri}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="bt_dvStartSec" Grid.Column="2"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_pri}" Click="Bt_dvStartSec_Click" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_sec}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:Name="bt_dvStartThird" Grid.Column="4"
+                                                ToolTip="{x:Static p:Resources.tt_dataview_start_pri}" Click="Bt_dvStartThird_Click" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <iconPacks:PackIconMaterial Kind="Monitor" Foreground="Purple"/>
+                                                <Label Content="{x:Static p:Resources.lb_dataview_start_third}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                    </Grid>
+
+
+
+
 
                                 </StackPanel>
 

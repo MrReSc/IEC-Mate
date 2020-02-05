@@ -696,4 +696,37 @@
   <data name="tt_zu_encodieng_kopieren" xml:space="preserve">
     <value>Move bitset for encoding.</value>
   </data>
+  <data name="lb_dataview_start_admin" xml:space="preserve">
+    <value>Login as Admin</value>
+  </data>
+  <data name="lb_dataview_start_halb" xml:space="preserve">
+    <value>Halved</value>
+  </data>
+  <data name="lb_dataview_start_pri" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="lb_dataview_start_sec" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="lb_dataview_start_third" xml:space="preserve">
+    <value>Third</value>
+  </data>
+  <data name="lb_dataview_start_user" xml:space="preserve">
+    <value>Login as User</value>
+  </data>
+  <data name="lb_dataview_start_voll" xml:space="preserve">
+    <value>AP521</value>
+  </data>
+  <data name="lb_framework" xml:space="preserve">
+    <value>framework.properties</value>
+  </data>
+  <data name="tt_dataview_start_admin" xml:space="preserve">
+    <value>Set the parameter "startAdminUser" in framework.properties</value>
+  </data>
+  <data name="tt_dataview_start_pri" xml:space="preserve">
+    <value>Sets the parameter "fx-stage-screen" in framework.properties</value>
+  </data>
+  <data name="tt_dataview_start_voll" xml:space="preserve">
+    <value>Sets the parameter "resolution" in framework.properties</value>
+  </data>
 </root>

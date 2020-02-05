@@ -2787,6 +2787,19 @@ namespace IECMate
             }
         }
 
+        private void Btn_open_framework_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string open = text_projktpfad_dataview.Text + Properties.Paths.dv_framework;
+                OpenFileOrFolder(open);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private void Bt_disableDataView_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -2813,6 +2826,158 @@ namespace IECMate
                 string text = File.ReadAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation);
                 text = text.Replace("rem start DataView.exe", "start DataView.exe");
                 File.WriteAllText(text_projktpfad_helfer.Text + Properties.Paths.Start_Simulation, text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_dvStartAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = text_projktpfad_dataview.Text + Properties.Paths.dv_framework;
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                string text = File.ReadAllText(path);
+                
+                if (!text.Contains("startAdminUser"))
+                {
+                    File.AppendAllText(path, "startAdminUser=true" + Environment.NewLine);
+                }
+
+                if (text.Contains("startAdminUser=false"))
+                {
+                    text = text.Replace("startAdminUser=false", "startAdminUser=true");
+                    File.WriteAllText(path, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_dvStartUser_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = text_projktpfad_dataview.Text + Properties.Paths.dv_framework;
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                string text = File.ReadAllText(path);
+
+                if (!text.Contains("startAdminUser"))
+                {
+                    File.AppendAllText(path, "startAdminUser=false" + Environment.NewLine);
+                }
+
+                if (text.Contains("startAdminUser=true"))
+                {
+                    text = text.Replace("startAdminUser=true", "startAdminUser=false");
+                    File.WriteAllText(path, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_dvStartVoll_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = text_projktpfad_dataview.Text + Properties.Paths.dv_framework;
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                string text = File.ReadAllText(path);
+
+                if (!text.Contains("resolution="))
+                {
+                    File.AppendAllText(path, "resolution=AP521" + Environment.NewLine);
+                }
+
+                if (text.Contains("resolution=WINDOWS"))
+                {
+                    text = text.Replace("resolution=WINDOWS", "resolution=AP521");
+                    File.WriteAllText(path, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_dvStartPri_Click(object sender, RoutedEventArgs e)
+        {
+            setFxStage("primary");
+        }
+
+        private void Bt_dvStartSec_Click(object sender, RoutedEventArgs e)
+        {
+            setFxStage("secondary");
+        }
+
+        private void Bt_dvStartThird_Click(object sender, RoutedEventArgs e)
+        {
+            setFxStage("third");
+        }
+
+        private void setFxStage(string monitor)
+        {
+            try
+            {
+                string path = text_projktpfad_dataview.Text + Properties.Paths.dv_framework;
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                string text = File.ReadAllText(path);
+
+                if (!text.Contains("fx-stage-screen"))
+                {
+                    File.AppendAllText(path, "fx-stage-screen=" + monitor + Environment.NewLine);
+                }
+
+                if (text.Contains("fx-stage-screen=primary"))
+                {
+                    text = text.Replace("fx-stage-screen=primary", "fx-stage-screen=" + monitor);
+                    File.WriteAllText(path, text);
+                }
+
+                if (text.Contains("fx-stage-screen=secondary"))
+                {
+                    text = text.Replace("fx-stage-screen=secondary", "fx-stage-screen=" + monitor);
+                    File.WriteAllText(path, text);
+                }
+
+                if (text.Contains("fx-stage-screen=third"))
+                {
+                    text = text.Replace("fx-stage-screen=third", "fx-stage-screen=" + monitor);
+                    File.WriteAllText(path, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Bt_dvStartHalb_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = text_projktpfad_dataview.Text + Properties.Paths.dv_framework;
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                string text = File.ReadAllText(path);
+
+                if (!text.Contains("resolution="))
+                {
+                    File.AppendAllText(path, "resolution=WINDOWS" + Environment.NewLine);
+                }
+
+                if (text.Contains("resolution=AP521"))
+                {
+                    text = text.Replace("resolution=AP521", "resolution=WINDOWS");
+                    File.WriteAllText(path, text);
+                }
             }
             catch (Exception ex)
             {
@@ -3554,7 +3719,12 @@ namespace IECMate
             }
         }
 
+
+
+
         #endregion
+
+
     }
 }
 

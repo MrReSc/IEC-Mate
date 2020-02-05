@@ -106,6 +106,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\DVIEW_Work\\framework.properties ähnelt.
+        /// </summary>
+        internal static string dv_framework {
+            get {
+                return ResourceManager.GetString("dv_framework", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\PostCheckoutNoPause.bat ähnelt.
         /// </summary>
         internal static string dv_PostCheckoutNoPause {

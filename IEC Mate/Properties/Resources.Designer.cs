@@ -763,6 +763,69 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login als Admin ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_admin {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Halbiert ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_halb {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_halb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Primär ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_pri {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_pri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sekundär ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_sec {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_sec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dritt ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_third {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_third", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login als User ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_user {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AP521 ähnelt.
+        /// </summary>
+        public static string lb_dataview_start_voll {
+            get {
+                return ResourceManager.GetString("lb_dataview_start_voll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die DataView Tools öffnen ähnelt.
         /// </summary>
         public static string lb_dataview_tools {
@@ -822,6 +885,15 @@ namespace IECMate.Properties {
         public static string lb_formProgram {
             get {
                 return ResourceManager.GetString("lb_formProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die framework.properties ähnelt.
+        /// </summary>
+        public static string lb_framework {
+            get {
+                return ResourceManager.GetString("lb_framework", resourceCulture);
             }
         }
         
@@ -1533,6 +1605,33 @@ namespace IECMate.Properties {
         public static string tt_dataview_sim_enable {
             get {
                 return ResourceManager.GetString("tt_dataview_sim_enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Setzt den Parameter &quot;startAdminUser&quot; in framework.properties ähnelt.
+        /// </summary>
+        public static string tt_dataview_start_admin {
+            get {
+                return ResourceManager.GetString("tt_dataview_start_admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Setzt den Parameter &quot;fx-stage-screen&quot; in framework.properties ähnelt.
+        /// </summary>
+        public static string tt_dataview_start_pri {
+            get {
+                return ResourceManager.GetString("tt_dataview_start_pri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Setzt den Parameter &quot;resolution&quot; in framework.properties ähnelt.
+        /// </summary>
+        public static string tt_dataview_start_voll {
+            get {
+                return ResourceManager.GetString("tt_dataview_start_voll", resourceCulture);
             }
         }
         

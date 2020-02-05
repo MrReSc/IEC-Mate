@@ -696,4 +696,37 @@
   <data name="tt_zu_encodieng_kopieren" xml:space="preserve">
     <value>Bitset zum Encodieren verschieben.</value>
   </data>
+  <data name="lb_dataview_start_admin" xml:space="preserve">
+    <value>Login als Admin</value>
+  </data>
+  <data name="lb_dataview_start_halb" xml:space="preserve">
+    <value>Halbiert</value>
+  </data>
+  <data name="lb_dataview_start_pri" xml:space="preserve">
+    <value>Primär</value>
+  </data>
+  <data name="lb_dataview_start_sec" xml:space="preserve">
+    <value>Sekundär</value>
+  </data>
+  <data name="lb_dataview_start_third" xml:space="preserve">
+    <value>Dritt</value>
+  </data>
+  <data name="lb_dataview_start_user" xml:space="preserve">
+    <value>Login als User</value>
+  </data>
+  <data name="lb_dataview_start_voll" xml:space="preserve">
+    <value>AP521</value>
+  </data>
+  <data name="lb_framework" xml:space="preserve">
+    <value>framework.properties</value>
+  </data>
+  <data name="tt_dataview_start_admin" xml:space="preserve">
+    <value>Setzt den Parameter "startAdminUser" in framework.properties</value>
+  </data>
+  <data name="tt_dataview_start_pri" xml:space="preserve">
+    <value>Setzt den Parameter "fx-stage-screen" in framework.properties</value>
+  </data>
+  <data name="tt_dataview_start_voll" xml:space="preserve">
+    <value>Setzt den Parameter "resolution" in framework.properties</value>
+  </data>
 </root>

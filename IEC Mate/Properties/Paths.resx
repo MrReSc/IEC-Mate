@@ -180,4 +180,7 @@
   <data name="dv_usb_sim" xml:space="preserve">
     <value>\\view\\media\\usb0\\dataView</value>
   </data>
+  <data name="dv_framework" xml:space="preserve">
+    <value>\\DVIEW_Work\\framework.properties</value>
+  </data>
 </root>
