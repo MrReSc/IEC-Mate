@@ -9,8 +9,11 @@
 
   <!-- This is the main ruleset. -->
   <RuleSet>
-    <Span color="Comment" begin="//"></Span>
-    <Span color="Comment" multiline="true" begin="\(\*" end="\*\)" />
+    <Span color="Comment" begin="//" ruleSet="SpecialKeywords" />
+    <Span color="Comment" multiline="true" begin="\(\*" end="\*\)" ruleSet="SpecialKeywords" />
+
+    <!-- use rules from other RuleSets -->
+    <Import ruleSet="SpecialKeywords" />
 
     <Span color="String">
       <Begin>"</Begin>
@@ -69,30 +72,27 @@
       <Word>Variable_3</Word>
     </Keywords>
 
-    <!--<Span color="XMLtagB">
-      <Begin>&lt;row</Begin>
-      <End>&gt;</End>
-    </Span>
-
-    <Span color="XMLtagB">
-      <Begin>&lt;/row</Begin>
-      <End>&gt;</End>
-    </Span>-->
-
-    <!--<Span color="XMLtagB">
-      <Begin>&lt;column</Begin>
-      <End>&gt;</End>
-    </Span>
-
-    <Span color="XMLtagB">
-      <Begin>&lt;/column</Begin>
-      <End>&gt;</End>
-    </Span>-->
-
     <Span color="XMLtags">
       <Begin>&lt;</Begin>
       <End>&gt;</End>
     </Span>
     
   </RuleSet>
+
+  <RuleSet name="SpecialKeywords">
+
+    <Keywords foreground="MediumVioletRed">
+      <Word>Variable_1</Word>
+    </Keywords>
+
+    <Keywords foreground="OrangeRed">
+      <Word>Variable_2</Word>
+    </Keywords>
+
+    <Keywords foreground="DarkTurquoise">
+      <Word>Variable_3</Word>
+    </Keywords>
+    
+  </RuleSet>
+  
 </SyntaxDefinition>
