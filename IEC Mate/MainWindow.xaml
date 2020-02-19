@@ -1924,6 +1924,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="5" />
                                     <RowDefinition Height="auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
@@ -1931,11 +1933,21 @@
                                      Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_proj_kundenordner}">
                                 </TextBox>
 
-                                <Button x:Name="btn_pfad_kundenprojekt" Grid.Row="1" Grid.Column="2" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_kundenprojekt_Click" >
+                                <Button x:Name="btn_pfad_kundenprojekt" Grid.Row="1" Grid.Column="2" Width="30" Height="30" 
+                                        HorizontalAlignment="Left" Click="Btn_pfad_kundenprojekt_Click" Focusable="False">
                                     <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto"/>
                                 </Button>
 
-                                <StackPanel Grid.Column="1" Grid.Row="2" Margin="0,20,0,0">
+                                <TextBox x:Name="text_updateBat" Grid.Column="1" Grid.Row="3" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_updateBat}" Margin="0" 
+                                     Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_updateBat}">
+                                </TextBox>
+
+                                <Button x:Name="btn_updateBat" Grid.Row="3" Grid.Column="2" Width="30" Height="30" 
+                                        HorizontalAlignment="Left" Click="Btn_updateBat_Click" Focusable="False">
+                                    <iconPacks:PackIconMaterial Kind="Script" Width="auto" Height="auto"/>
+                                </Button>
+
+                                <StackPanel Grid.Column="1" Grid.Row="4" Margin="0,20,0,0">
 
                                     <StackPanel.Resources>
                                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">

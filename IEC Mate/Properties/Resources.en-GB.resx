@@ -640,7 +640,7 @@
     <value>Select customer folder...</value>
   </data>
   <data name="tt_dataview_update_db_kundenordner" xml:space="preserve">
-    <value>Run update_Dataview_simulation_DB_to_new_vers_and_this_order.bat from customer folder</value>
+    <value>Run update_Dataview_sim****.bat from customer folder</value>
   </data>
   <data name="tt_kundenspez" xml:space="preserve">
     <value>Retrieve the bitset from the database for the customer specification.</value>
@@ -728,5 +728,11 @@
   </data>
   <data name="tt_dataview_start_voll" xml:space="preserve">
     <value>Sets the parameter "resolution" in framework.properties</value>
+  </data>
+  <data name="tt_updateBat" xml:space="preserve">
+    <value>Name of the batch file for the database update in the customer_folder\Project_Datanet\install</value>
+  </data>
+  <data name="wm_updateBat" xml:space="preserve">
+    <value>Script Name (update_Dataview_simu****.bat)</value>
   </data>
 </root>

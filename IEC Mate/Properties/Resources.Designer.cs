@@ -1636,7 +1636,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die update_Dataview_simulation_DB_to_new_vers_and_this_order.bat aus Kundenordner ausführen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die update_Dataview_sim****.bat aus Kundenordner ausführen ähnelt.
         /// </summary>
         public static string tt_dataview_update_db_kundenordner {
             get {
@@ -1843,6 +1843,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name der Batch Datei für das Datenbank Update im Kundenordner\Projekt_Datanet\install ähnelt.
+        /// </summary>
+        public static string tt_updateBat {
+            get {
+                return ResourceManager.GetString("tt_updateBat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Startet eine Dat@net Visualisierung im angegebenen Projektverzeichnis. ähnelt.
         /// </summary>
         public static string tt_visu_datanet {
@@ -1893,6 +1902,15 @@ namespace IECMate.Properties {
         public static string wm_file_ext {
             get {
                 return ResourceManager.GetString("wm_file_ext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Skript Name (update_Dataview_simu****.bat) ähnelt.
+        /// </summary>
+        public static string wm_updateBat {
+            get {
+                return ResourceManager.GetString("wm_updateBat", resourceCulture);
             }
         }
     }

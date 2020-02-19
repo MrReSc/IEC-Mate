@@ -528,5 +528,17 @@ namespace IECMate.Properties {
                 this["kundenspez_datanet"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("update_Dataview_simu_DB_to_vers_1_2_x_and_this_order.bat")]
+        public string update_bat {
+            get {
+                return ((string)(this["update_bat"]));
+            }
+            set {
+                this["update_bat"] = value;
+            }
+        }
     }
 }

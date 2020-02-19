@@ -128,5 +128,8 @@
     <Setting Name="kundenspez_datanet" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="update_bat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">update_Dataview_simu_DB_to_vers_1_2_x_and_this_order.bat</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

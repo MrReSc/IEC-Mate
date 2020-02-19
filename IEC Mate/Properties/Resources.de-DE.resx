@@ -640,7 +640,7 @@
     <value>Kundenordner auswählen...</value>
   </data>
   <data name="tt_dataview_update_db_kundenordner" xml:space="preserve">
-    <value>update_Dataview_simulation_DB_to_new_vers_and_this_order.bat aus Kundenordner ausführen</value>
+    <value>update_Dataview_sim****.bat aus Kundenordner ausführen</value>
   </data>
   <data name="tt_kundenspez" xml:space="preserve">
     <value>Bitset aus der Datenbank für den Kundenspez abrufen.</value>
@@ -728,5 +728,11 @@
   </data>
   <data name="tt_dataview_start_voll" xml:space="preserve">
     <value>Setzt den Parameter "resolution" in framework.properties</value>
+  </data>
+  <data name="tt_updateBat" xml:space="preserve">
+    <value>Name der Batch Datei für das Datenbank Update im Kundenordner\Projekt_Datanet\install</value>
+  </data>
+  <data name="wm_updateBat" xml:space="preserve">
+    <value>Skript Name (update_Dataview_simu****.bat)</value>
   </data>
 </root>

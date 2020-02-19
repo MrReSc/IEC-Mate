@@ -221,6 +221,7 @@ namespace IECMate
             text_projktpfad_helfer.Text = Properties.Settings.Default.projekt_pfad_helfer;
             text_projktpfad_dataview.Text = Properties.Settings.Default.projekt_pfad_dataview;
             text_kundenprojekt.Text = Properties.Settings.Default.projekt_pfad_kundenordner;
+            text_updateBat.Text = Properties.Settings.Default.update_bat;
             text_kundenspez.Text = Properties.Settings.Default.kundenspez;
             text_kundenspez_datanet.Text = Properties.Settings.Default.kundenspez_datanet;
             text_db_connectionstring.Text = Properties.Settings.Default.sql_connection_string;
@@ -1154,6 +1155,7 @@ namespace IECMate
                 Properties.Settings.Default.projekt_pfad_helfer = text_projktpfad_helfer.Text;
                 Properties.Settings.Default.projekt_pfad_dataview = text_projktpfad_dataview.Text;
                 Properties.Settings.Default.projekt_pfad_kundenordner = text_kundenprojekt.Text;
+                Properties.Settings.Default.update_bat= text_updateBat.Text;
                 Properties.Settings.Default.kundenspez = text_kundenspez.Text;
                 Properties.Settings.Default.kundenspez_datanet = text_kundenspez_datanet.Text;
                 Properties.Settings.Default.sql_connection_string = text_db_connectionstring.Text;
@@ -2565,6 +2567,35 @@ namespace IECMate
             }
         }
 
+        private void Btn_updateBat_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Batch File (*.bat)|*.bat";
+
+                if (Directory.Exists(text_kundenprojekt.Text + Properties.Paths.kundenordner_install))
+                {
+                    openFileDialog.InitialDirectory = text_kundenprojekt.Text + Properties.Paths.kundenordner_install.Replace("\\\\", "\\");
+                }
+                else
+                {
+                    openFileDialog.InitialDirectory = Properties.Paths.drive_c;
+                }
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    text_updateBat.Text = openFileDialog.SafeFileName;
+                    Log.Information("DataView: Update Skript DB geändert: {p}.", openFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+
         private async void FehlerHelferAsync()
         {
             try
@@ -3131,7 +3162,7 @@ namespace IECMate
         {
             try
             {
-                string open = text_kundenprojekt.Text + Properties.Paths.kundenordner_install + Properties.Paths.Start_db_update_kundenordner;
+                string open = text_kundenprojekt.Text + Properties.Paths.kundenordner_install + "\\" + text_updateBat.Text;
                 var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
@@ -3141,7 +3172,7 @@ namespace IECMate
                     }
                 };
                 process.Start();
-                Log.Information("DataView: update_Dataview_simulation_DB_to_new_vers_and_this_order.bat wurde gestartet.");
+                Log.Information("DataView: " + text_updateBat.Text + " wurde gestartet.");
             }
             catch (Exception ex)
             {
@@ -3719,12 +3750,7 @@ namespace IECMate
             }
         }
 
-
-
-
         #endregion
-
-
     }
 }
 
