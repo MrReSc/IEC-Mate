@@ -141,4 +141,6 @@ Nun kann die `IEC Mate.sln` Solution geöffnet werden. Wenn die Solution offen i
 ### Bekannte Probleme
 
 - Wenn die ganzen Referenzen nicht erkannt werden, muss einfach im Solution Explorer zu den Referenzen navigiert werden. Alle gelben Warnzeichen sollten nach ein paar Sekunden verschwinden.
+- Wenn der Fehler `Unable to find manifest signing certificate in the certificate store` auftritt muss die Signierung vom ClickOnce manifest deaktiviert werden (`IEC Mate -> Rechtsklick -> Properties -> Signing -> Sign the ClickOnce manifest deaktivieren`)
 - Wenn der Error `XDG0008` bei Übersetzten der Software auftritt, dann muss die Datei `MainWindow.xaml` mit einem `Rechtsklick -> Exluce from Project` vom Projekt entfernt werden. Danach sollte ein Übersetzten ohne Fehler funktionieren. Wenn es immer noch Fehler gibt, kann versucht werden, das Target auf `Release` zu wechseln und wieder auf `Debug` zurück. Wenn das Übersetzten fehlerfrei geklappt hat, muss mittel Rechtsklick auf das Projekt `IEC Mate -> Add -> Existing Item` die Datei `MainWindow.xaml.cs` wieder hinzugefügt werden.
+
