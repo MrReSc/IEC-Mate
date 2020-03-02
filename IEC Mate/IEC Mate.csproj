@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>IECMate</RootNamespace>
     <AssemblyName>IECMate</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
     <AssemblyFileVersionSettings>None.None.Increment.DateStamp</AssemblyFileVersionSettings>
     <AssemblyInfoVersionSettings>None.None.Increment.DateStamp</AssemblyInfoVersionSettings>
-    <AssemblyVersion>1.0.1575.20050</AssemblyVersion>
+    <AssemblyVersion>1.0.1587.20062</AssemblyVersion>
     <PublishUrl>C:\Users\r.scheidegger\Downloads\IEC Mate\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -42,7 +42,7 @@
     <ProductName>IEC-Mate</ProductName>
     <PublisherName>Remo Scheidegger</PublisherName>
     <ApplicationRevision>19222</ApplicationRevision>
-    <ApplicationVersion>1.0.1575.20050</ApplicationVersion>
+    <ApplicationVersion>1.0.1587.20062</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -105,17 +105,8 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetProjects.DataVisualization.Toolkit, Version=5.0.43.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.43\lib\net40\DotNetProjects.DataVisualization.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetProjects.Input.Toolkit, Version=5.0.43.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.43\lib\net40\DotNetProjects.Input.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetProjects.Layout.Toolkit, Version=5.0.43.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.43\lib\net40\DotNetProjects.Layout.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetProjects.WPF.Themes, Version=5.0.43.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjects.Wpf.Toolkit.5.0.43\lib\net40\DotNetProjects.WPF.Themes.dll</HintPath>
+    <Reference Include="DotNetProjects.Input.Toolkit, Version=6.0.77.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetProjects.WpfToolkit.Input.6.0.77\lib\net40\DotNetProjects.Input.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.0.0\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -214,6 +205,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -346,13 +338,13 @@
     <Content Include="resources\7z\7zxa.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\Entypo-license.txt" />
     <Content Include="resources\iec_mate_lizenz.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\oss_lizenzen_iec_mate.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="resources\Entypo-license.txt" />
     <Content Include="resources\st_syntax.xshd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
