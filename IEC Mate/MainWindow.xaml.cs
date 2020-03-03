@@ -121,14 +121,19 @@ namespace IECMate
             DataContext = this;
 
             //Hotkey
+            ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
             Key key1 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_comment);
             Key key2 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_beginend);
             Key key3 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_plain);
             Key key4 = (Key)Enum.Parse(typeof(Key), Properties.Settings.Default.hotkey_brackets);
-            HotkeyManager.Current.AddOrReplace("PxComment", key1, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            HotkeyManager.Current.AddOrReplace("PxBeginEnd", key2, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            HotkeyManager.Current.AddOrReplace("PxPlain", key3, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
-            HotkeyManager.Current.AddOrReplace("PxBrackets", key4, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+
+            if (initHotekeys(key1, key2, key3, key4))
+            {
+                key1 = Key.None;
+                key2 = Key.None;
+                key3 = Key.None;
+                key4 = Key.None;
+            }
 
             // Editor Setup
             string file = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"resources\st_syntax.xshd");
@@ -226,7 +231,6 @@ namespace IECMate
             text_kundenspez_datanet.Text = Properties.Settings.Default.kundenspez_datanet;
             text_db_connectionstring.Text = Properties.Settings.Default.sql_connection_string;
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
-            ts_hotkey.IsChecked = Properties.Settings.Default.hotkey;
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
             ts_offnen_nppp.IsChecked = Properties.Settings.Default.offnen_mit_nppp;
 
@@ -266,6 +270,29 @@ namespace IECMate
             #endregion
         }
 
+        private bool initHotekeys(Key k1, Key k2, Key k3, Key k4)
+        {
+            try
+            {
+                HotkeyManager.Current.AddOrReplace("PxComment", k1, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                HotkeyManager.Current.AddOrReplace("PxBeginEnd", k2, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                HotkeyManager.Current.AddOrReplace("PxPlain", k3, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                HotkeyManager.Current.AddOrReplace("PxBrackets", k4, ModifierKeys.Control | ModifierKeys.Shift, OnHotkeyPressed);
+                return false;
+            }
+            catch (HotkeyAlreadyRegisteredException exo)
+            {
+                Log.Error(exo, "Hotkey: Fehler");
+                ts_hotkey.IsChecked = false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+                return true;
+            }
+        }
+
         #region Allgemein
         public async void ReleaseCheck()
         {
@@ -276,6 +303,7 @@ namespace IECMate
                 var latest = releases[0];
                 var relVersion = latest.TagName.Split('.');
                 var aseVersion = AssemblyVersion(false).Split('.');
+
 
                 if (Convert.ToInt32(relVersion[0]) > Convert.ToInt32(aseVersion[0]) ||
                     Convert.ToInt32(relVersion[1]) > Convert.ToInt32(aseVersion[1]) ||
