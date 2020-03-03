@@ -58,13 +58,14 @@ Spezifisch auf IEC Projekte zugeschnitten sind die Ordner- und Datei-Helfer. Sie
 
 ![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/datanet.png?raw=true)
 
-Mit der Backupfunktion kann das aktuell ausgewählte Verzeichnis als Archiv `*.7z` gespeichert werden. 
-
-Die Simulation und die Visualisierung für das ausgewählte Projekt kann direkt gestartet werden.
-
-Auch gibt es einen Button um die ``*.puLock`` Dateien im ausgewählten Projekt zu löschen.
+- Mit der Backupfunktion kann das aktuell ausgewählte Verzeichnis als Archiv `*.7z` gespeichert werden. 
+- Die Simulation und die Visualisierung für das ausgewählte Projekt kann direkt gestartet werden.
+- Die `*.puLock` Dateien im ausgewählten Projekt zu können gelöscht werden.
+- Ein Kundenspez. kann in der Datei `systemOptions.properties` abgefragt oder geändert werden.
+- Das starten der DataView kann in der Datei `Start_Simulation.bat` deaktiviert werden.
 
 ## DataView
+Spezifisch auf DataView Projekte zugeschnitten sind die Ordner- und Datei-Helfer. Sie ermöglichen einen schnellen Zugriff auf häufig genutzt Dateien und Ordner.
 
 ![code](https://github.com/MrReSc/IEC-Mate/blob/master/screenshots/dataview.png?raw=true)
 
@@ -78,7 +79,7 @@ Die Funktionen in der Box `DataView Simulation` beziehen sich immer auf das Simu
 
 #### DataView Datenbank
 
-Wenn ein Kundenordner eingestellt ist, kann hier der Batch `update_Dataview_simulation_DB_to_new_vers_and_this_order.bat` ausgeführt werden.
+Wenn ein Kundenordner und ein Batch File eingestellt ist, kann hier der eingestellte Batch `update_Dataview_simulation_*****.bat` direkt ausgeführt werden.
 
 #### DataView Datenbank Bitset
 
@@ -100,7 +101,7 @@ IEC-Mate ist auf Deutsch und Englisch lokalisiert. Der Editor hat verschieden Ei
 
 IEC-Mate wurde auf MS Windows 10 getestet.
 
-- Windows 10 x86/x64
+- Windows 10 x86/x64 (Build 1709 / 1909)
 - .NET Framework 4.7.2
 
 Falls das .NET Framework 4.7.2 nicht vorhanden sein sollte, bitte der Installationsaufforderung folgen.
@@ -144,3 +145,17 @@ Nun kann die `IEC Mate.sln` Solution geöffnet werden. Wenn die Solution offen i
 - Wenn der Fehler `Unable to find manifest signing certificate in the certificate store` auftritt muss die Signierung vom ClickOnce manifest deaktiviert werden (`IEC Mate -> Rechtsklick -> Properties -> Signing -> Sign the ClickOnce manifest deaktivieren`)
 - Wenn der Error `XDG0008` bei Übersetzten der Software auftritt, dann muss die Datei `MainWindow.xaml` mit einem `Rechtsklick -> Exluce from Project` vom Projekt entfernt werden. Danach sollte ein Übersetzten ohne Fehler funktionieren. Wenn es immer noch Fehler gibt, kann versucht werden, das Target auf `Release` zu wechseln und wieder auf `Debug` zurück. Wenn das Übersetzten fehlerfrei geklappt hat, muss mittel Rechtsklick auf das Projekt `IEC Mate -> Add -> Existing Item` die Datei `MainWindow.xaml.cs` wieder hinzugefügt werden.
 
+## Release erstellen
+
+1. `master` branch auschecken
+2. Projektmappenkonfiguration auf `release` stellen
+3. Applikation Kompilieren `IEC Mate -> Rechtsklick -> Neu Erstellen`
+4. Setup Version einstellen `Setup -> Linksklick -> Deployment Project Properties` (Version von IEC-Mate + 1 `IEC Mate -> Rechtsklick -> Eigenschaften -> Anwendung -> Assemblyinformation... -> Assemblyversion Build Nummer`)
+5. Installer Kompilieren `Setup -> Rechtsklick -> Neu Erstellen`
+
+Das `IEC_Mate_Setup.msi` befindet sich im Pfad `.\MrReSc\IEC-Mate\Setup\Release`.
+
+## Release veröffentlichen
+1. Alle Änderungen nach `master` pushen.
+2. Einen Tag mit der Version (z.B. `1.0.1608`) erstellen und ins Repo pushen.
+3. Auf https://github.com/MrReSc/IEC-Mate/releases Release bearbeiten und `IEC_Mate_Setup.msi` hochladen.
