@@ -301,6 +301,20 @@ namespace IECMate
                 var client = new octokit.GitHubClient(new octokit.ProductHeaderValue("IEC-Mate"));
                 var releases = await client.Repository.Release.GetAll("MrReSc", "IEC-Mate");
                 var latest = releases[0];
+
+                // Wenn ein Pre Release veröffentlicht wird, dann soll kein automatisches Update geschehen
+                if (releases[0].Prerelease)
+                {
+                    for (int i = 0; i < releases.Count(); i++)
+                    {
+                        if (!releases[i].Prerelease)
+                        {
+                            latest = releases[i];
+                            break;
+                        }
+                    }
+                }
+
                 var relVersion = latest.TagName.Split('.');
                 var aseVersion = AssemblyVersion(false).Split('.');
 
