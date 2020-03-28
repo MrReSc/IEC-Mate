@@ -483,18 +483,6 @@ namespace IECMate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string kundenspez {
-            get {
-                return ((string)(this["kundenspez"]));
-            }
-            set {
-                this["kundenspez"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30000000")]
         public long LogFileSize {
             get {
@@ -514,18 +502,6 @@ namespace IECMate.Properties {
             }
             set {
                 this["LofFileRetain"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string kundenspez_datanet {
-            get {
-                return ((string)(this["kundenspez_datanet"]));
-            }
-            set {
-                this["kundenspez_datanet"] = value;
             }
         }
         

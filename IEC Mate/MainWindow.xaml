@@ -1522,6 +1522,7 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
+                                    <!--Kundenspez-->
                                     <Label Content="{x:Static p:Resources.lb_kundenspez}"  Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontSize="14" 
                                            Grid.ColumnSpan="3"/>
 
@@ -1554,6 +1555,7 @@
                                         <iconPacks:PackIconMaterial Kind="FileImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
                                     </Button>
 
+                                    <!--Option-->
                                     <Label Content="{x:Static p:Resources.lb_option}"  Grid.Column="5" Grid.Row="0" FontWeight="Medium" FontSize="14" 
                                            Grid.ColumnSpan="3"/>
 
@@ -1586,6 +1588,7 @@
                                         <iconPacks:PackIconMaterial Kind="FileImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
                                     </Button>
 
+                                    <!--Prüfsumme-->
                                     <Label Content="{x:Static p:Resources.lb_checksumme}"  Grid.Column="0" Grid.Row="8" FontWeight="Medium" FontSize="14" 
                                            Grid.ColumnSpan="3"/>
 
@@ -2067,8 +2070,12 @@
                                     <iconPacks:PackIconMaterial Kind="BackupRestore" Width="auto" Height="auto"/>
                                 </Button>
 
-                                <Grid Grid.Row="2" Grid.Column="1" Margin="0,20,0,0">
+                                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,20,0,0">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="20" />
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
@@ -2077,6 +2084,8 @@
 
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
+                                        <RowDefinition Height="0" />
+                                        <RowDefinition Height="auto" />
                                         <RowDefinition Height="10" />
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="10" />
@@ -2084,32 +2093,69 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBox x:Name="text_kundenspez" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez}" Margin="0" 
+                                    <!--Kundenspez-->
+                                    <Label Content="{x:Static p:Resources.lb_kundenspez}"  Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontSize="14" 
+                                           Grid.ColumnSpan="3"/>
+
+                                    <TextBox x:Name="text_kundenspez" Grid.Column="0" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez}" Margin="0" 
                                          VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
-                                         Width="200" MinHeight="30" CharacterCasing="Upper" KeyDown="Text_kundenspez_KeyDown">
+                                         Width="200" MinHeight="30" MaxLength="4" CharacterCasing="Upper" KeyDown="Text_kundenspez_KeyDown">
                                     </TextBox>
 
-                                    <TextBox x:Name="text_select_bitset_kundenspez" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" 
+                                    <TextBox x:Name="text_select_bitset_kundenspez" Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Center" 
                                          IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
                                     </TextBox>
 
-                                    <Button x:Name="btn_bitset_kundenspez" Grid.Column="1" Grid.Row="2" Width="30" Height="30" HorizontalAlignment="Left"
-                                    Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez}" Click="Btn_bitset_kundenspez_Click" >
+                                    <Button x:Name="btn_bitset_kundenspez" Grid.Column="1" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez}" Click="Btn_bitset_kundenspez_Click" >
                                         <iconPacks:PackIconMaterial Kind="DatabaseSearch" Width="auto" Height="auto"/>
                                     </Button>
 
-                                    <Button x:Name="btn_bitset_decode" Grid.Column="2" Grid.Row="2" Width="30" Height="30" HorizontalAlignment="Left"
+                                    <Button x:Name="btn_bitset_decode" Grid.Column="2" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
                                         Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_decodieren}" Click="Btn_bitset_decode_Click">
                                         <iconPacks:PackIconMaterial Kind="FlipToFront" Width="auto" Height="auto"/>
                                     </Button>
 
-                                    <TextBox x:Name="text_bitset" Grid.Column="0" Grid.Row="4" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez_update}" Margin="0" 
+                                    <TextBox x:Name="text_bitset" Grid.Column="0" Grid.Row="6" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_kundenspez_update}" Margin="0" 
                                          VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
                                          Width="200" MaxLength="10" PreviewTextInput="Text_bitset_PreviewTextInput">
                                     </TextBox>
 
-                                    <Button x:Name="btn_update_bitset_kundenspez" Grid.Column="1" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
+                                    <Button x:Name="btn_update_bitset_kundenspez" Grid.Column="1" Grid.Row="6" Width="30" Height="30" HorizontalAlignment="Left"
                                         Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_update}" Click="Btn_update_bitset_kundenspez_Click" >
+                                        <iconPacks:PackIconMaterial Kind="DatabaseImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
+                                    </Button>
+
+                                    <!--Option-->
+                                    <Label Content="{x:Static p:Resources.lb_option}"  Grid.Column="5" Grid.Row="0" FontWeight="Medium" FontSize="14" 
+                                           Grid.ColumnSpan="3"/>
+
+                                    <TextBox x:Name="text_option" Grid.Column="5" Grid.Row="2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_option}" Margin="0" 
+                                         VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
+                                         Width="200" MinHeight="30" CharacterCasing="Upper" KeyDown="Text_option_KeyDown" >
+                                    </TextBox>
+
+                                    <TextBox x:Name="text_select_option" Grid.Column="5" Grid.Row="4" VerticalContentAlignment="Center" 
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
+                                    </TextBox>
+
+                                    <Button x:Name="btn_option" Grid.Column="6" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_datanet}" Click="Btn_option_Click" >
+                                        <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
+                                    </Button>
+
+                                    <Button x:Name="btn_option_decode" Grid.Column="7" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_decodieren}" Click="Btn_bitset_option_decode_Click">
+                                        <iconPacks:PackIconMaterial Kind="FlipToFront" Width="auto" Height="auto"/>
+                                    </Button>
+
+                                    <TextBox x:Name="text_neue_option" Grid.Column="5" Grid.Row="6" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_option_update}" Margin="0" 
+                                         VerticalContentAlignment="Center" HorizontalAlignment="Left" Controls:TextBoxHelper.ClearTextButton="True" 
+                                         Width="200" MaxLength="10" PreviewTextInput="Text_bitset_PreviewTextInput">
+                                    </TextBox>
+
+                                    <Button x:Name="btn_update_bitset_option" Grid.Column="6" Grid.Row="6" Width="30" Height="30" HorizontalAlignment="Left"
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_update}" Click="Btn_update_bitset_option_Click" >
                                         <iconPacks:PackIconMaterial Kind="DatabaseImport" Width="auto" Height="auto" Foreground="OrangeRed"/>
                                     </Button>
                                 </Grid>

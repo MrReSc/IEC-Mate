@@ -227,8 +227,6 @@ namespace IECMate
             text_projktpfad_dataview.Text = Properties.Settings.Default.projekt_pfad_dataview;
             text_kundenprojekt.Text = Properties.Settings.Default.projekt_pfad_kundenordner;
             text_updateBat.Text = Properties.Settings.Default.update_bat;
-            text_kundenspez.Text = Properties.Settings.Default.kundenspez;
-            text_kundenspez_datanet.Text = Properties.Settings.Default.kundenspez_datanet;
             text_db_connectionstring.Text = Properties.Settings.Default.sql_connection_string;
             tc_root.SelectedIndex = Properties.Settings.Default.tabcontrol_index;
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
@@ -1198,8 +1196,6 @@ namespace IECMate
                 Properties.Settings.Default.projekt_pfad_dataview = text_projktpfad_dataview.Text;
                 Properties.Settings.Default.projekt_pfad_kundenordner = text_kundenprojekt.Text;
                 Properties.Settings.Default.update_bat= text_updateBat.Text;
-                Properties.Settings.Default.kundenspez = text_kundenspez.Text;
-                Properties.Settings.Default.kundenspez_datanet = text_kundenspez_datanet.Text;
                 Properties.Settings.Default.sql_connection_string = text_db_connectionstring.Text;
                 Properties.Settings.Default.akzentfarbe = cb_akzent_farbe.SelectedValue.ToString();
                 Properties.Settings.Default.hotkey = (bool)ts_hotkey.IsChecked;
@@ -3526,21 +3522,20 @@ namespace IECMate
 
         private void Btn_update_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
         {
-            UpdateBitsetKundenspez();
+            UpdateBitsetKundenspez(text_kundenspez.Text, text_bitset.Text, "bitset");
         }
 
-        private async void UpdateBitsetKundenspez()
+        private async void UpdateBitsetKundenspez(string spez, string biteset, string art)
         {
             try
             {
                 var connString = text_db_connectionstring.Text;
-                var spez = text_kundenspez.Text;
-                var value = Int64.Parse(text_bitset.Text);
+                var value = Int64.Parse(biteset);
                 int setid = 999999999;
 
                 if (value > 2147483647)
                 {
-                    Log.Debug("DataView: Bitset zu grosse Zahl.");
+                    Log.Debug("DataView: Bitset / Option zu grosse Zahl.");
                     await this.ShowMessageAsync(Properties.Resources.dialogTitelDatenbankFehler, Properties.Resources.dialogMsgDatenbankBitsetFehler, MessageDialogStyle.Affirmative);
                     return;
                 }
@@ -3550,7 +3545,18 @@ namespace IECMate
                     await conn.OpenAsync();
 
                     // Retrieve SETid
-                    using (var cmd = new MySqlCommand("SELECT SETid FROM bu_dc_control.tbl_setup WHERE SETname LIKE '" + spez + ".%';", conn))
+                    string query = String.Empty;
+                    if (art == "bitset")
+                    {
+                        query = "SELECT SETid FROM bu_dc_control.tbl_setup WHERE SETname LIKE '" + spez + ".%';";
+                    }
+
+                    if (art == "option")
+                    {
+                        query = "SELECT SETid FROM bu_dc_control.tbl_setup WHERE SETname = '" + spez + "';";
+                    }
+
+                    using (var cmd = new MySqlCommand(query, conn))
                     using (var reader = await cmd.ExecuteReaderAsync())
                         while (await reader.ReadAsync())
                             setid = reader.GetInt32(0);
@@ -3875,6 +3881,56 @@ namespace IECMate
         {
             UpdateBitsetDatanet(text_option_datanet.Text, text_neue_option_datanet.Text, "option");
         }
+
+        private void Text_option_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                GetValueOption();
+            }
+        }
+
+        private void Btn_option_Click(object sender, RoutedEventArgs e)
+        {
+            GetValueOption();
+        }
+
+        private async void GetValueOption()
+        {
+            try
+            {
+                var connString = text_db_connectionstring.Text;
+                var spez = text_option.Text;
+                text_select_option.Text = String.Empty;
+
+                using (var conn = new MySqlConnection(connString))
+                {
+                    await conn.OpenAsync();
+
+                    // Retrieve Bitset
+                    using (var cmd = new MySqlCommand("SELECT SETintValue FROM bu_dc_control.tbl_setup WHERE SETname = '" + spez + "';", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                        while (await reader.ReadAsync())
+                            text_select_option.Text = reader.GetInt32(0).ToString();
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                FehlerHelferDatenbank();
+                Log.Error(ex, "Error");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void Btn_update_bitset_option_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBitsetKundenspez(text_option.Text, text_neue_option.Text, "option");
+        }
+
 
         #endregion
 

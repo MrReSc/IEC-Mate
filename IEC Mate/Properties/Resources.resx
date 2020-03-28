@@ -646,7 +646,7 @@
     <value>Bitset aus der Datenbank für den Kundenspez abrufen.</value>
   </data>
   <data name="tt_kundenspez_update" xml:space="preserve">
-    <value>Bitset in der Datenbank für den Kundenspez ändern (Dezimalzahl).</value>
+    <value>Bitset / Option in der Datenbank ändern (Dezimalzahl).</value>
   </data>
   <data name="tt_proj_kundenordner" xml:space="preserve">
     <value>z.B. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612</value>
@@ -688,7 +688,7 @@
     <value>Bitset aus systemOptions.properties für den Kundenspez abrufen.</value>
   </data>
   <data name="tt_kundenspez_update_datanet" xml:space="preserve">
-    <value>Bitset in systemOptions.properties für den Kundenspez ändern (Dezimalzahl).</value>
+    <value>Bitset / Option in systemOptions.properties ändern (Dezimalzahl).</value>
   </data>
   <data name="tt_kundenspez_decodieren" xml:space="preserve">
     <value>Bitset decodieren.</value>

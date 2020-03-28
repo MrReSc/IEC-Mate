@@ -646,7 +646,7 @@
     <value>Retrieve the bitset from the database for the customer specification.</value>
   </data>
   <data name="tt_kundenspez_update" xml:space="preserve">
-    <value>Change the bitset in the database for the customer specification (decimal number).</value>
+    <value>Change the bitset / option in the database (decimal number).</value>
   </data>
   <data name="tt_proj_kundenordner" xml:space="preserve">
     <value>e.g. \\uzn343\dc_gbf_dat\Kunden_Datanet\BDAG_DE3\9990214612</value>
@@ -688,7 +688,7 @@
     <value>Retrieve the bitset from systemOptions.properties file for the customer specification.</value>
   </data>
   <data name="tt_kundenspez_update_datanet" xml:space="preserve">
-    <value>Change the bitset in the systemOptions.properties file for the customer specification (decimal number).</value>
+    <value>Change the bitset / option in the systemOptions.properties file (decimal number).</value>
   </data>
   <data name="tt_kundenspez_decodieren" xml:space="preserve">
     <value>Bitset decoding.</value>

@@ -116,17 +116,11 @@
     <Setting Name="sql_connection_string_default" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=localhost;Initial Catalog=bu_dc_control;User ID=root;Password=root</Value>
     </Setting>
-    <Setting Name="kundenspez" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="LogFileSize" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">30000000</Value>
     </Setting>
     <Setting Name="LofFileRetain" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">31</Value>
-    </Setting>
-    <Setting Name="kundenspez_datanet" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="update_bat" Type="System.String" Scope="User">
       <Value Profile="(Default)">update_Dataview_simu_DB_to_vers_1_2_x_and_this_order.bat</Value>

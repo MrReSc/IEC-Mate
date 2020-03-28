@@ -1798,7 +1798,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset in der Datenbank für den Kundenspez ändern (Dezimalzahl). ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset / Option in der Datenbank ändern (Dezimalzahl). ähnelt.
         /// </summary>
         public static string tt_kundenspez_update {
             get {
@@ -1807,7 +1807,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset in systemOptions.properties für den Kundenspez ändern (Dezimalzahl). ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset / Option in systemOptions.properties ändern (Dezimalzahl). ähnelt.
         /// </summary>
         public static string tt_kundenspez_update_datanet {
             get {
