@@ -1214,7 +1214,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_helfer" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
-                             Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_helfer_TextChanged">
+                             Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_helfer_TextChanged" IsReadOnly="True">
                     </TextBox>
 
                     <ComboBox  x:Name="cb_select_me" Grid.Column="2" Grid.Row="0" Width="180" Margin="30,0,0,0" 
@@ -1636,7 +1636,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="text_projktpfad_dataview" Grid.Column="0" Grid.Row="0" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_auswahlen}" Margin="0" 
-                             Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_dataview_TextChanged">
+                             Width="300" VerticalContentAlignment="Center" TextChanged="Text_projktpfad_dataview_TextChanged" IsReadOnly="True">
                     </TextBox>
 
                     <Button x:Name="btn_pfad_dataview_auswahlen" Grid.Row="0" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Left" Click="Btn_pfad_dataview_auswahlen_Click">
@@ -1979,7 +1979,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBox x:Name="text_kundenprojekt" Grid.Column="1" Grid.Row="1" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_proj_kundenordner}" Margin="0" 
-                                     Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_proj_kundenordner}">
+                                     Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_proj_kundenordner}" IsReadOnly="True">
                                 </TextBox>
 
                                 <Button x:Name="btn_pfad_kundenprojekt" Grid.Row="1" Grid.Column="2" Width="30" Height="30" 
@@ -1988,7 +1988,7 @@
                                 </Button>
 
                                 <TextBox x:Name="text_updateBat" Grid.Column="1" Grid.Row="3" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_updateBat}" Margin="0" 
-                                     Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_updateBat}">
+                                     Width="500" VerticalContentAlignment="Center" ToolTip="{x:Static p:Resources.tt_updateBat}" IsReadOnly="True">
                                 </TextBox>
 
                                 <Button x:Name="btn_updateBat" Grid.Row="3" Grid.Column="2" Width="30" Height="30" 
@@ -2184,10 +2184,12 @@
                         <RowDefinition Height="20" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <!--#region DataView Allgemein-->
+                    <!--#region Hot Keys Allgemein-->
                     <GroupBox Grid.Column="0" Grid.Row="2" Header="{x:Static p:Resources.gb_hotkeys}" Grid.ColumnSpan="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -2261,6 +2263,166 @@
                                 <Label Foreground="ForestGreen" Margin="0,-10,0,0" Content="{x:Static p:Resources.lb_px_brackets_text}"/>
 
                             </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <!--#endregion-->
+
+                    <!--#region Konfigurierbare Ordner-->
+                    <GroupBox Grid.Column="0" Grid.Row="4" Header="{x:Static p:Resources.gb_ordner}" Grid.ColumnSpan="4">
+
+                        <GroupBox.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="BorderThickness" Value="1"></Setter>
+                                <Setter Property="Controls:ButtonHelper.CornerRadius" Value="2"></Setter>
+                                <Setter Property="Width" Value="310"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                                <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                                <Setter Property="Focusable" Value="False"></Setter>
+                            </Style>
+
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+                                <Setter Property="FontSize" Value="14"></Setter>
+                            </Style>
+
+                            <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+                                <Setter Property="Width" Value="auto"></Setter>
+                                <Setter Property="Height" Value="auto"></Setter>
+                                <Setter Property="Margin" Value="4,0,5,0"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            </Style>
+
+                        </GroupBox.Resources>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="auto" /> <!--button-->
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="auto" /> <!--pfad-->
+                                <ColumnDefinition Width="auto" /> <!--button-->
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+
+                            <!--Button-->
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+
+                                <Button x:Name="bt_Ordner1" Click="Bt_Ordner1_Click" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label x:Name="lb_Ordner1" Content="{x:Static p:Resources.lb_ordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_Ordner2" Click="Bt_Ordner2_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label x:Name="lb_Ordner2" Content="{x:Static p:Resources.lb_ordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_Ordner3" Click="Bt_Ordner3_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label x:Name="lb_Ordner3" Content="{x:Static p:Resources.lb_ordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_Ordner4" Click="Bt_Ordner4_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label x:Name="lb_Ordner4" Content="{x:Static p:Resources.lb_ordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_Ordner5" Click="Bt_Ordner5_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label x:Name="lb_Ordner5" Content="{x:Static p:Resources.lb_ordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="bt_Ordner6" Click="Bt_Ordner6_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FolderOpen"/>
+                                        <Label x:Name="lb_Ordner6" Content="{x:Static p:Resources.lb_ordner}"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+                            
+                            <!--Pfad-->
+                            <StackPanel Grid.Column="3" Grid.Row="1">
+
+                                <TextBox x:Name="text_pfadOrdner1" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_ordner}"
+                                     Width="650" VerticalContentAlignment="Center" Height="30" Margin="0,5,0,16" IsReadOnly="True" Focusable="False">
+                                </TextBox>
+
+                                <TextBox x:Name="text_pfadOrdner2" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_ordner}"
+                                     Width="650" VerticalContentAlignment="Center" Height="30" Margin="0,5,0,16" IsReadOnly="True" Focusable="False"/>
+
+                                <TextBox x:Name="text_pfadOrdner3" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_ordner}"
+                                     Width="650" VerticalContentAlignment="Center" Height="30" Margin="0,5,0,16" IsReadOnly="True" Focusable="False">
+                                </TextBox>
+
+                                <TextBox x:Name="text_pfadOrdner4" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_ordner}"
+                                     Width="650" VerticalContentAlignment="Center" Height="30" Margin="0,5,0,16" IsReadOnly="True" Focusable="False">
+                                </TextBox>
+
+                                <TextBox x:Name="text_pfadOrdner5" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_ordner}"
+                                     Width="650" VerticalContentAlignment="Center" Height="30" Margin="0,5,0,16" IsReadOnly="True" Focusable="False">
+                                </TextBox>
+
+                                <TextBox x:Name="text_pfadOrdner6" Controls:TextBoxHelper.Watermark="{x:Static p:Resources.wm_ordner}"
+                                     Width="650" VerticalContentAlignment="Center" Height="30" Margin="0,5,0,16" IsReadOnly="True" Focusable="False">
+                                </TextBox>
+
+                            </StackPanel>
+
+                            <!--Button-->
+                            <StackPanel Grid.Column="4" Grid.Row="1">
+
+                                <Button x:Name="btn_pfadOrdner1" Width="30" Height="30" BorderThickness="0"
+                                        HorizontalAlignment="Left" Focusable="False" Margin="0,5,0,16" Click="Btn_pfadOrdner1_Click">
+                                    <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0"/>
+                                </Button>
+                                
+                                <Button x:Name="btn_pfadOrdner2" Width="30" Height="30" BorderThickness="0"
+                                        HorizontalAlignment="Left" Focusable="False" Margin="0,5,0,16" Click="Btn_pfadOrdner2_Click">
+                                    <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0"/>
+                                </Button>
+
+                                <Button x:Name="btn_pfadOrdner3" Width="30" Height="30" BorderThickness="0"
+                                        HorizontalAlignment="Left" Focusable="False" Margin="0,5,0,16" Click="Btn_pfadOrdner3_Click">
+                                    <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0"/>
+                                </Button>
+
+                                <Button x:Name="btn_pfadOrdner4" Width="30" Height="30" BorderThickness="0"
+                                        HorizontalAlignment="Left" Focusable="False" Margin="0,5,0,16" Click="Btn_pfadOrdner4_Click">
+                                    <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0"/>
+                                </Button>
+
+                                <Button x:Name="btn_pfadOrdner5" Width="30" Height="30" BorderThickness="0"
+                                        HorizontalAlignment="Left" Focusable="False" Margin="0,5,0,16" Click="Btn_pfadOrdner5_Click">
+                                    <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0"/>
+                                </Button>
+
+                                <Button x:Name="btn_pfadOrdner6" Width="30" Height="30" BorderThickness="0"
+                                        HorizontalAlignment="Left" Focusable="False" Margin="0,5,0,16" Click="Btn_pfadOrdner6_Click">
+                                    <iconPacks:PackIconMaterial Kind="FolderOpen" Width="auto" Height="auto" Margin="0"/>
+                                </Button>
+
+
+                            </StackPanel>
+
                         </Grid>
                     </GroupBox>
                     <!--#endregion-->

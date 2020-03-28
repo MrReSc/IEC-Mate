@@ -628,6 +628,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ordner öffnen ähnelt.
+        /// </summary>
+        public static string gb_ordner {
+            get {
+                return ResourceManager.GetString("gb_ordner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Variablen ähnelt.
         /// </summary>
         public static string gb_variablen {
@@ -984,6 +993,15 @@ namespace IECMate.Properties {
         public static string lb_option {
             get {
                 return ResourceManager.GetString("lb_option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kein Ordner ausgewählt ähnelt.
+        /// </summary>
+        public static string lb_ordner {
+            get {
+                return ResourceManager.GetString("lb_ordner", resourceCulture);
             }
         }
         
@@ -1947,6 +1965,15 @@ namespace IECMate.Properties {
         public static string wm_file_ext {
             get {
                 return ResourceManager.GetString("wm_file_ext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ordner auswählen... ähnelt.
+        /// </summary>
+        public static string wm_ordner {
+            get {
+                return ResourceManager.GetString("wm_ordner", resourceCulture);
             }
         }
         

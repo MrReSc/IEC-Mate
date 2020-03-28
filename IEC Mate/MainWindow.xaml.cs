@@ -232,6 +232,19 @@ namespace IECMate
             text_px_nummer.Text = Properties.Settings.Default.pxnummer;
             ts_offnen_nppp.IsChecked = Properties.Settings.Default.offnen_mit_nppp;
 
+            text_pfadOrdner1.Text = Properties.Settings.Default.ordner1;
+            setButtonLabel(lb_Ordner1, Properties.Settings.Default.ordner1);
+            text_pfadOrdner2.Text = Properties.Settings.Default.ordner2;
+            setButtonLabel(lb_Ordner2, Properties.Settings.Default.ordner2);
+            text_pfadOrdner3.Text = Properties.Settings.Default.ordner3;
+            setButtonLabel(lb_Ordner3, Properties.Settings.Default.ordner3);
+            text_pfadOrdner4.Text = Properties.Settings.Default.ordner4;
+            setButtonLabel(lb_Ordner4, Properties.Settings.Default.ordner4);
+            text_pfadOrdner5.Text = Properties.Settings.Default.ordner5;
+            setButtonLabel(lb_Ordner5, Properties.Settings.Default.ordner5);
+            text_pfadOrdner6.Text = Properties.Settings.Default.ordner6;
+            setButtonLabel(lb_Ordner6, Properties.Settings.Default.ordner6);
+
             cb_hotkey_pxBeginEnd.Text = key2.ToString();
             cb_hotekey_plain.Text = key3.ToString();
             cb_hotkey_pxComment.Text = key1.ToString();
@@ -1215,6 +1228,13 @@ namespace IECMate
                 Properties.Settings.Default.file_ext_user = text_file_ext.Text;
                 Properties.Settings.Default.exakte_suche = (bool)ts_exakte_suche.IsChecked;
                 Properties.Settings.Default.offnen_mit_nppp = (bool)ts_offnen_nppp.IsChecked;
+
+                Properties.Settings.Default.ordner1 = text_pfadOrdner1.Text;
+                Properties.Settings.Default.ordner2 = text_pfadOrdner2.Text;
+                Properties.Settings.Default.ordner3 = text_pfadOrdner3.Text;
+                Properties.Settings.Default.ordner4 = text_pfadOrdner4.Text;
+                Properties.Settings.Default.ordner5 = text_pfadOrdner5.Text;
+                Properties.Settings.Default.ordner6 = text_pfadOrdner6.Text;
 
                 Properties.Settings.Default.Save();
 
@@ -3931,10 +3951,117 @@ namespace IECMate
             UpdateBitsetKundenspez(text_option.Text, text_neue_option.Text, "option");
         }
 
+        private void Btn_pfadOrdner1_Click(object sender, RoutedEventArgs e)
+        {
+            selctOrdnerPfad(text_pfadOrdner1, "1", bt_Ordner1, lb_Ordner1);
+        }
+
+        private void Bt_Ordner1_Click(object sender, RoutedEventArgs e)
+        {
+            openOrdnerPfad(text_pfadOrdner1.Text);
+        }
+        private void Btn_pfadOrdner2_Click(object sender, RoutedEventArgs e)
+        {
+            selctOrdnerPfad(text_pfadOrdner2, "2", bt_Ordner2, lb_Ordner2);
+        }
+
+        private void Bt_Ordner2_Click(object sender, RoutedEventArgs e)
+        {
+            openOrdnerPfad(text_pfadOrdner2.Text);
+        }
+        private void Btn_pfadOrdner3_Click(object sender, RoutedEventArgs e)
+        {
+            selctOrdnerPfad(text_pfadOrdner3, "3", bt_Ordner3, lb_Ordner3);
+        }
+
+        private void Bt_Ordner3_Click(object sender, RoutedEventArgs e)
+        {
+            openOrdnerPfad(text_pfadOrdner3.Text);
+        }
+        private void Btn_pfadOrdner4_Click(object sender, RoutedEventArgs e)
+        {
+            selctOrdnerPfad(text_pfadOrdner4, "4", bt_Ordner4, lb_Ordner4);
+        }
+
+        private void Bt_Ordner4_Click(object sender, RoutedEventArgs e)
+        {
+            openOrdnerPfad(text_pfadOrdner4.Text);
+        }
+        private void Btn_pfadOrdner5_Click(object sender, RoutedEventArgs e)
+        {
+            selctOrdnerPfad(text_pfadOrdner5, "5", bt_Ordner5, lb_Ordner5);
+        }
+
+        private void Bt_Ordner5_Click(object sender, RoutedEventArgs e)
+        {
+            openOrdnerPfad(text_pfadOrdner5.Text);
+        }
+        private void Btn_pfadOrdner6_Click(object sender, RoutedEventArgs e)
+        {
+            selctOrdnerPfad(text_pfadOrdner6, "6", bt_Ordner6, lb_Ordner6);
+        }
+
+        private void Bt_Ordner6_Click(object sender, RoutedEventArgs e)
+        {
+            openOrdnerPfad(text_pfadOrdner6.Text);
+        }
+
+        private void selctOrdnerPfad(TextBox pfad, string no, Button button, Label label)
+        {
+            try
+            {
+                WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+                folderDialog.ShowNewFolderButton = false;
+
+                if (Directory.Exists(pfad.Text))
+                {
+                    folderDialog.SelectedPath = pfad.Text;
+                }
+                else
+                {
+                    folderDialog.SelectedPath = Properties.Paths.drive_c;
+                }
+
+                WinForms.DialogResult result = folderDialog.ShowDialog();
+
+                if (result == WinForms.DialogResult.OK)
+                {
+                    pfad.Text = folderDialog.SelectedPath;
+                    setButtonLabel(label, folderDialog.SelectedPath);
+                    Log.Information("Helfer: Konfigurierbarer Ordner " + no + " Pfad {p} wurde ausgewählt.", folderDialog.SelectedPath);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void openOrdnerPfad(string pfad)
+        {
+            try
+            {
+                OpenFileOrFolder(pfad);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void setButtonLabel(Label label, string pfad)
+        {
+            if (!String.IsNullOrWhiteSpace(pfad))
+            {
+                label.Content = new DirectoryInfo(pfad).Name;
+            }
+        }
+
 
         #endregion
 
-
+ 
     }
 }
 

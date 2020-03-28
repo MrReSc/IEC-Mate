@@ -735,6 +735,9 @@
   <data name="wm_updateBat" xml:space="preserve">
     <value>Skript Name (update_Dataview_simu****.bat)</value>
   </data>
+  <data name="gb_ordner" xml:space="preserve">
+    <value>Ordner öffnen</value>
+  </data>
   <data name="lb_checksumme" xml:space="preserve">
     <value>Prüfsumme</value>
   </data>
@@ -744,10 +747,16 @@
   <data name="lb_option" xml:space="preserve">
     <value>Option</value>
   </data>
+  <data name="lb_ordner" xml:space="preserve">
+    <value>Kein Ordner ausgewählt</value>
+  </data>
   <data name="tb_option" xml:space="preserve">
     <value>EN_OP_DEVICE</value>
   </data>
   <data name="tb_option_update" xml:space="preserve">
     <value>neuer Wert (Dezimalzahl)</value>
+  </data>
+  <data name="wm_ordner" xml:space="preserve">
+    <value>Ordner auswählen...</value>
   </data>
 </root>

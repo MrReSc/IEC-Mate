@@ -516,5 +516,77 @@ namespace IECMate.Properties {
                 this["update_bat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ordner1 {
+            get {
+                return ((string)(this["ordner1"]));
+            }
+            set {
+                this["ordner1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ordner2 {
+            get {
+                return ((string)(this["ordner2"]));
+            }
+            set {
+                this["ordner2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ordner3 {
+            get {
+                return ((string)(this["ordner3"]));
+            }
+            set {
+                this["ordner3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ordner4 {
+            get {
+                return ((string)(this["ordner4"]));
+            }
+            set {
+                this["ordner4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ordner5 {
+            get {
+                return ((string)(this["ordner5"]));
+            }
+            set {
+                this["ordner5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ordner6 {
+            get {
+                return ((string)(this["ordner6"]));
+            }
+            set {
+                this["ordner6"] = value;
+            }
+        }
     }
 }
