@@ -735,8 +735,11 @@
   <data name="wm_updateBat" xml:space="preserve">
     <value>Script Name (update_Dataview_simu****.bat)</value>
   </data>
+  <data name="lb_checksumme" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
   <data name="lb_kundenspez" xml:space="preserve">
-    <value>Customer-specific functions</value>
+    <value>Customer-specific function</value>
   </data>
   <data name="lb_option" xml:space="preserve">
     <value>Option</value>

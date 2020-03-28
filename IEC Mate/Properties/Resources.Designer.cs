@@ -709,6 +709,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Prüfsumme ähnelt.
+        /// </summary>
+        public static string lb_checksumme {
+            get {
+                return ResourceManager.GetString("lb_checksumme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die config ähnelt.
         /// </summary>
         public static string lb_config {
@@ -907,7 +916,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Kundenspezifische Funktionen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kundenspezifische Funktion ähnelt.
         /// </summary>
         public static string lb_kundenspez {
             get {
