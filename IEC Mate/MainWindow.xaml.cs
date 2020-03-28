@@ -3585,19 +3585,7 @@ namespace IECMate
 
         private void Btn_bitset_decode_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (!String.IsNullOrWhiteSpace(text_select_bitset_kundenspez.Text))
-                {
-                    ti_bitset.Focus();
-                    text_decode.Text = text_select_bitset_kundenspez.Text;
-                    text_decode.CaretIndex = text_decode.Text.Length;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error");
-            }
+            BitsetOptionDecode(text_select_bitset_kundenspez.Text);
         }
 
         private void Btn_bitset_kundenspez_datanet_Click(object sender, RoutedEventArgs e)
@@ -3631,11 +3619,13 @@ namespace IECMate
 
                         while ((s = sr.ReadLine()) != null)
                         {
+                            // Index von svMEyCUfunc speichern
                             if (s.Contains(text_kundenspez_datanet.Text))
                             {
                                 index = Regex.Match(s, @"\[([^)]*)\]").Groups[1].Value;
                             }
 
+                            // Wert von Kundensprez anhand Index auslesen
                             if (s.Contains("system.svMEyCUfunc[" + index + "].value"))
                             {
                                 string[] tokens = s.Split('=');
@@ -3656,10 +3646,10 @@ namespace IECMate
 
         private void Btn_update_bitset_kundenspez_datanet_Click(object sender, RoutedEventArgs e)
         {
-            UpdateBitsetDatanet(text_kundenspez_datanet.Text, text_bitset_datanet.Text);
+            UpdateBitsetDatanet(text_kundenspez_datanet.Text, text_bitset_datanet.Text, "bitset");
         }
 
-        private async void UpdateBitsetDatanet(string kundenspez, string bitset)
+        private async void UpdateBitsetDatanet(string kundenspez, string bitset, string art)
         {
             try
             {
@@ -3677,33 +3667,64 @@ namespace IECMate
                     return;
                 }
 
-                if (!String.IsNullOrWhiteSpace(kundenspez) & (kundenspez.Length == 4))
+                if (art == "bitset")
                 {
-                    using (var sr = new StreamReader(file, true))
+                    if (!String.IsNullOrWhiteSpace(kundenspez) & (kundenspez.Length == 4))
                     {
-                        var s = "";
-
-                        while ((s = sr.ReadLine()) != null)
+                        using (var sr = new StreamReader(file, true))
                         {
-                            if (s.Contains(kundenspez))
-                            {
-                                index = Regex.Match(s, @"\[([^)]*)\]").Groups[1].Value;
-                            }
+                            var s = "";
 
-                            if (s.Contains("system.svMEyCUfunc[" + index + "].value"))
+                            while ((s = sr.ReadLine()) != null)
                             {
-                                oldText = s;
+                                if (s.Contains(kundenspez))
+                                {
+                                    index = Regex.Match(s, @"\[([^)]*)\]").Groups[1].Value;
+                                }
+
+                                if (s.Contains("system.svMEyCUfunc[" + index + "].value"))
+                                {
+                                    oldText = s;
+                                }
                             }
                         }
                     }
+
+                    if (!String.IsNullOrWhiteSpace(bitset) & !String.IsNullOrWhiteSpace(oldText))
+                    {
+                        string text = File.ReadAllText(file);
+                        newText = "system.svMEyCUfunc[" + index + "].value = " + bitset + "|DINT";
+                        text = text.Replace(oldText, newText);
+                        File.WriteAllText(file, text);
+                    }
                 }
 
-                if (!String.IsNullOrWhiteSpace(bitset))
+                if (art == "option")
                 {
-                    string text = File.ReadAllText(file);
-                    newText = "system.svMEyCUfunc[" + index + "].value = " + bitset + "|DINT";
-                    text = text.Replace(oldText, newText);
-                    File.WriteAllText(file, text);
+                    if (!String.IsNullOrWhiteSpace(kundenspez))
+                    {
+                        using (var sr = new StreamReader(file, true))
+                        {
+                            var s = "";
+
+                            while ((s = sr.ReadLine()) != null)
+                            {
+                                if (Regex.IsMatch(s, string.Format(@"\b{0}\b", Regex.Escape(text_option_datanet.Text)), RegexOptions.IgnoreCase) &
+                                    s.Contains("system.svMEoptions"))
+                                {
+                                    oldText = s;
+                                }
+                            }
+                        }
+                    }
+
+                    if (!String.IsNullOrWhiteSpace(bitset) & !String.IsNullOrWhiteSpace(oldText))
+                    {
+                        string text = File.ReadAllText(file);
+                        newText = "system.svMEoptions." + kundenspez + " = " + bitset + "|DINT";
+                        text = text.Replace(oldText, newText);
+                        File.WriteAllText(file, text);
+                    }
                 }
             }
             catch (Exception ex)
@@ -3777,12 +3798,70 @@ namespace IECMate
 
         private void Btn_bitset_kundenspez_decode_Click(object sender, RoutedEventArgs e)
         {
+            BitsetOptionDecode(text_select_bitset_kundenspez_datanet.Text);
+        }
+
+        private void Text_option_datanet_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                text_select_option_kundenspez_datanet.Text = FindOptionDatanet();
+            }
+        }
+
+        private void Btn_bitset_option_datanet_Click(object sender, RoutedEventArgs e)
+        {
+            text_select_option_kundenspez_datanet.Text = FindOptionDatanet();
+        }
+
+        private string FindOptionDatanet()
+        {
             try
             {
-                if (!String.IsNullOrWhiteSpace(text_select_bitset_kundenspez_datanet.Text))
+                var file = text_projktpfad_helfer.Text + Properties.Paths.systemOptions;
+                file = file.Replace("\\\\", "\\");
+                var option = "";
+
+                if (!String.IsNullOrWhiteSpace(text_option_datanet.Text))
+                {
+                    using (var sr = new StreamReader(file, true))
+                    {
+                        var s = "";
+
+                        while ((s = sr.ReadLine()) != null)
+                        {
+                            if (Regex.IsMatch(s, string.Format(@"\b{0}\b", Regex.Escape(text_option_datanet.Text)), RegexOptions.IgnoreCase) &
+                                s.Contains("system.svMEoptions"))
+                            {
+                                string[] tokens = s.Split('=');
+                                string[] tok = tokens[1].Split('|');
+                                option = tok[0].Replace(" ", "");
+                            }
+                        }
+                    }
+                }
+                return option;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+                return "";
+            }
+        }
+
+        private void Btn_bitset_option_decode_Click(object sender, RoutedEventArgs e)
+        {
+            BitsetOptionDecode(text_select_option_kundenspez_datanet.Text);
+        }
+
+        private void BitsetOptionDecode(string decode)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(decode))
                 {
                     ti_bitset.Focus();
-                    text_decode.Text = text_select_bitset_kundenspez_datanet.Text;
+                    text_decode.Text = decode;
                     text_decode.CaretIndex = text_decode.Text.Length;
                 }
             }
@@ -3792,7 +3871,14 @@ namespace IECMate
             }
         }
 
+        private void Btn_update_bitset_option_datanet_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBitsetDatanet(text_option_datanet.Text, text_neue_option_datanet.Text, "option");
+        }
+
         #endregion
+
+
     }
 }
 

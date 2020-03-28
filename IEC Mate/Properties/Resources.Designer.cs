@@ -529,7 +529,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset Dat@net ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitset / Option Dat@net ähnelt.
         /// </summary>
         public static string gb_datanet_bitset {
             get {
@@ -547,7 +547,7 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Datenbank Bitset ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die DataView Datenbank Bitset / Option ähnelt.
         /// </summary>
         public static string gb_dataview_db_bitset {
             get {
@@ -907,6 +907,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kundenspezifische Funktionen ähnelt.
+        /// </summary>
+        public static string lb_kundenspez {
+            get {
+                return ResourceManager.GetString("lb_kundenspez", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die IEC-Mate Lizenz: ähnelt.
         /// </summary>
         public static string lb_lizenz {
@@ -957,6 +966,15 @@ namespace IECMate.Properties {
         public static string lb_me_xml {
             get {
                 return ResourceManager.GetString("lb_me_xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Option ähnelt.
+        /// </summary>
+        public static string lb_option {
+            get {
+                return ResourceManager.GetString("lb_option", resourceCulture);
             }
         }
         
@@ -1326,6 +1344,24 @@ namespace IECMate.Properties {
         public static string tb_kundenspez_update {
             get {
                 return ResourceManager.GetString("tb_kundenspez_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die EN_OP_DEVICE ähnelt.
+        /// </summary>
+        public static string tb_option {
+            get {
+                return ResourceManager.GetString("tb_option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die neuer Wert (Dezimalzahl) ähnelt.
+        /// </summary>
+        public static string tb_option_update {
+            get {
+                return ResourceManager.GetString("tb_option_update", resourceCulture);
             }
         }
         

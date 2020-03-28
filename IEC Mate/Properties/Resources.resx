@@ -661,7 +661,7 @@
     <value>Biteset Fehler</value>
   </data>
   <data name="gb_dataview_db_bitset" xml:space="preserve">
-    <value>DataView Datenbank Bitset</value>
+    <value>DataView Datenbank Bitset / Option</value>
   </data>
   <data name="gb_dataview_dev" xml:space="preserve">
     <value>DataView Entwicklung</value>
@@ -676,7 +676,7 @@
     <value>usb0 Speicher Ordner öffnen</value>
   </data>
   <data name="gb_datanet_bitset" xml:space="preserve">
-    <value>Bitset Dat@net</value>
+    <value>Bitset / Option Dat@net</value>
   </data>
   <data name="tt_checksum_datanet" xml:space="preserve">
     <value>Checksumme aus systemOptions.properties abrufen.</value>
@@ -734,5 +734,17 @@
   </data>
   <data name="wm_updateBat" xml:space="preserve">
     <value>Skript Name (update_Dataview_simu****.bat)</value>
+  </data>
+  <data name="lb_kundenspez" xml:space="preserve">
+    <value>Kundenspezifische Funktionen</value>
+  </data>
+  <data name="lb_option" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="tb_option" xml:space="preserve">
+    <value>EN_OP_DEVICE</value>
+  </data>
+  <data name="tb_option_update" xml:space="preserve">
+    <value>neuer Wert (Dezimalzahl)</value>
   </data>
 </root>
