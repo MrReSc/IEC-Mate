@@ -183,4 +183,10 @@
   <data name="dv_framework" xml:space="preserve">
     <value>\\DVIEW_Work\\framework.properties</value>
   </data>
+  <data name="hmiCfg" xml:space="preserve">
+    <value>\\hmiCfg.properties.nt</value>
+  </data>
+  <data name="hmiCfg2" xml:space="preserve">
+    <value>\\hmiCfg.properties.nt2</value>
+  </data>
 </root>

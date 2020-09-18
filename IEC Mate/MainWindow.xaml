@@ -1377,12 +1377,18 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Rectangle Width="310" Height="41" HorizontalAlignment="Left" Margin="0,0,0,10" />
+                                <Button x:Name="bt_enableLongTextOverwrite"
+                                        ToolTip="{x:Static p:Resources.tt_LongTextOverwrite}" Click="Bt_enableLongTextOverwrite_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="CheckboxMarkedOutline" Foreground="Green"/>
+                                        <Label Content="{x:Static p:Resources.lb_LongTextOverwrite}"/>
+                                    </StackPanel>
+                                </Button>
 
                                 <Button x:Name="bt_disableDataView"
                                         ToolTip="{x:Static p:Resources.tt_dataview_sim_disable}" Click="Bt_disableDataView_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="CloseBoxOutline" Foreground="Purple"/>
+                                        <iconPacks:PackIconMaterial Kind="CloseBoxOutline" Foreground="Red"/>
                                         <Label Content="{x:Static p:Resources.lb_dataview_sim_disable}"/>
                                     </StackPanel>
                                 </Button>
@@ -1390,7 +1396,7 @@
                                 <Button x:Name="bt_enableDataView"
                                         ToolTip="{x:Static p:Resources.tt_dataview_sim_enable}" Click="Bt_enableDataView_Click">
                                     <StackPanel Orientation="Horizontal">
-                                        <iconPacks:PackIconMaterial Kind="CheckboxMarkedOutline" Foreground="Purple"/>
+                                        <iconPacks:PackIconMaterial Kind="CheckboxMarkedOutline" Foreground="Green"/>
                                         <Label Content="{x:Static p:Resources.lb_dataview_sim_enable}"/>
                                     </StackPanel>
                                 </Button>

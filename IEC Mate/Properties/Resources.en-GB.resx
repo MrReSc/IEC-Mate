@@ -759,4 +759,10 @@
   <data name="wm_ordner" xml:space="preserve">
     <value>Select folder...</value>
   </data>
+  <data name="lb_LongTextOverwrite" xml:space="preserve">
+    <value>Activate overwrite long texts</value>
+  </data>
+  <data name="tt_LongTextOverwrite" xml:space="preserve">
+    <value>With a double click on a text the variable path is displayed. The long text can be overwritten.</value>
+  </data>
 </root>

@@ -2922,6 +2922,36 @@ namespace IECMate
             }
         }
 
+        private void Bt_enableLongTextOverwrite_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = text_projktpfad_helfer.Text + Properties.Paths.view + Properties.Paths.hmiCfg;
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                string text = File.ReadAllText(path);
+
+                if (text.Contains("DNET_overrideText=false|3"))
+                {
+                    text = text.Replace("DNET_overrideText=false|3", "DNET_overrideText=true|3");
+                    File.WriteAllText(path, text);
+                }
+
+                path = text_projktpfad_helfer.Text + Properties.Paths.view + Properties.Paths.hmiCfg + "2";
+                File.SetAttributes(path, FileAttributes.Normal);    // Es ist möglich das die Datei ReadOnly ist
+                text = File.ReadAllText(path);
+
+                if (text.Contains("DNET_overrideText=false|3"))
+                {
+                    text = text.Replace("DNET_overrideText=false|3", "DNET_overrideText=true|3");
+                    File.WriteAllText(path, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
         private void Bt_dvStartAdmin_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -4058,10 +4088,7 @@ namespace IECMate
             }
         }
 
-
         #endregion
-
- 
     }
 }
 

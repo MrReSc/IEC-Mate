@@ -759,4 +759,10 @@
   <data name="wm_ordner" xml:space="preserve">
     <value>Ordner auswählen...</value>
   </data>
+  <data name="lb_LongTextOverwrite" xml:space="preserve">
+    <value>Langtexte überschreiben aktivieren</value>
+  </data>
+  <data name="tt_LongTextOverwrite" xml:space="preserve">
+    <value>Mit einem Doppelklick auf einen Text wird der Variablenpfad angezeigt. Der Langtext kann überschrieben werden.</value>
+  </data>
 </root>

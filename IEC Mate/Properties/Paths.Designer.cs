@@ -160,6 +160,24 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\hmiCfg.properties.nt ähnelt.
+        /// </summary>
+        internal static string hmiCfg {
+            get {
+                return ResourceManager.GetString("hmiCfg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die \\hmiCfg.properties.nt2 ähnelt.
+        /// </summary>
+        internal static string hmiCfg2 {
+            get {
+                return ResourceManager.GetString("hmiCfg2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die \\application\\control\\ieccontrol ähnelt.
         /// </summary>
         internal static string ieccontrol {

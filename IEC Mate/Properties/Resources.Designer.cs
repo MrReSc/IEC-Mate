@@ -943,6 +943,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Langtexte überschreiben aktivieren ähnelt.
+        /// </summary>
+        public static string lb_LongTextOverwrite {
+            get {
+                return ResourceManager.GetString("lb_LongTextOverwrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die machineParameter ähnelt.
         /// </summary>
         public static string lb_machineParameter {
@@ -1830,6 +1839,15 @@ namespace IECMate.Properties {
         public static string tt_kundenspez_update_datanet {
             get {
                 return ResourceManager.GetString("tt_kundenspez_update_datanet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mit einem Doppelklick auf einen Text wird der Variablenpfad angezeigt. Der Langtext kann überschrieben werden. ähnelt.
+        /// </summary>
+        public static string tt_LongTextOverwrite {
+            get {
+                return ResourceManager.GetString("tt_LongTextOverwrite", resourceCulture);
             }
         }
         
