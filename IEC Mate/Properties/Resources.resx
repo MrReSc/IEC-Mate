@@ -643,7 +643,7 @@
     <value>update_Dataview_sim****.bat aus Kundenordner ausführen</value>
   </data>
   <data name="tt_kundenspez" xml:space="preserve">
-    <value>Bitset aus der Datenbank für den Kundenspez abrufen.</value>
+    <value>Bitset / Option aus der Datenbank abrufen.</value>
   </data>
   <data name="tt_kundenspez_update" xml:space="preserve">
     <value>Bitset / Option in der Datenbank ändern (Dezimalzahl).</value>

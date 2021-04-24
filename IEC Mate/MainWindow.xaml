@@ -2146,8 +2146,8 @@
                                     </TextBox>
 
                                     <Button x:Name="btn_option" Grid.Column="6" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"
-                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez_datanet}" Click="Btn_option_Click" >
-                                        <iconPacks:PackIconMaterial Kind="Magnify" Width="auto" Height="auto"/>
+                                        Focusable="False" ToolTip="{x:Static p:Resources.tt_kundenspez}" Click="Btn_option_Click" >
+                                        <iconPacks:PackIconMaterial Kind="DatabaseSearch" Width="auto" Height="auto"/>
                                     </Button>
 
                                     <Button x:Name="btn_option_decode" Grid.Column="7" Grid.Row="4" Width="30" Height="30" HorizontalAlignment="Left"

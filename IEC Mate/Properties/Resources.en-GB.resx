@@ -643,7 +643,7 @@
     <value>Run update_Dataview_sim****.bat from customer folder</value>
   </data>
   <data name="tt_kundenspez" xml:space="preserve">
-    <value>Retrieve the bitset from the database for the customer specification.</value>
+    <value>Retrieve the bitset / option from the database.</value>
   </data>
   <data name="tt_kundenspez_update" xml:space="preserve">
     <value>Change the bitset / option in the database (decimal number).</value>
