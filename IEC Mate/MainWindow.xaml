@@ -778,7 +778,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="450" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="5" />
                             </Grid.ColumnDefinitions>
@@ -794,6 +794,11 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="400"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
 
                                 <StackPanel VerticalAlignment="Top">
 
@@ -820,6 +825,20 @@
                                     <TextBox x:Name="text_encode_bin"  Text="{x:Static p:Resources.tb_bitset_bin}" 
                                              PreviewMouseDoubleClick="Text_encode_dec_PreviewMouseDoubleClick">
                                     </TextBox>
+                                </StackPanel>
+
+                                <StackPanel VerticalAlignment="Top" Grid.Column="1">
+                                    <Button x:Name="CopyToClipboard_encode_dec" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,0,0,0" Click="CopyToClipboard_encode_dec_Click">
+                                        <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
+                                    </Button>
+
+                                    <Button x:Name="CopyToClipboard_encode_hex" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_encode_hex_Click">
+                                        <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
+                                    </Button>
+
+                                    <Button x:Name="CopyToClipboard_encode_bin" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_encode_bin_Click">
+                                        <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
+                                    </Button>
                                 </StackPanel>
 
                                 <Button x:Name="btn_encoding_loschen" Grid.Row="1" Width="30" Height="30" HorizontalAlignment="Left" Focusable="False" Click="Btn_encoding_loschen_Click">
@@ -911,7 +930,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="450" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="5" />
                             </Grid.ColumnDefinitions>
@@ -928,7 +947,7 @@
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
 
-                                <StackPanel VerticalAlignment="Top">
+                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                                     <TextBox x:Name="text_decode"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_bitset_decode}" Controls:TextBoxHelper.ClearTextButton="True"
                                          Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" TextChanged="Text_decode_TextChanged">
                                     </TextBox>

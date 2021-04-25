@@ -2529,6 +2529,42 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
+
+        private void CopyToClipboard_encode_dec_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(text_encode_dec.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void CopyToClipboard_encode_hex_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(text_encode_hex.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void CopyToClipboard_encode_bin_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(text_encode_bin.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
         #endregion
 
         #region Helferfunktionen
