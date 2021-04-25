@@ -520,6 +520,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bit- und Byteadresse umrechnen ähnelt.
+        /// </summary>
+        public static string gb_byte_adresse {
+            get {
+                return ResourceManager.GetString("gb_byte_adresse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Code Vorlage ähnelt.
         /// </summary>
         public static string gb_code_vorlage {
@@ -1312,6 +1321,15 @@ namespace IECMate.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitadresse... (z.B. 247) ähnelt.
+        /// </summary>
+        public static string tb_bitadresse {
+            get {
+                return ResourceManager.GetString("tb_bitadresse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die 2#0 ähnelt.
         /// </summary>
         public static string tb_bitset_bin {
@@ -1344,6 +1362,15 @@ namespace IECMate.Properties {
         public static string tb_bitset_hex {
             get {
                 return ResourceManager.GetString("tb_bitset_hex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Byteadresse... (z.B. 30.7) ähnelt.
+        /// </summary>
+        public static string tb_byteadresse {
+            get {
+                return ResourceManager.GetString("tb_byteadresse", resourceCulture);
             }
         }
         

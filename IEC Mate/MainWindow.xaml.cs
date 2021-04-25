@@ -3606,6 +3606,31 @@ namespace IECMate
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            var ue = e.Source as TextBox;
+            Regex regex;
+            if (ue.Text.Contains("."))
+            {
+                var split = ue.Text.Split('.');
+
+                if (split[1].Length < 1)
+                {
+                    regex = new Regex("[^0-7]+");
+                }
+                else
+                {
+                    regex = new Regex("");
+                }            
+            }
+            else
+            {
+                regex = new Regex("[^0-9.]+");
+            }
+
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Btn_update_bitset_kundenspez_Click(object sender, RoutedEventArgs e)
         {
             UpdateBitsetKundenspez(text_kundenspez.Text, text_bitset.Text, "bitset");
@@ -4121,6 +4146,76 @@ namespace IECMate
             if (!String.IsNullOrWhiteSpace(pfad))
             {
                 label.Content = new DirectoryInfo(pfad).Name;
+            }
+        }
+
+        private void text_bitadresse_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(text_bitadresse.Text))
+                {
+                    var value = Convert.ToInt32(text_bitadresse.Text);
+                    int byteadress_pre = value / 8;
+                    int byteadress_post = value - (8 * byteadress_pre);
+                    text_convert_byteadresse.Text = byteadress_pre.ToString() + "." + byteadress_post.ToString();
+                }
+                else
+                {
+                    text_convert_byteadresse.Text = String.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void text_byteadresse_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(text_byteadresse.Text))
+                {
+                    double value = Convert.ToDouble(text_byteadresse.Text);
+                    int integerPart = Convert.ToInt32(Math.Truncate(value));
+                    int fractionalPart = Convert.ToInt32((value - Math.Truncate(value)) * 10);
+
+                    int bitadresse = (integerPart * 8) + fractionalPart;
+                    text_convert_bitadresse.Text = bitadresse.ToString();
+                }
+                else
+                {
+                    text_convert_bitadresse.Text = String.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void CopyToClipboard_convert_byteadresse_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(text_convert_byteadresse.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
+            }
+        }
+
+        private void CopyToClipboard_convert_bitadresse_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(text_convert_bitadresse.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error");
             }
         }
 

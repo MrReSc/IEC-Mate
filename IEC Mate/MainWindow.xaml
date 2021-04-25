@@ -828,15 +828,15 @@
                                 </StackPanel>
 
                                 <StackPanel VerticalAlignment="Top" Grid.Column="1">
-                                    <Button x:Name="CopyToClipboard_encode_dec" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,0,0,0" Click="CopyToClipboard_encode_dec_Click">
+                                    <Button x:Name="CopyToClipboard_encode_dec" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,0,0,0" Click="CopyToClipboard_encode_dec_Click">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
                                     </Button>
 
-                                    <Button x:Name="CopyToClipboard_encode_hex" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_encode_hex_Click">
+                                    <Button x:Name="CopyToClipboard_encode_hex" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_encode_hex_Click">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
                                     </Button>
 
-                                    <Button x:Name="CopyToClipboard_encode_bin" Grid.Row="1" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_encode_bin_Click">
+                                    <Button x:Name="CopyToClipboard_encode_bin" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_encode_bin_Click">
                                         <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
                                     </Button>
                                 </StackPanel>
@@ -2211,6 +2211,7 @@
                         <RowDefinition Height="20" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -2451,6 +2452,66 @@
                         </Grid>
                     </GroupBox>
                     <!--#endregion-->
+
+                    <!--#region Konfigurierbare Ordner-->
+
+                    <GroupBox Grid.Column="0" Grid.Row="6" Header="{x:Static p:Resources.gb_byte_adresse}" Grid.ColumnSpan="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="400" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="400" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel VerticalAlignment="Top" Grid.Column="1" Grid.Row="1">
+                                <TextBox x:Name="text_bitadresse"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_bitadresse}" Controls:TextBoxHelper.ClearTextButton="True"
+                                         Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" MaxLength="20" PreviewTextInput="Text_bitset_PreviewTextInput" TextChanged="text_bitadresse_TextChanged">
+                                </TextBox>
+
+                                <TextBox x:Name="text_convert_byteadresse" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel VerticalAlignment="Top" Grid.Column="2" Grid.Row="1">
+                                <Rectangle Width="35" Height="35" HorizontalAlignment="Left" Margin="5,0,0,0" />
+
+                                <Button x:Name="CopyToClipboard_convert_byteadresse" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_convert_byteadresse_Click">
+                                    <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel VerticalAlignment="Top" Grid.Column="3" Grid.Row="1">
+                                <TextBox x:Name="text_byteadresse"  Controls:TextBoxHelper.Watermark="{x:Static p:Resources.tb_byteadresse}" Controls:TextBoxHelper.ClearTextButton="True"
+                                         Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" MaxLength="20" PreviewTextInput="NumberValidationTextBox" TextChanged="text_byteadresse_TextChanged">
+                                </TextBox>
+
+                                <TextBox x:Name="text_convert_bitadresse" Width="400" VerticalContentAlignment="Center" Margin="0,0,0,10" FontSize="20" 
+                                         IsReadOnly="True" Background="{DynamicResource GrayBrush8}">
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel VerticalAlignment="Top" Grid.Column="4" Grid.Row="1">
+                                <Rectangle Width="35" Height="35" HorizontalAlignment="Left" Margin="5,0,0,0" />
+
+                                <Button x:Name="CopyToClipboard_convert_bitadresse" Width="35" Height="35" HorizontalAlignment="Left" Focusable="False" Margin="5,10,0,0" Click="CopyToClipboard_convert_bitadresse_Click">
+                                    <iconPacks:PackIconMaterial Kind="ContentCopy" Width="20" Height="20"/>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </GroupBox>
+
 
                 </Grid>
             </TabItem>

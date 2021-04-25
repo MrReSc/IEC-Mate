@@ -765,4 +765,13 @@
   <data name="tt_LongTextOverwrite" xml:space="preserve">
     <value>Mit einem Doppelklick auf einen Text wird der Variablenpfad angezeigt. Der Langtext kann überschrieben werden.</value>
   </data>
+  <data name="gb_byte_adresse" xml:space="preserve">
+    <value>Bit- und Byteadresse umrechnen</value>
+  </data>
+  <data name="tb_bitadresse" xml:space="preserve">
+    <value>Bitadresse... (z.B. 247)</value>
+  </data>
+  <data name="tb_byteadresse" xml:space="preserve">
+    <value>Byteadresse... (z.B. 30.7)</value>
+  </data>
 </root>
