@@ -163,7 +163,7 @@
     <value>\\PostCheckoutNoPause.bat</value>
   </data>
   <data name="dv_tools" xml:space="preserve">
-    <value>\\DVIEW_Work\\Tools</value>
+    <value>\\Tools</value>
   </data>
   <data name="kundenordner_install" xml:space="preserve">
     <value>\\Projekt_Datanet\\install</value>
@@ -172,16 +172,16 @@
     <value>\\update_Dataview_simulation_DB_to_new_vers_and_this_order.bat</value>
   </data>
   <data name="dv_bilder_dev" xml:space="preserve">
-    <value>\\DVIEW_Work\\contents\\images</value>
+    <value>\\contents\\images</value>
   </data>
   <data name="dv_usb_dev" xml:space="preserve">
-    <value>\\DVIEW_Work\\media\\usb0\\dataView</value>
+    <value>\\media\\usb0\\dataView</value>
   </data>
   <data name="dv_usb_sim" xml:space="preserve">
     <value>\\view\\media\\usb0\\dataView</value>
   </data>
   <data name="dv_framework" xml:space="preserve">
-    <value>\\DVIEW_Work\\framework.properties</value>
+    <value>\\framework.properties</value>
   </data>
   <data name="hmiCfg" xml:space="preserve">
     <value>\\hmiCfg.properties.nt</value>
