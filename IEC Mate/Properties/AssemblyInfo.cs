@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -51,5 +51,7 @@ using System.Windows;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1701.21256")]
-[assembly: AssemblyFileVersion("1.0.1701.21256")]
+[assembly: AssemblyVersion("1.0.1715.23076")]
+[assembly: AssemblyFileVersion("1.0.1715.23076")]
+
+[assembly: AssemblyInformationalVersion("0.0.14.23076")]

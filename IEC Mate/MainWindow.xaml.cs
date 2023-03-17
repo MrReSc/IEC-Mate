@@ -3175,33 +3175,50 @@ namespace IECMate
                 Log.Error(ex, "Error");
             }
         }
-        private void Bt_simStopen_Click(object sender, RoutedEventArgs e)
+        private async void Bt_simStopen_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                foreach (var process in Process.GetProcessesByName("putty"))
+                // Reguläres beenden der Simulation mit dem bat File
+                string open = text_projktpfad_helfer.Text + Properties.Paths.Stop_Simulation;
+                var process = new Process
                 {
-                    process.Kill();
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = open,
+                        WorkingDirectory = Path.GetDirectoryName(open)
+                    }
+                };
+                process.Start();
+
+                // Warten von 5 Sekunden 
+                // Danach wird überprüft, ob noch Prozesse laufen. Falls dies der Fall ist, werden diese beendet.
+                // So ist eine abwärts Kompatibilität gewährleistet und es funktioniert auch, wenn die Simu sofort wieder gestoppt wird.
+                await Task.Delay(5000);
+
+                foreach (var p in Process.GetProcessesByName("putty"))
+                {
+                    p.Kill();
                 }
 
-                foreach (var process in Process.GetProcessesByName("K2Ctrl"))
+                foreach (var p in Process.GetProcessesByName("K2Ctrl"))
                 {
-                    process.Kill();
+                    p.Kill();
                 }
 
-                foreach (var process in Process.GetProcessesByName("cmd"))
+                foreach (var p in Process.GetProcessesByName("cmd"))
                 {
-                    process.Kill();
+                    p.Kill();
                 }
 
-                foreach (var process in Process.GetProcessesByName("DataView"))
+                foreach (var p in Process.GetProcessesByName("DataView"))
                 {
-                    process.Kill();
+                    p.Kill();
                 }
 
-                foreach (var process in Process.GetProcessesByName("java"))
+                foreach (var p in Process.GetProcessesByName("java"))
                 {
-                    process.Kill();
+                    p.Kill();
                 }
 
                 Log.Information("Helfer: Simulation wurde beendet.");

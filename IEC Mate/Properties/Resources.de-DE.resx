@@ -586,7 +586,7 @@
     <value>Startet die Simulation im angegebenen Projektverzeichnis.</value>
   </data>
   <data name="tt_stop_sim" xml:space="preserve">
-    <value>Stopt die Prozesse "K2Ctrl", "putty", "DataView", "java" und "cmd". Dies kann auch unbeabsichtigt andere Programme beenden.</value>
+    <value>Stoppt die Simulation im angegebenen Projektverzeichnis.</value>
   </data>
   <data name="tt_visu_datanet" xml:space="preserve">
     <value>Startet eine Dat@net Visualisierung im angegebenen Projektverzeichnis.</value>

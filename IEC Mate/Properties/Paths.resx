@@ -189,4 +189,7 @@
   <data name="hmiCfg2" xml:space="preserve">
     <value>\\hmiCfg.properties.nt2</value>
   </data>
+  <data name="Stop_Simulation" xml:space="preserve">
+    <value>\\Stopp_Simulation.bat</value>
+  </data>
 </root>
